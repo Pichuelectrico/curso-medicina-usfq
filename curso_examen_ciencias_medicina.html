@@ -41,7 +41,7 @@
     overflow-x:auto;
     box-shadow:0 2px 6px rgba(0,0,0,.05);
   }
-  nav button{
+  nav button, nav a.back{
     flex:0 0 auto;
     background:none;
     border:none;
@@ -52,9 +52,12 @@
     color:#555;
     border-bottom:3px solid transparent;
     white-space:nowrap;
+    text-decoration:none;
+    font-family:inherit;
   }
   nav button.active{color:var(--azul);border-bottom:3px solid var(--azul);}
-  nav button:hover{color:var(--azul-dark);background:#f8f0f0;}
+  nav button:hover, nav a.back:hover{color:var(--azul-dark);background:#f8f0f0;}
+  nav a.back{color:var(--azul-dark);}
 
   main{max-width:1000px;margin:0 auto;padding:30px 20px 80px;}
   section{display:none;animation:fade .3s ease;}
@@ -157,6 +160,7 @@
 </header>
 
 <nav id="navBar">
+  <a class="back" href="index.html">← Volver al inicio</a>
   <button data-target="inicio" class="active">Inicio</button>
   <button data-target="matematica">Matemática</button>
   <button data-target="quimica">Química</button>
