@@ -287,6 +287,190 @@
         font-size: 0.85rem;
         line-height: 1.35;
       }
+      .teuc {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin: 14px 0;
+      }
+      .teuc article {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-top: 4px solid var(--azul);
+        border-radius: 10px;
+        padding: 12px 12px 10px;
+      }
+      .teuc .k {
+        display: inline-flex;
+        width: 28px;
+        height: 28px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--azul);
+        color: #fff;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .teuc h5 {
+        margin: 0 0 4px;
+        color: var(--azul-dark);
+        font-size: 0.95rem;
+      }
+      .teuc p {
+        margin: 0;
+        font-size: 0.86rem;
+        color: #445;
+      }
+      .g-card {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        padding: 16px 16px 12px;
+        margin: 14px 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      .g-card h4 {
+        margin: 0 0 4px;
+        color: var(--azul-dark);
+      }
+      .g-card .lead {
+        margin: 0 0 10px;
+        color: #445;
+        font-size: 0.92rem;
+      }
+      .g-visual {
+        background: linear-gradient(180deg, #fff, #fbf7f7);
+        border: 1px solid var(--borde);
+        border-radius: 10px;
+        padding: 12px;
+        overflow-x: auto;
+      }
+      .g-visual svg {
+        width: 100%;
+        height: auto;
+        max-width: 520px;
+        display: block;
+        margin: 0 auto;
+      }
+      .stem {
+        width: 100%;
+        border-collapse: collapse;
+        max-width: 360px;
+        margin: 0 auto;
+        font-variant-numeric: tabular-nums;
+      }
+      .stem th,
+      .stem td {
+        border: 1px solid var(--borde);
+        padding: 7px 12px;
+        text-align: left;
+      }
+      .stem th {
+        background: var(--azul);
+        color: #fff;
+        width: 70px;
+      }
+      .stem td {
+        letter-spacing: 0.12em;
+        font-weight: 650;
+      }
+      .stem caption {
+        caption-side: bottom;
+        text-align: left;
+        color: #667;
+        font-size: 0.82rem;
+        padding-top: 6px;
+      }
+      .pie-row {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .pie {
+        width: 168px;
+        height: 168px;
+        border-radius: 50%;
+        background: conic-gradient(
+          #c8102e 0 40%,
+          #1e9e6a 40% 70%,
+          #2f6fad 70% 90%,
+          #d4a017 90% 100%
+        );
+        box-shadow: inset 0 0 0 10px #fff, 0 1px 4px rgba(0, 0, 0, 0.08);
+      }
+      .pie-legend {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 0.9rem;
+      }
+      .pie-legend li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 6px 0;
+      }
+      .sw {
+        width: 14px;
+        height: 14px;
+        border-radius: 3px;
+        display: inline-block;
+      }
+      .g-read {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .g-read ul {
+        margin: 6px 0 0 18px;
+        padding: 0;
+      }
+      .g-read li {
+        margin: 3px 0;
+        font-size: 0.9rem;
+      }
+      .g-mini {
+        background: #f7f4f4;
+        border-radius: 8px;
+        padding: 8px 10px;
+        font-size: 0.84rem;
+      }
+      .g-mini b {
+        color: var(--azul-dark);
+      }
+      .versus {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 8px 0 4px;
+      }
+      .versus div {
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 0.9rem;
+      }
+      .versus .bars {
+        background: #fdecef;
+        border: 1px solid #f3c2c8;
+      }
+      .versus .hist {
+        background: #eaf3fb;
+        border: 1px solid #c5d7ea;
+      }
+      .versus h5 {
+        margin: 0 0 6px;
+      }
+      @media (max-width: 760px) {
+        .teuc,
+        .g-read,
+        .versus {
+          grid-template-columns: 1fr;
+        }
+      }
       .example {
         background: #f2fbf6;
         border-left: 4px solid var(--verde);
@@ -482,6 +666,9 @@
           </button>
           <button class="topic-link" onclick="openLesson('l14')">
             14 · PAA: datos
+          </button>
+          <button class="topic-link" onclick="openGraficas()">
+            Gráficas del examen · T-E-U-C
           </button>
           <button class="topic-link" onclick="openLesson('l15')">
             15 · PAA: estrategia
@@ -2437,6 +2624,366 @@ B |████████ 8
 AB |████ 4</pre
             >
           </div>
+
+          <div id="graficas-examen">
+            <h3 style="color: var(--azul-dark); margin: 22px 0 6px">
+              Gráficas que sí salen en el examen
+            </h3>
+            <p>
+              Antes de calcular, lee cualquier gráfica con el mismo orden.
+              <strong>T-E-U-C</strong> evita el error más común: contestar un
+              número sin saber qué mide.
+            </p>
+            <div class="teuc">
+              <article>
+                <span class="k">T</span>
+                <h5>Título</h5>
+                <p>¿Qué tema muestra el gráfico?</p>
+              </article>
+              <article>
+                <span class="k">E</span>
+                <h5>Ejes o etiquetas</h5>
+                <p>¿Qué variables aparecen?</p>
+              </article>
+              <article>
+                <span class="k">U</span>
+                <h5>Unidades</h5>
+                <p>¿Son personas, dólares, porcentajes, años o kilómetros?</p>
+              </article>
+              <article>
+                <span class="k">C</span>
+                <h5>Comparación o conclusión</h5>
+                <p>
+                  ¿Qué dato es mayor, menor, cambia más o marca una tendencia?
+                </p>
+              </article>
+            </div>
+
+            <div class="g-card">
+              <h4>1 · Tallo y hoja</h4>
+              <p class="lead">
+                Ordena cada dato sin perderlo. El tallo es la decena y la hoja
+                es la unidad. Sirve para mediana, moda y conteos.
+              </p>
+              <div class="g-visual">
+                <table class="stem">
+                  <tr>
+                    <th>Tallo</th>
+                    <td>Hojas</td>
+                  </tr>
+                  <tr>
+                    <th>4</th>
+                    <td>2 &nbsp; 5 &nbsp; 8</td>
+                  </tr>
+                  <tr>
+                    <th>5</th>
+                    <td>0 &nbsp; 1 &nbsp; 3 &nbsp; 7</td>
+                  </tr>
+                  <tr>
+                    <th>6</th>
+                    <td>2 &nbsp; 6 &nbsp; 9</td>
+                  </tr>
+                  <tr>
+                    <th>7</th>
+                    <td>1 &nbsp; 4</td>
+                  </tr>
+                  <caption>
+                    Clave: 6 | 2 = 62 puntos. Hay 12 estudiantes.
+                  </caption>
+                </table>
+              </div>
+              <div class="g-read">
+                <div>
+                  <strong>Preguntas típicas</strong>
+                  <ul>
+                    <li>¿Cuántos datos hay? Cuenta las hojas: 12.</li>
+                    <li>
+                      ¿Mediana? Ordenados, el centro está entre 53 y 57 → 55.
+                    </li>
+                    <li>¿Cuántos sacaron 60 o más? 62, 66, 69, 71 y 74 → 5.</li>
+                    <li>¿Moda? La hoja que más se repite en un mismo tallo.</li>
+                  </ul>
+                </div>
+                <div class="g-mini">
+                  <b>T</b> Puntajes del examen.<br />
+                  <b>E</b> Tallo = decena, hoja = unidad.<br />
+                  <b>U</b> Puntos.<br />
+                  <b>C</b> La mayoría está en los 50.
+                </div>
+              </div>
+            </div>
+
+            <div class="g-card">
+              <h4>2 · Gráfico de barras</h4>
+              <p class="lead">
+                Compara categorías separadas. Cada barra es un grupo distinto y
+                <strong>hay espacio entre ellas</strong>.
+              </p>
+              <div class="g-visual">
+                <svg viewBox="0 0 460 230" role="img" aria-label="Estudiantes por materia, gráfico de barras">
+                  <text x="230" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#7a0c1e">Estudiantes inscritos por materia</text>
+                  <line x1="48" y1="28" x2="48" y2="176" stroke="#c5ced6" />
+                  <line x1="48" y1="176" x2="430" y2="176" stroke="#c5ced6" />
+                  <text x="40" y="180" text-anchor="end" font-size="11" fill="#667">0</text>
+                  <text x="40" y="106" text-anchor="end" font-size="11" fill="#667">10</text>
+                  <text x="40" y="36" text-anchor="end" font-size="11" fill="#667">20</text>
+                  <line x1="48" y1="102" x2="430" y2="102" stroke="#eee" />
+                  <rect x="78" y="64" width="52" height="112" rx="4" fill="#c8102e" />
+                  <rect x="168" y="99" width="52" height="77" rx="4" fill="#1e9e6a" />
+                  <rect x="258" y="120" width="52" height="56" rx="4" fill="#2f6fad" />
+                  <rect x="348" y="78" width="52" height="98" rx="4" fill="#d4a017" />
+                  <text x="104" y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#7a0c1e">16</text>
+                  <text x="194" y="93" text-anchor="middle" font-size="12" font-weight="700" fill="#146b48">11</text>
+                  <text x="284" y="114" text-anchor="middle" font-size="12" font-weight="700" fill="#2f6fad">8</text>
+                  <text x="374" y="72" text-anchor="middle" font-size="12" font-weight="700" fill="#8a6a10">14</text>
+                  <text x="104" y="196" text-anchor="middle" font-size="12" fill="#334">Mate</text>
+                  <text x="194" y="196" text-anchor="middle" font-size="12" fill="#334">Química</text>
+                  <text x="284" y="196" text-anchor="middle" font-size="12" fill="#334">Biología</text>
+                  <text x="374" y="196" text-anchor="middle" font-size="12" fill="#334">Verbal</text>
+                  <text x="18" y="110" font-size="11" fill="#667" transform="rotate(-90 18 110)">estudiantes</text>
+                </svg>
+              </div>
+              <div class="g-read">
+                <div>
+                  <strong>Preguntas típicas</strong>
+                  <ul>
+                    <li>¿Qué materia tiene más estudiantes? Matemática, 16.</li>
+                    <li>¿Cuántos más tiene Verbal que Biología? 14 − 8 = 6.</li>
+                    <li>¿Total? 16 + 11 + 8 + 14 = 49 estudiantes.</li>
+                  </ul>
+                </div>
+                <div class="g-mini">
+                  <b>T</b> Inscritos por materia.<br />
+                  <b>E</b> Materia (x) y cantidad (y).<br />
+                  <b>U</b> Estudiantes, no porcentajes.<br />
+                  <b>C</b> Mate es la mayor; Biología, la menor.
+                </div>
+              </div>
+            </div>
+
+            <div class="g-card">
+              <h4>3 · Histograma</h4>
+              <p class="lead">
+                Agrupa una variable numérica continua en intervalos. Las barras
+                <strong>se tocan</strong>, porque 50 es el final de un intervalo
+                y el inicio del siguiente.
+              </p>
+              <div class="g-visual">
+                <svg viewBox="0 0 460 230" role="img" aria-label="Histograma de puntajes por intervalo">
+                  <text x="230" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#7a0c1e">Puntajes de la PAA, agrupados</text>
+                  <line x1="46" y1="28" x2="46" y2="176" stroke="#c5ced6" />
+                  <line x1="46" y1="176" x2="430" y2="176" stroke="#c5ced6" />
+                  <text x="38" y="180" text-anchor="end" font-size="11" fill="#667">0</text>
+                  <text x="38" y="86" text-anchor="end" font-size="11" fill="#667">8</text>
+                  <text x="38" y="36" text-anchor="end" font-size="11" fill="#667">16</text>
+                  <rect x="56" y="141" width="70" height="35" fill="#9ec9ef" stroke="#fff" stroke-width="1" />
+                  <rect x="126" y="97" width="70" height="79" fill="#5aa0dd" stroke="#fff" stroke-width="1" />
+                  <rect x="196" y="45" width="70" height="131" fill="#2f6fad" stroke="#fff" stroke-width="1" />
+                  <rect x="266" y="106" width="70" height="70" fill="#5aa0dd" stroke="#fff" stroke-width="1" />
+                  <rect x="336" y="150" width="70" height="26" fill="#9ec9ef" stroke="#fff" stroke-width="1" />
+                  <text x="91" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#1d3f63">4</text>
+                  <text x="161" y="91" text-anchor="middle" font-size="12" font-weight="700" fill="#1d3f63">9</text>
+                  <text x="231" y="39" text-anchor="middle" font-size="12" font-weight="700" fill="#1d3f63">15</text>
+                  <text x="301" y="100" text-anchor="middle" font-size="12" font-weight="700" fill="#1d3f63">8</text>
+                  <text x="371" y="144" text-anchor="middle" font-size="12" font-weight="700" fill="#1d3f63">3</text>
+                  <text x="56" y="194" font-size="11" fill="#334">40</text>
+                  <text x="126" y="194" font-size="11" fill="#334">50</text>
+                  <text x="196" y="194" font-size="11" fill="#334">60</text>
+                  <text x="266" y="194" font-size="11" fill="#334">70</text>
+                  <text x="336" y="194" font-size="11" fill="#334">80</text>
+                  <text x="400" y="194" font-size="11" fill="#334">90</text>
+                  <text x="230" y="216" text-anchor="middle" font-size="12" fill="#556">puntaje</text>
+                  <text x="16" y="112" font-size="11" fill="#667" transform="rotate(-90 16 112)">estudiantes</text>
+                </svg>
+              </div>
+              <div class="versus">
+                <div class="bars">
+                  <h5>Barras</h5>
+                  Categorías sueltas (materia, grupo sanguíneo, ciudad). Hay
+                  hueco entre barras. Pregunta: ¿qué categoría es mayor?
+                </div>
+                <div class="hist">
+                  <h5>Histograma</h5>
+                  Intervalos de un número continuo (puntaje, edad, peso). Las
+                  barras se tocan. Pregunta: ¿en qué intervalo hay más datos?
+                </div>
+              </div>
+              <div class="g-read">
+                <div>
+                  <strong>Preguntas típicas</strong>
+                  <ul>
+                    <li>¿Qué intervalo es el más frecuente? 60 a 70, con 15.</li>
+                    <li>¿Cuántos sacaron menos de 60? 4 + 9 = 13.</li>
+                    <li>¿Cuántos hay en total? 4 + 9 + 15 + 8 + 3 = 39.</li>
+                  </ul>
+                </div>
+                <div class="g-mini">
+                  <b>T</b> Puntajes agrupados.<br />
+                  <b>E</b> Intervalo de puntaje (x) y estudiantes (y).<br />
+                  <b>U</b> Personas por cada tramo de 10 puntos.<br />
+                  <b>C</b> El grupo grande está entre 60 y 70.
+                </div>
+              </div>
+            </div>
+
+            <div class="g-card">
+              <h4>4 · Gráfico de pastel</h4>
+              <p class="lead">
+                Muestra partes de un todo. Los sectores suman 100%. No compara
+                cambios en el tiempo.
+              </p>
+              <div class="g-visual">
+                <div class="pie-row">
+                  <div class="pie" role="img" aria-label="Grupo sanguíneo: O 40%, A 30%, B 20%, AB 10%"></div>
+                  <ul class="pie-legend">
+                    <li><span class="sw" style="background:#c8102e"></span> O · 40% · 80 personas</li>
+                    <li><span class="sw" style="background:#1e9e6a"></span> A · 30% · 60 personas</li>
+                    <li><span class="sw" style="background:#2f6fad"></span> B · 20% · 40 personas</li>
+                    <li><span class="sw" style="background:#d4a017"></span> AB · 10% · 20 personas</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="g-read">
+                <div>
+                  <strong>Preguntas típicas</strong>
+                  <ul>
+                    <li>¿Qué grupo es el mayor? O, el 40%.</li>
+                    <li>Si el total es 200, ¿cuántos son B? 0.20 × 200 = 40.</li>
+                    <li>O y A juntos: 40% + 30% = 70% del total.</li>
+                  </ul>
+                </div>
+                <div class="g-mini">
+                  <b>T</b> Grupo sanguíneo de 200 personas.<br />
+                  <b>E</b> Cada sector es una categoría.<br />
+                  <b>U</b> Porcentaje del total (o personas).<br />
+                  <b>C</b> O es el doble de B (40% contra 20%).
+                </div>
+              </div>
+            </div>
+
+            <div class="g-card">
+              <h4>5 · Gráfico de línea</h4>
+              <p class="lead">
+                Sigue una variable a lo largo del tiempo. La pregunta casi
+                siempre es la tendencia o el tramo que más cambia.
+              </p>
+              <div class="g-visual">
+                <svg viewBox="0 0 460 230" role="img" aria-label="Consultas por año, gráfico de línea">
+                  <text x="230" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#7a0c1e">Consultas de la clínica por año</text>
+                  <line x1="50" y1="30" x2="50" y2="176" stroke="#c5ced6" />
+                  <line x1="50" y1="176" x2="420" y2="176" stroke="#c5ced6" />
+                  <text x="42" y="180" text-anchor="end" font-size="11" fill="#667">0</text>
+                  <text x="42" y="104" text-anchor="end" font-size="11" fill="#667">40</text>
+                  <text x="42" y="36" text-anchor="end" font-size="11" fill="#667">80</text>
+                  <polyline points="90,104 165,77 240,90 315,46 390,32" fill="none" stroke="#c8102e" stroke-width="3" stroke-linejoin="round" />
+                  <line x1="240" y1="90" x2="315" y2="46" stroke="#1e9e6a" stroke-width="4" />
+                  <circle cx="90" cy="104" r="5" fill="#c8102e" />
+                  <circle cx="165" cy="77" r="5" fill="#c8102e" />
+                  <circle cx="240" cy="90" r="5" fill="#c8102e" />
+                  <circle cx="315" cy="46" r="5" fill="#1e9e6a" />
+                  <circle cx="390" cy="32" r="5" fill="#c8102e" />
+                  <text x="90" y="98" text-anchor="middle" font-size="11" font-weight="700" fill="#7a0c1e">40</text>
+                  <text x="165" y="71" text-anchor="middle" font-size="11" font-weight="700" fill="#7a0c1e">55</text>
+                  <text x="240" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="#7a0c1e">48</text>
+                  <text x="315" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="#146b48">72</text>
+                  <text x="390" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#7a0c1e">80</text>
+                  <text x="90" y="194" text-anchor="middle" font-size="12" fill="#334">2021</text>
+                  <text x="165" y="194" text-anchor="middle" font-size="12" fill="#334">2022</text>
+                  <text x="240" y="194" text-anchor="middle" font-size="12" fill="#334">2023</text>
+                  <text x="315" y="194" text-anchor="middle" font-size="12" fill="#334">2024</text>
+                  <text x="390" y="194" text-anchor="middle" font-size="12" fill="#334">2025</text>
+                  <text x="16" y="112" font-size="11" fill="#667" transform="rotate(-90 16 112)">consultas</text>
+                </svg>
+              </div>
+              <div class="g-read">
+                <div>
+                  <strong>Preguntas típicas</strong>
+                  <ul>
+                    <li>¿La tendencia general sube o baja? Sube.</li>
+                    <li>¿Dónde cambia más? De 2023 a 2024: 72 − 48 = +24.</li>
+                    <li>¿Hubo alguna baja? Sí, de 2022 a 2023 (55 a 48).</li>
+                  </ul>
+                </div>
+                <div class="g-mini">
+                  <b>T</b> Consultas de la clínica.<br />
+                  <b>E</b> Año (x) y consultas (y).<br />
+                  <b>U</b> Número de consultas, no porcentajes.<br />
+                  <b>C</b> El salto verde es el mayor aumento.
+                </div>
+              </div>
+            </div>
+
+            <div class="g-card">
+              <h4>6 · Gráfico de dispersión</h4>
+              <p class="lead">
+                Cada punto es un caso, con dos variables. No se unen con una
+                línea. Se busca si, al crecer una, la otra sube, baja o no se
+                relaciona.
+              </p>
+              <div class="g-visual">
+                <svg viewBox="0 0 460 230" role="img" aria-label="Horas de estudio contra puntaje, gráfico de dispersión">
+                  <text x="230" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#7a0c1e">Horas de estudio y puntaje</text>
+                  <line x1="54" y1="30" x2="54" y2="178" stroke="#c5ced6" />
+                  <line x1="54" y1="178" x2="420" y2="178" stroke="#c5ced6" />
+                  <line x1="70" y1="150" x2="390" y2="48" stroke="#e7b4bc" stroke-width="2" stroke-dasharray="5 4" />
+                  <circle cx="90" cy="142" r="6" fill="#c8102e" />
+                  <circle cx="130" cy="128" r="6" fill="#c8102e" />
+                  <circle cx="168" cy="118" r="6" fill="#c8102e" />
+                  <circle cx="210" cy="96" r="6" fill="#c8102e" />
+                  <circle cx="248" cy="88" r="6" fill="#c8102e" />
+                  <circle cx="290" cy="70" r="6" fill="#c8102e" />
+                  <circle cx="330" cy="58" r="6" fill="#c8102e" />
+                  <circle cx="372" cy="46" r="6" fill="#c8102e" />
+                  <circle cx="300" cy="150" r="6" fill="#2f6fad" stroke="#fff" stroke-width="1" />
+                  <text x="318" y="146" font-size="11" fill="#2f6fad">atípico</text>
+                  <text x="54" y="198" font-size="12" fill="#556">pocas horas</text>
+                  <text x="330" y="198" font-size="12" fill="#556">muchas horas</text>
+                  <text x="16" y="118" font-size="11" fill="#667" transform="rotate(-90 16 118)">puntaje</text>
+                </svg>
+              </div>
+              <div class="g-read">
+                <div>
+                  <strong>Preguntas típicas</strong>
+                  <ul>
+                    <li>¿La relación es positiva? Sí: más horas, más puntaje.</li>
+                    <li>Negativa sería lo contrario: al subir x, baja y.</li>
+                    <li>El punto azul no sigue al resto: es un dato atípico.</li>
+                  </ul>
+                </div>
+                <div class="g-mini">
+                  <b>T</b> Estudio frente a puntaje.<br />
+                  <b>E</b> Horas (x) y puntaje (y).<br />
+                  <b>U</b> Horas y puntos, un punto por estudiante.<br />
+                  <b>C</b> Tendencia de subida, con un caso aparte.
+                </div>
+              </div>
+            </div>
+
+            <div class="mini-quiz">
+              <h4>🎯 Ponte a prueba · gráficas</h4>
+              <div class="quiz-q" data-correct="b">
+                <p class="question">1. En T-E-U-C, la U pide revisar…</p>
+                <label><input type="radio" name="c2_graf_q1" value="a" /> el título del gráfico</label>
+                <label><input type="radio" name="c2_graf_q1" value="b" /> si el número son personas, dólares, % o años</label>
+                <label><input type="radio" name="c2_graf_q1" value="c" /> solo el color de las barras</label>
+              </div>
+              <div class="quiz-q" data-correct="c">
+                <p class="question">2. Un histograma se distingue de un gráfico de barras porque…</p>
+                <label><input type="radio" name="c2_graf_q2" value="a" /> usa colores y las barras no</label>
+                <label><input type="radio" name="c2_graf_q2" value="b" /> siempre muestra porcentajes</label>
+                <label><input type="radio" name="c2_graf_q2" value="c" /> sus barras se tocan: el eje agrupa intervalos numéricos</label>
+              </div>
+              <div class="quiz-q" data-correct="a">
+                <p class="question">3. Si al aumentar las horas de estudio el puntaje tiende a subir, la dispersión muestra…</p>
+                <label><input type="radio" name="c2_graf_q3" value="a" /> una relación positiva</label>
+                <label><input type="radio" name="c2_graf_q3" value="b" /> una relación negativa</label>
+                <label><input type="radio" name="c2_graf_q3" value="c" /> que no hay ninguna relación</label>
+              </div>
+              <button class="action-btn quiz-check">Corregir</button>
+              <p class="quiz-result"></p>
+            </div>
+          </div>
+
           <div class="example">
             <h4>✏️ Ejemplo resuelto</h4>
             <p>Notas: 7, 8, 8, 9, 13. Halla media y mediana.</p>
@@ -2672,6 +3219,14 @@ R --&gt; F[No dejes blancos si no penaliza]</pre
         el.classList.add("open");
         if (typeof mmScan === "function") mmScan(el);
         el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      function openGraficas() {
+        openLesson("l14");
+        const t = document.getElementById("graficas-examen");
+        if (!t) return;
+        setTimeout(function () {
+          t.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 60);
       }
 
       document.querySelectorAll(".lesson-header").forEach((h) => {
