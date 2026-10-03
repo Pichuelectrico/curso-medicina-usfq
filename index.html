@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Curso Intensivo de Preparación — Ingreso a Medicina y PAA USFQ
+    </title>
+    <style>
+      :root {
+        --azul: #c8102e;
+        --azul-dark: #7a0c1e;
+        --verde: #1e9e6a;
+        --rojo: #c0392b;
+        --amarillo: #b8860b;
+        --gris: #f4f6f8;
+        --texto: #223;
+        --borde: #e1e6ea;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        background: var(--gris);
+        color: var(--texto);
+        line-height: 1.6;
+      }
+      header.hero {
+        background: linear-gradient(135deg, var(--azul-dark), var(--azul));
+        color: #fff;
+        padding: 44px 20px;
+        text-align: center;
+      }
+      header.hero h1 {
+        margin: 0 0 10px;
+        font-size: 2.1rem;
+      }
+      header.hero p {
+        margin: 4px 0;
+        opacity: 0.92;
+        font-size: 1.05rem;
+      }
+      .badges {
+        margin-top: 16px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .badge {
+        background: rgba(255, 255, 255, 0.16);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+      }
+      nav.topnav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #fff;
+        border-bottom: 1px solid var(--borde);
+        display: flex;
+        overflow-x: auto;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+      nav.topnav a {
+        flex: 0 0 auto;
+        padding: 13px 18px;
+        color: #555;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.93rem;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+      }
+      nav.topnav a:hover {
+        color: var(--azul-dark);
+        background: #f8f0f0;
+      }
+      nav.topnav a.current {
+        color: var(--azul);
+        border-bottom: 3px solid var(--azul);
+      }
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 28px 20px 80px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        padding: 22px 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      .card h2 {
+        color: var(--azul-dark);
+        margin-top: 0;
+        border-bottom: 2px solid var(--azul);
+        padding-bottom: 8px;
+      }
+      .card h3 {
+        color: var(--azul);
+      }
+
+      .progress-wrap {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-bottom: 22px;
+      }
+      .progress-bar-bg {
+        background: #ede6e6;
+        border-radius: 10px;
+        height: 14px;
+        overflow: hidden;
+        margin-top: 8px;
+      }
+      .progress-bar-fill {
+        background: linear-gradient(90deg, var(--verde), #27ae60);
+        height: 100%;
+        width: 0%;
+        transition: width 0.4s ease;
+      }
+      .progress-text {
+        font-size: 0.9rem;
+        color: #555;
+        margin-top: 6px;
+      }
+      .progress-actions {
+        margin-top: 14px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .reset-btn {
+        background: #fff;
+        color: var(--rojo);
+        border: 1.5px solid var(--rojo);
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-weight: 600;
+        font-size: 0.88rem;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .reset-btn:hover {
+        background: #fdecea;
+      }
+      .mini-bars .row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .mini-bars .lbl {
+        flex: 0 0 150px;
+        font-size: 0.87rem;
+        font-weight: 600;
+        color: var(--azul-dark);
+      }
+      .mini-bars .bar {
+        flex: 1;
+        background: #ede6e6;
+        border-radius: 8px;
+        height: 11px;
+        overflow: hidden;
+      }
+      .mini-bars .bar div {
+        background: linear-gradient(90deg, var(--azul), #e03a52);
+        height: 100%;
+        width: 0%;
+        transition: width 0.4s ease;
+      }
+      .mini-bars .val {
+        flex: 0 0 110px;
+        font-size: 0.8rem;
+        color: #777;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 14px 0;
+      }
+      th,
+      td {
+        border: 1px solid var(--borde);
+        padding: 8px 12px;
+        text-align: left;
+        font-size: 0.93rem;
+      }
+      th {
+        background: var(--azul);
+        color: #fff;
+      }
+      tr:nth-child(even) {
+        background: #fcf8f8;
+      }
+
+      .tip {
+        background: #eaf6ef;
+        border-left: 4px solid var(--verde);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 0.93rem;
+      }
+      .warn {
+        background: #fdecea;
+        border-left: 4px solid var(--rojo);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 0.93rem;
+      }
+      .note {
+        background: #fffbea;
+        border-left: 4px solid var(--amarillo);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 0.93rem;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+        margin-top: 14px;
+      }
+      .step {
+        background: #fdf8f8;
+        border: 1px solid var(--borde);
+        border-radius: 10px;
+        padding: 14px 16px;
+      }
+      .step .n {
+        display: inline-block;
+        background: var(--azul);
+        color: #fff;
+        border-radius: 50%;
+        width: 26px;
+        height: 26px;
+        text-align: center;
+        line-height: 26px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+      }
+
+      .classes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        margin-top: 14px;
+      }
+      .clase-card {
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+      }
+      .clase-card .num {
+        display: inline-block;
+        background: var(--azul);
+        color: #fff;
+        font-size: 0.75rem;
+        border-radius: 12px;
+        padding: 3px 12px;
+        margin-bottom: 8px;
+        align-self: flex-start;
+      }
+      .clase-card h3 {
+        margin: 0 0 6px;
+        color: var(--azul-dark);
+        font-size: 1.05rem;
+      }
+      .clase-card p {
+        font-size: 0.88rem;
+        color: #556;
+        margin: 0 0 6px;
+        flex: 1;
+      }
+      .clase-card .meta {
+        font-size: 0.8rem;
+        color: #888;
+        margin-bottom: 12px;
+      }
+      .clase-card a {
+        display: inline-block;
+        background: var(--azul);
+        color: #fff;
+        text-decoration: none;
+        padding: 9px 14px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      .clase-card a:hover {
+        background: var(--azul-dark);
+      }
+
+      .calc-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 10px;
+      }
+      @media (max-width: 700px) {
+        .calc-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .calc-grid label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: block;
+        margin-bottom: 6px;
+      }
+      .calc-grid input[type="number"] {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1.5px solid var(--borde);
+        border-radius: 8px;
+        font-size: 1rem;
+      }
+      .calc-result {
+        margin-top: 16px;
+        padding: 16px;
+        border-radius: 10px;
+        background: #fdf8f8;
+        border: 1.5px dashed var(--azul);
+      }
+      .calc-result .big {
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: var(--azul-dark);
+      }
+      .calc-result .verdict {
+        font-weight: 700;
+        margin-top: 6px;
+      }
+      .ok {
+        color: var(--verde);
+      }
+      .bad {
+        color: var(--rojo);
+      }
+
+      footer {
+        text-align: center;
+        padding: 26px;
+        color: #888;
+        font-size: 0.85rem;
+      }
+      footer a {
+        color: var(--azul);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <h1>🩺 Curso Intensivo de Preparación — Ingreso a Medicina y PAA USFQ</h1>
+      <p>
+        6 clases · 18 horas · Examen de Ciencias (Matemática, Química, Biología)
+        + PAA College Board intensivo con examen de práctica
+      </p>
+      <p>
+        Lecciones dictadas por tu profesor: analogías, fórmulas clave, diagramas
+        y mini-quizzes corregibles.
+      </p>
+      <div class="badges">
+        <span class="badge">📐 Matemática</span>
+        <span class="badge">⚗️ Química</span>
+        <span class="badge">🧬 Biología</span>
+        <span class="badge">🧠 PAA Verbal + Matemática</span>
+        <span class="badge">✅ Progreso guardado</span>
+      </div>
+    </header>
+
+    <nav class="topnav">
+      <a href="index.html" class="current">🏠 Inicio</a>
+      <a href="clase1.html">Clase 1 · Matemática I</a>
+      <a href="clase2.html">Clase 2 · Funciones + PAA Mat</a>
+      <a href="clase3.html">Clase 3 · Química</a>
+      <a href="clase4.html">Clase 4 · Biología</a>
+      <a href="clase5.html">Clase 5 · PAA Verbal</a>
+      <a href="clase6.html">Clase 6 · PAA Intensivo</a>
+    </nav>
+
+    <main>
+      <div class="progress-wrap">
+        <strong>📈 Tu progreso general</strong>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="globalBar"></div>
+        </div>
+        <div class="progress-text" id="globalText">
+          0 de 0 lecciones completadas (0%)
+        </div>
+        <div class="mini-bars" id="miniBars"></div>
+        <div class="tip">
+          💡 El progreso se guarda automáticamente en este navegador cuando
+          marcas cada lección como completada dentro de su clase.
+        </div>
+        <div class="progress-actions">
+          <button type="button" class="reset-btn" id="resetProgress">
+            Reiniciar progreso
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🚀 ¿Cómo funciona el curso?</h2>
+        <div class="steps">
+          <div class="step">
+            <span class="n">1</span><strong>Abre una clase</strong><br />Tenemos
+            6 clases intensivas de 3 horas cada una. Empieza por la Clase 1 y
+            sigue el orden.
+          </div>
+          <div class="step">
+            <span class="n">2</span><strong>Haz clic en un tema</strong><br />En
+            el menú de cada clase, pulsa el tema que quieras estudiar (por
+            ejemplo, "Números reales") y se abrirá la lección completa.
+          </div>
+          <div class="step">
+            <span class="n">3</span><strong>Estudia como en clase</strong
+            ><br />Cada lección es una lectura dictada por tu profesor:
+            explicación con analogías, términos y fórmulas clave, diagramas,
+            ejemplos resueltos y errores comunes.
+          </div>
+          <div class="step">
+            <span class="n">4</span><strong>Ponte a prueba</strong><br />Al
+            final de cada lección hay un mini-quiz corregible. Marca la lección
+            como ✅ completada y avanza.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🎯 Tu meta: el puntaje de admisión a la USFQ</h2>
+        <p>
+          El puntaje de admisión a la USFQ se determina con estos parámetros:
+        </p>
+        <table>
+          <tr>
+            <th>Parámetro</th>
+            <th>Porcentaje</th>
+          </tr>
+          <tr>
+            <td>
+              Promedio de notas de 1ero y 2do de bachillerato (o nota final de
+              grado)
+            </td>
+            <td>60%</td>
+          </tr>
+          <tr>
+            <td>Prueba de Aptitud Académica PAA — College Board</td>
+            <td>40%</td>
+          </tr>
+        </table>
+
+        <h3>La PAA se evalúa así</h3>
+        <table>
+          <tr>
+            <th>Componente</th>
+            <th>Puntaje</th>
+          </tr>
+          <tr>
+            <td>Examen de Aptitud Verbal</td>
+            <td>1200</td>
+          </tr>
+          <tr>
+            <td>Examen de Aptitud Matemática</td>
+            <td>1200</td>
+          </tr>
+          <tr>
+            <td><strong>Nota PAA total</strong></td>
+            <td><strong>2400</strong></td>
+          </tr>
+        </table>
+
+        <h3>Puntajes mínimos de admisión</h3>
+        <table>
+          <tr>
+            <th>Destino</th>
+            <th>Mínimo</th>
+          </tr>
+          <tr>
+            <td>Ingreso a la USFQ</td>
+            <td>1650</td>
+          </tr>
+          <tr>
+            <td>Odontología</td>
+            <td>1750</td>
+          </tr>
+          <tr>
+            <td><strong>Medicina Humana</strong> 🩺</td>
+            <td><strong>1900</strong></td>
+          </tr>
+        </table>
+
+        <h3>Proceso de admisión a Medicina Humana</h3>
+        <ul>
+          <li>Prueba de Aptitud Académica PAA — College Board.</li>
+          <li>
+            Promedio de notas de 1ero y 2do de bachillerato (o nota final de
+            grado) <strong>mínimo: 8/10</strong>.
+          </li>
+          <li>
+            <strong>Examen de Ciencias</strong> (Química, Biología y
+            Matemáticas) — es exactamente lo que preparas en las Clases 1 a 4.
+          </li>
+        </ul>
+        <div class="warn">
+          ⚠️ Si tu idioma nativo no es el español, deberás rendir un examen de
+          ubicación y alcanzar el nivel requerido para ser estudiante de la
+          USFQ.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🎓 Becas USFQ — dato a tener en cuenta</h2>
+        <p>
+          Si tu meta es financiar tu carrera, apunta más alto que el mínimo de
+          admisión. Los puntajes mínimos de la PAA para optar a becas son:
+        </p>
+        <table>
+          <tr>
+            <th>Beca</th>
+            <th>Puntaje mínimo (escala PAA 2400)</th>
+            <th>Requisitos adicionales</th>
+          </tr>
+          <tr>
+            <td><strong>Beca de Excelencia</strong> (general)</td>
+            <td>2150 / 2400</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>Beca de Excelencia</strong> (Medicina)</td>
+            <td>2150 / 2400</td>
+            <td>
+              Solo los <strong>10 mejores puntajes</strong> son invitados al
+              proceso de selección de la beca.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Beca de Honor</strong> (general)</td>
+            <td>2000 / 2400</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>Beca de Honor</strong> (Medicina)</td>
+            <td>2150 / 2400</td>
+            <td>
+              Haber sido
+              <strong>abanderado, portaestandarte o escolta</strong> en el año
+              lectivo anterior.
+            </td>
+          </tr>
+        </table>
+        <div class="note">
+          📌 Dato referencial aportado por el estudiante — confirma condiciones
+          vigentes con Admisiones USFQ.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🧮 Calculadora de puntaje (estimación referencial)</h2>
+        <p>
+          Ingresa tu promedio de bachillerato y una nota PAA simulada para
+          estimar tu puntaje de admisión:
+        </p>
+        <div class="calc-grid">
+          <div>
+            <label for="inpProm">Promedio de notas (0 – 10)</label>
+            <input
+              type="number"
+              id="inpProm"
+              min="0"
+              max="10"
+              step="0.01"
+              value="9"
+            />
+          </div>
+          <div>
+            <label for="inpPaa">Nota PAA (0 – 2400)</label>
+            <input
+              type="number"
+              id="inpPaa"
+              min="0"
+              max="2400"
+              step="10"
+              value="1800"
+            />
+          </div>
+        </div>
+        <div class="calc-result" id="calcResult">
+          <div class="big" id="calcScore">—</div>
+          <div class="verdict" id="calcVerdict"></div>
+        </div>
+        <div class="note">
+          📌 Estimación referencial: se pondera 60% del promedio (escala sobre
+          2400) + 40% de la nota PAA. La fórmula exacta de conversión la aplica
+          USFQ; verifica con la universidad.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>📚 Las 6 clases del curso intensivo</h2>
+        <div class="classes">
+          <div class="clase-card">
+            <span class="num">Clase 1/5 · 3h</span>
+            <h3>📐 Matemática I — Fundamentos</h3>
+            <p>
+              Números reales, exponentes y radicales, razones y proporciones,
+              álgebra, productos notables y factorización, fórmula cuadrática,
+              ecuaciones, desigualdades, geometría y la recta.
+            </p>
+            <div class="meta">12 lecciones interactivas</div>
+            <a href="clase1.html">Abrir Clase 1 →</a>
+          </div>
+          <div class="clase-card">
+            <span class="num">Clase 2/5 · 3h</span>
+            <h3>📈 Matemática II — Funciones + PAA Matemática</h3>
+            <p>
+              Funciones y sus gráficas, transformaciones, inversas, cuadráticas,
+              exponenciales y logaritmos. Además: toda la Aptitud Matemática de
+              la PAA (aritmética, álgebra, geometría, datos y razonamiento).
+            </p>
+            <div class="meta">15 lecciones interactivas</div>
+            <a href="clase2.html">Abrir Clase 2 →</a>
+          </div>
+          <div class="clase-card">
+            <span class="num">Clase 3/5 · 3h</span>
+            <h3>⚗️ Química</h3>
+            <p>
+              El mol y las concentraciones, el átomo y la tabla periódica,
+              enlaces, números de oxidación, reacciones y balanceo, ácido-base y
+              buffers, química orgánica y biomoléculas.
+            </p>
+            <div class="meta">16 lecciones interactivas</div>
+            <a href="clase3.html">Abrir Clase 3 →</a>
+          </div>
+          <div class="clase-card">
+            <span class="num">Clase 4/5 · 3h</span>
+            <h3>🧬 Biología</h3>
+            <p>
+              Método científico, química de la vida, la célula y sus organelos,
+              membrana, ATP y enzimas, respiración celular, fotosíntesis,
+              biodiversidad y técnicas de laboratorio.
+            </p>
+            <div class="meta">11 lecciones interactivas</div>
+            <a href="clase4.html">Abrir Clase 4 →</a>
+          </div>
+          <div class="clase-card">
+            <span class="num">Clase 5/6 · 3h</span>
+            <h3>🧠 PAA Verbal + Estrategia + Simulacro</h3>
+            <p>
+              Repaso final: comprensión de lectura, analogías, completar
+              oraciones, sinónimos y corrección. Cálculo de tu puntaje, plan de
+              última semana y simulacro general de 30 preguntas.
+            </p>
+            <div class="meta">9 lecciones + simulacro</div>
+            <a href="clase5.html">Abrir Clase 5 →</a>
+          </div>
+          <div class="clase-card">
+            <span class="num">Clase 6/6 · 3h</span>
+            <h3>🎯 PAA Intensivo (material oficial de práctica)</h3>
+            <p>
+              El PAA a fondo con tu material de estudio: aritmética, álgebra,
+              geometría, trigonometría, estadística, probabilidad, lectura,
+              figuras retóricas y redacción PAA (elisión, adición,
+              generalización…).
+            </p>
+            <div class="meta">16 lecciones + examen de práctica completo</div>
+            <a href="clase6.html">Abrir Clase 6 →</a>
+            <a
+              href="examen_paa.html"
+              style="
+                background: #fff;
+                color: var(--azul);
+                border: 1.5px solid var(--azul);
+                margin-top: 8px;
+              "
+              >📝 Examen de práctica (175 ejercicios) →</a
+            >
+          </div>
+        </div>
+        <div class="tip">
+          💡 Consejo: dedica más tiempo a los temas que te resulten más
+          difíciles y usa calculadora científica
+          <strong>no programable</strong> para practicar, tal como se permite en
+          el examen real.
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Curso Intensivo de Preparación — Ingreso a Medicina USFQ · Progreso
+      guardado en este navegador.<br />
+      ¿Quieres ver el temario en formato checklist? Abre el
+      <a href="curso_examen_ciencias_medicina.html">archivo original</a>.
+    </footer>
+
+    <script>
+      const EXPECTED = {
+        clase1: 12,
+        clase2: 15,
+        clase3: 16,
+        clase4: 11,
+        clase5: 9,
+        clase6: 16,
+      };
+      const LABELS = {
+        clase1: "Clase 1 · Matemática I",
+        clase2: "Clase 2 · Funciones + PAA Mat",
+        clase3: "Clase 3 · Química",
+        clase4: "Clase 4 · Biología",
+        clase5: "Clase 5 · PAA Verbal + Simulacro",
+        clase6: "Clase 6 · PAA Intensivo",
+      };
+
+      function loadDone() {
+        try {
+          return JSON.parse(localStorage.getItem("medcurso_v2_done")) || {};
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function renderProgress() {
+        const done = loadDone();
+        let totalDone = 0,
+          totalExpected = 0;
+        const mini = document.getElementById("miniBars");
+        let html = "";
+        for (const cls in EXPECTED) {
+          let d = 0;
+          for (const key in done) {
+            if (key.indexOf(cls + ":") === 0 && done[key]) d++;
+          }
+          const exp = EXPECTED[cls];
+          totalDone += d;
+          totalExpected += exp;
+          const pct = Math.round((d / exp) * 100);
+          html +=
+            '<div class="row"><span class="lbl">' +
+            LABELS[cls] +
+            "</span>" +
+            '<span class="bar"><div style="width:' +
+            pct +
+            '%"></div></span>' +
+            '<span class="val">' +
+            d +
+            "/" +
+            exp +
+            " (" +
+            pct +
+            "%)</span></div>";
+        }
+        mini.innerHTML = html;
+        const gp = totalExpected
+          ? Math.round((totalDone / totalExpected) * 100)
+          : 0;
+        document.getElementById("globalBar").style.width = gp + "%";
+        document.getElementById("globalText").textContent =
+          totalDone +
+          " de " +
+          totalExpected +
+          " lecciones completadas (" +
+          gp +
+          "%)" +
+          (totalDone === 0 ? " — ¡empieza con la Clase 1!" : "");
+      }
+
+      // ===== Calculadora de puntaje =====
+      function calc() {
+        const prom = parseFloat(document.getElementById("inpProm").value);
+        const paa = parseFloat(document.getElementById("inpPaa").value);
+        const scoreEl = document.getElementById("calcScore");
+        const verdict = document.getElementById("calcVerdict");
+        if (
+          isNaN(prom) ||
+          isNaN(paa) ||
+          prom < 0 ||
+          prom > 10 ||
+          paa < 0 ||
+          paa > 2400
+        ) {
+          scoreEl.textContent = "—";
+          verdict.className = "verdict";
+          verdict.textContent =
+            "Ingresa un promedio entre 0 y 10 y una PAA entre 0 y 2400.";
+          return;
+        }
+        const puntaje = 0.6 * (prom / 10) * 2400 + 0.4 * paa;
+        const pts = Math.round(puntaje);
+        scoreEl.textContent = pts.toLocaleString("es-EC") + " / 2400";
+        if (pts >= 1900) {
+          verdict.className = "verdict ok";
+          verdict.textContent =
+            "✅ Supera el mínimo para Medicina Humana (1900)";
+        } else if (pts >= 1750) {
+          verdict.className = "verdict";
+          verdict.style.color = "var(--amarillo)";
+          verdict.textContent =
+            "🦷 Alcanza Odontología (1750) pero le falta a Medicina (1900)";
+        } else if (pts >= 1650) {
+          verdict.className = "verdict";
+          verdict.style.color = "var(--amarillo)";
+          verdict.textContent =
+            "📗 Alcanza el mínimo general USFQ (1650), pero no Odontología ni Medicina";
+        } else {
+          verdict.className = "verdict bad";
+          verdict.textContent =
+            "❌ Por debajo del mínimo general USFQ (1650). ¡A estudiar!";
+        }
+      }
+      document.getElementById("inpProm").addEventListener("input", calc);
+      document.getElementById("inpPaa").addEventListener("input", calc);
+
+      async function resetProgress() {
+        const ok = confirm(
+          "Esto borra el progreso de las clases y la caché guardada de esta página en este navegador. ¿Continuar?"
+        );
+        if (!ok) return;
+        try {
+          localStorage.clear();
+          sessionStorage.clear();
+        } catch (e) {}
+        try {
+          if ("caches" in window) {
+            const keys = await caches.keys();
+            await Promise.all(keys.map((key) => caches.delete(key)));
+          }
+        } catch (e) {}
+        try {
+          if ("serviceWorker" in navigator) {
+            const regs = await navigator.serviceWorker.getRegistrations();
+            await Promise.all(regs.map((reg) => reg.unregister()));
+          }
+        } catch (e) {}
+        location.reload();
+      }
+      document
+        .getElementById("resetProgress")
+        .addEventListener("click", resetProgress);
+
+      renderProgress();
+      calc();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,2516 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Clase 1 · Matemática I: Fundamentos — Curso Intensivo Medicina USFQ
+    </title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <style>
+      :root {
+        --azul: #c8102e;
+        --azul-dark: #7a0c1e;
+        --verde: #1e9e6a;
+        --rojo: #c0392b;
+        --amarillo: #b8860b;
+        --gris: #f4f6f8;
+        --texto: #223;
+        --borde: #e1e6ea;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        background: var(--gris);
+        color: var(--texto);
+        line-height: 1.6;
+      }
+      header.hero {
+        background: linear-gradient(135deg, var(--azul-dark), var(--azul));
+        color: #fff;
+        padding: 36px 20px;
+        text-align: center;
+      }
+      header.hero h1 {
+        margin: 0 0 8px;
+        font-size: 1.9rem;
+      }
+      header.hero p {
+        margin: 4px 0;
+        opacity: 0.92;
+      }
+      .badges {
+        margin-top: 14px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .badge {
+        background: rgba(255, 255, 255, 0.16);
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+      }
+      .topnav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #fff;
+        border-bottom: 1px solid var(--borde);
+        display: flex;
+        overflow-x: auto;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+      .topnav a {
+        flex: 0 0 auto;
+        padding: 13px 16px;
+        color: #555;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.92rem;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+      }
+      .topnav a:hover {
+        color: var(--azul-dark);
+        background: #f8f0f0;
+      }
+      .topnav a.current {
+        color: var(--azul);
+        border-bottom: 3px solid var(--azul);
+      }
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 26px 20px 80px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        padding: 22px 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      .card h2 {
+        color: var(--azul-dark);
+        margin-top: 0;
+        border-bottom: 2px solid var(--azul);
+        padding-bottom: 8px;
+      }
+      .progress-wrap {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 22px;
+      }
+      .progress-bar-bg {
+        background: #ede6e6;
+        border-radius: 10px;
+        height: 14px;
+        overflow: hidden;
+        margin-top: 8px;
+      }
+      .progress-bar-fill {
+        background: linear-gradient(90deg, var(--verde), #27ae60);
+        height: 100%;
+        width: 0%;
+        transition: width 0.4s ease;
+      }
+      .progress-text {
+        font-size: 0.9rem;
+        color: #555;
+        margin-top: 6px;
+      }
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .topic-link {
+        background: #fff;
+        border: 1.5px solid var(--azul);
+        color: var(--azul-dark);
+        border-radius: 10px;
+        padding: 10px 12px;
+        text-align: left;
+        cursor: pointer;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+      .topic-link:hover {
+        background: #fdeeef;
+      }
+      table.plan {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0;
+      }
+      .plan th,
+      .plan td {
+        border: 1px solid var(--borde);
+        padding: 8px 10px;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+      .plan th {
+        background: var(--azul);
+        color: #fff;
+      }
+      .plan tr:nth-child(even) {
+        background: #fcf8f8;
+      }
+      .lesson {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        margin-bottom: 16px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      .lesson-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 18px;
+        cursor: pointer;
+        flex-wrap: wrap;
+      }
+      .lesson-header:hover {
+        background: #fbefef;
+      }
+      .lesson-num {
+        background: var(--azul);
+        color: #fff;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        padding: 3px 10px;
+        white-space: nowrap;
+      }
+      .lesson-header h3 {
+        margin: 0;
+        font-size: 1.05rem;
+        color: var(--azul-dark);
+        flex: 1;
+      }
+      .lesson-time {
+        color: #777;
+        font-size: 0.85rem;
+        white-space: nowrap;
+      }
+      .lesson-done {
+        font-size: 0.85rem;
+        cursor: pointer;
+        white-space: nowrap;
+        user-select: none;
+      }
+      .lesson-body {
+        display: none;
+        padding: 4px 22px 20px;
+        border-top: 1px dashed var(--borde);
+      }
+      .lesson.open .lesson-body {
+        display: block;
+      }
+      .lesson.done .lesson-header {
+        background: #eaf6ef;
+      }
+      .lesson.done .lesson-num {
+        background: var(--verde);
+      }
+      .teacher {
+        background: #fdeeef;
+        border-left: 4px solid var(--azul);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 16px 0;
+      }
+      .teacher p {
+        margin: 8px 0;
+      }
+      .keyterms table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      .keyterms th,
+      .keyterms td {
+        border: 1px solid var(--borde);
+        padding: 7px 10px;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+      .keyterms th {
+        background: #fdeeef;
+        color: var(--azul-dark);
+      }
+      .formula-box {
+        background: #fffbea;
+        border: 1.5px solid var(--amarillo);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 14px 0;
+      }
+      .formula-box h4 {
+        margin: 0 0 6px;
+        color: var(--amarillo);
+      }
+      .formula-box pre {
+        margin: 4px 0;
+        font-family: Consolas, Menlo, monospace;
+        font-size: 0.95rem;
+        background: none;
+        white-space: pre-wrap;
+      }
+      .diagram-box {
+        background: #fbf9f9;
+        border: 1px dashed #c89aa0;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 14px 0;
+        overflow-x: auto;
+      }
+      .diagram-box h4 {
+        margin: 0 0 6px;
+        color: #7a4a52;
+      }
+      .diagram-box pre {
+        margin: 6px 0;
+        font-family: Consolas, Menlo, monospace;
+        font-size: 0.85rem;
+        line-height: 1.35;
+      }
+      .example {
+        background: #f2fbf6;
+        border-left: 4px solid var(--verde);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+      }
+      .example ol {
+        margin: 8px 0 4px 22px;
+      }
+      .pitfall {
+        background: #fdecea;
+        border-left: 4px solid var(--rojo);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 0.93rem;
+      }
+      .medlink {
+        background: #f3eefb;
+        border-left: 4px solid #7b4fb5;
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 0.93rem;
+      }
+      .mini-quiz {
+        border: 1.5px solid var(--azul);
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin: 16px 0;
+      }
+      .mini-quiz h4 {
+        margin: 0 0 10px;
+        color: var(--azul);
+      }
+      .quiz-q {
+        margin-bottom: 14px;
+        padding: 10px 12px;
+        border: 1px solid var(--borde);
+        border-radius: 8px;
+      }
+      .quiz-q p.question {
+        font-weight: 600;
+        margin: 0 0 8px;
+      }
+      .quiz-q label {
+        display: block;
+        padding: 5px 9px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-bottom: 3px;
+        font-size: 0.92rem;
+      }
+      .quiz-q label:hover {
+        background: #fbefef;
+      }
+      .quiz-q input {
+        margin-right: 8px;
+      }
+      .quiz-result {
+        font-weight: 700;
+        margin: 8px 0 0;
+      }
+      button.action-btn,
+      .action-btn {
+        display: inline-block;
+        background: var(--azul);
+        color: #fff;
+        border: none;
+        padding: 9px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      button.action-btn:hover,
+      .action-btn:hover {
+        background: var(--azul-dark);
+      }
+      footer {
+        text-align: center;
+        padding: 24px;
+        color: #888;
+        font-size: 0.85rem;
+      }
+      .clasnav {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 26px;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 700px) {
+        .lesson-header h3 {
+          font-size: 0.98rem;
+        }
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/mhchem.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+      onload="renderMathInElement(document.body,{delimiters:[{left:&#x27;$$&#x27;,right:&#x27;$$&#x27;,display:true},{left:&#x27;\\[&#x27;,right:&#x27;\\]&#x27;,display:true},{left:&#x27;\\(&#x27;,right:&#x27;\\)&#x27;,display:false}]})"
+    ></script>
+  </head>
+  <body>
+    <header class="hero">
+      <h1>🧮 Clase 1/6 · Matemática I: Fundamentos</h1>
+      <p>Curso Intensivo de Preparación — Ingreso a Medicina USFQ</p>
+      <p>⏱ Duración: 3 horas · Módulo: Bases algebraicas y geometría</p>
+      <div class="badges">
+        <span class="badge">📐 12 lecciones</span
+        ><span class="badge">⏱ ~15 min c/u</span
+        ><span class="badge">🎯 Base del Examen de Ciencias</span>
+      </div>
+    </header>
+    <div class="topnav">
+      <a href="index.html">🏠 Inicio</a
+      ><a href="clase1.html" class="current">Clase 1</a
+      ><a href="clase2.html">Clase 2</a><a href="clase3.html">Clase 3</a
+      ><a href="clase4.html">Clase 4</a><a href="clase5.html">Clase 5</a>
+      <a href="clase6.html">Clase 6</a>
+    </div>
+    <main>
+      <div class="progress-wrap">
+        <strong>Progreso de esta clase</strong>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="classProgressBar"></div>
+        </div>
+        <div class="progress-text" id="classProgressText">
+          0 de 12 lecciones completadas (0%)
+        </div>
+      </div>
+      <div class="card">
+        <h2>📚 Menú de temas — haz clic para abrir la clase</h2>
+        <p>
+          Cada tema abre una lección completa dictada por tu profesor:
+          explicación con analogías, términos y fórmulas clave, diagramas,
+          ejemplo resuelto y mini-quiz.
+        </p>
+        <div class="topic-grid">
+          <button class="topic-link" onclick="openLesson('l01')">
+            1 · Números reales
+          </button>
+          <button class="topic-link" onclick="openLesson('l02')">
+            2 · Exponentes y radicales
+          </button>
+          <button class="topic-link" onclick="openLesson('l03')">
+            3 · Razones y proporciones
+          </button>
+          <button class="topic-link" onclick="openLesson('l04')">
+            4 · Expresiones algebraicas
+          </button>
+          <button class="topic-link" onclick="openLesson('l05')">
+            5 · Productos notables y factorización
+          </button>
+          <button class="topic-link" onclick="openLesson('l06')">
+            6 · Fórmula cuadrática
+          </button>
+          <button class="topic-link" onclick="openLesson('l07')">
+            7 · Expresiones fraccionarias
+          </button>
+          <button class="topic-link" onclick="openLesson('l08')">
+            8 · Ecuaciones lineales y fraccionarias
+          </button>
+          <button class="topic-link" onclick="openLesson('l09')">
+            9 · Problemas con ecuaciones
+          </button>
+          <button class="topic-link" onclick="openLesson('l10')">
+            10 · Desigualdades
+          </button>
+          <button class="topic-link" onclick="openLesson('l11')">
+            11 · Geometría básica
+          </button>
+          <button class="topic-link" onclick="openLesson('l12')">
+            12 · La recta
+          </button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>🗓️ Plan de la sesión (3 horas)</h2>
+        <table class="plan">
+          <tr>
+            <th>Bloque</th>
+            <th>Tiempo</th>
+            <th>Contenido</th>
+          </tr>
+          <tr>
+            <td>A</td>
+            <td>0:00 – 0:50</td>
+            <td>
+              Lecciones 1–4: números reales, exponentes, razones, expresiones
+              algebraicas
+            </td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>0:50 – 1:40</td>
+            <td>
+              Lecciones 5–8: factorización, cuadrática, fracciones algebraicas,
+              ecuaciones
+            </td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>1:40 – 2:30</td>
+            <td>
+              Lecciones 9–10: problemas con ecuaciones y desigualdades +
+              práctica
+            </td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>2:30 – 3:00</td>
+            <td>Lecciones 11–12: geometría básica y la recta + quiz final</td>
+          </tr>
+        </table>
+      </div>
+      <article class="lesson" id="l01">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 1</span>
+          <h3>Números reales</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que los números son como los habitantes de una gran ciudad
+              llamada Recta Numérica. Cada uno tiene su dirección exacta: los
+              naturales (1, 2, 3…) son los fundadores del barrio; los enteros
+              agregan a sus vecinos negativos y al cero; los racionales llenan
+              cada hueco con fracciones como 1/2 o −3/4; y los irracionales,
+              como \(\pi \) o \(\sqrt{2}\), son esos vecinos misteriosos con
+              decimales infinitos que nunca se repiten. Todos juntos forman los
+              números reales: cualquier punto que puedas marcar sobre la recta.
+            </p>
+            <p>
+              Piensa en los conjuntos como muñecas rusas: cada conjunto cabe
+              dentro del siguiente, ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ, y los irracionales completan
+              el conjunto real. Esto importa porque cada tipo de número admite
+              distintas operaciones: no puedes dividir entre cero en ninguno, y
+              las raíces pares de negativos no son reales. Ordenar y comparar
+              reales es como ordenar pacientes por triaje: usas la recta, el
+              valor absoluto como "distancia al cero" y las propiedades de orden
+              para decidir quién va primero. Dominar esta clasificación te
+              ahorra errores en todo lo que sigue: simplificar, despejar y
+              graficar dependen de saber con qué clase de número trabajas.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Número racional</td>
+                <td>
+                  Cociente p/q de enteros con \(q \neq 0;\) decimal finito o
+                  periódico.
+                </td>
+              </tr>
+              <tr>
+                <td>Número irracional</td>
+                <td>
+                  Decimal infinito no periódico (\(\pi \), \(\sqrt{2}\)); no es
+                  cociente de enteros.
+                </td>
+              </tr>
+              <tr>
+                <td>Valor absoluto</td>
+                <td>Distancia de un número al cero: |x| \(\ge \) 0.</td>
+              </tr>
+              <tr>
+                <td>Intervalo</td>
+                <td>
+                  Conjunto continuo de reales entre dos extremos, p. ej. [1, 5).
+                </td>
+              </tr>
+              <tr>
+                <td>Opuesto e inverso</td>
+                <td>
+                  Opuesto: −a; inverso multiplicativo: \(1/a (a \neq 0).\)
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ |x|=\begin{cases}x &amp; \text{si }x\ge 0\\-x &amp; \text{si
+              }x\lt 0\end{cases}\qquad |x-a|=\text{distancia entre }x\text{ y }a
+              \] \[ a\lt b,\ c\gt 0\Rightarrow ac\lt bc\qquad a\lt b,\ c\lt
+              0\Rightarrow ac\gt bc \] \[ \text{Intervalos: }(a,b)\text{
+              abierto}\quad [a,b]\text{ cerrado}\quad [a,b)\text{ mixto} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+R[Reales] --&gt; Q[Racionales]
+R --&gt; I[Irracionales]
+Q --&gt; Z[Enteros]
+Z --&gt; N[Naturales]
+Z --&gt; ZN[Cero y negativos]</pre
+            >
+            <pre>
+Recta numérica:
+&lt;──●────●────●────●────●────●──&gt;
+ -2 -1 0 1/2 √2 2</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Clasifica −7, 0.75, \(\sqrt{3}\) y ordena −2, |−3|, \(-\sqrt{5}\).
+            </p>
+            <ol>
+              <li>
+                −7 es entero y racional; \(0.75 = 3/4\) es racional;
+                \(\sqrt{3}\) es irracional.
+              </li>
+              <li>Calcula: |−3| = 3; \(-\sqrt{5}\) \(\approx \) −2.24.</li>
+              <li>
+                Ordena de menor a mayor: \(-\sqrt{5}\) \(\approx \) −2.24 &lt;
+                −2 &lt; 3 = |−3|.
+              </li>
+              <li>En intervalo: esos valores están en [−3, 3]. ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> creer que todo decimal es
+            racional (\(\pi \) no lo es); decir que |x| siempre es x (falla con
+            negativos); dividir entre cero "porque da infinito".
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> los signos vitales y
+            dosis son números reales con intervalos de referencia; leer "PA
+            entre 90/60 y 120/80" es leer intervalos.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. ¿Cuál es irracional?</p>
+              <label
+                ><input type="radio" name="c1_l01_q1" value="a" /> \(0.333… =
+                1/3\)</label
+              ><label
+                ><input type="radio" name="c1_l01_q1" value="b" /> \(\pi
+                \)</label
+              ><label
+                ><input type="radio" name="c1_l01_q1" value="c" /> −8/2</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">2. ¿Cuánto vale |−7| + |3|?</p>
+              <label><input type="radio" name="c1_l01_q2" value="a" /> −4</label
+              ><label><input type="radio" name="c1_l01_q2" value="b" /> 4</label
+              ><label
+                ><input type="radio" name="c1_l01_q2" value="c" /> 10</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">3. El intervalo [2, 7) incluye…</p>
+              <label
+                ><input type="radio" name="c1_l01_q3" value="a" /> el 2 pero no
+                el 7</label
+              ><label
+                ><input type="radio" name="c1_l01_q3" value="b" /> el 7 pero no
+                el 2</label
+              ><label
+                ><input type="radio" name="c1_l01_q3" value="c" /> ni el 2 ni el
+                7</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l02">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 2</span>
+          <h3>Exponentes y radicales</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que un exponente es como fotocopiar un documento varias
+              veces: \(x^{3}\) significa "multiplica x por sí misma 3 veces".
+              Los exponentes convierten multiplicaciones largas en notación
+              corta, y sus leyes son el manual de la fotocopiadora: cuando
+              multiplicas potencias de la misma base, sumas exponentes; cuando
+              divides, restas; cuando elevas una potencia a otra, multiplicas.
+              El exponente cero siempre da 1 (toda base no nula) y el exponente
+              negativo significa "ponlo en el denominador": \(x^{-n} =
+              1/x^{n}.\)
+            </p>
+            <p>
+              Piensa en los radicales como la operación inversa: si el exponente
+              es "subir por la escalera", la raíz es "bajarla". \(\sqrt{x}\)
+              busca el número que al cuadrado da \(x, y \sqrt[n]{x} = x^{1/n}.\)
+              Por eso puedes convertir radicales en exponentes fraccionarios y
+              aplicar las mismas leyes. Para operar con raíces: extrae cuadrados
+              perfectos \((\sqrt{7}2 = \sqrt{36\cdot 2}\)\(\sqrt{36\cdot 2} =
+              6\sqrt{2}),\) racionaliza denominadores \((1/\sqrt{2} =
+              \sqrt{2}/2) y\) solo suma radicales semejantes (\(2\sqrt{3}\) +
+              \(5\sqrt{3} = 7\sqrt{3}).\) La trampa clásica: \(\sqrt{a+b}\) NO
+              es \(\sqrt{a}\) + \(\sqrt{b}\).
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Base y exponente</td>
+                <td>
+                  En \(a^{n}\), a es la base y n el número de veces que se
+                  multiplica.
+                </td>
+              </tr>
+              <tr>
+                <td>Exponente fraccionario</td>
+                <td>\(x^{m/n} = \sqrt[n]{xᵐ}.\)</td>
+              </tr>
+              <tr>
+                <td>Radical semejante</td>
+                <td>Raíces con igual índice y radicando; se pueden sumar.</td>
+              </tr>
+              <tr>
+                <td>Racionalizar</td>
+                <td>
+                  Eliminar raíces del denominador multiplicando por el conjugado
+                  o la raíz.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ a^m\cdot a^n=a^{m+n}\qquad \frac{a^m}{a^n}=a^{m-n}\qquad
+              (a^m)^n=a^{m\cdot n} \] \[ (ab)^n=a^nb^n\qquad a^0=1\qquad
+              a^{-n}=\frac{1}{a^n} \] \[ \sqrt[n]{a}=a^{1/n}\qquad
+              \sqrt{ab}=\sqrt{a}\cdot\sqrt{b}\qquad
+              \sqrt{\frac{a}{b}}=\frac{\sqrt{a}}{\sqrt{b}} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph LR
+P[Potencia a elevado n] --&gt; M[Multiplicar: suma exponentes]
+P --&gt; D[Dividir: resta exponentes]
+P --&gt; E[Potencia de potencia: multiplica]
+P --&gt; R[Raiz: exponente fraccionario]</pre
+            >
+            <pre>  ⁿ√(aᵐ)  =  a^(m/n)   ⇄   a⁻ⁿ = 1/aⁿ</pre>
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Simplifica (\(2x^{3})^{2}\) \(\cdot \) \(x^{-1}\) / (\(4x^{4}\)) y
+              calcula \(\sqrt{7}2\) − \(\sqrt{3}2\).
+            </p>
+            <ol>
+              <li>\((2x^{3})^{2} = 4x^{6}.\)</li>
+              <li>
+                \(4x^{6} \cdot x^{-1} = 4x^{5};\) dividido entre \(4x^{4}\) da
+                \(x^{5-4} = x.\)
+              </li>
+              <li>
+                \(\sqrt{7}2 = \sqrt{36\cdot 2}\)\(\sqrt{36\cdot 2} = 6\sqrt{2};
+                \sqrt{3}2\)\(6\sqrt{2}; \sqrt{3}2 = \sqrt{16\cdot
+                2}\)\(\sqrt{16\cdot 2} = 4\sqrt{2}.\)
+              </li>
+              <li>Resta: \(6\sqrt{2}\) − \(4\sqrt{2} = 2\sqrt{2}.\) ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> escribir \((a+b)^{2} =
+            a^{2}+b^{2}\) (falta 2ab); sumar exponentes al elevar potencias en
+            vez de multiplicarlos; dejar raíces en el denominador.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> la notación científica de
+            laboratorio (\(10^{6}\) bacterias/mL) y el pH logarítmico viven de
+            exponentes.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. \(x^{5}\) \(\cdot \) \(x^{3}\) =</p>
+              <label
+                ><input type="radio" name="c1_l02_q1" value="a" />
+                \(x^{15}\)</label
+              ><label
+                ><input type="radio" name="c1_l02_q1" value="b" />
+                \(x^{8}\)</label
+              ><label
+                ><input type="radio" name="c1_l02_q1" value="c" />
+                \(2x^{8}\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. \(\sqrt{5}0\) simplificado es…</p>
+              <label
+                ><input type="radio" name="c1_l02_q2" value="a" />
+                \(5\sqrt{2}\)</label
+              ><label
+                ><input type="radio" name="c1_l02_q2" value="b" />
+                \(25\sqrt{2}\)</label
+              ><label
+                ><input type="radio" name="c1_l02_q2" value="c" />
+                \(2\sqrt{5}\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. 1/\(\sqrt{2}\) racionalizado es…</p>
+              <label
+                ><input type="radio" name="c1_l02_q3" value="a" />
+                \(\sqrt{2}\)</label
+              ><label
+                ><input type="radio" name="c1_l02_q3" value="b" />
+                2/\(\sqrt{2}\)</label
+              ><label
+                ><input type="radio" name="c1_l02_q3" value="c" />
+                \(\sqrt{2}\)/2</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l03">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 3</span>
+          <h3>Razones y proporciones</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que preparas limonada: la receta dice 2 limones por cada
+              litro de agua. Esa comparación "2 a 1" es una razón. Si quieres 3
+              litros, no adivinas: mantienes la receta y usas 6 limones. Esa
+              igualdad de dos razones \((2/1 = 6/3)\) es una proporción. Las
+              razones comparan, las proporciones conservan la receta cuando
+              cambia la escala. Por eso aparecen en mapas, mezclas, descuentos y
+              dosis: todo lo que crece "en la misma medida".
+            </p>
+            <p>
+              Piensa en la proporción como una balanza en equilibrio: \(a/b =
+              c/d\) se resuelve cruzando, ad = bc. Si la relación es directa
+              (más insumo, más producto), multiplicas en cruz normal; si es
+              inversa (más obreros, menos tiempo), el producto se mantiene
+              constante: \(x_{1}\cdot y_{1} = x_{2}\cdot y_{2}.\) Los
+              porcentajes son solo razones con denominador 100, y la regla de
+              tres es el atajo para hallar el término faltante. El error típico
+              es tratar una relación inversa como si fuera directa: duplicar
+              enfermeros no duplica el tiempo, lo reduce a la mitad.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Razón</td>
+                <td>Comparación a:b o a/b entre dos cantidades.</td>
+              </tr>
+              <tr>
+                <td>Proporción</td>
+                <td>Igualdad de dos razones: \(a/b = c/d.\)</td>
+              </tr>
+              <tr>
+                <td>Proporcionalidad directa</td>
+                <td>
+                  Al aumentar una variable, la otra aumenta en la misma razón.
+                </td>
+              </tr>
+              <tr>
+                <td>Proporcionalidad inversa</td>
+                <td>
+                  Al aumentar una, la otra disminuye; su producto es constante.
+                </td>
+              </tr>
+              <tr>
+                <td>Porcentaje</td>
+                <td>Razón con base 100: p% = p/100.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ \frac{a}{b}=\frac{c}{d}\Rightarrow ad=bc\Rightarrow
+              x=\frac{bc}{a} \] \[ \text{Directa: }y=kx\qquad \text{Inversa:
+              }xy=k \] \[ p\%\text{ de }N=\frac{p}{100}\cdot N\qquad
+              \text{aumento: }N\cdot\left(1+\frac{p}{100}\right) \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+RZ[Razon a:b] --&gt; PR[Proporcion a/b = c/d]
+PR --&gt; D[Directa: cruz ad = bc]
+PR --&gt; I[Inversa: producto x1y1 = x2y2]
+PR --&gt; P[Porcentaje: base 100]</pre
+            >
+            <pre>
+Directa: ↑ insumo ⇒ ↑ producto     Inversa: ↑ obreros ⇒ ↓ tiempo</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Si 5 mL de jarabe contienen 250 mg del fármaco, ¿cuántos mg hay en
+              8 mL?
+            </p>
+            <ol>
+              <li>Plantea: \(250/5 = x/8.\)</li>
+              <li>Cruza: 5x = \(250\cdot 8 = 2000.\)</li>
+              <li>Despeja: \(x = 2000/5\)\(2000/5 = 400\) mg. ✔</li>
+              <li>Verifica: la razón 50 mg/mL se conserva.</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> aplicar regla de tres directa a
+            un caso inverso; confundir "aumentó 30%" con "es el 30%"; olvidar
+            simplificar unidades antes de cruzar.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> casi toda dosis
+            pediátrica es una proporción: mg por kg de peso.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. Si \(3/4 = x/12, x\) vale…</p>
+              <label><input type="radio" name="c1_l03_q1" value="a" /> 6</label
+              ><label><input type="radio" name="c1_l03_q1" value="b" /> 9</label
+              ><label
+                ><input type="radio" name="c1_l03_q1" value="c" /> 16</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                2. 4 obreros tardan 6 h; 8 obreros (mismo ritmo) tardarán…
+              </p>
+              <label
+                ><input type="radio" name="c1_l03_q2" value="a" /> 3 h
+                (inversa)</label
+              ><label
+                ><input type="radio" name="c1_l03_q2" value="b" /> 12 h</label
+              ><label
+                ><input type="radio" name="c1_l03_q2" value="c" /> 6 h</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. El 20% de 250 es…</p>
+              <label><input type="radio" name="c1_l03_q3" value="a" /> 20</label
+              ><label
+                ><input type="radio" name="c1_l03_q3" value="b" /> 30</label
+              ><label
+                ><input type="radio" name="c1_l03_q3" value="c" /> 50</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l04">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 4</span>
+          <h3>Expresiones algebraicas</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que el álgebra es como cocinar con recipientes
+              etiquetados: en vez de decir "3 manzanas + 2 manzanas", escribes
+              3x + 2x. La letra x es el recipiente y el número es cuántas
+              unidades hay dentro. Un término tiene signo, coeficiente y parte
+              literal (ej. \(-4x^{2}y\)); el grado es el exponente mayor, y los
+              términos semejantes son los que comparten exactamente el mismo
+              recipiente: solo esos se pueden sumar o restar.
+            </p>
+            <p>
+              Piensa en sumar polinomios como ordenar una bodega: juntas lo
+              igual con lo igual y lo distinto se deja separado. Multiplicar es
+              repartir: a(b+c) = ab+ac, y con dos binomios aplicas "cada uno con
+              cada uno" (FOIL): (x+2)(x+3) = \(x^{2}+5x+6\). Dividir monomios es
+              restar exponentes y cuidar los signos. Evaluar la expresión en un
+              valor (sustituir \(x = 2)\) es como probar la receta: reemplazas y
+              calculas. El secreto de esta lección es el orden y los signos: un
+              menos mal distribuido arruina todo el plato.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Término algebraico</td>
+                <td>
+                  Producto de coeficiente numérico y parte literal con
+                  exponentes.
+                </td>
+              </tr>
+              <tr>
+                <td>Términos semejantes</td>
+                <td>
+                  Misma parte literal con mismos exponentes; se pueden reducir.
+                </td>
+              </tr>
+              <tr>
+                <td>Polinomio</td>
+                <td>Suma de términos; su grado es el mayor exponente.</td>
+              </tr>
+              <tr>
+                <td>Evaluar</td>
+                <td>
+                  Sustituir la variable por un número y calcular el resultado.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ a(b+c)=ab+ac \] \[ (x+a)(x+b)=x^2+(a+b)x+ab \] \[ ax+bx=(a+b)x
+              \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+EX[Expresion] --&gt; T[Terminos]
+T --&gt; S[Semejantes: sumar/restar]
+T --&gt; D[Distintos: no se combinan]
+EX --&gt; M[Multiplicar: repartir cada termino]</pre
+            >
+            <pre>3x² + 5x − 2x² + 7  =  (3−2)x² + 5x + 7  =  x² + 5x + 7</pre>
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Simplifica (2x − 3)(x + 4) − (\(x^{2}\) − 5).</p>
+            <ol>
+              <li>
+                Multiplica: \(2x\cdot x = 2x^{2}; 2x\cdot 4\) = 8x; \(-3\cdot
+                x\) = −3x; \(-3\cdot 4\) = −12 \(\to \) \(2x^{2}\) + 5x − 12.
+              </li>
+              <li>Resta el paréntesis: \(-(x^{2}\) − \(5) = -x^{2}\) + 5.</li>
+              <li>
+                Suma: \(2x^{2}\) − \(x^{2} = x^{2};\) queda \(x^{2}\) + 5x − 7.
+                ✔
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> sumar \(x^{2}\) + x como
+            \(2x^{2}\) (no son semejantes); olvidar cambiar signos al restar un
+            polinomio; multiplicar solo el primer término del paréntesis.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> las fórmulas clínicas
+            (IMC, superficie corporal, dosis) son expresiones algebraicas que
+            evalúas con datos del paciente.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. Reduce: 4x + 7 − 2x + 3 =</p>
+              <label
+                ><input type="radio" name="c1_l04_q1" value="a" /> 2x + 4</label
+              ><label
+                ><input type="radio" name="c1_l04_q1" value="b" /> 2x +
+                10</label
+              ><label
+                ><input type="radio" name="c1_l04_q1" value="c" /> 6x +
+                10</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">2. (x + 5)(x + 1) =</p>
+              <label
+                ><input type="radio" name="c1_l04_q2" value="a" /> \(x^{2}\) +
+                5</label
+              ><label
+                ><input type="radio" name="c1_l04_q2" value="b" /> \(x^{2}\) +
+                5x + 5</label
+              ><label
+                ><input type="radio" name="c1_l04_q2" value="c" /> \(x^{2}\) +
+                6x + 5</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">3. Si P(x) = \(2x^{2}\) − 3x + 1, P(2) =</p>
+              <label><input type="radio" name="c1_l04_q3" value="a" /> 3</label
+              ><label><input type="radio" name="c1_l04_q3" value="b" /> 5</label
+              ><label
+                ><input type="radio" name="c1_l04_q3" value="c" /> 9</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l05">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 5</span>
+          <h3>Productos notables y factorización</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que los productos notables son atajos en un camino que
+              recorres todos los días: en vez de multiplicar (\(a+b)^{2}\) paso
+              a paso, memorizas que siempre da \(a^{2}\) + 2ab + \(b^{2}\). Son
+              tres atajos que aparecen en cada examen: el cuadrado de un binomio
+              (suma y resta), la diferencia de cuadrados (a+b)(a−b) = \(a^{2}\)
+              − \(b^{2}\), y el binomio con término común que ya viste.
+              Reconocerlos a simple vista es como reconocer a un amigo entre la
+              multitud: la forma te resulta familiar.
+            </p>
+            <p>
+              Piensa en la factorización como el camino de regreso: si
+              multiplicar es armar un mueble, factorizar es desarmarlo y guardar
+              las piezas en su caja, es decir, escribir el polinomio como
+              producto. El orden de ataque siempre es: primero busca factor
+              común (\(2x^{2}\) + 4x = 2x(x+2)); luego prueba diferencia de
+              cuadrados (\(x^{2}\) − 9 = (x+3)(x−3)); luego trinomio cuadrado
+              perfecto o de la forma x²+bx+c (\(x^{2}+5x+6\) = (x+2)(x+3)); y si
+              hay cuatro términos, agrupa. Factorizar bien es la llave de las
+              ecuaciones cuadráticas y de simplificar fracciones algebraicas.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Producto notable</td>
+                <td>
+                  Multiplicación frecuente con forma desarrollada memorizable.
+                </td>
+              </tr>
+              <tr>
+                <td>Factor común</td>
+                <td>
+                  Factor que comparten todos los términos; se extrae primero.
+                </td>
+              </tr>
+              <tr>
+                <td>Diferencia de cuadrados</td>
+                <td>\(a^{2}\) − \(b^{2}\) = (a+b)(a−b).</td>
+              </tr>
+              <tr>
+                <td>Trinomio cuadrado perfecto</td>
+                <td>\(a^{2}\) ± 2ab + \(b^{2} = (a\) ± \(b)^{2}\).</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ (a+b)^2=a^2+2ab+b^2\qquad (a-b)^2=a^2-2ab+b^2 \] \[
+              (a+b)(a-b)=a^2-b^2\qquad x^2+(a+b)x+ab=(x+a)(x+b) \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+F[Factorizar] --&gt; C{Hay factor comun}
+C --&gt;|Si| E[Extraerlo primero]
+C --&gt;|No| D{Que forma tiene}
+D --&gt; DC[2 terminos: diferencia de cuadrados]
+D --&gt; TC[3 terminos: trinomio]
+D --&gt; AG[4 terminos: agrupar]</pre
+            >
+            <pre>(a+b)² = a² + 2ab + b²   ⇄   a² − b² = (a+b)(a−b)</pre>
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Factoriza \(3x^{2}\) − 12 y \(x^{2}\) + 7x + 12.</p>
+            <ol>
+              <li>En \(3x^{2}\) − 12 hay factor común 3: \(3(x^{2}\) − 4).</li>
+              <li>
+                \(x^{2}\) − 4 es diferencia de cuadrados: (x+2)(x−2). Resultado:
+                3(x+2)(x−2).
+              </li>
+              <li>
+                En \(x^{2}+7x+12\) busca dos números que multipliquen 12 y sumen
+                7: 3 y 4.
+              </li>
+              <li>Resultado: (x+3)(x+4). ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> escribir \((a-b)^{2} = a^{2}\)
+            − \(b^{2}\) (falta −2ab); intentar factorizar \(x^{2}\) + 9 como
+            diferencia de cuadrados (es suma, no factoriza en reales); olvidar
+            sacar el factor común primero.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> despejar fórmulas de
+            cinética o diluciones exige factorizar para cancelar factores
+            iguales arriba y abajo.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">1. (x − \(4)^{2}\) =</p>
+              <label
+                ><input type="radio" name="c1_l05_q1" value="a" /> \(x^{2}\) −
+                8x + 16</label
+              ><label
+                ><input type="radio" name="c1_l05_q1" value="b" /> \(x^{2}\) −
+                16</label
+              ><label
+                ><input type="radio" name="c1_l05_q1" value="c" /> \(x^{2}\) +
+                8x + 16</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">2. \(x^{2}\) − 25 factorizado es…</p>
+              <label
+                ><input type="radio" name="c1_l05_q2" value="a" />
+                (\(x-5)^{2}\)</label
+              ><label
+                ><input type="radio" name="c1_l05_q2" value="b" />
+                (\(x+5)^{2}\)</label
+              ><label
+                ><input type="radio" name="c1_l05_q2" value="c" />
+                (x+5)(x−5)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">3. \(x^{2}\) + 8x + 15 =</p>
+              <label
+                ><input type="radio" name="c1_l05_q3" value="a" />
+                (x+1)(x+15)</label
+              ><label
+                ><input type="radio" name="c1_l05_q3" value="b" />
+                (x+3)(x+5)</label
+              ><label
+                ><input type="radio" name="c1_l05_q3" value="c" />
+                (x−3)(x−5)</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l06">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 6</span>
+          <h3>Fórmula cuadrática y ecuaciones cuadráticas</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que una ecuación cuadrática (ax² + bx + \(c = 0)\)
+              describe la trayectoria de una pelota que lanzas al aire: sube, se
+              detiene y cae. Las soluciones son los instantes en que la pelota
+              toca el suelo. A veces toca dos veces la matemática (dos
+              soluciones), a veces roza el suelo una sola vez, y a veces nunca
+              lo toca en los reales. Esa es la intuición geométrica detrás de
+              todo lo que sigue.
+            </p>
+            <p>
+              Piensa en el discriminante \(D = b^{2}\) − 4ac como el pronóstico
+              del partido antes de jugar: si \(D \gt 0\) hay dos soluciones
+              reales; si \(D = 0\) hay una solución doble; si \(D \lt 0\) no hay
+              soluciones reales. La fórmula general x = (−b ± \(\sqrt{D})/(2a\))
+              resuelve TODAS las cuadráticas, pero si el trinomio factoriza
+              fácil, factorizar es más rápido: \(x^{2}\) − 5x + \(6 = 0 \to \)
+              (x−2)(x−3) = \(0 \to x\)\(0 \to x = 2 o x\)\(2 o x = 3.\) Completa
+              el cuadro de herramientas con la suma y producto de raíces
+              \((x_{1}+x_{2} = -b/a, x_{1}\cdot x_{2}\)\(-b/a, x_{1}\cdot x_{2}
+              = c/a)\) para verificar tus respuestas en segundos.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Ecuación cuadrática</td>
+                <td>ax² + bx + \(c = 0\) con \(a \neq 0.\)</td>
+              </tr>
+              <tr>
+                <td>Discriminante</td>
+                <td>
+                  \(D = b^{2}\) − 4ac; predice el número de soluciones reales.
+                </td>
+              </tr>
+              <tr>
+                <td>Raíz doble</td>
+                <td>Solución única cuando \(D = 0.\)</td>
+              </tr>
+              <tr>
+                <td>Vértice</td>
+                <td>Punto mínimo o máximo de la parábola: \(x = -b/(2a).\)</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\qquad D=b^2-4ac \] \[ D\gt
+              0\text{: dos raíces}\quad D=0\text{: una doble}\quad D\lt 0\text{:
+              sin raíces reales} \] \[ x_1+x_2=-\frac{b}{a}\qquad x_1\cdot
+              x_2=\frac{c}{a}\qquad \text{vértice en }x=-\frac{b}{2a} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+Q[ax2+bx+c=0] --&gt; DD[Calcula D = b2-4ac]
+DD --&gt; P{D mayor que 0?}
+P --&gt;|Si| DOS[Dos soluciones: formula general]
+P --&gt;|No| Z{D igual a 0?}
+Z --&gt;|Si| UNA[Una raiz doble]
+Z --&gt;|No| NING[Sin solucion real]</pre
+            >
+            <pre>
+Parábola ∩ eje x:  2 cortes (D&gt;0) · 1 roce (D=0) · 0 cortes (D&lt;0)</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Resuelve \(2x^{2}\) − 7x + \(3 = 0.\)</p>
+            <ol>
+              <li>Identifica: \(a = 2, b\) = −7, \(c = 3.\)</li>
+              <li>\(D = 49\) − \(24 = 25; \sqrt{D}\)\(25; \sqrt{D} = 5.\)</li>
+              <li>
+                \(x = (7\) ± \(5)/4 \to x_{1}\)\(5)/4 \to x_{1} = 12/4\)\(12/4 =
+                3; x_{2}\)\(3; x_{2} = 2/4\)\(2/4 = 1/2.\)
+              </li>
+              <li>Verifica: suma = \(3.5 = 7/2\)\(7/2 = -b/a\) ✔.</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> olvidar el 2a completo en el
+            denominador; equivocarse con el signo de −b cuando b es negativo;
+            usar la fórmula sin ordenar primero la ecuación a la forma ax²+bx+c
+            = 0.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> las curvas
+            dosis-respuesta y muchos modelos de crecimiento se aproximan con
+            parábolas; hallar el vértice es hallar la dosis óptima.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                1. El discriminante de \(x^{2}\) − 4x + 4 es…
+              </p>
+              <label><input type="radio" name="c1_l06_q1" value="a" /> 8</label
+              ><label
+                ><input type="radio" name="c1_l06_q1" value="b" /> 0 (raíz
+                doble)</label
+              ><label
+                ><input type="radio" name="c1_l06_q1" value="c" /> −8</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                2. Las soluciones de \(x^{2}\) − 5x + \(6 = 0\) son…
+              </p>
+              <label
+                ><input type="radio" name="c1_l06_q2" value="a" /> \(x = 2 y
+                x\)\(2 y x = 3\)</label
+              ><label
+                ><input type="radio" name="c1_l06_q2" value="b" /> x = −2 y x =
+                −3</label
+              ><label
+                ><input type="radio" name="c1_l06_q2" value="c" /> \(x = 1 y
+                x\)\(1 y x = 6\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. \(x^{2}\) + 2x + \(5 = 0\) tiene…</p>
+              <label
+                ><input type="radio" name="c1_l06_q3" value="a" /> dos
+                soluciones reales</label
+              ><label
+                ><input type="radio" name="c1_l06_q3" value="b" /> una raíz
+                doble</label
+              ><label
+                ><input type="radio" name="c1_l06_q3" value="c" /> ninguna
+                solución real (D = −16)</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l07">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 7</span>
+          <h3>Expresiones fraccionarias</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que una fracción algebraica como (\(x^{2}-9)/(x+3\)) es
+              una maleta con candado: antes de abrirla debes preguntar qué
+              valores están prohibidos, es decir, los que anulan el denominador
+              (aquí x \(\neq \) −3). Ese dominio de validez es lo primero que se
+              escribe, porque simplificar sin declararlo es como firmar una
+              receta sin revisar alergias: peligroso. Luego simplificas
+              exactamente igual que con fracciones numéricas: factorizas arriba
+              y abajo y cancelas solo factores completos, nunca sumandos
+              sueltos.
+            </p>
+            <p>
+              Piensa en sumar fracciones algebraicas como cocinar con distintos
+              moldes: necesitas un molde común, el mínimo común denominador.
+              Para 1/x + \(1/(x+1)\) el MCD es x(x+1): conviertes, sumas
+              numeradores y simplificas si se puede. Multiplicar es directo
+              (numerador con numerador) y dividir es multiplicar por la
+              invertida. Y cuando la fracción se iguala a cero, recuerda la
+              regla de oro: una fracción vale cero solo si su numerador es cero
+              (y el denominador no lo es).
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Fracción algebraica</td>
+                <td>Cociente \(P(x)/Q(x)\) de polinomios con \(Q \neq 0.\)</td>
+              </tr>
+              <tr>
+                <td>Dominio / restricción</td>
+                <td>Valores que anulan el denominador; se excluyen.</td>
+              </tr>
+              <tr>
+                <td>MCD algebraico</td>
+                <td>Mínimo común múltiplo de los denominadores.</td>
+              </tr>
+              <tr>
+                <td>Fracción equivalente</td>
+                <td>
+                  Se obtiene multiplicando o dividiendo numerador y denominador
+                  por lo mismo (no nulo).
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ Q(x)\neq 0\qquad \frac{a}{b}\pm\frac{c}{d}=\frac{ad\pm bc}{bd}
+              \] \[
+              \left(\frac{a}{b}\right)\div\left(\frac{c}{d}\right)=\frac{ad}{bc}\qquad
+              \frac{P}{Q}=0\iff P=0\text{ con }Q\neq 0 \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+FR[Fraccion P/Q] --&gt; DO[1 Declara Q distinto de 0]
+DO --&gt; FA[2 Factoriza arriba y abajo]
+FA --&gt; CA[3 Cancela factores comunes]
+CA --&gt; OP[4 Opera: MCD, multiplica o divide]</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Simplifica (\(x^{2}\) − \(9)/(x^{2}\) + 5x + 6).</p>
+            <ol>
+              <li>
+                Denominador \(\neq \) 0: (x+2)(x+3) \(\neq \) 0 \(\to \) x
+                \(\neq \) −2, −3.
+              </li>
+              <li>Factoriza numerador: (x+3)(x−3).</li>
+              <li>Factoriza denominador: (x+2)(x+3).</li>
+              <li>Cancela (x+3): queda (\(x-3)/(x+2\)). ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> cancelar sumandos (en (x+5)/5
+            no se cancela el 5); olvidar declarar las restricciones; sumar
+            denominadores en vez de buscar el MCD.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> concentraciones (mg/mL) y
+            diluciones en serie son fracciones: simplificarlas sin perder el
+            dominio evita dosis inválidas.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">1. En \(1/(x-2)\), la restricción es…</p>
+              <label
+                ><input type="radio" name="c1_l07_q1" value="a" /> \(x \neq
+                2\)</label
+              ><label
+                ><input type="radio" name="c1_l07_q1" value="b" /> \(x \neq
+                0\)</label
+              ><label
+                ><input type="radio" name="c1_l07_q1" value="c" /> x \(\neq \)
+                −2</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                2. (\(x^{2}-4)/(x-2\)) simplificado \((x \neq 2)\) es…
+              </p>
+              <label
+                ><input type="radio" name="c1_l07_q2" value="a" /> x − 4</label
+              ><label
+                ><input type="radio" name="c1_l07_q2" value="b" /> x + 2</label
+              ><label
+                ><input type="radio" name="c1_l07_q2" value="c" /> \(x^{2}\) −
+                2</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. (2/3) \(\div \) (4/5) =</p>
+              <label
+                ><input type="radio" name="c1_l07_q3" value="a" /> 8/15</label
+              ><label
+                ><input type="radio" name="c1_l07_q3" value="b" /> 6/20</label
+              ><label
+                ><input type="radio" name="c1_l07_q3" value="c" /> 5/6</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l08">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 8</span>
+          <h3>Ecuaciones lineales y fraccionarias</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que una ecuación es una balanza perfectamente equilibrada:
+              lo que haces en un platillo debes hacerlo en el otro para no
+              romper el equilibrio. Despejar x es ir quitando capas como a una
+              cebolla: primero eliminas sumas y restas, luego multiplicaciones y
+              divisiones, siempre con la operación inversa. En 3x + \(5 = 20,\)
+              restas 5 en ambos lados (3x = 15) y divides entre \(3 (x = 5).\)
+              Simple, siempre que respetes el orden y verifiques al final
+              sustituyendo.
+            </p>
+            <p>
+              Piensa en las ecuaciones fraccionarias como balanzas con pesas
+              incómodas: lo primero es deshacerte de los denominadores
+              multiplicando todo por el MCM. En x/2 + \(x/3 = 5,\) multiplicas
+              por 6 y obtienes 5x = 30. Pero ojo: si la incógnita está en un
+              denominador, algunas "soluciones" pueden anularlo y son soluciones
+              extrañas que debes descartar. La verificación no es opcional aquí:
+              sustituye y confirma que ningún denominador sea cero.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Ecuación lineal</td>
+                <td>
+                  ax + \(b = 0\) con \(a \neq 0;\) una sola solución \(x =
+                  -b/a.\)
+                </td>
+              </tr>
+              <tr>
+                <td>Operación inversa</td>
+                <td>Deshace otra: suma/resta, multiplicación/división.</td>
+              </tr>
+              <tr>
+                <td>MCM</td>
+                <td>Mínimo común múltiplo; elimina denominadores.</td>
+              </tr>
+              <tr>
+                <td>Solución extraña</td>
+                <td>Valor que anula un denominador; se descarta.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ ax+b=0\Rightarrow x=-\frac{b}{a} \] \[ \text{Si
+              }\frac{x}{a}+\frac{x}{b}=c\text{: multiplica todo por MCM}(a,b) \]
+              \[ \text{Si hay }x\text{ en el denominador: declara restricciones
+              y verifica} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+E[Ecuacion] --&gt; HAY{Hay denominadores?}
+HAY --&gt;|Si| MCM[Multiplica todo por el MCM]
+HAY --&gt;|No| DES[Despeja con inversas]
+MCM --&gt; DES
+DES --&gt; VER[Verifica sustituyendo]</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Resuelve \(2/(x-1) = 4/3.\)</p>
+            <ol>
+              <li>Restricción: \(x \neq 1.\)</li>
+              <li>Cruza: \(2\cdot 3\) = 4(x−1) \(\to \) 6 = 4x − 4.</li>
+              <li>Suma 4: 10 = 4x \(\to x = 5/2\)\(5/2 = 2.5.\)</li>
+              <li>Verifica: denominador 2.5−1 = \(1.5 \neq 0\) ✔.</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> multiplicar por el MCM solo
+            algunos términos; aceptar soluciones que anulan el denominador;
+            cambiar mal un signo al pasar términos al otro lado.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> despejar la fórmula de
+            dosis \((D = C\cdot V) o\) de dilución \((C_{1}V_{1} = C_{2}V_{2})\)
+            es resolver ecuaciones lineales todos los días.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. Si 4x − \(7 = 9, x\) =</p>
+              <label
+                ><input type="radio" name="c1_l08_q1" value="a" /> 0.5</label
+              ><label><input type="radio" name="c1_l08_q1" value="b" /> 4</label
+              ><label
+                ><input type="radio" name="c1_l08_q1" value="c" /> 16</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. x/2 + \(x/3 = 5\) da…</p>
+              <label
+                ><input type="radio" name="c1_l08_q2" value="a" /> \(x =
+                6\)</label
+              ><label
+                ><input type="radio" name="c1_l08_q2" value="b" /> \(x =
+                5\)</label
+              ><label
+                ><input type="radio" name="c1_l08_q2" value="c" /> \(x =
+                30\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. En \(3/(x) = 6, x\) =</p>
+              <label><input type="radio" name="c1_l08_q3" value="a" /> 18</label
+              ><label><input type="radio" name="c1_l08_q3" value="b" /> 2</label
+              ><label
+                ><input type="radio" name="c1_l08_q3" value="c" /> 1/2</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l09">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 9</span>
+          <h3>Resolución de problemas con ecuaciones</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que cada problema verbal es un paciente que llega con
+              síntomas en palabras y tú debes escribir su historia clínica en
+              lenguaje matemático. El método que nunca falla tiene cuatro pasos:
+              entiende (¿qué me piden? ¿qué datos tengo?), traduce (asigna x a
+              lo desconocido y convierte frases en ecuaciones: "el doble de" es
+              2x, "aumentado en 5" es +5), resuelve (la técnica de las lecciones
+              6 y 8) y verifica (¿la respuesta tiene sentido en la historia
+              original?).
+            </p>
+            <p>
+              Piensa en la traducción como aprender un idioma nuevo con un
+              diccionario fijo: "es" casi siempre significa "=", "de un total"
+              sugiere suma, "por cada" sugiere multiplicación o razón. Los
+              problemas típicos son edades, mezclas, dinero, distancias \((d =
+              v\cdot t) y\) porcentajes. La mayoría de los errores no son de
+              cálculo sino de traducción: leer dos veces y subrayar datos y
+              pregunta te ahorra más puntos que memorizar fórmulas. Y siempre
+              cierra el ciclo: una edad negativa o una distancia absurda te
+              avisa de que la ecuación está mal planteada.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Incógnita</td>
+                <td>Cantidad desconocida que se representa con una letra.</td>
+              </tr>
+              <tr>
+                <td>Traducción algebraica</td>
+                <td>
+                  Convertir frases del enunciado en expresiones y ecuaciones.
+                </td>
+              </tr>
+              <tr>
+                <td>Verificación contextual</td>
+                <td>
+                  Comprobar que la solución tenga sentido en el problema real.
+                </td>
+              </tr>
+              <tr>
+                <td>Modelo \(d = v\cdot t\)</td>
+                <td>
+                  Distancia = velocidad \(\times \) tiempo; base de problemas de
+                  movimiento.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ \text{“es”}\to =\quad\text{“más que”}\to +\quad\text{“menos
+              que”}\to - \] \[ \text{“el doble/triple de }x\text{”}\to
+              2x/3x\qquad\text{“el }p\%\text{ de }N\text{”}\to\frac{p}{100}\cdot
+              N \] \[ d=v\cdot t\qquad \text{precio
+              total}=\text{cantidad}\times\text{precio unitario} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+P[Enunciado] --&gt; E[1 Entiende: datos e incognita]
+E --&gt; T[2 Traduce a ecuacion]
+T --&gt; R[3 Resuelve]
+R --&gt; V[4 Verifica en la historia]</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>La suma de dos números consecutivos es 37. Hállalos.</p>
+            <ol>
+              <li>Incógnita: menor = x; siguiente = x + 1.</li>
+              <li>Ecuación: x + (x+1) = 37 \(\to \) 2x + \(1 = 37.\)</li>
+              <li>Resuelve: 2x = \(36 \to x\)\(36 \to x = 18.\)</li>
+              <li>Números: 18 y 19; verifica: 18+19 = 37 ✔.</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> asignar mal la incógnita
+            (elegir x para lo que no piden); traducir "5 menos que x" como 5 − x
+            al revés… en realidad sí es 5−x, el error es escribir x−5; no
+            verificar el sentido de la respuesta.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> el triaje y el
+            diagnóstico siguen el mismo ciclo: datos \(\to \) modelo \(\to \)
+            cálculo \(\to \) verificación clínica.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                1. "El triple de un número disminuido en 4 es 11". La ecuación
+                es…
+              </p>
+              <label
+                ><input type="radio" name="c1_l09_q1" value="a" /> 3(x − \(4) =
+                11\)</label
+              ><label
+                ><input type="radio" name="c1_l09_q1" value="b" /> 3x − \(4 =
+                11\)</label
+              ><label
+                ><input type="radio" name="c1_l09_q1" value="c" /> 3x + \(4 =
+                11\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                2. Un libro cuesta el doble que un cuaderno y juntos cuestan 36.
+                El cuaderno cuesta…
+              </p>
+              <label><input type="radio" name="c1_l09_q2" value="a" /> 12</label
+              ><label
+                ><input type="radio" name="c1_l09_q2" value="b" /> 18</label
+              ><label
+                ><input type="radio" name="c1_l09_q2" value="c" /> 24</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. Un auto viaja a 60 km/h por 2.5 h. Recorre…
+              </p>
+              <label
+                ><input type="radio" name="c1_l09_q3" value="a" /> 120 km</label
+              ><label
+                ><input type="radio" name="c1_l09_q3" value="b" /> 62.5
+                km</label
+              ><label
+                ><input type="radio" name="c1_l09_q3" value="c" /> 150 km</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l10">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 10</span>
+          <h3>Desigualdades</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que las ecuaciones preguntan "¿cuándo son exactamente
+              iguales?" y las desigualdades preguntan algo más parecido a la
+              vida real: "¿cuándo es suficiente?". Decir "necesitas al menos
+              8/10 para postular a Medicina" es una desigualdad: nota \(\ge \)
+              8. Se resuelven casi igual que las ecuaciones, con una sola regla
+              de oro que lo cambia todo: si multiplicas o divides por un número
+              negativo, el signo se voltea. Es como mirar la balanza en un
+              espejo.
+            </p>
+            <p>
+              Piensa en la solución como un territorio, no un punto: en vez de
+              \(x = 3\) obtienes \(x \gt 3,\) que se dibuja sombreando la recta
+              y se escribe como intervalo (3, \(+\infty \)). Con desigualdades
+              dobles (2 &lt; 3x − \(1 \le 8)\) operas en las tres partes a la
+              vez. Y con las cuadráticas (\(x^{2}\) − 5x + \(6 \gt 0),\)
+              factoriza, marca las raíces en la recta y prueba el signo en cada
+              zona: la parábola que abre hacia arriba es positiva fuera de sus
+              raíces. Representar en recta, intervalo y desigualdad a la vez te
+              blinda contra errores.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Desigualdad</td>
+                <td>
+                  Comparación con &lt;, &gt;, \(\le \) o \(\ge \); su solución
+                  es un conjunto.
+                </td>
+              </tr>
+              <tr>
+                <td>Conjunto solución</td>
+                <td>Todos los valores que satisfacen la desigualdad.</td>
+              </tr>
+              <tr>
+                <td>Punto crítico</td>
+                <td>Valor donde la expresión se anula o cambia de signo.</td>
+              </tr>
+              <tr>
+                <td>Notación de intervalo</td>
+                <td>
+                  (a,b), [a,b], (\(-\infty \), a], etc. para escribir
+                  soluciones.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ a\lt b,\ c\lt 0\Rightarrow ac\gt bc\quad\text{(el signo SE
+              VOLTEA)} \] \[ a\le x\le b\iff x\in[a,b] \] \[ x^2-5x+6\gt 0\iff
+              (x-2)(x-3)\gt 0\iff x\lt 2\text{ o }x\gt 3 \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+D[Desigualdad] --&gt; L[Lineal: despeja normal]
+L --&gt; N{Multiplicas por negativo?}
+N --&gt;|Si| V[Voltea el signo]
+N --&gt;|No| K[Manten el signo]
+D --&gt; C[Cuadratica: factoriza y analiza signos]</pre
+            >
+            <pre>
+x &gt; 3 en recta:   ──○━━━━━━━━━━▶   (3, +∞)
+x ≤ 1 en recta: ◀━━━━━━━━━━●── (−∞, 1]</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Resuelve −2x + \(5 \ge 11.\)</p>
+            <ol>
+              <li>Resta 5: −2x \(\ge \) 6.</li>
+              <li>Divide entre −2 (negativo: voltea): x \(\le \) −3.</li>
+              <li>Intervalo: (\(-\infty \), −3].</li>
+              <li>Verifica con x = −4: 8+5 = \(13 \ge 11\) ✔.</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> olvidar voltear el signo al
+            dividir entre negativo; escribir la solución como un solo número en
+            vez de un intervalo; confundir ○ (abierto) con ● (cerrado).
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> casi todo valor clínico
+            es una desigualdad: glucosa en ayunas &lt; 100 mg/dL, fiebre \(\ge
+            \) 38 °C.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. Si −3x &gt; 9, entonces…</p>
+              <label
+                ><input type="radio" name="c1_l10_q1" value="a" /> x &gt;
+                −3</label
+              ><label
+                ><input type="radio" name="c1_l10_q1" value="b" /> x &lt;
+                −3</label
+              ><label
+                ><input type="radio" name="c1_l10_q1" value="c" /> \(x \gt
+                3\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. 2x + \(1 \le 7\) equivale a…</p>
+              <label
+                ><input type="radio" name="c1_l10_q2" value="a" /> \(x \le
+                3\)</label
+              ><label
+                ><input type="radio" name="c1_l10_q2" value="b" /> \(x \ge
+                3\)</label
+              ><label
+                ><input type="radio" name="c1_l10_q2" value="c" /> \(x \le
+                4\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. (x−2)(x−3) &gt; 0 se cumple cuando…</p>
+              <label
+                ><input type="radio" name="c1_l10_q3" value="a" /> \(2 \lt
+                x\)\(x \lt 3\)</label
+              ><label
+                ><input type="radio" name="c1_l10_q3" value="b" /> \(x = 2 o
+                x\)\(2 o x = 3\)</label
+              ><label
+                ><input type="radio" name="c1_l10_q3" value="c" /> \(x \lt 2 o
+                x\)\(2 o x \gt 3\)</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l11">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 11</span>
+          <h3>Geometría básica</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que la geometría es el lenguaje con el que la naturaleza
+              escribe sus formas: los ángulos son los giros entre dos caminos
+              que se cruzan, y los triángulos son las estructuras más rígidas
+              que existen — por eso los puentes están llenos de ellos. Un ángulo
+              agudo mide menos de 90°, el recto mide exactamente 90° y el obtuso
+              va de 90° a 180°. Dos ángulos son complementarios si suman 90° y
+              suplementarios si suman 180°. Con eso ya puedes perseguir ángulos
+              desconocidos por cualquier figura.
+            </p>
+            <p>
+              Piensa en el triángulo rectángulo como la estrella del examen: sus
+              catetos forman el ángulo recto y la hipotenusa es el lado largo,
+              unidos por el teorema de Pitágoras, \(a^{2}\) + \(b^{2} = c^{2}.\)
+              El área del triángulo es (\(base\cdot altura)\)/2, la del
+              rectángulo es base·altura y la del círculo es \(\pi r^{2}\) con
+              perímetro \(2\pi r\). Y memoriza los tríos pitagóricos \(3-4-5\) y
+              \(5-12-13\): cuando los veas, te ahorras la raíz. Clasifica
+              triángulos por lados (equilátero, isósceles, escaleno) y por
+              ángulos (acutángulo, rectángulo, obtusángulo) y tendrás el mapa
+              completo.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Hipotenusa</td>
+                <td>
+                  Lado opuesto al ángulo recto; el más largo del triángulo
+                  rectángulo.
+                </td>
+              </tr>
+              <tr>
+                <td>Perímetro</td>
+                <td>Suma de los lados; contorno de la figura.</td>
+              </tr>
+              <tr>
+                <td>Área</td>
+                <td>Medida de la superficie encerrada por la figura.</td>
+              </tr>
+              <tr>
+                <td>Ángulos complementarios</td>
+                <td>Suman 90°; suplementarios suman 180°.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ a^2+b^2=c^2\qquad (c=\text{hipotenusa}) \] \[ \text{Triángulo:
+              }A=\frac{b\cdot h}{2}\quad\text{Rectángulo: }A=b\cdot
+              h\quad\text{Cuadrado: }A=l^2,\ P=4l \] \[ \text{Círculo: }A=\pi
+              r^2\quad P=2\pi r\qquad\text{Suma de ángulos internos}=180^\circ
+              \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+G[Geometria] --&gt; AN[Angulos: agudo recto obtuso]
+G --&gt; TR[Triangulos: lados y angulos]
+TR --&gt; PIT[Pitagoras a2+b2=c2]
+G --&gt; AR[Areas y perimetros]</pre
+            >
+            <pre>
+Triángulo rectángulo:
+ |\
+ | \
+ a | \ c (hipotenusa)
+ | \
+ |____\
+ b
+a² + b² = c²</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Un triángulo rectángulo tiene catetos 6 y 8. Halla la hipotenusa y
+              el área.
+            </p>
+            <ol>
+              <li>
+                Pitágoras: \(c^{2} = 36\) + \(64 = 100 \to c\)\(100 \to c\)\(100
+                \to c = 10.\)
+              </li>
+              <li>Reconoce el trío \(6-8-10\) (doble del \(3-4-5\)). ✔</li>
+              <li>Área: \(A = 6\cdot 8/2\)\(6\cdot 8/2 = 24.\)</li>
+              <li>Perímetro: 6+8+10 = 24. ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> aplicar Pitágoras a triángulos
+            no rectángulos; confundir área con perímetro; usar el diámetro en
+            vez del radio en \(\pi r^{2}\).
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> el cálculo de superficies
+            (quemaduras con la regla de los 9) y volúmenes de órganos es
+            geometría aplicada.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. Catetos 5 y 12; la hipotenusa es…</p>
+              <label><input type="radio" name="c1_l11_q1" value="a" /> 17</label
+              ><label
+                ><input type="radio" name="c1_l11_q1" value="b" /> 13</label
+              ><label
+                ><input type="radio" name="c1_l11_q1" value="c" /> 60</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. El área de un círculo de radio 3 es…</p>
+              <label
+                ><input type="radio" name="c1_l11_q2" value="a" /> \(9\pi
+                \)</label
+              ><label
+                ><input type="radio" name="c1_l11_q2" value="b" /> \(6\pi
+                \)</label
+              ><label
+                ><input type="radio" name="c1_l11_q2" value="c" /> \(3\pi
+                \)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. Dos ángulos complementarios suman…</p>
+              <label
+                ><input type="radio" name="c1_l11_q3" value="a" /> 180°</label
+              ><label
+                ><input type="radio" name="c1_l11_q3" value="b" /> 360°</label
+              ><label
+                ><input type="radio" name="c1_l11_q3" value="c" /> 90°</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l12">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 12</span>
+          <h3>La recta: pendiente y ecuación</h3>
+          <span class="lesson-time">⏱ ~15 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que caminas por una colina: la pendiente te dice qué tan
+              empinada es y hacia dónde sube. En matemáticas, la pendiente m
+              mide exactamente eso para una recta: cuánto sube (o baja) y por
+              cada unidad que avanzas a la derecha. Se calcula con dos puntos:
+              \(m = (y_{2}-y_{1})/(x_{2}-x_{1}).\) Pendiente positiva sube,
+              negativa baja, cero es horizontal y la vertical "no tiene
+              pendiente" porque dividirías entre cero.
+            </p>
+            <p>
+              Piensa en la ecuación y = mx + b como la ficha técnica de la
+              recta: m es la inclinación y b es dónde cruza el eje y (el punto
+              de partida cuando \(x = 0).\) Con un punto y la pendiente usas la
+              forma punto-pendiente y − \(y_{1}\) = m(x − \(x_{1}\)). Dos rectas
+              son paralelas si comparten pendiente y perpendiculares si sus
+              pendientes son inversas con signo cambiado (\(m_{1}\cdot m_{2}\) =
+              −1). Graficar es entonces facilísimo: marca b en el eje y y avanza
+              con la pendiente como si fueran pasos: "sube m por cada 1 a la
+              derecha".
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Pendiente</td>
+                <td>
+                  \(m = \Delta y/\Delta x;\) inclinación y dirección de la
+                  recta.
+                </td>
+              </tr>
+              <tr>
+                <td>Intercepto</td>
+                <td>Punto donde la recta cruza un eje; b cruza el eje y.</td>
+              </tr>
+              <tr>
+                <td>Rectas paralelas</td>
+                <td>Misma pendiente, nunca se cortan.</td>
+              </tr>
+              <tr>
+                <td>Rectas perpendiculares</td>
+                <td>
+                  Pendientes con \(m_{1}\cdot m_{2}\) = −1; se cortan a 90°.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ m=\frac{y_2-y_1}{x_2-x_1}\qquad y=mx+b\qquad y-y_1=m(x-x_1) \]
+              \[ \text{Paralelas: }m_1=m_2\qquad\text{Perpendiculares: }m_1\cdot
+              m_2=-1 \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph LR
+D[Dos puntos] --&gt; M[Calcula m]
+M --&gt; B[Halla b con un punto]
+B --&gt; G[Grafica: marca b y avanza m]
+G --&gt; R[Paralela: misma m - Perpendicular: m inversa]</pre
+            >
+            <pre>
+y = 2x + 1:   *        m = 2 (sube 2 por cada 1)
+ * * b = 1 (cruza y en 1)
+ *------*-- x</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Halla la ecuación de la recta que pasa por (1, 2) y (3, 8).</p>
+            <ol>
+              <li>
+                Pendiente: \(m = (8-2)/(3-1)\)\((8-2)/(3-1) = 6/2\)\(6/2 = 3.\)
+              </li>
+              <li>Punto-pendiente: y − 2 = 3(x − 1).</li>
+              <li>Desarrolla: y = 3x − 3 + 2 = 3x − 1.</li>
+              <li>Verifica con \((3{,}8): 3\cdot 3-1 = 8\) ✔.</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> invertir \(\Delta x\) con
+            \(\Delta y\) en la pendiente; confundir b con la raíz (b es el cruce
+            con y, no con x); decir que la recta vertical tiene pendiente cero
+            (en realidad es indefinida).
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> las rectas modelan
+            tendencias: caída de fiebre en el tiempo o calibración de un equipo
+            (señal vs. concentración).
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">1. La pendiente entre (0, 1) y (2, 7) es…</p>
+              <label><input type="radio" name="c1_l12_q1" value="a" /> 3</label
+              ><label
+                ><input type="radio" name="c1_l12_q1" value="b" /> 1/3</label
+              ><label
+                ><input type="radio" name="c1_l12_q1" value="c" /> 6</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                2. En y = −2x + 5, la pendiente y el intercepto son…
+              </p>
+              <label
+                ><input type="radio" name="c1_l12_q2" value="a" /> \(m = 5, b\)
+                = −2</label
+              ><label
+                ><input type="radio" name="c1_l12_q2" value="b" /> m = −2, \(b =
+                5\)</label
+              ><label
+                ><input type="radio" name="c1_l12_q2" value="c" /> \(m = 2,
+                b\)\(2, b = 5\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. Una recta perpendicular a y = 2x + 1 tiene pendiente…
+              </p>
+              <label><input type="radio" name="c1_l12_q3" value="a" /> 2</label
+              ><label
+                ><input type="radio" name="c1_l12_q3" value="b" /> −2</label
+              ><label
+                ><input type="radio" name="c1_l12_q3" value="c" /> −1/2</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+      <div class="clasnav">
+        <a class="action-btn" href="index.html">⬅ Volver al inicio</a
+        ><a class="action-btn" href="index.html">🏠 Volver al inicio</a
+        ><a class="action-btn" href="clase2.html">Clase siguiente ➡</a>
+      </div>
+    </main>
+    <footer>
+      Curso Intensivo de Preparación USFQ — Medicina · Tu progreso se guarda en
+      este navegador.
+    </footer>
+    <script>
+      const CLASE_ID = "clase1"; // ← clase1, clase2, clase3, clase4 o clase5
+      const STORE_KEY = "medcurso_v2_done";
+      function loadDone() {
+        try {
+          return JSON.parse(localStorage.getItem(STORE_KEY)) || {};
+        } catch (e) {
+          return {};
+        }
+      }
+      function saveDone(d) {
+        try {
+          localStorage.setItem(STORE_KEY, JSON.stringify(d));
+        } catch (e) {}
+      }
+
+      function openLesson(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.add("open");
+        if (typeof mmScan === "function") mmScan(el);
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      document.querySelectorAll(".lesson-header").forEach((h) => {
+        h.addEventListener("click", (e) => {
+          if (e.target.closest(".lesson-done")) return;
+          h.parentElement.classList.toggle("open");
+          if (
+            h.parentElement.classList.contains("open") &&
+            typeof mmScan === "function"
+          )
+            mmScan(h.parentElement);
+        });
+      });
+
+      document.querySelectorAll(".lesson-done input").forEach((cb) => {
+        cb.addEventListener("change", () => {
+          const lid = cb.closest(".lesson").id;
+          const d = loadDone();
+          d[CLASE_ID + ":" + lid] = cb.checked;
+          saveDone(d);
+          cb.closest(".lesson").classList.toggle("done", cb.checked);
+          refreshProgress();
+        });
+      });
+
+      function refreshProgress() {
+        const lessons = document.querySelectorAll(".lesson");
+        const done = loadDone();
+        let d = 0;
+        lessons.forEach((l) => {
+          if (done[CLASE_ID + ":" + l.id]) d++;
+        });
+        const pct = lessons.length ? Math.round((d / lessons.length) * 100) : 0;
+        const bar = document.getElementById("classProgressBar");
+        const txt = document.getElementById("classProgressText");
+        if (bar) bar.style.width = pct + "%";
+        if (txt)
+          txt.textContent =
+            d +
+            " de " +
+            lessons.length +
+            " lecciones completadas (" +
+            pct +
+            "%)";
+      }
+      (function () {
+        const done = loadDone();
+        document.querySelectorAll(".lesson").forEach((l) => {
+          if (done[CLASE_ID + ":" + l.id]) {
+            l.classList.add("done");
+            const cb = l.querySelector(".lesson-done input");
+            if (cb) cb.checked = true;
+          }
+        });
+        refreshProgress();
+      })();
+
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".quiz-check");
+        if (!btn) return;
+        const box = btn.closest(".mini-quiz");
+        let correct = 0,
+          total = 0;
+        box.querySelectorAll(".quiz-q").forEach((q) => {
+          total++;
+          const val = q.dataset.correct;
+          const sel = q.querySelector("input:checked");
+          q.querySelectorAll("label").forEach((l) => (l.style.background = ""));
+          if (sel && sel.value === val) {
+            correct++;
+            sel.parentElement.style.background = "#d4f4dd";
+          } else {
+            if (sel) sel.parentElement.style.background = "#fbd7d2";
+            const ok = q.querySelector('input[value="' + val + '"]');
+            if (ok) ok.parentElement.style.background = "#d4f4dd";
+          }
+        });
+        const res = box.querySelector(".quiz-result");
+        if (res)
+          res.textContent =
+            "Resultado: " + correct + "/" + total + " correctas";
+      });
+
+      if (window.mermaid) {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: "neutral",
+          securityLevel: "loose",
+        });
+      }
+      function mmScan(root) {
+        if (!window.mermaid) return;
+        const list =
+          root && root.querySelectorAll
+            ? root.querySelectorAll("pre.mermaid")
+            : [];
+        list.forEach((el) => {
+          if (el.getAttribute("data-processed")) return;
+          if (el.offsetParent === null) return; // oculto: esperar a que se abra la lección
+          try {
+            mermaid.run({ nodes: [el] });
+          } catch (e) {}
+        });
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        mmScan(document);
+      });
+
+      window.addEventListener("load", () => {
+        mmScan(document);
+      });
+    </script>
+  </body>
+</html>

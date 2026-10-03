@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 6 · PAA Intensivo — Curso Intensivo Medicina USFQ</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<!-- KaTeX (LaTeX) para fórmulas matemáticas -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/mhchem.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="document.addEventListener('DOMContentLoaded',function(){renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false});});"></script>
+<style>
+  :root{
+    --azul:#c8102e; --azul-dark:#7a0c1e; --verde:#1e9e6a; --rojo:#c0392b;
+    --amarillo:#b8860b; --gris:#f4f6f8; --texto:#223; --borde:#e1e6ea;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Segoe UI',Roboto,Arial,sans-serif;background:var(--gris);color:var(--texto);line-height:1.6;}
+  header.hero{background:linear-gradient(135deg,var(--azul-dark),var(--azul));color:#fff;padding:36px 20px;text-align:center;}
+  header.hero h1{margin:0 0 8px;font-size:1.9rem;}
+  header.hero p{margin:4px 0;opacity:.92;}
+  .badges{margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .badge{background:rgba(255,255,255,.16);padding:5px 14px;border-radius:20px;font-size:.85rem;}
+  .topnav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--borde);display:flex;overflow-x:auto;box-shadow:0 2px 6px rgba(0,0,0,.05);}
+  .topnav a{flex:0 0 auto;padding:13px 16px;color:#555;text-decoration:none;font-weight:600;font-size:.92rem;white-space:nowrap;border-bottom:3px solid transparent;}
+  .topnav a:hover{color:var(--azul-dark);background:#f8f0f0;}
+  .topnav a.current{color:var(--azul);border-bottom:3px solid var(--azul);}
+  main{max-width:1000px;margin:0 auto;padding:26px 20px 80px;}
+  .card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:22px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .card h2{color:var(--azul-dark);margin-top:0;border-bottom:2px solid var(--azul);padding-bottom:8px;}
+  .progress-wrap{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+  .progress-bar-bg{background:#ede6e6;border-radius:10px;height:14px;overflow:hidden;margin-top:8px;}
+  .progress-bar-fill{background:linear-gradient(90deg,var(--verde),#27ae60);height:100%;width:0%;transition:width .4s ease;}
+  .progress-text{font-size:.9rem;color:#555;margin-top:6px;}
+  .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:12px;}
+  .topic-link{background:#fff;border:1.5px solid var(--azul);color:var(--azul-dark);border-radius:10px;padding:10px 12px;text-align:left;cursor:pointer;font-size:.92rem;font-weight:600;}
+  .topic-link:hover{background:#fdeeef;}
+  table.plan{width:100%;border-collapse:collapse;margin:12px 0;}
+  .plan th,.plan td{border:1px solid var(--borde);padding:8px 10px;font-size:.9rem;text-align:left;}
+  .plan th{background:var(--azul);color:#fff;}
+  .plan tr:nth-child(even){background:#fcf8f8;}
+  .lesson{background:#fff;border:1px solid var(--borde);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .lesson-header{display:flex;align-items:center;gap:10px;padding:14px 18px;cursor:pointer;flex-wrap:wrap;}
+  .lesson-header:hover{background:#fbefef;}
+  .lesson-num{background:var(--azul);color:#fff;border-radius:12px;font-size:.75rem;padding:3px 10px;white-space:nowrap;}
+  .lesson-header h3{margin:0;font-size:1.05rem;color:var(--azul-dark);flex:1;}
+  .lesson-time{color:#777;font-size:.85rem;white-space:nowrap;}
+  .lesson-done{font-size:.85rem;cursor:pointer;white-space:nowrap;user-select:none;}
+  .lesson-body{display:none;padding:4px 22px 20px;border-top:1px dashed var(--borde);}
+  .lesson.open .lesson-body{display:block;}
+  .lesson.done .lesson-header{background:#eaf6ef;}
+  .lesson.done .lesson-num{background:var(--verde);}
+  .teacher{background:#fdeeef;border-left:4px solid var(--azul);padding:12px 16px;border-radius:6px;margin:16px 0;}
+  .teacher p{margin:8px 0;}
+  .keyterms table{width:100%;border-collapse:collapse;margin:10px 0;}
+  .keyterms th,.keyterms td{border:1px solid var(--borde);padding:7px 10px;font-size:.9rem;text-align:left;}
+  .keyterms th{background:#fdeeef;color:var(--azul-dark);}
+  .formula-box{background:#fffbea;border:1.5px solid var(--amarillo);border-radius:8px;padding:12px 16px;margin:14px 0;}
+  .formula-box h4{margin:0 0 6px;color:var(--amarillo);}
+  .formula-box pre{margin:4px 0;font-family:Consolas,Menlo,monospace;font-size:.95rem;background:none;white-space:pre-wrap;}
+  .formula-box .katex-display{margin:8px 0;overflow-x:auto;overflow-y:hidden;padding:2px 0;}
+  .formula-box .katex{font-size:1.05rem;}
+  .diagram-box{background:#fbf9f9;border:1px dashed #c89aa0;border-radius:8px;padding:12px 16px;margin:14px 0;overflow-x:auto;}
+  .diagram-box h4{margin:0 0 6px;color:#7a4a52;}
+  .diagram-box pre{margin:6px 0;font-family:Consolas,Menlo,monospace;font-size:.85rem;line-height:1.35;}
+  .example{background:#f2fbf6;border-left:4px solid var(--verde);padding:12px 16px;border-radius:6px;margin:14px 0;}
+  .example ol{margin:8px 0 4px 22px;}
+  .pitfall{background:#fdecea;border-left:4px solid var(--rojo);padding:12px 16px;border-radius:6px;margin:14px 0;font-size:.93rem;}
+  .medlink{background:#f3eefb;border-left:4px solid #7b4fb5;padding:12px 16px;border-radius:6px;margin:14px 0;font-size:.93rem;}
+  .pasaje{background:#fefafa;border:1px solid var(--borde);border-radius:8px;padding:12px 16px;margin:12px 0;font-style:italic;}
+  .mini-quiz{border:1.5px solid var(--azul);border-radius:10px;padding:14px 18px;margin:16px 0;}
+  .mini-quiz h4{margin:0 0 10px;color:var(--azul);}
+  .quiz-q{margin-bottom:14px;padding:10px 12px;border:1px solid var(--borde);border-radius:8px;}
+  .quiz-q p.question{font-weight:600;margin:0 0 8px;}
+  .quiz-q label{display:block;padding:5px 9px;border-radius:6px;cursor:pointer;margin-bottom:3px;font-size:.92rem;}
+  .quiz-q label:hover{background:#fbefef;}
+  .quiz-q input{margin-right:8px;}
+  .quiz-result{font-weight:700;margin:8px 0 0;}
+  details.explica{margin:8px 0 0;border:1px solid var(--borde);border-radius:8px;padding:8px 14px;background:#fefafa;}
+  details.explica summary{cursor:pointer;font-weight:600;color:var(--azul-dark);}
+  button.action-btn,.action-btn{display:inline-block;background:var(--azul);color:#fff;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;text-decoration:none;}
+  button.action-btn:hover,.action-btn:hover{background:var(--azul-dark);}
+  footer{text-align:center;padding:24px;color:#888;font-size:.85rem;}
+  .clasnav{display:flex;justify-content:space-between;gap:10px;margin-top:26px;flex-wrap:wrap;}
+  @media(max-width:700px){ .lesson-header h3{font-size:.98rem;} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>🎯 Clase 6/6 · PAA Intensivo</h1>
+  <p>Curso Intensivo de Preparación — Ingreso a Medicina USFQ</p>
+  <p>⏱ Duración: 3 horas · Módulo: PAA College Board (40% de tu puntaje de admisión)</p>
+  <div class="badges"><span class="badge">16 lecciones</span><span class="badge">48 preguntas de mini-quiz</span><span class="badge">Meta: 2150 para beca</span></div>
+</header>
+
+<div class="topnav">
+  <a href="index.html">🏠 Inicio</a>
+  <a href="clase1.html">Clase 1</a>
+  <a href="clase2.html">Clase 2</a>
+  <a href="clase3.html">Clase 3</a>
+  <a href="clase4.html">Clase 4</a>
+  <a href="clase5.html">Clase 5</a>
+  <a href="clase6.html" class="current">Clase 6</a>
+</div>
+
+<main>
+
+  <div class="progress-wrap">
+    <strong>Progreso de esta clase</strong>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="classProgressBar"></div></div>
+    <div class="progress-text" id="classProgressText">0 de 0 lecciones completadas (0%)</div>
+  </div>
+
+  <div class="card">
+    <h2>📚 Menú de temas — haz clic para abrir la clase</h2>
+    <p>Cada tema abre una lección completa dictada por tu profesor: explicación con analogías, términos y fórmulas clave, diagramas, ejemplo resuelto y mini-quiz.</p>
+    <div class="topic-grid">
+      <button class="topic-link" onclick="openLesson('l01')">1 · La PAA: estructura, escala y estrategia</button>
+      <button class="topic-link" onclick="openLesson('l02')">2 · Aritmética I: reales, fracciones y PEMDAS</button>
+      <button class="topic-link" onclick="openLesson('l03')">3 · Aritmética II: razón, proporción y porcentaje</button>
+      <button class="topic-link" onclick="openLesson('l04')">4 · Divisibilidad y factores primos</button>
+      <button class="topic-link" onclick="openLesson('l05')">5 · Álgebra I: traducción, ecuaciones y sistemas</button>
+      <button class="topic-link" onclick="openLesson('l06')">6 · Álgebra II: cuadráticas y valor absoluto</button>
+      <button class="topic-link" onclick="openLesson('l07')">7 · Álgebra III: sucesiones y patrones</button>
+      <button class="topic-link" onclick="openLesson('l08')">8 · Funciones: dominio, transformaciones, variación</button>
+      <button class="topic-link" onclick="openLesson('l09')">9 · Geometría I: ángulos y triángulos</button>
+      <button class="topic-link" onclick="openLesson('l10')">10 · Geometría II: áreas, círculos y volúmenes</button>
+      <button class="topic-link" onclick="openLesson('l11')">11 · Trigonometría</button>
+      <button class="topic-link" onclick="openLesson('l12')">12 · Estadística y gráficas</button>
+      <button class="topic-link" onclick="openLesson('l13')">13 · Probabilidad y conteo</button>
+      <button class="topic-link" onclick="openLesson('l14')">14 · Lectura PAA: estrategia</button>
+      <button class="topic-link" onclick="openLesson('l15')">15 · Figuras retóricas</button>
+      <button class="topic-link" onclick="openLesson('l16')">16 · Redacción PAA</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🗓️ Plan de la sesión (3 horas)</h2>
+    <table class="plan">
+      <tr><th>Bloque</th><th>Tiempo</th><th>Contenido</th></tr>
+      <tr><td>A</td><td>0:00 – 0:40</td><td>Estructura de la PAA + aritmética (l01–l04)</td></tr>
+      <tr><td>B</td><td>0:40 – 1:30</td><td>Álgebra y funciones (l05–l08)</td></tr>
+      <tr><td>C</td><td>1:30 – 2:10</td><td>Geometría y trigonometría (l09–l11)</td></tr>
+      <tr><td>D</td><td>2:10 – 2:40</td><td>Estadística y probabilidad (l12–l13)</td></tr>
+      <tr><td>E</td><td>2:40 – 3:00</td><td>Verbal: lectura, retórica, redacción (l14–l16) + tarea: examen de práctica en casa</td></tr>
+    </table>
+  </div>
+
+  
+  <!-- ==================== LECCIÓN 1 ==================== -->
+  <article class="lesson" id="l01">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 1</span>
+      <h3>🎯 La PAA: estructura, escala y estrategia general</h3>
+      <span class="lesson-time">⏱ ~12 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>La Prueba de Aptitud Académica no premia la memoria: mide tu <strong>razonamiento</strong>, es decir, qué tan bien usas lo que ya sabes bajo presión de tiempo. Y como toda prueba estandarizada, es predecible a propósito: conoces de antemano cada sección, cada cantidad de preguntas y cada minuto disponible. Gestionarla bien es como atender una <strong>guardia de emergencias</strong>: tienes estaciones asignadas con tiempos fijos, haces triage (resuelves primero lo rápido y dejas marcado lo lento) y —regla de oro— a ningún paciente se le deja sin evaluar. En la PAA, la regla equivalente es brutal y a tu favor: <strong>no hay penalización por error</strong>, así que jamás debe quedar una casilla vacía; un 20 % de aciertos por adivinar es infinitamente mejor que un cero.</p>
+        <p>La estructura completa son <strong>175 preguntas en 3 horas</strong>: Lectura (45 preguntas, 50 min), Matemáticas (55, 60 min), Redacción (25, 30 min) e Inglés (50, 40 min). Cada parte se califica en una escala de 200 a 800, y la nota PAA que llega a USFQ se calcula sobre 2400 (Aptitud Verbal 1200 + Aptitud Matemática 1200); para la beca que buscas, la meta es <strong>2150</strong> — los cortes exactos verifícalos con USFQ en cada convocatoria. Convierte cada parte en un ritmo antes del examen: Matemáticas te da ~1,09 min por pregunta, Lectura ~1,11, Redacción ~1,20 e Inglés apenas ~0,8. Si una pregunta no cede en ~40 segundos, márcala en la hoja y avanza: el PAA premia a quien cosecha las 40 fáciles antes de sangrar tiempo en las 5 difíciles.</p>
+        <p>Última pieza de la estrategia general: <strong>elimina antes de elegir</strong>. En preguntas de selección múltiple no necesitas "saber" la respuesta, solo reconocer la correcta entre cuatro. Toda opción que contradiga los datos, que use palabras extremas (siempre, nunca, totalmente) o que responda una pregunta distinta muere primero. Con tres sospechosos eliminados, tu probabilidad de acierto adivinando sube de 25 % a 50 %. Eso, multiplicado por 175 preguntas, vale cientos de puntos.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>PAA</td><td>Prueba de Aptitud Académica del College Board; mide razonamiento, no memoria</td></tr>
+          <tr><td>Triage de preguntas</td><td>Resolver primero las fáciles y marcar para volver las que consumen tiempo</td></tr>
+          <tr><td>Sin penalización</td><td>Los errores no restan puntos; siempre conviene responder todas las preguntas</td></tr>
+          <tr><td>Escala 200–800</td><td>Rango con el que se califica cada parte del examen</td></tr>
+          <tr><td>Eliminación</td><td>Descartar opciones contradictorias o extremas para adivinar con ventaja</td></tr>
+          <tr><td>Ritmo (pace)</td><td>Minutos disponibles divididos entre preguntas de la sección</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 La PAA de un vistazo</h4>
+        <pre>Seccion         Tiempo    Preguntas   Ritmo (min/preg)
+Lectura         50 min       45          ~1,11
+Matematicas     60 min       55          ~1,09
+Redaccion       30 min       25          ~1,20
+Ingles          40 min       50          ~0,80
+---------------------------------------------
+TOTAL          180 min      175          (3 horas)
+
+Puntaje por parte: 200 – 800
+Nota PAA: Verbal 1200 + Matematica 1200 = 2400
+Meta de beca: 2150 (verifica cortes con USFQ)
+Regla 1: NUNCA dejes casillas vacias (no hay penalizacion)
+Regla 2: si una pregunta no cede en ~40 s, marcala y avanza</pre>
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ El ciclo del triage en cada sección</h4>
+        <pre class="mermaid">
+graph TD
+  A[Pregunta nueva] --> B{Cede en 40 s}
+  B -- Si --> C[Marca la respuesta]
+  B -- No --> D[Deja un punto en la hoja]
+  D --> E[Pregunta siguiente]
+  E --> A
+  C --> F[Al terminar la seccion]
+  F --> G[Vuelve a las marcadas]
+  G --> H[Adivina lo que reste]
+  H --> C
+        </pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> planifica tu sesión de Matemáticas y calcula tu brecha para la beca.<br>
+        1. <em>Ritmo:</em> 60 min ÷ 55 preguntas = 1,09 min/pregunta; para dejar margen de revisión, apunta a 1,0 min y reserva los últimos 5 min para las marcadas.<br>
+        2. <em>Triage en acción:</em> en el primer barrido resuelves 40 preguntas en 40 min (1 min cada una) y marcas 15.<br>
+        3. <em>Segundo barrido:</em> en los 20 min restantes atacas las 15 marcadas; resuelves 10 y adivinas 5 (sin penalización).<br>
+        4. <em>Brecha (ejercicio hipotético):</em> supón que tu preparador puntúa cada parte sobre 800 y suma tus tres partes principales contra la meta 2150: con Lectura 680, Matemáticas 720 y Redacción 540 sumas 1940.<br>
+        5. <em>Falta:</em> 2150 − 1940 = <strong>210 puntos</strong> → subir ~70 por parte equivale a unas 8–10 preguntas más correctas en total.<br>
+        6. <em>Conclusión:</em> la meta es alcanzable con ritmo disciplinado y cero casillas vacías.
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Dejar casillas en blanco "por si restan": en la PAA <strong>no hay penalización</strong>; el blanco es el único puntaje garantizado de 0.</li>
+          <li>Invertir 5 minutos en la pregunta 1 de la sección: rompe el ritmo y contamina las 50 restantes.</li>
+          <li>Responder con tu conocimiento del mundo en Lectura: la evidencia vive dentro del pasaje, no en tu memoria.</li>
+          <li>Ignorar los tiempos por sección: 3 horas se evaporan si no llevas reloj propio.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> esta disciplina de bloques cronometrados es exactamente la de los exámenes de grado y residencia médica: cientos de casos clínicos, tiempo por ítem y cero penalización por intento. El médico que aprende a hacer triage de preguntas hoy es el mismo que mañana prioriza correctamente a un paciente en Shock hipovolémico entre diez en la sala de espera.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">1. La sección de Matemáticas de la PAA consta de:</p>
+          <label><input type="radio" name="c6_l01_q1" value="a"> 45 preguntas en 50 minutos</label>
+          <label><input type="radio" name="c6_l01_q1" value="b"> 55 preguntas en 60 minutos</label>
+          <label><input type="radio" name="c6_l01_q1" value="c"> 25 preguntas en 30 minutos</label>
+          <label><input type="radio" name="c6_l01_q1" value="d"> 50 preguntas en 40 minutos</label>
+        </div>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">2. ¿Qué ocurre si te equivocas en una pregunta de la PAA?</p>
+          <label><input type="radio" name="c6_l01_q2" value="a"> Se restan puntos de tus aciertos</label>
+          <label><input type="radio" name="c6_l01_q2" value="b"> Se anula la sección completa</label>
+          <label><input type="radio" name="c6_l01_q2" value="c"> Solo se penaliza en Lectura</label>
+          <label><input type="radio" name="c6_l01_q2" value="d"> Nada: no hay penalización, así que conviene responder todas</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">3. ¿Cuántas preguntas tiene la PAA completa y cuánto tiempo total tienes para responderlas?</p>
+          <label><input type="radio" name="c6_l01_q3" value="a"> 175 preguntas en 180 minutos</label>
+          <label><input type="radio" name="c6_l01_q3" value="b"> 125 preguntas en 120 minutos</label>
+          <label><input type="radio" name="c6_l01_q3" value="c"> 175 preguntas en 150 minutos</label>
+          <label><input type="radio" name="c6_l01_q3" value="d"> 150 preguntas en 180 minutos</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 2 ==================== -->
+  <article class="lesson" id="l02">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 2</span>
+      <h3>🔢 Aritmética I: números reales, fracciones y PEMDAS</h3>
+      <span class="lesson-time">⏱ ~15 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>Todo el álgebra, la geometría y la estadística del PAA se construyen sobre el sistema de los <strong>números reales</strong> y un protocolo de cálculo que no admite negociación. Dentro de los reales conviven familias anidadas: los naturales (1, 2, 3…), los enteros (que añaden negativos y el cero), los racionales (fracciones y decimales que se terminan o periódicos) y los irracionales (√2, π), cuya expansión decimal no se repite nunca. Reconocer a qué familia pertenece cada número te evita errores groseros: si el PAA pide "cuántos enteros hay entre −2 y 3", la respuesta son cuatro (−1, 0, 1, 2), no cinco.</p>
+        <p>Entre los racionales viven las <strong>fracciones</strong>, y sus tres operaciones tienen receta cerrada que conviene memorizar: para sumar o restar con distintos denominadores, multiplica en cruz y abajo el producto — \(\frac{a}{b}\pm\frac{c}{d}=\frac{ad\pm bc}{bd}\), así \(\frac{1}{4}+\frac{1}{6}=\frac{6+4}{24}=\frac{10}{24}=\frac{5}{12}\); para multiplicar, recto — \(\frac{a}{b}\cdot\frac{c}{d}=\frac{ac}{bd}\); y para dividir, invierte y multiplica — \(\frac{a}{b}\div\frac{c}{d}=\frac{a}{b}\cdot\frac{d}{c}\). El apunte oficial lo usa con Carmen: compró 5 m de alambre y usó 3/4, así que le sobró \(5\times\frac{1}{4}=\frac{5}{4}=1\frac{1}{4}\) m. Fíjate en el paso previo: "lo que sobra" es \(1-\frac{3}{4}=\frac{1}{4}\) de la compra; el PAA siempre esconde una traducción antes de la operación.</p>
+        <p>Sobre esos números actúan las <strong>propiedades</strong> que abaratan el cálculo: la conmutativa (a+b = b+a y ab = ba), la asociativa (puedes reagrupar sin cambiar el resultado), la distributiva (a(b+c) = ab+ac, la más rentable del examen), el elemento neutro (sumar 0, multiplicar por 1) y el inverso (sumar el opuesto, multiplicar por el recíproco). Pero la propiedad más examinada no es una propiedad: es el <strong>orden de las operaciones</strong>. Piénsalo como el protocolo ABCDE de una reanimación: primero la vía aérea, después la respiración, luego la circulación; si alteras el orden, el paciente muere aunque hagas bien cada paso individual. En aritmética, el orden es: <strong>Paréntesis → Exponentes → Multiplicación y División (de izquierda a derecha) → Suma y Resta (de izquierda a derecha)</strong>.</p>
+        <p>El PAA diseña preguntas específicamente para castigar a quien calcula de izquierda a derecha sin mirar la jerarquía. La expresión 2−3(5+2)(5−8) vale 65, no −19: primero resuelves los paréntesis, luego multiplicas 3·7·(−3) = −63, y solo al final restas: 2−(−63) = 2+63 = 65. Fíjate en dos detalles que el examen explota: restar un negativo <em>suma</em>, y el signo menos delante del 3 pertenece al producto entero, no solo al primer factor. Domina este protocolo y las preguntas "trampa" de aritmética se vuelven preguntas regaladas.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Números racionales</td><td>Expresables como fracción a/b con b≠0; decimales finitos o periódicos</td></tr>
+          <tr><td>Números irracionales</td><td>No expresables como fracción: √2, π; decimales infinitos no periódicos</td></tr>
+          <tr><td>Fracción</td><td>a/b: a es el numerador (partes tomadas), b el denominador (partes totales)</td></tr>
+          <tr><td>Recíproco</td><td>El invertido de a/b es b/a; dividir = multiplicar por el recíproco</td></tr>
+          <tr><td>Propiedad distributiva</td><td>a(b+c) = ab+ac; permite multiplicar un factor sobre una suma</td></tr>
+          <tr><td>Jerarquía de operaciones</td><td>Paréntesis → Exponentes → ×/÷ → +/−, siempre de izquierda a derecha</td></tr>
+          <tr><td>Opuesto de un producto</td><td>El signo negativo delante de una multiplicación afecta a TODO el producto</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 Fracciones, propiedades y el ejemplo estrella del PAA</h4>
+        \[ \frac{a}{b}\pm\frac{c}{d}=\frac{ad\pm bc}{bd} \qquad \frac{a}{b}\cdot\frac{c}{d}=\frac{ac}{bd} \qquad \frac{a}{b}\div\frac{c}{d}=\frac{a}{b}\cdot\frac{d}{c} \]
+        \[ a(b+c) = ab + ac \qquad\qquad 2-3(5+2)(5-8) = 2-3(7)(-3) = 2-(-63) = 65 \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ La torre de la jerarquía (de arriba hacia abajo)</h4>
+        <pre>            PARENTESIS  ( )  [ ]
+                 |
+              EXPONENTES  x^2, raices
+                 |
+    MULTIPLICACION y DIVISION  (izq -> der)
+                 |
+       SUMA y RESTA  (izq -> der)
+
+Regla de oro: mismo nivel = se resuelve
+de izquierda a derecha, no "division
+antes que multiplicacion"</pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> evalúa \( 24 \div (-6) + 5(3+2)^2 \) paso a paso.<br>
+        1. <em>Paréntesis:</em> (3+2) = 5 → queda \( 24 \div (-6) + 5 \cdot 5^2 \).<br>
+        2. <em>Exponentes:</em> 5² = 25 → queda \( 24 \div (-6) + 5 \cdot 25 \).<br>
+        3. <em>Multiplicación y división (izquierda a derecha):</em> 24 ÷ (−6) = −4 y 5·25 = 125 → queda −4 + 125.<br>
+        4. <em>Suma:</em> −4 + 125 = <strong>121</strong>.<br>
+        5. <em>Control de trampa:</em> si hubieras dividido "después" de multiplicar o sumado antes, habrías obtenido −4+5 = 1 y luego 1·25 = 25: exactamente el distractor que el PAA ofrece.<br>
+        6. <em>Fracciones (ejemplo del examen):</em> Carmen compró 5 m de alambre y usó 3/4 → le sobró 5 × (1 − 3/4) = 5 × 1/4 = 5/4 = <strong>1¼ m</strong>.
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Creer que la multiplicación "va antes" que la división: en el mismo nivel, se resuelven de izquierda a derecha (12 ÷ 3 × 2 = 8, no 2).</li>
+          <li>Confundir −3² = −9 con (−3)² = 9: el exponente actúa solo sobre lo que toca.</li>
+          <li>Olvidar que restar un negativo suma: 2 − (−63) = 65, no −61.</li>
+          <li>Distribuir un signo a medias: −(x−4) = −x+4, no −x−4.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> calcular una dosis es aplicar la jerarquía de operaciones con vidas de por medio: mg/kg·día ÷ concentración requiere resolver denominadores y paréntesis en orden estricto. Un pediatra que computa (peso × dosis) ÷ (concentración × volumen) al revés administra 10 veces la dosis equivocada; el protocolo, igual que en reanimación, no se improvisa.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">1. ¿Cuánto vale \( 2-3(5+2)(5-8) \)?</p>
+          <label><input type="radio" name="c6_l02_q1" value="a"> −61</label>
+          <label><input type="radio" name="c6_l02_q1" value="b"> 170</label>
+          <label><input type="radio" name="c6_l02_q1" value="c"> 65</label>
+          <label><input type="radio" name="c6_l02_q1" value="d"> −40</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">2. La propiedad que justifica escribir 7(x+4) = 7x+28 es la:</p>
+          <label><input type="radio" name="c6_l02_q2" value="a"> distributiva</label>
+          <label><input type="radio" name="c6_l02_q2" value="b"> conmutativa</label>
+          <label><input type="radio" name="c6_l02_q2" value="c"> asociativa</label>
+          <label><input type="radio" name="c6_l02_q2" value="d"> del elemento inverso</label>
+        </div>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">3. Carmen compró 5 m de alambre y usó 3/4. ¿Cuánto alambre le sobró?</p>
+          <label><input type="radio" name="c6_l02_q3" value="a"> 1 m</label>
+          <label><input type="radio" name="c6_l02_q3" value="b"> 4 m</label>
+          <label><input type="radio" name="c6_l02_q3" value="c"> 3/4 m</label>
+          <label><input type="radio" name="c6_l02_q3" value="d"> 1¼ m</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 3 ==================== -->
+  <article class="lesson" id="l03">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 3</span>
+      <h3>🧮 Aritmética II: razón, proporción, porcentaje y descuentos sucesivos</h3>
+      <span class="lesson-time">⏱ ~15 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>Una <strong>razón</strong> compara dos cantidades por cociente (a:b, se lee "a es a b") y funciona como una <strong>dilución marcada en el frasco</strong>: "1:4" no dice cuánto líquido hay en total, dice la relación fija entre concentrado y diluyente, y de ahí puedes reconstruir cualquier cantidad. Una <strong>proporción</strong> afirma que dos razones son iguales: \(\frac{a}{b}=\frac{c}{d}\), que equivale a ad = bc — el producto cruzado que resuelve desde recetas hasta mapas a escala. El apunte oficial lo usa con un premio de $5000 repartido en razón 3:7: si A aportó $3 y B aportó $7, B recibe \(\frac{7}{10}\times 5000 = 3500\) dólares — primero la razón te da la fracción del total, después multiplicas. Las proporciones responden todo lo que en el PAA se pregunta como "si 3 trabajadores producen X, ¿cuánto producen 5?" y "¿cuánto vale x si 4/x = 10/15?": multiplica en cruz (10x = 60 → x = 6) y listo.</p>
+        <p>Los <strong>porcentajes</strong> son fracciones cuyo denominador está clavado en 100: 45 % = 0,45 = 45/100, y por eso p % de N = (p/100)·N. El PAA los disfraza de tres formas: "¿cuánto es el 30 % de 80?" (multiplicas: 0,30·80 = 24), "el 30 % de un número es 24, ¿cuál es el número?" (divides: 24 ÷ 0,30 = 80) y "de 80 a 104, ¿qué porcentaje aumentó?" (comparas: (104−80)/80 = 24/80 = 30 %). Domina las tres direcciones y tendrás la mitad de las preguntas de proporcionalidad resueltas; la otra mitad son razones y proporciones del párrafo anterior.</p>
+        <p>El movimiento estrella del PAA es el <strong>descuento sucesivo</strong>, donde la intuición traiciona. Si un artículo tiene 50 % de descuento "y además 10 % adicional", el descuento total NO es 60 %: los descuentos se <em>multiplican</em>, no se suman. Pagarás el 0,50 × 0,90 = 0,45 del precio, es decir 45 %, y el ahorro total es 55 %. La regla clínica equivalente: cuando dos "rebajas" actúan una tras otra sobre lo que queda, multiplícalas como diluciones —0,70 seguido de 0,80 deja 0,56—, nunca las sumes. Ese solo concepto vale entre una y dos preguntas en cada PAA real.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Razón</td><td>Comparación por cociente entre dos cantidades: a:b</td></tr>
+          <tr><td>Porcentaje</td><td>Fracción con denominador 100: 45 % = 0,45; p % de N = (p/100)·N</td></tr>
+          <tr><td>Proporción</td><td>Igualdad entre dos razones: a/b = c/d ⇔ ad = bc</td></tr>
+          <tr><td>Descuento sucesivo</td><td>Dos rebajas aplicadas en secuencia: se multiplican sus factores (0,50 × 0,90)</td></tr>
+          <tr><td>Cambio porcentual</td><td>(final − inicial)/inicial × 100</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 Razón, proporción y el descuento sucesivo del material</h4>
+        \[ p\%\ \text{de}\ N = \frac{p}{100}\cdot N \qquad\qquad \frac{a}{b}=\frac{c}{d} \;\Longleftrightarrow\; a\cdot d = b\cdot c \]
+        \[ \text{Premio en razón } 3{:}7 \Rightarrow B=\frac{7}{10}\cdot 5000 = 3500 \]
+        \[ 0{,}50 \times 0{,}90 = 0{,}45 \;\Rightarrow\; \text{pagas } 45\% \;\Rightarrow\; \text{descuento total} = 55\% \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ El triángulo de conversión fracción–decimal–porcentaje</h4>
+        <pre>            FRACCION  3/5
+             /            \
+     (divide b en a)     (multiplica por 100)
+           /                \
+     DECIMAL 0,6  -------- PORCENTAJE 60%
+              (multiplica por 100)
+
+    fraccion -> decimal : divide a / b
+    decimal  -> %       : desplaza el punto 2 lugares
+    %        -> decimal : desplaza el punto 2 lugares a la izq</pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> el premio y la camiseta, con las herramientas de esta lección.<br>
+        1. <em>Razón (ejemplo del examen):</em> un premio de $5000 se reparte en razón 3:7 según lo aportado por A y B → B recibe (7/10)·5000 = <strong>$3500</strong> y A, (3/10)·5000 = $1500.<br>
+        2. <em>Pasada 1:</em> 100 × 0,70 = 70 (pagas el 70 %).<br>
+        3. <em>Pasada 2:</em> 70 × 0,80 = 56 (pagas el 80 % de lo que quedaba).<br>
+        4. <em>En un solo paso:</em> 100 × 0,70 × 0,80 = 100 × 0,56 = <strong>$56</strong>.<br>
+        5. <em>Descuento total:</em> (100−56)/100 = 44 %, no 50 %.<br>
+        6. <em>Generalización:</em> dos descuentos de a % y b % equivalen a uno solo de (1 − (1−a)(1−b)); aquí (1 − 0,70·0,80) = 0,44. Y el ejercicio propuesto del material: $80 con 25 % y 15 % adicional → 80 × 0,75 × 0,85 = <strong>$51</strong>.
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Sumar descuentos sucesivos: 30 % + 20 % NO es 50 %; se multiplican los factores de lo que pagas (0,70 × 0,80 = 0,56).</li>
+          <li>Sumar fracciones cruzando denominadores: 1/4 + 1/6 no es 2/10; necesitas el mismo denominador.</li>
+          <li>Dividir entre cero: toda fracción con denominador 0 no está definida (aparece como distractor).</li>
+          <li>Confundir "el 30 % de" con "30 % más que": subir 80 en 30 % da 104, no 110.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> las diluciones de medicamentos siguen exactamente la lógica de los descuentos sucesivos: si una solución se diluye a la mitad y luego a un tercio, la concentración final es 1/2 × 1/3 = 1/6 de la original, nunca "la mitad más un tercio". Y las tasas de una prueba diagnóstica (sensibilidad 90 %, prevalencia 10 %) son porcentajes encadenados: la probabilidad de detectar un caso real es 0,90 × 0,10 = 0,09.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">1. Un artículo de $50 tiene 20 % de descuento y luego 30 % adicional sobre el precio rebajado. ¿Cuánto pagas?</p>
+          <label><input type="radio" name="c6_l03_q1" value="a"> $25</label>
+          <label><input type="radio" name="c6_l03_q1" value="b"> $28</label>
+          <label><input type="radio" name="c6_l03_q1" value="c"> $30</label>
+          <label><input type="radio" name="c6_l03_q1" value="d"> $35</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">2. En una clínica hay 64 pacientes y 3/8 de ellos son hombres. ¿Cuántos hombres hay?</p>
+          <label><input type="radio" name="c6_l03_q2" value="a"> 18</label>
+          <label><input type="radio" name="c6_l03_q2" value="b"> 21</label>
+          <label><input type="radio" name="c6_l03_q2" value="c"> 24</label>
+          <label><input type="radio" name="c6_l03_q2" value="d"> 32</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">3. ¿A qué descuento total equivale aplicar primero 50 % y luego 10 %?</p>
+          <label><input type="radio" name="c6_l03_q3" value="a"> 60 %</label>
+          <label><input type="radio" name="c6_l03_q3" value="b"> 55 %</label>
+          <label><input type="radio" name="c6_l03_q3" value="c"> 45 %</label>
+          <label><input type="radio" name="c6_l03_q3" value="d"> 50 %</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 4 ==================== -->
+  <article class="lesson" id="l04">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 4</span>
+      <h3>🔑 Divisibilidad, factores primos y conteo de divisores</h3>
+      <span class="lesson-time">⏱ ~14 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>Las reglas de divisibilidad funcionan como un <strong>protocolo de tamizaje clínico</strong>: pruebas baratas y rápidas primero, estudios costosos solo si los primeros no deciden. Nadie divide 14175 entre 3 a mano: haces el tamizaje —suma de dígitos 1+4+1+7+5 = 18, múltiplo de 3— y lo declaras divisible en dos segundos. El panel completo de tamizaje del PAA: un número es divisible entre 2 si termina en dígito par; entre 3 si la suma de sus dígitos es múltiplo de 3; entre 4 si sus dos últimos dígitos forman múltiplo de 4; entre 5 si termina en 0 o 5; entre 6 si pasa las pruebas del 2 y del 3 a la vez; entre 9 si la suma de dígitos es múltiplo de 9; y entre 10 si termina en 0.</p>
+        <p>Si el tamizaje pasa, la confirmación es <strong>factorizar en primos</strong>, la "forma estándar" de todo número: descomponerlo como producto de primos, como cuando ordenas el botiquín hasta llegar a frascos individuales que ya no se pueden abrir. Así, 360 = 2³·3²·5. Y aquí aparece la fórmula más rentable de toda la aritmética del PAA: si N = 2ᵃ·3ᵇ·5ᶜ, el número de divisores de N es (a+1)(b+1)(c+1). Para 360: (3+1)(2+1)(1+1) = 4·3·2 = 24 divisores — el ejercicio propuesto del material. El examen lo aplica así: 4p (con p primo) = 2²·p¹, así que sus factores son (2+1)(1+1) = <strong>6</strong>. ¿Por qué el +1? Porque cada exponente admite usar 0, 1, 2… hasta a copias del primo, y contar cero copias también es una opción válida.</p>
+        <p>Completa el kit la distinción <strong>factor vs múltiplo</strong>, que el PAA intercambia a propósito: los factores de 12 son sus divisores (1, 2, 3, 4, 6, 12 — seis llaves que abren la cerradura 12) y sus múltiplos son los números que 12 abre (12, 24, 36, 48…). El máximo común divisor (MCD) resuelve "repartir en el grupo más grande posible" y el mínimo común múltiplo (MCM) resuelve "coincidir en el mismo instante": dos alarmas que suenan cada 12 y cada 18 minutos vuelven a coincidir a los MCM(12,18) = 36 minutos. Con factorización en primos, ambos salen solos: MCD tomando los primos comunes con el menor exponente; MCM, todos los primos con el mayor exponente.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Regla de divisibilidad</td><td>Test rápido sin dividir: dígitos finales, suma de dígitos o ambas</td></tr>
+          <tr><td>Número primo</td><td>Mayor que 1 y divisible solo entre 1 y sí mismo: 2, 3, 5, 7, 11…</td></tr>
+          <tr><td>Factorización prima</td><td>Escribir N como producto de primos: forma única de cada número</td></tr>
+          <tr><td>Número de divisores</td><td>(a+1)(b+1)(c+1) con N = 2ᵃ·3ᵇ·5ᶜ… (se suma 1 por la opción de "no usar" el primo)</td></tr>
+          <tr><td>MCD</td><td>Mayor divisor común: primos comunes con el MENOR exponente</td></tr>
+          <tr><td>MCM</td><td>Menor múltiplo común: TODOS los primos con el MAYOR exponente</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 La fórmula del número de divisores</h4>
+        \[ N = 2^{a}\cdot 3^{b}\cdot 5^{c} \;\Rightarrow\; \#\,\text{divisores} = (a+1)(b+1)(c+1) \]
+        \[ \text{Ejemplo del examen: } 4p = 2^{2}\cdot p^{1} \;\Rightarrow\; (2+1)(1+1) = 6 \text{ factores} \qquad 360 \Rightarrow 4\cdot 3\cdot 2 = 24 \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ Árbol de factorización prima de 360</h4>
+        <pre>                360
+               /     \
+              2      180
+                    /     \
+                   2      90
+                         /    \
+                        2     45
+                             /    \
+                            3     15
+                                 /    \
+                                3      5
+
+   360 = 2 x 2 x 2 x 3 x 3 x 5 = 2^3 x 3^2 x 5
+   divisores = (3+1)(2+1)(1+1) = 24</pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> dos preguntas tipo PAA con la misma herramienta.<br>
+        1. <em>Pregunta de dígito:</em> ¿qué dígito K (el menor posible) hace a 14K75 divisible entre 3? Suma fija: 1+4+7+5 = 17, más K. Necesitamos 17+K múltiplo de 3 → K = 1 (17+1 = 18). El número 14175 también pasa la del 5 (termina en 5) y la del 9 (18 es múltiplo de 9).<br>
+        2. <em>Pregunta de divisores:</em> ¿cuántos divisores positivos tiene 450? Factoriza: 450 = 45·10 = (3²·5)·(2·5) = 2·3²·5².<br>
+        3. <em>Aplica la fórmula:</em> (1+1)(2+1)(2+1) = 2·3·3 = <strong>18 divisores</strong>.<br>
+        4. <em>Verificación de sentido:</em> lista algunos —1, 2, 3, 5, 6, 9, 10, 15, 18, 25, 30, 45, 50, 75, 90, 150, 225, 450— y cuenta: 18 exactos.
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Olvidar el +1 en cada exponente: para 2⁴·p, responder 4·1 = 4 divisores en lugar de 5·2 = 10.</li>
+          <li>Aplicar la regla del 3 a la del 4: la del 4 mira los DOS últimos dígitos (11456 es divisible entre 4 porque 56 lo es).</li>
+          <li>Confundir factor con múltiplo: "¿cuántos múltiplos tiene 12?" es infinito; "¿cuántos factores?" es 6.</li>
+          <li>Tomar el 1 como primo: no lo es, y arruina la factorización prima.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> el tamizaje en cascada es la columna vertebral del diagnóstico: una prueba de orina barata decide si merece un ultrasonido caro, igual que la regla del 3 decide si merece la división completa. Y la farmacocinética vive de múltiplos: si un antibiótico se dosifica cada 12 h y otro cada 18 h, la primera hora en que el paciente toma ambos a la vez es el MCM = 36; programar esquemas de tratamiento es, literalmente, aritmética de múltiplos.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">1. ¿Cuál es el menor dígito K que hace a 14K75 divisible entre 3?</p>
+          <label><input type="radio" name="c6_l04_q1" value="a"> 0</label>
+          <label><input type="radio" name="c6_l04_q1" value="b"> 2</label>
+          <label><input type="radio" name="c6_l04_q1" value="c"> 3</label>
+          <label><input type="radio" name="c6_l04_q1" value="d"> 1</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">2. ¿Cuántos factores positivos tiene 4p, si p es un primo distinto de 2? (Pista: 4p = 2²·p¹)</p>
+          <label><input type="radio" name="c6_l04_q2" value="a"> 4</label>
+          <label><input type="radio" name="c6_l04_q2" value="b"> 6</label>
+          <label><input type="radio" name="c6_l04_q2" value="c"> 8</label>
+          <label><input type="radio" name="c6_l04_q2" value="d"> 10</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">3. ¿Cuántos divisores positivos tiene 360 = 2³·3²·5?</p>
+          <label><input type="radio" name="c6_l04_q3" value="a"> 6</label>
+          <label><input type="radio" name="c6_l04_q3" value="b"> 12</label>
+          <label><input type="radio" name="c6_l04_q3" value="c"> 24</label>
+          <label><input type="radio" name="c6_l04_q3" value="d"> 60</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 5 ==================== -->
+  <article class="lesson" id="l05">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 5</span>
+      <h3>↔️ Álgebra I: traducción verbal→algebraica, ecuaciones lineales y sistemas</h3>
+      <span class="lesson-time">⏱ ~15 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>El álgebra comienza como un <strong>trabajo de traducción</strong>, y en eso se parece a tomar la historia clínica: el paciente dice "me duele la cabeza desde que el doble de días que tengo fiebre", y el clínico traduce esa frase coloquial a términos técnicos antes de decidir cualquier tratamiento. El PAA traduce así: "el doble de p" es 2p; "5 menos que el doble de p" es <strong>2p−5</strong> (¡no 5−2p!); "el triple de x aumentado en 7" es 3x+7; "la mitad de la suma de a y b" es (a+b)/2. La frase completa manda: "menos que" invierte el orden de lectura, igual que "menor que" en un diagnóstico. Domina el diccionario y media sección de Matemáticas se convierte en lectura.</p>
+        <p>Traducida la frase al álgebra, llega la <strong>ecuación lineal</strong> (ax+b = c) y su método de tres pasos que los apuntes oficiales fijan: 1) despeja los términos con x hacia un lado (invirtiendo signos al pasarlos), 2) reduce términos semejantes, 3) divide entre el coeficiente. Así, 3(2x−1) = 4x+5 → distribuye: 6x−3 = 4x+5 → agrupa: 2x = 8 → x = 4, y la verificación lo certifica: 3(2·4−1) = 21 y 4·4+5 = 21 ✓. La ecuación es una <strong>balanza de laboratorio</strong>: los dos platos pesan lo mismo y toda operación en un plato se repite exactamente en el otro. El ejemplo del examen es verbal: "un celular cuesta $15.000 más que otro y juntos cuestan $1.500.000" → x + (x+15.000) = 1.500.000 → 2x = 1.485.000 → x = 742.500.</p>
+        <p>Con dos incógnitas y dos condiciones, entra el <strong>sistema de ecuaciones</strong> — dos agendas de guardia que se cruzan en un solo punto: la solución (p, r) es el único turno donde ambas se cumplen. Los apuntes dan dos métodos. <em>Sustitución</em> (cuando una ecuación ya te da una variable despejada): 4p+2r = 7,90 con 2r = p+0,15 → metes la segunda en la primera: 4p+(p+0,15) = 7,90 → 5p = 7,75 → p = $1,55. <em>Eliminación</em> (cuando los coeficientes se prestan): multiplica una ecuación para que una variable quede con coeficientes opuestos y suma ambas. Y la regla de oro del PAA: la pregunta casi nunca pide x, pide el precio del caro, la edad del mayor o la suma de ambos — lee el enunciado dos veces, primero para plantear y después para responder lo que de verdad pregunta.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Ecuación lineal</td><td>Igualdad con la variable a primer grado: ax+b = c</td></tr>
+          <tr><td>Despeje</td><td>Aislar la variable repitiendo operaciones en ambos lados (balanza)</td></tr>
+          <tr><td>Sistema de ecuaciones</td><td>Dos ecuaciones con dos incógnitas; su solución las cumple TODAS</td></tr>
+          <tr><td>Método de sustitución</td><td>Cuando una ecuación ya da una variable despejada: métela en la otra</td></tr>
+          <tr><td>Método de eliminación</td><td>Multiplica para igualar coeficientes y suma (o resta) las ecuaciones</td></tr>
+          <tr><td>Verificación</td><td>Sustituir la solución en la ecuación original (en ambas, si es sistema)</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 El método y los ejemplos del material oficial (2.2 y 2.3)</h4>
+        \[ \text{"cinco menos que el doble de } p\text{"} = 2p-5 \qquad x+(x+15.000)=1.500.000 \;\Rightarrow\; x=742.500 \]
+        \[ 4p+2r=7{,}90,\qquad 2r=p+0{,}15 \;\Rightarrow\; 4p+(p+0{,}15)=7{,}90 \;\Rightarrow\; 5p=7{,}75 \;\Rightarrow\; p=1{,}55 \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ Diccionario español → álgebra (tal como lo pregunta el PAA)</h4>
+        <pre>FRASE COLQUIAL                        ALGEBRA
+"el doble de p"                -->    2p
+"5 menos que el doble de p"    -->    2p - 5     (el orden se invierte!)
+"el triple de x aumentado en 7" ->   3x + 7
+"la mitad de la suma de a y b" -->    (a + b)/2
+"el cuadrado de la suma"       -->    (a + b)^2   (primero suma)
+"la suma de los cuadrados"     -->    a^2 + b^2   (primero cuadrado)
+"x excede a y en 3"            -->    x = y + 3</pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> los tres pasos del examen, del español a la solución.<br>
+        1. <em>Traducción:</em> "el triple de la suma de x y 2" → primero la suma, después el triple: 3(x+2). (El distractor clásico es 3x+2: el orden de la frase manda.)<br>
+        2. <em>Ecuación lineal:</em> 3(2x−1) = 4x+5 → distribuye: 6x−3 = 4x+5 → agrupa: 2x = 8 → <strong>x = 4</strong>.<br>
+        3. <em>Verifica:</em> 3(2·4−1) = 3·7 = 21 y 4·4+5 = 21 ✓ — ambos platos pesan igual.<br>
+        4. <em>Sistema (sustitución):</em> paletas y refrescos: 4p+2r = 7,90 y 2r = p+0,15 → 4p+(p+0,15) = 7,90 → 5p = 7,75 → <strong>p = $1,55</strong> y 2r = 1,70 → r = $0,85.<br>
+        5. <em>Responde lo que piden:</em> si la pregunta fuera "¿cuánto cuesta 1 paleta y 1 refresco?", la respuesta es 1,55+0,85 = $2,40 — no p ni r sueltos.
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Leer "5 menos que el doble de p" como 5−2p: el orden se invierte; es 2p−5.</li>
+          <li>Al pasar términos de lado, olvidar invertir el signo: 6x−3 = 4x+5 da 2x = 8, no 2x = 2.</li>
+          <li>En un sistema, verificar en una sola ecuación: la solución debe cumplirlas las dos.</li>
+          <li>Responder x cuando el problema pregunta 2x, x+y o el mayor de los dos valores.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> la ventilación mecánica se ajusta como un sistema de ecuaciones: el volumen corriente depende del peso y la frecuencia, y cambiar un parámetro obliga a recalcular los demás (6 mL/kg de peso ideal × frecuencia = minuto-ventilación). Igual que en el sistema 2×2, tocar una ecuación sin actualizar la otra descompensa al paciente: en ambos mundos, la verificación final no es opcional.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">1. Según los apuntes, "cinco menos que el doble de p" se traduce como:</p>
+          <label><input type="radio" name="c6_l05_q1" value="a"> 2p − 5</label>
+          <label><input type="radio" name="c6_l05_q1" value="b"> 5 − 2p</label>
+          <label><input type="radio" name="c6_l05_q1" value="c"> 2(p − 5)</label>
+          <label><input type="radio" name="c6_l05_q1" value="d"> 5p − 2</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">2. Si 3(2x − 1) = 4x + 7, entonces x =</p>
+          <label><input type="radio" name="c6_l05_q2" value="a"> 3</label>
+          <label><input type="radio" name="c6_l05_q2" value="b"> 4</label>
+          <label><input type="radio" name="c6_l05_q2" value="c"> 5</label>
+          <label><input type="radio" name="c6_l05_q2" value="d"> 6</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">3. Al sustituir 2r = p + 0,15 en 4p + 2r = 7,90 se obtiene:</p>
+          <label><input type="radio" name="c6_l05_q3" value="a"> 3p = 7,75</label>
+          <label><input type="radio" name="c6_l05_q3" value="b"> 4p = 7,75</label>
+          <label><input type="radio" name="c6_l05_q3" value="c"> 5p = 7,75</label>
+          <label><input type="radio" name="c6_l05_q3" value="d"> 6p = 7,90</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 6 ==================== -->
+  <article class="lesson" id="l06">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 6</span>
+      <h3>📈 Álgebra II: ecuaciones cuadráticas, desigualdades y valor absoluto</h3>
+      <span class="lesson-time">⏱ ~15 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>Una ecuación cuadrática tiene la forma ax²+bx+c = 0 y su gráfica es una parábola: la curva que dibuja toda gota de medicamento que cae de una bureta, toda pelota que se lanza, todo ingreso que sube y luego baja. Los apuntes oficiales ordenan tres métodos por preferencia: <em>factorización</em> (si ves los números, gana), <em>aislamiento</em> (cuando no hay término en x, como 4x²−8 = 56 → 4x² = 64 → x² = 16 → x = ±4) y <em>fórmula general</em> (el protocolo universal que funciona siempre, como la intubación según protocolo: no es elegante, pero no falla). Regla sagrada: salvo que el problema pida el valor positivo, una cuadrática tiene <strong>dos raíces</strong> — el material lo confirma: de x² = 16 el examen espera x = ±4 (y si pide el positivo, x = 4). El distractor favorito del PAA es la mitad de las raíces.</p>
+        <p>Las <strong>desigualdades</strong> se resuelven como ecuaciones con una sola diferencia que vale todo el punto: al multiplicar o dividir por un número negativo, el símbolo se <strong>voltea</strong>. En −3x+7 &gt; −8 restas 7 (−3x &gt; −15) y divides entre −3, volteando a x &lt; 5. ¿Por qué se voltea? Porque el orden de los números se refleja al pasar al lado negativo: 2 &lt; 5, pero −2 &gt; −5. En el PAA la desigualdad rara vez viene sola: viene vestida de problema verbal ("¿hasta cuántos pacientes puede aceptar la sala sin superar 30 camas?") y su respuesta es un <em>intervalo</em>, no un número solitario. Prueba siempre un valor de tu intervalo en la desigualdad original: es la verificación de 5 segundos.</p>
+        <p>El <strong>valor absoluto</strong> |x| es la distancia de x al cero: siempre ≥ 0. Como toda distancia, produce ecuaciones con DOS casos: |2x−1| = 7 dice que (2x−1) está a 7 pasos del cero, a la derecha o a la izquierda → 2x−1 = 7 (x = 4) o 2x−1 = −7 (x = −3). Los apuntes fijan las dos reglas maestras: |x+a| ≤ b equivale a −b ≤ x+a ≤ b (la solución vive ENTRE los límites, una zona "y") y |x+a| ≥ b equivale a x+a ≤ −b o x+a ≥ b (la solución vive FUERA de los límites, dos colas, una zona "o"). Es literalmente la lógica clínica de la temperatura: "normal" es |T−37| ≤ 1, un intervalo (36 ≤ T ≤ 37); "fiebre" es T−37 ≥ 1, una cola. El símbolo te dice si la respuesta vive entre los límites o fuera de ellos.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Cuadrática</td><td>ax²+bx+c = 0 con a≠0; su gráfica es una parábola</td></tr>
+          <tr><td>Factorización</td><td>Escribir ax²+bx+c como producto de binomios: (x−2)(x−3) = 0</td></tr>
+          <tr><td>Discriminante (Δ)</td><td>b²−4ac: predice 2 raíces (Δ&gt;0), 1 doble (Δ=0) o ninguna real (Δ&lt;0)</td></tr>
+          <tr><td>Valor absoluto |x|</td><td>Distancia de x al cero; |x+a| ≤ b → solución ENTRE límites; |x+a| ≥ b → FUERA</td></tr>
+          <tr><td>Desigualdad</td><td>Comparación &lt;, &gt;, ≤, ≥; su solución es un intervalo de valores</td></tr>
+          <tr><td>Volteo del signo</td><td>Al dividir o multiplicar por negativo, &lt; se vuelve &gt; (y viceversa)</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 Fórmula general, discriminante, desigualdad y valor absoluto</h4>
+        \[ x = \frac{-b \pm \sqrt{b^{2}-4ac}}{2a} \qquad\qquad \Delta = b^{2}-4ac \]
+        \[ 4x^{2}-8=56 \;\Rightarrow\; x^{2}=16 \;\Rightarrow\; x=\pm 4 \qquad\qquad -3x+7 \gt -8 \;\Rightarrow\; x \lt 5 \]
+        \[ |x+a|\le b \;\Rightarrow\; -b \le x+a \le b \qquad |x+a|\ge b \;\Rightarrow\; x+a\le -b \;\text{o}\; x+a\ge b \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ El discriminante como scanner de raíces</h4>
+        <pre>                 Delta = b^2 - 4ac
+                /        |         \
+          Delta &gt; 0   Delta = 0   Delta &lt; 0
+          DOS raices  UNA raiz   NINGUNA raiz
+          reales      doble      real
+              |           |           |
+       la parabola    toca el eje   la parabola
+       cruza el eje   en 1 punto    NO toca el eje
+          x en 2 puntos  x en 1 punto  (flota arriba o abajo)</pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> las tres piezas del título, con los números del material.<br>
+        1. <em>Cuadrática por factorización:</em> x²−5x+6 = 0 → busca dos números que multiplicados den 6 y sumados −5: −2 y −3 → (x−2)(x−3) = 0 → x = 2 o x = 3. Discriminante: Δ = 25−24 = 1 &gt; 0 → dos raíces reales ✓.<br>
+        2. <em>Aislamiento (ejemplo del examen):</em> 4x²−8 = 56 → 4x² = 64 → x² = 16 → x = ±4 (dos raíces; si el examen pide el positivo, x = 4).<br>
+        3. <em>Desigualdad:</em> −2x+3 &gt; 9 → −2x &gt; 6 → divides entre −2 y volteas: x &lt; −3. Verifica con x = −4: −2(−4)+3 = 11 &gt; 9 ✓.<br>
+        4. <em>Valor absoluto:</em> |2x−1| = 7 → caso 1: 2x−1 = 7 → x = 4; caso 2: 2x−1 = −7 → x = −3. Verifica: |2(4)−1| = 7 ✓ y |2(−3)−1| = |−7| = 7 ✓.<br>
+        5. <em>Zona entre límites:</em> |x+3| ≤ 5 → −5 ≤ x+3 ≤ 5 → <strong>−8 ≤ x ≤ 2</strong> (un intervalo, no dos colas).
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Reportar solo la raíz positiva en x² = 16: la respuesta completa es x = ±4.</li>
+          <li>Dividir entre un negativo sin voltear el signo: −3x &gt; −15 da x &lt; 5, no x &gt; 5.</li>
+          <li>Resolver |…| = b con un solo caso: toda ecuación de valor absoluto tiene DOS casos (+b y −b).</li>
+          <li>Interpretar Δ &lt; 0 como "error de cálculo": significa raíces no reales, respuesta legítima del PAA.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> la farmacocinética de dosis únicas describe concentraciones con parábolas: el fármaco sube, alcanza un pico y decae, y el clínico pregunta "¿entre qué horas la concentración supera la mínima eficaz?" — exactamente la pregunta x²−5x+6 &lt; 0. Y el rango normal de cualquier signo vital es una desigualdad con valor absoluto: |T−37| ≤ 1 define al paciente afebril (36–37 °C); salirse del intervalo por cualquiera de las dos colas dispara la alerta.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">1. Las soluciones de 4x² − 8 = 56 son:</p>
+          <label><input type="radio" name="c6_l06_q1" value="a"> x = 4 únicamente</label>
+          <label><input type="radio" name="c6_l06_q1" value="b"> x = ±2</label>
+          <label><input type="radio" name="c6_l06_q1" value="c"> x = 16</label>
+          <label><input type="radio" name="c6_l06_q1" value="d"> x = ±4</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">2. La desigualdad |x + 3| ≤ 5 equivale a:</p>
+          <label><input type="radio" name="c6_l06_q2" value="a"> −8 ≤ x ≤ 2</label>
+          <label><input type="radio" name="c6_l06_q2" value="b"> −2 ≤ x ≤ 8</label>
+          <label><input type="radio" name="c6_l06_q2" value="c"> x ≤ −8 o x ≥ 2</label>
+          <label><input type="radio" name="c6_l06_q2" value="d"> x ≤ 2 únicamente</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">3. El discriminante de 2x² + 3x + 5 = 0 es Δ = 9 − 40 = −31. Por lo tanto, la ecuación tiene:</p>
+          <label><input type="radio" name="c6_l06_q3" value="a"> dos raíces reales distintas</label>
+          <label><input type="radio" name="c6_l06_q3" value="b"> ninguna raíz real</label>
+          <label><input type="radio" name="c6_l06_q3" value="c"> una raíz doble</label>
+          <label><input type="radio" name="c6_l06_q3" value="d"> tres raíces</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 7 ==================== -->
+  <article class="lesson" id="l07">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 7</span>
+      <h3>🔁 Álgebra III: sucesiones y patrones</h3>
+      <span class="lesson-time">⏱ ~16 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>Una <strong>sucesión</strong> es una lista de números que sigue una regla fija: 7, 10, 13, 16… y la regla es "suma 3". Cuando cada término se obtiene sumando una cantidad fija d al anterior, la sucesión es <em>aritmética</em> y su término general es aₙ = a₁+(n−1)d: la primera dosis más el incremento repetido (n−1) veces. Piénsalo como un <strong>esquema de dosificación</strong>: dosis de carga a₁, incremento diario d, y la dosis del día n es exactamente aₙ. En 7, 10, 13, 16…: a₁ = 7 y d = 3, así que a₁₀ = 7+(10−1)·3 = 7+27 = <strong>34</strong> — calculado sin escribir los diez términos. Esa es la rentabilidad del término general: convierte "contar" en "evaluar".</p>
+        <p>El PAA convierte la sucesión en desigualdad, y ahí vive la trampa del redondeo. El ejemplo del material: el primer día lees 5 páginas y luego 3 más cada día; ¿en qué día terminas un libro de 100? Plantea 5+3(n−1) ≥ 100 → 3(n−1) ≥ 95 → n−1 ≥ 31,67 → n ≥ 32,67. La respuesta es el día <strong>33</strong>: el día 32 solo llevas 5+3(31) = 98 páginas — no llegan — y el día 33 cumples con 101. Cuando la desigualdad pregunta "¿en qué día/ paso alcanza?", el redondeo siempre es hacia ARRIBA: al paciente se le completa el esquema, nunca se le deja a 98 de 100.</p>
+        <p>Los <strong>patrones</strong> del PAA no siempre son números sueltos: son figuras que crecen (palitos, cuadrados de puntos, triángulos). La técnica: calcula las <em>primeras diferencias</em> (cuánto suma cada paso); si son constantes, es aritmética con esa d. Si varían, calcula las <em>segundas diferencias</em>: si esas son constantes, el patrón es cuadrático y crece como n² (1, 4, 9, 16…). Así, un patrón que empieza con 3 palitos y añade 2 por figura usa 3+(n−1)·2 en la figura n: la figura 20 usa 3+19·2 = 41. Y verifica siempre tu fórmula con los dos primeros términos antes de responder: una fórmula que falla en n = 2 está mal construida, aunque "se vea bien".</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Sucesión</td><td>Lista ordenada de números que sigue una regla fija</td></tr>
+          <tr><td>Término general aₙ</td><td>Fórmula que da cualquier término a partir de la posición n</td></tr>
+          <tr><td>Sucesión aritmética</td><td>Cada término = anterior + d; término general aₙ = a₁+(n−1)d</td></tr>
+          <tr><td>Diferencia común (d)</td><td>Cantidad fija que se suma en cada paso</td></tr>
+          <tr><td>Primeras diferencias</td><td>Restas entre términos consecutivos; si son constantes → aritmética</td></tr>
+          <tr><td>Patrón cuadrático</td><td>Segundas diferencias constantes; crece como n² (1, 4, 9, 16…)</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 Término general y el ejemplo del material (2.8)</h4>
+        \[ a_{n}=a_{1}+(n-1)\,d \]
+        \[ 5+3(n-1)\ge 100 \;\Rightarrow\; 3(n-1)\ge 95 \;\Rightarrow\; n\ge 32{,}67 \;\Rightarrow\; n=33 \]
+        \[ \text{Figura } n \text{ con } a_{1}=3,\ d=2:\; 3+(20-1)\cdot 2 = 41 \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ Árbol de decisión para identificar el patrón</h4>
+        <pre class="mermaid">
+graph TD
+  A[Patron de una sucesion] --> B[Calcula primeras diferencias]
+  B --> C{Son constantes}
+  C -- Si --> D[Aritmetica: a1 mas d repetida]
+  C -- No --> E[Calcula segundas diferencias]
+  E --> F{Son constantes}
+  F -- Si --> G[Cuadratica: crece como n al cuadrado]
+  F -- No --> H[Busca multiplicacion o alternancia]
+        </pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> tres preguntas tipo PAA.<br>
+        1. <em>Sucesión aritmética:</em> 7, 10, 13, 16… → a₁ = 7, d = 3 → a₁₀ = 7+(10−1)·3 = 7+27 = <strong>34</strong>.<br>
+        2. <em>Ejemplo del examen:</em> libro de 100 páginas, 5 el primer día y 3 más cada día → 5+3(n−1) ≥ 100 → 3(n−1) ≥ 95 → n−1 ≥ 31,67 → <strong>n = 33</strong>. Comprueba: día 32 → 5+3(31) = 98 ✗; día 33 → 5+3(32) = 101 ✓.<br>
+        3. <em>Patrón de palitos:</em> la figura 1 usa 3 y cada figura añade 2 → figura 20: 3+(20−1)·2 = <strong>41 palitos</strong>.<br>
+        4. <em>Patrón cuadrático:</em> 1, 4, 9, 16 → aₙ = n² (primeras diferencias 3, 5, 7; segundas constantes = 2).<br>
+        5. <em>Rutina de verificación:</em> tu fórmula debe acertar en n = 1 y n = 2; si falla, reconstrúyela antes de responder.
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Usar n en vez de n−1: aₙ = a₁+(n−1)d; con n a secas cuentas un paso de más.</li>
+          <li>Redondear hacia abajo cuando la pregunta es "¿en qué día/paso alcanza?": es n = 33, no 32.</li>
+          <li>Asumir aritmética sin verificar: calcula las diferencias primero; 2, 4, 8, 16 no suma 2.</li>
+          <li>Confundir término con posición: en 7, 10, 13…, a₃ = 13 (el TERCER término), no 3.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> los esquemas de medicación son sucesiones aritméticas: dosis de carga (a₁) más dosis de mantenimiento fija por día (d) — calcular en qué día el paciente acumula la dosis total prescrita es la desigualdad 5+3(n−1) ≥ 100 del examen, con el mismo redondeo hacia arriba. Y el seguimiento pediátrico también lee diferencias: cuando las primeras diferencias de talla dejan de ser constantes mes a mes, el pediatra investiga; un patrón que cambia es un hallazgo clínico.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">1. En la sucesión 7, 10, 13, 16… el término general es aₙ = 7 + (n−1)·3. ¿Cuánto vale a₁₀?</p>
+          <label><input type="radio" name="c6_l07_q1" value="a"> 31</label>
+          <label><input type="radio" name="c6_l07_q1" value="b"> 33</label>
+          <label><input type="radio" name="c6_l07_q1" value="c"> 34</label>
+          <label><input type="radio" name="c6_l07_q1" value="d"> 37</label>
+        </div>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">2. Lees 5 páginas el primer día y 3 más cada día siguiente. ¿En qué día alcanzas las 100 páginas del libro?</p>
+          <label><input type="radio" name="c6_l07_q2" value="a"> Día 30</label>
+          <label><input type="radio" name="c6_l07_q2" value="b"> Día 31</label>
+          <label><input type="radio" name="c6_l07_q2" value="c"> Día 32</label>
+          <label><input type="radio" name="c6_l07_q2" value="d"> Día 33</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">3. Un patrón de figuras usa 3 palitos en la figura 1 y añade 2 palitos por figura. ¿Cuántos palitos usa la figura 20?</p>
+          <label><input type="radio" name="c6_l07_q3" value="a"> 41</label>
+          <label><input type="radio" name="c6_l07_q3" value="b"> 40</label>
+          <label><input type="radio" name="c6_l07_q3" value="c"> 43</label>
+          <label><input type="radio" name="c6_l07_q3" value="d"> 39</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 8 ==================== -->
+  <article class="lesson" id="l08">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 8</span>
+      <h3>⚙️ Funciones: dominio, transformaciones, pendiente y gráficas</h3>
+      <span class="lesson-time">⏱ ~14 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>Una función es una <strong>máquina de cápsulas de café</strong>: metes una cápsula (la entrada x) y sale siempre el mismo café (la salida f(x)); la misma entrada jamás produce dos salidas distintas. La notación f(x) se lee "f de x" y significa "el resultado de aplicar la regla f a x". Evaluar es mecánico pero exige disciplina con los signos: si f(x) = 3x²+2x−4, entonces f(3) = 3(9)+6−4 = 27+6−4 = <strong>29</strong>, exactamente el ejemplo del material oficial. El error clásico es leer f(3) como "f por 3" y multiplicar: f no es una variable, es la <em>regla</em>. La máquina también acepta expresiones: f(a+1) exige sustituir x por (a+1) en cada aparición.</p>
+        <p>Dentro de las funciones, la familia lineal f(x) = mx+b es la más preguntada: m es la <strong>pendiente</strong> (cuánto sube la salida por cada unidad que sube la entrada) y b el <strong>intercepto</strong> (el valor cuando x = 0, donde la línea cruza el eje y). Para f(x) = 2x+3, cada paquete extra cuesta $2 y la cuota fija es $3: f(0) = 3, f(1) = 5, f(4) = 11. La pendiente entre dos puntos se calcula m = (y₂−y₁)/(x₂−x₁), "cambio de y entre cambio de x". Si la pregunta del PAA dice "¿cuánto aumenta y cuando x aumenta en 1?", está preguntando la pendiente sin decir su nombre. Y cuando la pendiente se esconde en ax+by = c, despeja primero: la pendiente es −a/b (para 9x−3y = 12 → y = 3x−4 → m = 3).</p>
+        <p>Antes de evaluar, pregunta qué entradas son válidas: eso es el <strong>dominio</strong>. Dos reglas bastan en el PAA: bajo una raíz cuadrada el argumento no puede ser negativo (√(x−1) existe solo si x ≥ 1) y en un denominador nada puede anularse (1/(x−2) exige x ≠ 2). Y cuando el examen "mueve" una gráfica, mueve la máquina sin cambiar la regla: son las <strong>transformaciones</strong> — f(x)+k sube k unidades, f(x)−k baja k, f(x+h) corre la gráfica h a la IZQUIERDA (¡parece que hace lo contrario!), f(x−h) a la DERECHA, −f(x) refleja sobre el eje x y f(−x) sobre el eje y. Piénsalo como <strong>ajustar la inclinación de la camilla</strong>: el paciente (la regla f) es el mismo; solo cambia la posición desde la que lo observas.</p>
+        <p>El PAA cierra el tema con la <strong>variación</strong>. En la variación <em>directa</em>, las variables suben y bajan juntas manteniendo un cociente fijo: y = kx, como un goteo IV calibrado a 60 mL/h — el doble de horas, el doble de mililitros. En la variación <em>inversa</em>, cuando una sube la otra baja manteniendo un producto fijo: xy = k, la ley de Boyle de los gases o el clásico trabajadores-tiempo: 4 obreros pintan en 12 horas (k = 48), 8 obreros tardan 6 (48/8). Para resolver cualquier variación: primero calcula k con el par de datos conocido, después usa k con el nuevo valor. Y verifica el sentido físico: en la inversa, si x se duplica, y se reduce a la mitad — nunca ambas suben.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Función</td><td>Regla que asigna a cada entrada UNA única salida: f(x)</td></tr>
+          <tr><td>Dominio</td><td>Conjunto de entradas válidas (evita dividir entre 0 o raíces de negativos)</td></tr>
+          <tr><td>Pendiente (m)</td><td>Cambio de y por unidad de x: m = (y₂−y₁)/(x₂−x₁); en ax+by=c, m = −a/b</td></tr>
+          <tr><td>Transformación</td><td>Desplaza o refleja la gráfica: f(x)±k vertical, f(x±h) horizontal, −f(x) espejo</td></tr>
+          <tr><td>Variación directa</td><td>y = kx: suben juntas, cociente constante</td></tr>
+          <tr><td>Variación inversa</td><td>xy = k: una sube, la otra baja, producto constante</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 Evaluación, dominio, lineal, variación y transformaciones</h4>
+        \[ f(x)=3x^{2}+2x-4 \;\Rightarrow\; f(3)=3(9)+2(3)-4=27+6-4=29 \]
+        \[ \text{Dominio: } \sqrt{u}\Rightarrow u\ge 0 \qquad \frac{1}{u}\Rightarrow u\ne 0 \qquad ax+by=c \Rightarrow m=-\frac{a}{b} \]
+        \[ f(x)=mx+b \qquad \text{Directa: } y=kx \qquad \text{Inversa: } xy=k \qquad f(x-h)\text{ corre a la derecha} \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ La máquina función, sus variaciones y sus movimientos</h4>
+        <pre>      ENTRADA x         SALIDA f(x)
+          3   ---> [ 3x^2 + 2x - 4 ] --->  29
+         -2   ---> [ 3x^2 + 2x - 4 ] --->  12 - 4 - 4 = 4
+
+  VARIACION DIRECTA y = kx          VARIACION INVERSA xy = k
+  goteo IV: 60 mL/h                 4 obreros -> 12 h (k = 48)
+   1 h -> 60 mL                     8 obreros ->  6 h (48/8)
+   2 h -> 120 mL   (sube)           x sube  ->  y baja
+
+  TRANSFORMACIONES DE LA GRAFICA
+  f(x) + k  ->  k ARRIBA            f(x) - k  ->  k ABAJO
+  f(x + h)  ->  h a la IZQUIERDA    f(x - h)  ->  h a la DERECHA
+  -f(x)     ->  reflejo eje x       f(-x)     ->  reflejo eje y</pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> un equipo de enfermería pinta (digamos, pinta la sala) con variación inversa entre obreros y horas: 4 obreros tardan 12 horas.<br>
+        1. <em>Calcula la constante:</em> k = x·y = 4·12 = 48 obreros-hora.<br>
+        2. <em>Nuevo escenario:</em> ¿cuántas horas tardan 8 obreros? 8·y = 48 → y = 6 horas.<br>
+        3. <em>Control de sentido:</em> el doble de obreros → la mitad de horas ✓ (es inversa).<br>
+        4. <em>Extensión lineal:</em> si además cada hora de trabajo paga $9 por obrero, el costo de 8 obreros durante 6 h es 8·6·9 = $432.<br>
+        5. <em>Y evaluación de función:</em> para f(x) = x²−3x+1, f(−2) = (−2)²−3(−2)+1 = 4+6+1 = 11 — con paréntesis en cada sustitución.<br>
+        6. <em>Dominio:</em> g(x) = 1/(x−2) existe solo si x ≠ 2; h(x) = √(x−1) exige x ≥ 1 (bajo la raíz nada negativo).<br>
+        7. <em>Transformación:</em> la gráfica de f(x)+3 es la de f subida 3 unidades; f(x−2) corre 2 a la derecha (la máquina es la misma, cambia la posición de la camilla).
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Leer f(3) como "f por 3": f(3) es la regla evaluada en 3, nunca un producto.</li>
+          <li>Sustituir sin paréntesis: f(−2) con x² exige (−2)² = 4, no −4.</li>
+          <li>Tratar la variación inversa como directa: si xy = k y x se duplica, y se DIVIDE entre 2.</li>
+          <li>Creer que f(x+h) corre a la derecha: corre a la IZQUIERDA; f(x−h) es la que va a la derecha.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> las funciones están en cada monitor de signos vitales: la SpO₂, la presión arterial y la glucosa son funciones del tiempo, y la pendiente de la curva es lo que dispara las alarmas (una glucosa de 180 con pendiente +40/h es una emergencia distinta a la misma cifra estable). Y la variación inversa es la ley de Boyle de la fisiología respiratoria: al inspirar, el volumen pulmonar sube y la presión baja en producto constante.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">1. Si f(x) = 3x² + 2x − 4, ¿cuánto vale f(3)?</p>
+          <label><input type="radio" name="c6_l08_q1" value="a"> 23</label>
+          <label><input type="radio" name="c6_l08_q1" value="b"> 29</label>
+          <label><input type="radio" name="c6_l08_q1" value="c"> 31</label>
+          <label><input type="radio" name="c6_l08_q1" value="d"> 17</label>
+        </div>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">2. La gráfica de f(x) + 3 se obtiene de la de f(x) desplazándola:</p>
+          <label><input type="radio" name="c6_l08_q2" value="a"> 3 unidades a la derecha</label>
+          <label><input type="radio" name="c6_l08_q2" value="b"> 3 unidades hacia abajo</label>
+          <label><input type="radio" name="c6_l08_q2" value="c"> 3 unidades a la izquierda</label>
+          <label><input type="radio" name="c6_l08_q2" value="d"> 3 unidades hacia arriba</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">3. La pendiente de la función lineal f(x) = 2x + 3 es:</p>
+          <label><input type="radio" name="c6_l08_q3" value="a"> 3</label>
+          <label><input type="radio" name="c6_l08_q3" value="b"> −2</label>
+          <label><input type="radio" name="c6_l08_q3" value="c"> 2</label>
+          <label><input type="radio" name="c6_l08_q3" value="d"> 5</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 9 ==================== -->
+  <article class="lesson" id="l09">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 9</span>
+      <h3>📐 Geometría I: ángulos y triángulos</h3>
+      <span class="lesson-time">⏱ ~16 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>La geometría del PAA descansa en pocas leyes de ángulos que funcionan como <strong>dosis complementarias</strong>: dos ángulos complementarios son dos jeringas que juntas llenan una ampolla de 90 unidades (suman 90°); dos suplementarios llenan una de 180 (suman 180°); y los ángulos opuestos por el vértice son gemelos idénticos (miden lo mismo). Cuando una transversal corta dos rectas paralelas, se generan pares de ángulos iguales (alternos internos, correspondientes) y suplementarios (internos del mismo lado): el PAA te da un ángulo de 35° y espera que por contagio deduzcas los siete restantes sin medir nada.</p>
+        <p>En todo triángulo, los tres ángulos internos suman <strong>180°</strong>, el ángulo exterior es igual a la suma de los dos internos no adyacentes, y cualquier lado es menor que la suma de los otros dos (desigualdad triangular). El triángulo estrella es el rectángulo, porque activa el <strong>teorema de Pitágoras</strong>: a²+b² = c², con c la hipotenusa. Memoriza los tripletes enteros —(3,4,5), (5,12,13), (8,15,17), (7,24,25) y sus múltiplos—: si el PAA da catetos 9 y 12, reconoces el 3-4-5 escalado ×3 y respondes hipotenusa 15 sin calcular una raíz. El tiempo que ahorras son puntos.</p>
+        <p>Aún mejor que los tripletes son los <strong>triángulos especiales</strong>, kits estandarizados donde conocer un lado equivale a conocerlos todos. El 45-45-90 tiene lados en razón 1 : 1 : √2 (es la mitad de un cuadrado): catetos iguales, hipotenusa cateto×√2. El 30-60-90 tiene razón 1 : √3 : 2 (es la mitad de un equilátero): el lado corto está frente al 30°, el largo frente al 60° y la hipotenusa es el doble del corto. Así, si la hipotenusa es 10, el corto mide 5 y el largo 5√3. El material oficial combina todo: ángulos complementarios con x y (x−20) cuya ecuación x+(x−20) = 90 da x = 55°. La estrategia general: identifica primero QUÉ tipo de triángulo tienes, y deja que su kit haga el resto.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Ángulos complementarios</td><td>Suman 90°</td></tr>
+          <tr><td>Ángulos suplementarios</td><td>Suman 180°</td></tr>
+          <tr><td>Opuestos por el vértice</td><td>Iguales entre sí; se forman al cruzarse dos rectas</td></tr>
+          <tr><td>Desigualdad triangular</td><td>Cada lado &lt; suma de los otros dos</td></tr>
+          <tr><td>Triángulo 45-45-90</td><td>Lados 1 : 1 : √2; mitad de un cuadrado</td></tr>
+          <tr><td>Triángulo 30-60-90</td><td>Lados 1 : √3 : 2; el corto frente al 30°, hipotenusa = 2×corto</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 Pitágoras, tripletes y triángulos especiales</h4>
+        \[ a^{2}+b^{2}=c^{2} \qquad (3,4,5)\;(5,12,13)\;(8,15,17)\;(7,24,25) \]
+        \[ 45\text{-}45\text{-}90:\; 1:1:\sqrt{2} \qquad\qquad 30\text{-}60\text{-}90:\; 1:\sqrt{3}:2 \]
+        \[ x+(x-20)=90^{\circ} \;\Rightarrow\; 2x=110^{\circ} \;\Rightarrow\; x=55^{\circ} \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ Los dos kits de triángulos especiales</h4>
+        <pre>   45-45-90  (mitad de cuadrado)      30-60-90  (mitad de equilatero)
+        |\                                /|
+        | \                               / |
+        |  \                             /  |
+   1    |   \  sqrt2              1    /   |  2 (hipotenusa)
+        |    \                         /    |
+        |_____\                       /_____|
+          1     45                  30    60
+                                 corto 1  largo sqrt3
+
+  45-45-90: catetos iguales;  hip = cateto x sqrt2
+  30-60-90: corto (frente al 30) x 2 = hip;  largo = corto x sqrt3</pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> tres micro-casos PAA.<br>
+        1. <em>Complementarios:</em> dos ángulos miden x y x−20. Plantea x + (x−20) = 90 → 2x = 110 → <strong>x = 55°</strong> (y su compañero mide 35°). Verifica: 55+35 = 90 ✓.<br>
+        2. <em>Triplete:</em> una escalera apoya a 9 m del muro y su base alcanza 12 m de distancia horizontal... mejor: catetos de 9 y 12 → reconoces (3,4,5)×3 → hipotenusa = <strong>15</strong>, sin raíces.<br>
+        3. <em>Especial:</em> en un 30-60-90 la hipotenusa mide 10 → el corto (frente al 30°) es 10/2 = <strong>5</strong> y el largo es 5√3. Si el examen solo da el largo (5√3), divide entre √3 para hallar el corto y luego dúplicalo.
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Aplicar Pitágoras a un triángulo que NO es rectángulo: sin ángulo de 90°, a²+b² = c² no aplica.</li>
+          <li>Confundir el lado corto del 30-60-90: es el OPUESTO al ángulo de 30°, no el que está al lado del 60°.</li>
+          <li>Olvidar que la hipotenusa es siempre el lado MAYOR: si obtuviste c = 4 con catetos 3 y 5, revisa.</li>
+          <li>Sumar los ángulos de un cuadrilátero como si fueran 180°: suman 360°.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> la ortopedia vive de triángulos: el ángulo de abducción de la cadera se mide en radiografías donde los ejes óseos forman triángulos rectángulos, y la regla del 30-60-90 aparece en las mediciones de escoliosis. Hasta la vía de acceso venoso central se calcula con ángulos: la aguja entra a 45° respecto a la piel, y conocer las razones entre lados evita puncionar demasiado profundo.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">1. Dos ángulos complementarios miden x y (x − 20)°. ¿Cuánto vale x?</p>
+          <label><input type="radio" name="c6_l09_q1" value="a"> 55°</label>
+          <label><input type="radio" name="c6_l09_q1" value="b"> 35°</label>
+          <label><input type="radio" name="c6_l09_q1" value="c"> 45°</label>
+          <label><input type="radio" name="c6_l09_q1" value="d"> 70°</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">2. En un triángulo 45-45-90, cada cateto mide 7. La hipotenusa mide:</p>
+          <label><input type="radio" name="c6_l09_q2" value="a"> 14</label>
+          <label><input type="radio" name="c6_l09_q2" value="b"> 7√2</label>
+          <label><input type="radio" name="c6_l09_q2" value="c"> 7√3</label>
+          <label><input type="radio" name="c6_l09_q2" value="d"> 49</label>
+        </div>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">3. Los catetos de un triángulo rectángulo miden 9 y 12. La hipotenusa es:</p>
+          <label><input type="radio" name="c6_l09_q3" value="a"> 13</label>
+          <label><input type="radio" name="c6_l09_q3" value="b"> 20</label>
+          <label><input type="radio" name="c6_l09_q3" value="c"> 21</label>
+          <label><input type="radio" name="c6_l09_q3" value="d"> 15</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 10 ==================== -->
+  <article class="lesson" id="l10">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 10</span>
+      <h3>🔵 Geometría II: áreas, círculos, volúmenes y coordenadas</h3>
+      <span class="lesson-time">⏱ ~16 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>Las fórmulas de área y volumen no se memorizan como poemas: se entienden como <strong>recetas de escalas</strong>. El área del triángulo es base×altura/2 (el rectángulo en el cabe); la del trapecio promedia sus bases paralelas: A = ½(b₁+b₂)·h — con bases 10 y 6 y altura 4, A = ½(16)(4) = 32, el ejemplo del material. En los círculos domina la pareja A = πr² y C = 2πr, y la regla clínica número uno: el <strong>radio, no el diámetro</strong>. Si el PAA dice "piscina de 10 pies de diámetro rodeada por una verja a 7 pies", el radio total es r = 5+7 = 12 y la verja mide C = 2π(12) = 24π. El 60 % de los errores en círculos es usar r = 10.</p>
+        <p>Los <strong>volúmenes</strong> son áreas apiladas: prisma y cilindro = área de la base × altura (el material da el prisma de 25×10×5 = 1250 y el cilindro de 300π), el cono = ⅓·πr²h y la esfera = 4/3·πr³. Y aquí vive el concepto más elegante del examen: el <strong>escalamiento</strong>. Si multiplicas todas las longitudes por k, las áreas se multiplican por k² y los volúmenes por k³, como al diluir un medicamento: duplicar la "concentración lineal" cuadruplica la superficie y octuplica el volumen. Dos esferas con radios 2 y 6 (razón 1:3) tienen volúmenes en razón 1:27. El PAA pregunta esto una y otra vez con "figuras semejantes": es la razón de áreas o volúmenes, nunca la de lados.</p>
+        <p>En el <strong>plano cartesiano</strong>, la distancia entre (x₁,y₁) y (x₂,y₂) es Pitágoras disfrazado: d = √((x₂−x₁)²+(y₂−y₁)²). Del (1,2) al (7,10): √(6²+8²) = √100 = 10 — otro triplete 6-8-10. El punto medio promedia coordenadas: ((x₁+x₂)/2, (y₁+y₂)/2). Y el <strong>teorema de Tales</strong> cierra el kit: toda recta paralela a un lado de un triángulo corta los otros dos proporcionalmente, la herramienta oficial para "sombra del poste/sombra de la persona". Con este arsenal, la sección de geometría del PAA es un banco de fórmulas con disfraz: tu trabajo es quitar el disfraz y aplicar la receta correcta con el radio correcto.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Área del trapecio</td><td>A = ½(b₁+b₂)·h; promedia las bases paralelas por la altura</td></tr>
+          <tr><td>Arco de círculo</td><td>Fracción de la circunferencia: (ángulo/360°)·2πr</td></tr>
+          <tr><td>Volumen</td><td>Prisma/cilindro = área base × altura; cono = ⅓πr²h; esfera = 4/3 πr³</td></tr>
+          <tr><td>Escalamiento</td><td>Longitudes ×k → áreas ×k² → volúmenes ×k³</td></tr>
+          <tr><td>Distancia cartesiana</td><td>d = √((x₂−x₁)²+(y₂−y₁)²): Pitágoras en el plano</td></tr>
+          <tr><td>Teorema de Tales</td><td>Una paralela a un lado corta los otros dos en proporción</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 Áreas, círculos, distancia y escalamiento</h4>
+        \[ A_{\text{trapecio}}=\tfrac{1}{2}(b_{1}+b_{2})h \qquad A_{\text{circ}}=\pi r^{2} \qquad L_{\text{arco}}=\frac{\theta}{360^{\circ}}\cdot 2\pi r \]
+        \[ d=\sqrt{(x_{2}-x_{1})^{2}+(y_{2}-y_{1})^{2}} \qquad V_{\text{cilindro}}=\pi r^{2} h \qquad k \to k^{2} \to k^{3} \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ La escalera del escalamiento (figuras semejantes)</h4>
+        <pre>              LINEAL (lado)      AREA           VOLUMEN
+  k = 2          x 2              x 4             x 8
+  k = 3          x 3              x 9             x 27
+  k = 1/2        x 1/2            x 1/4           x 1/8
+
+  Ejemplo del PAA: esfera de radio 2 y esfera de radio 6
+  razon de radios = 1:3  ->  razon de areas = 1:9
+                         ->  razon de volumenes = 1:27</pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> tres micro-casos con las fórmulas del material.<br>
+        1. <em>Trapecio:</em> bases 10 y 6, altura 4 → A = ½(10+6)(4) = ½(16)(4) = <strong>32</strong>.<br>
+        2. <em>Arco:</em> ángulo central 60° en un círculo de radio 12 → L = (60/360)·2π·12 = (1/6)(24π) = <strong>4π</strong>.<br>
+        3. <em>Distancia:</em> del punto (1, 2) al (7, 10) → d = √((7−1)²+(10−2)²) = √(36+64) = √100 = <strong>10</strong>.<br>
+        4. <em>Escalamiento:</em> si duplicas las dimensiones de esa figura, el área se multiplica por 4 y el volumen (si lo tuviera) por 8 — la relación de áreas del PAA siempre es k², no k.
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Usar el diámetro como radio: "piscina de 10 pies de diámetro" significa r = 5 (y con la verja, r = 12).</li>
+          <li>Usar el lado inclinado como altura del paralelogramo: la altura es la distancia PERPENDICULAR entre bases.</li>
+          <li>Escalar volúmenes con k²: duplicar la figura multiplica el volumen por 8, no por 4.</li>
+          <li>Restar coordenadas en desorden: (x₂−x₁)² al cuadrado se protege del signo, pero sé consistente.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> el escalamiento k²/k³ decide dosis y guías: al duplicar las dimensiones de una lesión, su área se cuadruplica (por eso una "pequeña" quemadura que se duplica en diámetro cuadruplica el líquido perdido), y el volumen de la mochila de oxígeno crece con k³. En radiología, la medida 2D de un nódulo subestima lo que k³ predice de su masa: por eso los protocolos vigilan el diámetro con la aritmética del escalamiento en mente.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">1. Un trapecio tiene bases 10 y 6 y altura 4. Su área es:</p>
+          <label><input type="radio" name="c6_l10_q1" value="a"> 16</label>
+          <label><input type="radio" name="c6_l10_q1" value="b"> 64</label>
+          <label><input type="radio" name="c6_l10_q1" value="c"> 32</label>
+          <label><input type="radio" name="c6_l10_q1" value="d"> 24</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">2. Si el diámetro de una esfera se triplica, su volumen se multiplica por:</p>
+          <label><input type="radio" name="c6_l10_q2" value="a"> 27</label>
+          <label><input type="radio" name="c6_l10_q2" value="b"> 3</label>
+          <label><input type="radio" name="c6_l10_q2" value="c"> 6</label>
+          <label><input type="radio" name="c6_l10_q2" value="d"> 9</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">3. La distancia entre los puntos (1, 2) y (7, 10) es:</p>
+          <label><input type="radio" name="c6_l10_q3" value="a"> 8</label>
+          <label><input type="radio" name="c6_l10_q3" value="b"> 10</label>
+          <label><input type="radio" name="c6_l10_q3" value="c"> 14</label>
+          <label><input type="radio" name="c6_l10_q3" value="d"> 100</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 11 ==================== -->
+  <article class="lesson" id="l11">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 11</span>
+      <h3>📏 Trigonometría: razones, valores exactos e identidades</h3>
+      <span class="lesson-time">⏱ ~14 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>La trigonometría es la <strong>triangulación del radiólogo</strong>: si conoces un ángulo y un lado de un triángulo rectángulo, deduces todos los demás sin tocar al paciente. Sobre el ángulo de referencia θ, cada lado recibe un papel: el <em>opuesto</em> (el que está frente a θ), el <em>adyacente</em> (el que forma el ángulo, sin ser la hipotenusa) y la <em>hipotenusa</em> (la mayor, frente al ángulo de 90°). Con esos papeles, tres razones lo hacen todo y su mnemotecnia es SOH-CAH-TOA: <strong>S</strong>en = <strong>O</strong>puesto/<strong>H</strong>ipotenusa, <strong>C</strong>os = <strong>A</strong>dyacente/<strong>H</strong>ipotenusa, <strong>T</strong>an = <strong>O</strong>puesto/<strong>A</strong>dyacente. La advertencia crítica: los papeles dependen del ángulo que escojas — el cateto que era adyacente para θ se vuelve opuesto para el otro ángulo agudo.</p>
+        <p>El PAA exige de memoria los <strong>valores exactos</strong> de 30°, 45° y 60°, y son solo tres familias: sen30 = cos60 = 1/2; sen45 = cos45 = √2/2; sen60 = cos30 = √3/2; y tan45 = 1 (con tan30 = √3/3 y tan60 = √3). Nótala simetría: el seno de un ángulo es el coseno de su complemento. Con esos valores se resuelven preguntas completas: una escalera de 10 m apoyada a 60° del suelo alcanza 10·sen60° = 10·(√3/2) = 5√3 ≈ 8,66 m de altura. Y las <strong>identidades</strong> verifican todo: sen²θ + cos²θ = 1 (viene de Pitágoras dividido entre hipotenusa²) y tanθ = senθ/cosθ. Compruébalo con 45°: (√2/2)² + (√2/2)² = 1/2 + 1/2 = 1 ✓.</p>
+        <p>Para triángulos NO rectángulos, el kit son las dos leyes. La <strong>ley de senos</strong> (a/sen A = b/sen B = c/sen C) exige que cada lado esté pareado con su ángulo opuesto, y resuelve los casos "ángulo-ángulo-lado" y "lado-ángulo-ángulo". La <strong>ley de cosenos</strong> (c² = a²+b²−2ab·cos C) es Pitágoras generalizado con su término corrector −2ab·cosC, y resuelve el caso "lado-ángulo-lado": dos lados y el ángulo ENTRE ellos. La regla de selección del PAA: ¿conoces el ángulo entre los dos lados dados? → ley de cosenos; ¿conoces un par lado-ángulo opuesto? → ley de senos. Con la tabla de valores exactos, las dos leyes y las identidades, trigonometría entera cabe en media hoja.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Cateto opuesto</td><td>Lado enfrente del ángulo de referencia</td></tr>
+          <tr><td>Cateto adyacente</td><td>Lado que forma el ángulo (sin contar la hipotenusa)</td></tr>
+          <tr><td>SOH-CAH-TOA</td><td>Sen = Op/Hip; Cos = Ad/Hip; Tan = Op/Ad</td></tr>
+          <tr><td>Identidad pitagórica</td><td>sen²θ + cos²θ = 1, válida para todo ángulo θ</td></tr>
+          <tr><td>Ley de senos</td><td>a/sen A = b/sen B = c/sen C (lado emparejado con ángulo opuesto)</td></tr>
+          <tr><td>Ley de cosenos</td><td>c² = a²+b²−2ab·cos C (usa el ángulo ENTRE los dos lados)</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 Razones, valores exactos e identidades</h4>
+        \[ \sin\theta=\frac{op}{hip} \qquad \cos\theta=\frac{ad}{hip} \qquad \tan\theta=\frac{op}{ad} \]
+        \[ \sin 30^{\circ}=\tfrac{1}{2},\quad \sin 45^{\circ}=\tfrac{\sqrt{2}}{2},\quad \sin 60^{\circ}=\tfrac{\sqrt{3}}{2},\quad \cos 30^{\circ}=\tfrac{\sqrt{3}}{2},\quad \cos 60^{\circ}=\tfrac{1}{2},\quad \tan 45^{\circ}=1 \]
+        \[ \sin^{2}\theta+\cos^{2}\theta=1 \qquad \tan\theta=\frac{\sin\theta}{\cos\theta} \qquad \frac{a}{\sin A}=\frac{b}{\sin B} \qquad c^{2}=a^{2}+b^{2}-2ab\cos C \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ El triángulo de referencia y sus papeles</h4>
+        <pre>            /|
+           / |
+    hip   /  |  op (frente a theta)
+         /   |
+        / theta
+       /_____|  90
+          ad
+
+  SOH: Sen = Op / Hip      CAH: Cos = Ad / Hip      TOA: Tan = Op / Ad
+  CUIDADO: si tomas el OTRO angulo agudo como referencia,
+  los papeles de op y ad se intercambian</pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> una escalera de 10 m se apoya formando 60° con el suelo.<br>
+        1. <em>Identifica el papel:</em> la escalera es la hipotenusa (10 m); la altura contra el muro es el lado opuesto a los 60°.<br>
+        2. <em>Elige la razón:</em> sen60° = op/hip → op = hip·sen60°.<br>
+        3. <em>Aplica el valor exacto:</em> op = 10·(√3/2) = 5√3 ≈ <strong>8,66 m</strong>.<br>
+        4. <em>Complemento:</em> el cateto adyacente sería 10·cos60° = 10·(1/2) = 5 m de distancia a la pared.<br>
+        5. <em>Verifica con la identidad:</em> (5√3)² + 5² = 75 + 25 = 100 = 10² ✓ — Pitágoras corrobora la trigonometría.
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Confundir opuesto con adyacente: dependen del ángulo de referencia que elijas; señálalo con el dedo antes de escribir.</li>
+          <li>Memorizar los valores de seno y aplicarlos como coseno: recuerda que sen30° = cos60° = 1/2.</li>
+          <li>Usar la ley de senos sin emparejar lado con ángulo OPUESTO.</li>
+          <li>Usar la ley de cosenos cuando el ángulo dado NO está entre los dos lados: ahí aplica la ley de senos.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> la ecografía y la radiología intervencionista triangulan constantemente: el ángulo de insonación afecta la lectura Doppler (la velocidad medida es v·cosθ, ¡la razón coseno en vivo!), y la biopsia guiada se planifica con profundidad y ángulo para llegar al nódulo sin tocar vasos. Cada vez que el radiólogo ajusta "ángulo de corrección", está aplicando el coseno de esta lección.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">1. La tangente de un ángulo se define como:</p>
+          <label><input type="radio" name="c6_l11_q1" value="a"> opuesto / hipotenusa</label>
+          <label><input type="radio" name="c6_l11_q1" value="b"> adyacente / hipotenusa</label>
+          <label><input type="radio" name="c6_l11_q1" value="c"> hipotenusa / opuesto</label>
+          <label><input type="radio" name="c6_l11_q1" value="d"> opuesto / adyacente</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">2. El valor exacto de sen 30° es:</p>
+          <label><input type="radio" name="c6_l11_q2" value="a"> √3/2</label>
+          <label><input type="radio" name="c6_l11_q2" value="b"> √2/2</label>
+          <label><input type="radio" name="c6_l11_q2" value="c"> 1/2</label>
+          <label><input type="radio" name="c6_l11_q2" value="d"> 1</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">3. La identidad pitagórica establece que sen²θ + cos²θ =</p>
+          <label><input type="radio" name="c6_l11_q3" value="a"> 1</label>
+          <label><input type="radio" name="c6_l11_q3" value="b"> 0</label>
+          <label><input type="radio" name="c6_l11_q3" value="c"> θ</label>
+          <label><input type="radio" name="c6_l11_q3" value="d"> 2</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 12 ==================== -->
+  <article class="lesson" id="l12">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 12</span>
+      <h3>📊 Estadística: tendencia central, dispersión y gráficas</h3>
+      <span class="lesson-time">⏱ ~15 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>Las medidas de tendencia central son <strong>tres retratos del "paciente típico"</strong> de una sala: la <em>media</em> es el promedio de todos los signos vitales; la <em>mediana</em> es el paciente que está exactamente en medio de la fila del pasillo (mitad arriba, mitad abajo); y la <em>moda</em> es el diagnóstico que más se repite. El material oficial usa el conjunto {0, 3, 10, −3, 1, 3}: la media es 14/6 ≈ 2,33, la mediana (con los datos ordenados −3, 0, 1, 3, 3, 10) es (1+3)/2 = 2, y la moda es 3. La lección clínica más importante: la media es frágil ante valores extremos — añade un solo paciente de 100 kg a la fila y el "peso promedio" salta, mientras la mediana apenas se mueve. Por eso los reportes de sueldos y de esperanza de vida usan medianas.</p>
+        <p>La <strong>dispersión</strong> mide cuánto se agita la sala: el rango es máximo−mínimo (en el material: de −3 a 10 → 13… y en el ejemplo de mediana par, de 12 a 22 → 10; ordena SIEMPRE antes de restar) y la <strong>desviación estándar</strong> (σ) resume la distancia típica a la media. El material lo ilustra con dos grupos de pacientes con media 10 pero σ distinta: mismos promedios, salas totalmente distintas. Y la joya del PAA es la <strong>regla 68-95-99,7</strong> para distribuciones normales (acampanadas): ~68 % de los datos cae dentro de μ±1σ, ~95 % dentro de μ±2σ y ~99,7 % dentro de μ±3σ. Con media 74 y σ = 6 (la distribución de calificaciones del material), un z-score z = (x−μ)/σ = 2 señala x = 74+12 = 86, y sabes que ese 86 supera al ~97,5 % del grupo (50 % + la mitad del 95 %).</p>
+        <p>Finalmente, el PAA presenta los datos en <strong>gráficas</strong> y espera lectura quirúrgica con el método TEUC: <strong>T</strong>ítulo (qué se compara), <strong>E</strong>jes (qué hay en cada uno), <strong>U</strong>nidades (¿miles? ¿porcentajes? ¿personas?) y <strong>C</strong>omparación (la pregunta real: ¿quién crece más, dónde está el máximo?). Cuidado con las trampas clásicas: los histogramas agrupan datos continuos en intervalos (sus barras se tocan) mientras las barras comparan categorías; y un eje que empieza en 90 en lugar de 0 exagera cualquier diferencia. También distingue <em>población</em> (todos los pacientes posibles) de <em>muestra</em> (los que estudiaste): las conclusiones de una muestra se generalizan solo si fue bien tomada, la misma regla de todo ensayo clínico.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Media</td><td>Promedio: suma de los datos entre n; sensible a valores extremos</td></tr>
+          <tr><td>Mediana</td><td>Valor central de los datos ORDENADOS; si n es par, promedio de los dos centrales</td></tr>
+          <tr><td>Moda</td><td>Valor que más se repite (puede haber más de una, o ninguna)</td></tr>
+          <tr><td>Desviación estándar (σ)</td><td>Distancia típica de los datos a la media; σ grande = datos dispersos</td></tr>
+          <tr><td>Z-score</td><td>z = (x−μ)/σ: cuántas desviaciones estándar está x de la media</td></tr>
+          <tr><td>Método TEUC</td><td>Título, Ejes, Unidades, Comparación: lectura de gráficas sin trampas</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 Media, z-score y la regla 68-95-99,7</h4>
+        \[ \bar{x}=\frac{x_{1}+x_{2}+\cdots+x_{n}}{n} \qquad\qquad z=\frac{x-\mu}{\sigma} \;\Longleftrightarrow\; x=\mu+z\sigma \]
+        \[ \mu \pm 1\sigma \to 68\% \qquad \mu \pm 2\sigma \to 95\% \qquad \mu \pm 3\sigma \to 99{,}7\% \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ La curva normal y sus bandas</h4>
+        <pre>                     ____
+                   /      \
+                 /   68%    \
+               /   [ mu ]     \
+             /      95%         \
+           /        99,7%         \
+    -----|----|----|----|----|----|----|-----
+      -3s   -2s   -1s  mu  +1s  +2s  +3s
+
+  Ejemplo del material: mu = 74, sigma = 6
+  mu + 1s = 80    mu + 2s = 86    mu + 3s = 92</pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> el conjunto {12, 14, 14, 15, 18, 22} del material.<br>
+        1. <em>Mediana:</em> ya ordenado, n = 6 (par) → promedia los centrales: (14+15)/2 = <strong>14,5</strong>.<br>
+        2. <em>Media:</em> 12+14+14+15+18+22 = 95 → 95/6 ≈ 15,83.<br>
+        3. <em>Prueba de robustez:</em> añade un valor extremo de 100 → media = 195/7 ≈ 27,9 (¡saltó 12 unidades!) pero la mediana pasa de 14,5 a 15 (subió 0,5): la mediana resiste.<br>
+        4. <em>Rango:</em> original 22−12 = 10; con el extremo, 100−12 = 88.<br>
+        5. <em>Z-score del material:</em> con μ = 74 y σ = 6, una calificación de 86 tiene z = (86−74)/6 = 2 → está 2σ sobre la media, por encima del ~97,5 % de los estudiantes.
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Calcular la mediana sin ordenar primero los datos: ordenar es el paso 1, siempre.</li>
+          <li>Con n par, olvidar promediar los dos valores centrales (la mediana puede ser decimal).</li>
+          <li>Leer el z-score al revés: z = −2 significa BAJO la media, no alto.</li>
+          <li>Fiarte de las alturas de las barras sin revisar las unidades y el punto de inicio del eje.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> las tablas de crecimiento pediátrico son exactamente esta lección: un peso en el percentil 97 (z ≈ +1,88) se interpreta con μ y σ de la población de referencia, y la regla 68-95-99,7 decide qué laboratorio "normal" significa. Cuando un ensayo clínico reporta "media 10 ± 2", esa ±2 es la desviación estándar: dos estudios con la misma media y distinta σ describen tratamientos con comportamientos muy distintos.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">1. La mediana del conjunto {12, 14, 14, 15, 18, 22} es:</p>
+          <label><input type="radio" name="c6_l12_q1" value="a"> 14</label>
+          <label><input type="radio" name="c6_l12_q1" value="b"> 14,5</label>
+          <label><input type="radio" name="c6_l12_q1" value="c"> 15</label>
+          <label><input type="radio" name="c6_l12_q1" value="d"> 16</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">2. Una distribución tiene μ = 74 y σ = 6. ¿Qué valor corresponde a z = 2?</p>
+          <label><input type="radio" name="c6_l12_q2" value="a"> 86</label>
+          <label><input type="radio" name="c6_l12_q2" value="b"> 80</label>
+          <label><input type="radio" name="c6_l12_q2" value="c"> 74</label>
+          <label><input type="radio" name="c6_l12_q2" value="d"> 62</label>
+        </div>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">3. Si añades un valor extremadamente alto a un conjunto de datos, la medida de tendencia central que MÁS cambia es:</p>
+          <label><input type="radio" name="c6_l12_q3" value="a"> la mediana</label>
+          <label><input type="radio" name="c6_l12_q3" value="b"> la moda</label>
+          <label><input type="radio" name="c6_l12_q3" value="c"> ninguna cambia</label>
+          <label><input type="radio" name="c6_l12_q3" value="d"> la media</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 13 ==================== -->
+  <article class="lesson" id="l13">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 13</span>
+      <h3>🎲 Probabilidad y técnicas de conteo</h3>
+      <span class="lesson-time">⏱ ~16 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>La probabilidad es la matemática de la <strong>incertidumbre clínica</strong>: es el pensamiento que usas cada vez que interpretas una prueba diagnóstica, donde P(enfermedad | prueba positiva) depende de cuán frecuente es la enfermedad. Su definición es una fracción: P(E) = casos favorables/casos posibles, y vive entre 0 (imposible) y 1 (seguro). El material oficial da el ejemplo canónico: dos dados, P(suma = 5) — los pares favorables son (1,4), (2,3), (3,2) y (4,1): cuatro de los 36 resultados → 4/36 = <strong>1/9</strong>. Fíjate en que (1,4) y (4,1) son resultados DIFERENTES: el dado rojo y el azul son pacientes distintos. Y la primera herramienta de rescate es el complemento: P(no ocurre) = 1 − P(ocurre), perfecto para preguntas del tipo "al menos uno".</p>
+        <p>Cuando dos eventos conviven, entra la <strong>fórmula de la unión</strong>: P(A∪B) = P(A) + P(B) − P(A∩B). El material lo aplica con P(A) = 0,35, P(B) = 0,20 y P(A∩B) = 0,10 → P(A∪B) = 0,45, y de ahí el complemento da P(ninguno de los dos) = 1 − 0,45 = 0,55. El término que se resta existe para no contar dos veces a quien está en ambos grupos (los diagramas de Venn lo muestran: la intersección se suma dos veces si sumas a ojo). Para eventos <em>independientes</em> (una moneda y un dado: lo uno no toca lo otro) las probabilidades se multiplican: P(cara y 6) = ½·1/6 = 1/12. Para eventos <em>dependientes</em> (extraer 2 balas rojas de una bolsa sin reponer: 3 rojas y 2 azules → 3/5 · 2/4 = 3/10), el segundo evento se calcula sobre el mundo ya modificado por el primero.</p>
+        <p>El <strong>conteo</strong> responde "¿cuántas maneras hay…?" y su decisión clave es una: ¿importa el orden? Si eliges presidente, secretario y tesorero (cada cargo es distinto), importa → <em>permutación</em>. Si eliges 3 voluntarios de 12 para el mismo turno, no importa → <em>combinación</em>: C(12,3) = 12!/(3!·9!) = 220. La regla del menú de cafetería multiplica cuando hay opciones por ETAPAS: con 26 letras y 10 dígitos, una placa de 2 letras y 2 dígitos admite 26·26·10·10 = 67 600 placas (el ejemplo del material). Las permutaciones con orden son P(8,3) = 8·7·6 = 336, y el factorial es la permutación total: 5! = 120 formas de ordenar 5 expedientes. Decide primero "¿orden sí o no?" y cada pregunta de conteo se responde sola.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>P(E)</td><td>Favorables/posibles; entre 0 y 1</td></tr>
+          <tr><td>Complemento</td><td>P(no E) = 1 − P(E); ideal para "al menos uno"</td></tr>
+          <tr><td>Eventos independientes</td><td>Uno no afecta al otro: P(A y B) = P(A)·P(B)</td></tr>
+          <tr><td>Eventos dependientes</td><td>El segundo se calcula SIN reponer (la bolsa ya cambió)</td></tr>
+          <tr><td>Permutación</td><td>Conteo CON orden: P(n,r) = n!/(n−r)!; factorial n! = n·(n−1)···1</td></tr>
+          <tr><td>Combinación</td><td>Conteo SIN orden: C(n,r) = n!/(r!(n−r)!); solo se elige el grupo</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>📐 Probabilidad, unión y conteo</h4>
+        \[ P(E)=\frac{\text{favorables}}{\text{posibles}} \qquad P(\text{no } E)=1-P(E) \qquad P(A\cup B)=P(A)+P(B)-P(A\cap B) \]
+        \[ P(n,r)=\frac{n!}{(n-r)!} \qquad\qquad C(n,r)=\frac{n!}{r!\,(n-r)!} \]
+        \[ \text{Material: } P(A\cup B)=0{,}35+0{,}20-0{,}10=0{,}45 \;\Rightarrow\; P(\text{ninguno})=0{,}55 \]
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ El árbol de decisión del conteo</h4>
+        <pre class="mermaid">
+graph TD
+  A[Cuantas maneras hay] --> B{El orden importa}
+  B -- Si --> C[Permutacion]
+  C --> D[n factorial o P de n r]
+  B -- No --> E[Combinacion]
+  E --> F[C de n r]
+  D --> G[Multiplica por etapas si hay pasos]
+  F --> G
+        </pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> dos preguntas tipo PAA.<br>
+        1. <em>Dados:</em> ¿P(suma = 5)? Espacio muestral: 6×6 = 36 resultados ordenados. Favorables: (1,4), (2,3), (3,2), (4,1) → P = 4/36 = <strong>1/9</strong>. Y su complemento: P(suma ≠ 5) = 32/36 = 8/9.<br>
+        2. <em>Comité:</em> de 5 mujeres y 7 hombres se elige un comité de 2 mujeres y 2 hombres. Etapa 1: C(5,2) = 10. Etapa 2: C(7,2) = 21. Regla del menú (multiplica etapas): 10·21 = <strong>210 comités</strong>.<br>
+        3. <em>Control:</em> si el problema pidiera "presidente y secretaria mujeres + 2 hombres vocales", el orden de las mujeres YA importaría: P(5,2) = 20 → 20·21 = 420.
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Olvidar restar la intersección: P(A∪B) = 0,35+0,20 = 0,55 cuenta dos veces a quien pertenece a ambos.</li>
+          <li>Usar combinación cuando los cargos/posiciones son distintos: ahí el orden importa y es permutación.</li>
+          <li>En eventos sin reemplazo, reponer el denominador: tras extraer 1 bala roja quedan 4 balas y 2 rojas, no 5 y 3.</li>
+          <li>Contar (1,4) una sola vez en dos dados: (1,4) y (4,1) son dos resultados del espacio de 36.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> leer una prueba de laboratorio es probabilidad condicional en tiempo real: un test con 99 % de sensibilidad aplicado a una enfermedad rara (prevalencia 0,1 %) da muchos falsos positivos, porque P(enfermo|positivo) combina prevalencia, sensibilidad y especificidad — la matemática del valor predictivo. Y la epidemiología cuenta con combinaciones: los brotes se investigan eligiendo subgrupos de expuestos/no expuestos, exactamente C(n,r) sobre pacientes.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">1. Al lanzar dos dados, ¿cuál es la probabilidad de que la suma sea 5?</p>
+          <label><input type="radio" name="c6_l13_q1" value="a"> 1/6</label>
+          <label><input type="radio" name="c6_l13_q1" value="b"> 4/12</label>
+          <label><input type="radio" name="c6_l13_q1" value="c"> 1/9</label>
+          <label><input type="radio" name="c6_l13_q1" value="d"> 1/18</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">2. Si P(A) = 0,35, P(B) = 0,20 y P(A∩B) = 0,10, entonces P(A∪B) =</p>
+          <label><input type="radio" name="c6_l13_q2" value="a"> 0,65</label>
+          <label><input type="radio" name="c6_l13_q2" value="b"> 0,45</label>
+          <label><input type="radio" name="c6_l13_q2" value="c"> 0,55</label>
+          <label><input type="radio" name="c6_l13_q2" value="d"> 0,35</label>
+        </div>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">3. ¿De cuántas maneras se puede elegir un grupo de 3 personas entre 12 (sin importar el orden)?</p>
+          <label><input type="radio" name="c6_l13_q3" value="a"> 1320</label>
+          <label><input type="radio" name="c6_l13_q3" value="b"> 36</label>
+          <label><input type="radio" name="c6_l13_q3" value="c"> 1728</label>
+          <label><input type="radio" name="c6_l13_q3" value="d"> 220</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 14 ==================== -->
+  <article class="lesson" id="l14">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 14</span>
+      <h3>📖 Lectura PAA: estrategia de dos pasadas y tipos de pregunta</h3>
+      <span class="lesson-time">⏱ ~14 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>La sección de Lectura no premia al que lee más rápido: premia al que <strong>extrae evidencia</strong> con menos coste. La técnica oficial del material es la de <strong>dos pasadas</strong>, y su analogía perfecta es la anamnesis clínica: en la primera pasada escuchas TODO el caso sin interrumpir (2 minutos: título, primer párrafo completo y primera oración de cada párrafo restante), construyendo el mapa: ¿de qué habla?, ¿qué tesis defiende?, ¿cómo se organiza? En la segunda pasada atiendes pregunta por pregunta, y cada respuesta se sostiene volviendo al texto con el dedo: en Lectura, la evidencia vive <strong>dentro del pasaje</strong>, y tu conocimiento del mundo (biología, historia, medicina) es irrelevante e incluso peligroso: el examen penaliza al que responde "lo que es verdad" en lugar de "lo que el texto dice".</p>
+        <p>Para eso necesitas reconocer los <strong>seis tipos de ejercicio</strong> que el material enumera: (1) idea principal o propósito, que vive en el primer párrafo y en la oración de cierre; (2) detalle explícito, que se resuelve por localización literal; (3) vocabulario en contexto, donde la palabra vale lo que SU PÁRRAFO dice, no el diccionario; (4) inferencia, deducción lógica que NO sale del texto pero tampoco se copia de él; (5) función del autor o de una cita (¿por qué incluyó esto?); y (6) resumen o título, que debe cubrir TODO el pasaje sin exagerar su alcance. Cada tipo tiene su distractor típico: en inferencia, la opción que "es verdad pero nadie puede deducirla del texto"; en idea principal, el detalle correcto pero parcial; en resumen, el título que solo cubre un párrafo.</p>
+        <p>El mapa se completa con la <strong>estructura de los párrafos</strong>, que el material clasifica: general→específico (afirmación y ejemplos), causa→consecuencia, problema→solución, cronológico y comparación/contraste. Identificar el patrón en la primera pasada te dice dónde viven las respuestas: en causa→consecuencia, las preguntas "¿por qué?" se responden en la primera mitad; en problema→solución, la tesis suele ser la solución propuesta. Y en vocabulario en contexto usa el método de sustitución: "El arqueólogo <em>hurgó</em> entre los restos con paciencia" — prueba cada opción en la frase; "buscó con insistencia" la conserva, "agredió" o "destruyó" la rompen. La palabra correcta es la que el contexto certifica, nunca la más rebuscada.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Dos pasadas</td><td>Primera: mapa del texto (título + arranques); segunda: preguntas con el texto en mano</td></tr>
+          <tr><td>Idea principal</td><td>Afirmación que abarca todo el pasaje; vive en apertura y cierre</td></tr>
+          <tr><td>Vocabulario en contexto</td><td>El significado lo fija el párrafo, no el diccionario</td></tr>
+          <tr><td>Inferencia</td><td>Deducida del texto: más que copiar, menos que opinar</td></tr>
+          <tr><td>Evidencia</td><td>Línea u oración del pasaje que sostiene la respuesta</td></tr>
+          <tr><td>Distractor extremo</td><td>Opción con "siempre/nunca/todos": casi nunca es la correcta</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>🗺️ El método de las dos pasadas (receta del material)</h4>
+        <pre>1a PASADA (aprox. 2 min por texto):
+   - Lee el titulo y el PRIMER parrafo completo
+   - Lee la PRIMERA oracion de cada parrafo restante
+   - Preguntate: tema, tesis, tono y estructura
+
+2a PASADA (pregunta por pregunta):
+   - Localiza la linea que sustenta la respuesta
+   - Sustituye la palabra clave en contexto
+   - Elimina: extremos, fuera del alcance, copia literal mal usada</pre>
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ Ruta de la segunda pasada</h4>
+        <pre class="mermaid">
+graph TD
+  A[Llega la pregunta] --> B[Identifica el tipo]
+  B --> C[Vuelve al texto por evidencia]
+  C --> D{Hay opcion sustentada}
+  D -- Si --> E[Marcala y sigue]
+  D -- No --> F[Elimina extremos y fuera de alcance]
+  F --> G[Elige la mas modesta]
+  G --> E
+        </pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> vocabulario en contexto, paso a paso.<br>
+        1. <em>Oración del pasaje:</em> "Durante horas, el arqueólogo hurgó entre los fragmentos, moviendo la tierra con pincel hasta que el mosaico apareció".<br>
+        2. <em>Pregunta:</em> en el contexto, "hurgó" significa...<br>
+        3. <em>Método de sustitución:</em> prueba las opciones en la oración: "destruyó entre los fragmentos" ✗ (contradice "con pincel"); "miró desde lejos" ✗ (contradice "moviendo la tierra"); "limpió el museo" ✗ (fuera de contexto); "<strong>buscó con insistencia entre</strong>" ✓ (conserva todo el sentido).<br>
+        4. <em>Regla aprendida:</em> la respuesta la certifica el párrafo, no tu memoria del diccionario ni el "sonido elegante" de la palabra.<br>
+        5. <em>Extra — inferencia:</em> si el pasaje dice "trabajó durante horas sin hallar el mosaico hasta el final", se infiere que la tarea requirió paciencia — NO se infiere que odiaba su trabajo (eso no lo dijo el texto).
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Leer el pasaje completo palabra por palabra en la primera pasada: gastas 6 minutos en un mapa de 2.</li>
+          <li>Responder con conocimiento externo: la pregunta mide el TEXTO, no tu erudición.</li>
+          <li>Elegir opciones con extremos ("siempre", "nunca", "todos"): el PAA las usa como carnada.</li>
+          <li>Confundir "inferencia" con "copia literal": la inferencia exige un paso lógico, no la repetición de una línea.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> la anamnesis es lectura de dos pasadas aplicada a pacientes: primero escuchas el relato completo sin interrumpir (la "primera pasada" que construye el mapa clínico) y después preguntas dirigidas con evidencia (antecedentes, examinación, laboratorios). Saltarte la primera pasada produce diagnósticos prematuros; responder sin evidencia del "texto" (el paciente) es la anamnesis que el PAA — y la medicina — castigan.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">1. En la primera pasada del método de dos pasadas se lee:</p>
+          <label><input type="radio" name="c6_l14_q1" value="a"> el título, el primer párrafo completo y la primera oración de cada párrafo restante</label>
+          <label><input type="radio" name="c6_l14_q1" value="b"> todo el texto palabra por palabra</label>
+          <label><input type="radio" name="c6_l14_q1" value="c"> primero todas las preguntas y luego el texto</label>
+          <label><input type="radio" name="c6_l14_q1" value="d"> solo el último párrafo, donde está la conclusión</label>
+        </div>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">2. En una pregunta de vocabulario en contexto, el significado correcto lo determina:</p>
+          <label><input type="radio" name="c6_l14_q2" value="a"> tu intuición general sobre la palabra</label>
+          <label><input type="radio" name="c6_l14_q2" value="b"> el significado más raro del diccionario</label>
+          <label><input type="radio" name="c6_l14_q2" value="c"> la frecuencia con que usas la palabra</label>
+          <label><input type="radio" name="c6_l14_q2" value="d"> el contexto del propio pasaje</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">3. Una inferencia válida en Lectura PAA es una afirmación que:</p>
+          <label><input type="radio" name="c6_l14_q3" value="a"> copia literalmente una línea del texto</label>
+          <label><input type="radio" name="c6_l14_q3" value="b"> expresa la opinión personal del lector</label>
+          <label><input type="radio" name="c6_l14_q3" value="c"> se deduce lógicamente del texto sin salirse de él</label>
+          <label><input type="radio" name="c6_l14_q3" value="d"> agrega un dato cierto que el texto no sugiere</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 15 ==================== -->
+  <article class="lesson" id="l15">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 15</span>
+      <h3>🎭 Figuras retóricas: el lenguaje figurado en el PAA</h3>
+      <span class="lesson-time">⏱ ~12 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>Las figuras retóricas son los <strong>signos vitales del lenguaje</strong>: no cambian el mensaje literal, pero revelan el estado interno del texto —su tono, su intención, su emoción— igual que el pulso revela lo que el rostro calla. El PAA te dará una oración y cuatro nombres; tu trabajo es diagnosticar la figura con un test de tres preguntas: ¿hay comparación?, ¿se atribuye algo humano a lo no humano?, ¿hay exageración o juego de sentidos? El material oficial provee los ejemplos canónicos: "sus ojos son rayitos de sol" (metáfora), "brilla como un farol" (símil), "el campo dormía" (personificación), "una mirada dulce" (sinestesia).</p>
+        <p>El diagnóstico fino está en los pares. <strong>Metáfora vs símil:</strong> ambos comparan, pero el símil trae nexo explícito (como, cual, parece, semejante a) y la metáfora salta el puente e identifica directamente (A <em>es</em> B): "sus ojos son rayitos de sol" no dice "se parecen a", dice que SON. <strong>Personificación vs sinestesia:</strong> la primera da acciones o sentimientos humanos a cosas no humanas ("el campo dormía", "el viento susurraba"); la segunda cruza sentidos distintos ("mirada dulce" mezcla vista y gusto, "voz aterciopelada" mezcla oído y tacto). <strong>Hipérbole vs onomatopeya:</strong> la hipérbole exagera para emocionar ("te lo he repetido un millón de veces"); la onomatopeya imita sonidos reales ("el tic-tac del reloj", "bufó el motor").</p>
+        <p>Completa el panel las figuras de <strong>estructura</strong>: la <em>anáfora</em> repite una o más palabras al inicio de versos u oraciones consecutivas ("Vine a ver. Vine a tocar. Vine a quedarme") y la <em>antítesis</em> enfrenta ideas opuestas dentro de la misma construcción ("Me pidieron la luna y te dieron ceniza"). Estrategia de examen: primero clasifica por familia (¿compara?, ¿humaniza?, ¿exagera?, ¿estructura?) y luego afina dentro de la familia con los tests anteriores. Y no confundas hipérbole con mentira: la exageración es deliberada y expresiva; el examen premia a quien reconoce la intención, no a quien la juzga.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Metáfora</td><td>Identifica A con B SIN nexo: "sus ojos son rayitos de sol"</td></tr>
+          <tr><td>Símil</td><td>Compara CON nexo (como, cual, parece): "brilla como un farol"</td></tr>
+          <tr><td>Personificación</td><td>Atribuye cualidades humanas a lo no humano: "el campo dormía"</td></tr>
+          <tr><td>Sinestesia</td><td>Mezcla sentidos: "mirada dulce", "voz aterciopelada"</td></tr>
+          <tr><td>Hipérbole</td><td>Exageración intencional y expresiva: "un millón de veces"</td></tr>
+          <tr><td>Anáfora / Antítesis</td><td>Repetición inicial de palabras / ideas opuestas en una misma estructura</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>🗺️ Tabla de diagnóstico rápido (del material oficial)</h4>
+        <pre>Figura            Prueba diagnostica              Ejemplo del material
+---------------   ----------------------------    --------------------------
+Simil             hay nexo (como, cual)           "brilla como un farol"
+Metafora          identifica SIN nexo             "sus ojos son rayitos de sol"
+Personificacion   lo no humano actua humano       "el campo dormia"
+Sinestesia        se cruzan sentidos              "mirada dulce"
+Hiperbole         exageracion expresiva           "te lo he dicho un millon de veces"
+Onomatopeya       imita un sonido                 "tic-tac", "bufar"
+Anafora           repeticion inicial              "Vine a ver. Vine a tocar."
+Antitesis         ideas opuestas juntas           "pidieron la luna, dieron ceniza"</pre>
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ Árbol de clasificación por familias</h4>
+        <pre class="mermaid">
+graph TD
+  A[Figura detectada] --> B{Que hace}
+  B --> C[Compara] --> D[Con nexo: simil]
+  D --> E[Sin nexo: metafora]
+  B --> F[Humaniza] --> G[Personificacion]
+  B --> H[Cruza sentidos] --> I[Sinestesia]
+  B --> J[Exagera o suena] --> K[Hiperbole - Onomatopeya]
+  B --> L[Juega con estructura] --> M[Anafora - Antitesis]
+        </pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> diagnósticos en cadena, con el test de tres preguntas.<br>
+        1. "El viento susurraba secretos entre los pinos" → el viento (no humano) susurra y guarda secretos (actos humanos) → <strong>personificación</strong>. No hay nexo comparativo ni cruce de sentidos.<br>
+        2. "Su sonrisa era un faro en medio del hospital" → identifica A con B sin "como" → <strong>metáfora</strong>.<br>
+        3. "Te esperé siglos en la sala de espera" → exageración expresiva → <strong>hipérbole</strong>.<br>
+        4. "Habló con una voz de seda" → oído + tacto → <strong>sinestesia</strong>.<br>
+        5. <em>Control de las trampas:</em> si la oración 2 dijera "su sonrisa brillaba como un faro", habría nexo → sería <strong>símil</strong>. La diferencia entera cabe en una palabra: "como".
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>Marcar metáfora cuando aparece "como": con nexo explícito es símil, siempre.</li>
+          <li>Confundir personificación con animismo general: debe haber acción o sentimiento HUMANO atribuido.</li>
+          <li>Tomar la hipérbole literalmente: "un millón de veces" no mide, emociona.</li>
+          <li>Buscar sinestesia solo en adjetivos "bonitos": el cruce debe ser entre sentidos distintos (vista+gusto, oído+tacto).</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> la clínica habla en metáforas que el médico debe interpretar con precisión: "el corazón le iba a estallar" es hipérbole, pero "su corazón se apagaba" es metáfora que describe insuficiencia; describir un dolor "quemante", "punzante" o "eléctrico" es sinestesia diagnóstica (el paciente cruza sensaciones para comunicar). Entender el lenguaje figurado del paciente es semiología pura: detrás de cada figura hay un signo clínico.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">1. La oración "El campo dormía bajo la luna" contiene una:</p>
+          <label><input type="radio" name="c6_l15_q1" value="a"> metáfora</label>
+          <label><input type="radio" name="c6_l15_q1" value="b"> personificación</label>
+          <label><input type="radio" name="c6_l15_q1" value="c"> hipérbole</label>
+          <label><input type="radio" name="c6_l15_q1" value="d"> onomatopeya</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">2. "Sus ojos son rayitos de sol" (sin nexo comparativo) es una:</p>
+          <label><input type="radio" name="c6_l15_q2" value="a"> símil</label>
+          <label><input type="radio" name="c6_l15_q2" value="b"> personificación</label>
+          <label><input type="radio" name="c6_l15_q2" value="c"> metáfora</label>
+          <label><input type="radio" name="c6_l15_q2" value="d"> sinestesia</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">3. La diferencia esencial entre símil y metáfora es que el símil:</p>
+          <label><input type="radio" name="c6_l15_q3" value="a"> usa un nexo comparativo explícito como "como" o "cual"</label>
+          <label><input type="radio" name="c6_l15_q3" value="b"> siempre exagera la comparación</label>
+          <label><input type="radio" name="c6_l15_q3" value="c"> compara dos sentidos distintos</label>
+          <label><input type="radio" name="c6_l15_q3" value="d"> atribuye acciones humanas a objetos</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== LECCIÓN 16 ==================== -->
+  <article class="lesson" id="l16">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 16</span>
+      <h3>✍️ Redacción PAA: elisión, adición, generalización, integración y particularización</h3>
+      <span class="lesson-time">⏱ ~14 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✓</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <p>La sección de Redacción (25 preguntas, 30 minutos) no pide escribir: pide <strong>editar como el mejor residente edita una nota de evolución</strong>. Las cinco técnicas que el material oficial define son cinco movimientos de ese oficio. La <em>elisión</em> suprime lo redundante: cuando una nota dice "volvió a repetir el mismo examen de sangre", "volvió a" y "repetir" dicen lo mismo dos veces; el editor elimina la sobra y conserva el sentido. La <em>adición</em> va en dirección contraria: enriquece la oración con modificadores o figuras que la hacen más precisa o expresiva ("El hospital espera" → "El hospital, silencioso como una madrugada, espera").</p>
+        <p>Las otras tres técnicas operan sobre párrafos y conjuntos de enunciados. La <em>generalización</em> pide el enunciado que <strong>contiene a los demás</strong>: si tres oraciones hablan de antibióticos, de vacunas y de antisépticos, la generalización es "existen múltiples estrategias para combatir las infecciones" — una frase paraguas bajo la cual caben todas. La <em>integración</em> es su prima directa aplicada a títulos: elegir el que <strong>abarca todo el párrafo</strong> sin quedarse en un detalle ni inventar un alcance que el texto no tiene. Y la <em>particularización</em> es el paso de lo abstracto a lo figurado y específico: convertir "el niño estaba muy triste" en "el niño arrastraba sus zapatos como si cargara el hospital entero".</p>
+        <p>La estrategia de sección cierra el curso. Con 25 preguntas en 30 minutos (~1,2 min/pregunta), la decisión previa es identificar QUÉ pide la consigna: si dice "suprimir lo sobrante" → elisión; "añadir expresividad" → adición; "enunciado que englobe a los demás" → generalización; "título del párrafo" → integración; "expresarlo con lenguaje figurado" → particularización. Los distractores están etiquetados con técnicas equivocadas: el título que solo cubre la mitad del párrafo NO integra; la "corrección" que elimina información nueva NO es elisión (solo se elimina redundancia, nunca contenido). Y recuerda la meta que abraza todo el curso: 2150 para la beca. Con las 16 lecciones de hoy —estructura, aritmética, álgebra, funciones, geometría, trigonometría, estadística, probabilidad y toda la aptitud verbal— tienes el mapa completo; el PAA premia al que lo recorrió antes del examen.</p>
+      </div>
+      <div class="keyterms">
+        <table>
+          <tr><th>Término</th><th>Significado</th></tr>
+          <tr><td>Elisión</td><td>Omitir lo redundante sin perder sentido</td></tr>
+          <tr><td>Adición</td><td>Añadir modificadores o figuras que enriquecen la oración</td></tr>
+          <tr><td>Generalización</td><td>Enunciado que contiene/engloba a los demás</td></tr>
+          <tr><td>Integración</td><td>Título que abarca TODO el párrafo</td></tr>
+          <tr><td>Particularización</td><td>Concretar con lenguaje figurado y específico</td></tr>
+          <tr><td>Redundancia</td><td>Información repetida que el editor elimina ("volvió a repetir")</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>🗺️ Las cinco técnicas, en una tarjeta</h4>
+        <pre>TECNICA             QUE HACE                      PISTA DE LA CONSIGNA
+----------------    --------------------------    -------------------------
+Elsion              SUPRIME lo redundante         "suprimir lo sobrante"
+Adicion             ANADE expresividad            "enriquecer / agregar"
+Generalizacion      enunciado PARAGUAS            "que englobe a los demas"
+Integracion         TITULO del parrafo completo   "dar titulo adecuado"
+Particularizacion   pasa a lo figurado/especifico "expresion figurada"</pre>
+      </div>
+      <div class="diagram-box">
+        <h4>🗺️ Diagnóstico de la pregunta de Redacción</h4>
+        <pre class="mermaid">
+graph TD
+  A[Pregunta de redaccion] --> B{Que pide la consigna}
+  B --> C[Quitar sobras] --> D[Elsion]
+  B --> E[Anadir riqueza] --> F[Adicion]
+  B --> G[Resumir todo] --> H[Generalizacion - Integracion]
+  B --> I[Concretar con figuras] --> J[Particularizacion]
+        </pre>
+      </div>
+      <div class="example">
+        <strong>🧪 Ejemplo resuelto:</strong> las cinco técnicas sobre el mismo material clínico.<br>
+        1. <em>Elisión:</em> "Volvió a repetir el mismo análisis de sangre una vez más" → sobran "volvió a" y "una vez más" → "Repetió el análisis de sangre".<br>
+        2. <em>Adición:</em> "El pasillo del hospital estaba vacío" → "El pasillo del hospital, desinfectado y mudo, estaba vacío".<br>
+        3. <em>Generalización:</em> oraciones sobre lavado de manos, guantes y esterilización → "Las medidas de asepsia evitan infecciones" (las contiene a todas).<br>
+        4. <em>Integración:</em> párrafo que narra cómo la higiene redujo las infecciones nosocomiales en tres hospitales → título correcto: "La higiene hospitalaria salva vidas", no "El jabón más barato" (detalle parcial).<br>
+        5. <em>Particularización:</em> "El paciente tenía mucho miedo" → "El paciente apretaba la sábana hasta blanquearle los nudillos".
+      </div>
+      <div class="pitfall">
+        ⚠️ <strong>Errores comunes:</strong>
+        <ul>
+          <li>En elisión, suprimir información NUEVA: solo se elimina lo que repite sentido, nunca contenido.</li>
+          <li>En integración, elegir el título que solo cubre un párrafo o un detalle del texto.</li>
+          <li>En generalización, elegir un enunciado demasiado estrecho (no engloba) o demasiado amplio (agrega lo que no está).</li>
+          <li>Confundir particularización con adición: particularizar es CONCRETAR con figuras; añadir es ampliar la oración.</li>
+        </ul>
+      </div>
+      <div class="medlink">
+        🩺 <strong>Conexión con medicina:</strong> la nota de evolución es el ejercicio de redacción más vigilado del mundo: el residente elide la redundancia (" paciente refiere que refiere dolor" nunca), añade lo que falta (el hallazgo que justifica el diagnóstico), generaliza al formular el diagnóstico que agrupa hallazgos, integra titulando el caso ("síndrome nefrótico en progresión") y particulariza al describir el examen físico. Un internista se reconoce, igual que en el PAA, por lo que quita con la misma seguridad con la que añade.
+      </div>
+      <div class="mini-quiz">
+        <h4>✅ Mini-quiz</h4>
+        <div class="quiz-q" data-correct="d">
+          <p class="question">1. Corregir "Volvió a repetir el mismo examen" suprimiendo las palabras sobrantes corresponde a la técnica de:</p>
+          <label><input type="radio" name="c6_l16_q1" value="a"> adición</label>
+          <label><input type="radio" name="c6_l16_q1" value="b"> integración</label>
+          <label><input type="radio" name="c6_l16_q1" value="c"> generalización</label>
+          <label><input type="radio" name="c6_l16_q1" value="d"> elisión</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">2. Elegir el título que abarca todo un párrafo es la técnica de:</p>
+          <label><input type="radio" name="c6_l16_q2" value="a"> integración</label>
+          <label><input type="radio" name="c6_l16_q2" value="b"> elisión</label>
+          <label><input type="radio" name="c6_l16_q2" value="c"> particularización</label>
+          <label><input type="radio" name="c6_l16_q2" value="d"> adición</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">3. La generalización consiste en:</p>
+          <label><input type="radio" name="c6_l16_q3" value="a"> suprimir las palabras redundantes de una oración</label>
+          <label><input type="radio" name="c6_l16_q3" value="b"> formular un enunciado que contiene a los demás</label>
+          <label><input type="radio" name="c6_l16_q3" value="c"> traducir una oración a lenguaje figurado específico</label>
+          <label><input type="radio" name="c6_l16_q3" value="d"> añadir figuras retóricas para enriquecer el texto</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+
+
+
+  <div class="clasnav">
+    <a class="action-btn" href="clase5.html">⬅ Clase anterior</a>
+    <a class="action-btn" href="index.html">🏠 Volver al inicio</a>
+    <a class="action-btn" href="examen_paa.html">📝 Examen de práctica ➡</a>
+  </div>
+
+</main>
+
+<footer>Curso Intensivo de Preparación USFQ — Medicina · Tu progreso se guarda en este navegador.</footer>
+
+<script>
+const CLASE_ID = 'clase6';
+const STORE_KEY = 'medcurso_v2_done';
+function loadDone(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch(e){ return {}; } }
+function saveDone(d){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(d)); }catch(e){} }
+
+
+function openLesson(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.add('open');
+  if(typeof mmScan === 'function') mmScan(el);
+  el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+document.querySelectorAll('.lesson-header').forEach(h=>{
+  h.addEventListener('click', (e)=>{
+    if(e.target.closest('.lesson-done')) return;
+    h.parentElement.classList.toggle('open');
+    if(h.parentElement.classList.contains('open') && typeof mmScan === 'function') mmScan(h.parentElement);
+  });
+});
+
+document.querySelectorAll('.lesson-done input').forEach(cb=>{
+  cb.addEventListener('change', ()=>{
+    const lid = cb.closest('.lesson').id;
+    const d = loadDone();
+    d[CLASE_ID + ':' + lid] = cb.checked;
+    saveDone(d);
+    cb.closest('.lesson').classList.toggle('done', cb.checked);
+    refreshProgress();
+  });
+});
+
+function refreshProgress(){
+  const lessons = document.querySelectorAll('.lesson');
+  const done = loadDone();
+  let d = 0;
+  lessons.forEach(l=>{ if(done[CLASE_ID + ':' + l.id]) d++; });
+  const pct = lessons.length ? Math.round(d / lessons.length * 100) : 0;
+  const bar = document.getElementById('classProgressBar');
+  const txt = document.getElementById('classProgressText');
+  if(bar) bar.style.width = pct + '%';
+  if(txt) txt.textContent = d + ' de ' + lessons.length + ' lecciones completadas (' + pct + '%)';
+}
+(function(){
+  const done = loadDone();
+  document.querySelectorAll('.lesson').forEach(l=>{
+    if(done[CLASE_ID + ':' + l.id]){
+      l.classList.add('done');
+      const cb = l.querySelector('.lesson-done input');
+      if(cb) cb.checked = true;
+    }
+  });
+  refreshProgress();
+})();
+
+document.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.quiz-check');
+  if(!btn) return;
+  const box = btn.closest('.mini-quiz');
+  let correct = 0, total = 0;
+  box.querySelectorAll('.quiz-q').forEach(q=>{
+    total++;
+    const val = q.dataset.correct;
+    const sel = q.querySelector('input:checked');
+    q.querySelectorAll('label').forEach(l=> l.style.background='');
+    if(sel && sel.value === val){
+      correct++;
+      sel.parentElement.style.background = '#d4f4dd';
+    } else {
+      if(sel) sel.parentElement.style.background = '#fbd7d2';
+      const ok = q.querySelector('input[value="' + val + '"]');
+      if(ok) ok.parentElement.style.background = '#d4f4dd';
+    }
+  });
+  const res = box.querySelector('.quiz-result');
+  if(res) res.textContent = 'Resultado: ' + correct + '/' + total + ' correctas';
+});
+
+if(window.mermaid){ mermaid.initialize({ startOnLoad:false, theme:'neutral', securityLevel:'loose' }); }
+function mmScan(root){
+  if(!window.mermaid) return;
+  const list = (root && root.querySelectorAll) ? root.querySelectorAll('pre.mermaid') : [];
+  list.forEach(el=>{
+    if(el.getAttribute('data-processed')) return;
+    if(el.offsetParent === null) return; // oculto: esperar a que se abra la lección
+    try{ mermaid.run({ nodes: [el] }); }catch(e){}
+  });
+}
+document.addEventListener('DOMContentLoaded', ()=>{ mmScan(document); });
+
+window.addEventListener('load', ()=>{ mmScan(document); });
+</script>
+</body>
+</html>

@@ -1,0 +1,2788 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Clase 2 · Matemática II: Funciones + PAA Matemática — Curso Intensivo
+      Medicina USFQ
+    </title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <style>
+      :root {
+        --azul: #c8102e;
+        --azul-dark: #7a0c1e;
+        --verde: #1e9e6a;
+        --rojo: #c0392b;
+        --amarillo: #b8860b;
+        --gris: #f4f6f8;
+        --texto: #223;
+        --borde: #e1e6ea;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        background: var(--gris);
+        color: var(--texto);
+        line-height: 1.6;
+      }
+      header.hero {
+        background: linear-gradient(135deg, var(--azul-dark), var(--azul));
+        color: #fff;
+        padding: 36px 20px;
+        text-align: center;
+      }
+      header.hero h1 {
+        margin: 0 0 8px;
+        font-size: 1.9rem;
+      }
+      header.hero p {
+        margin: 4px 0;
+        opacity: 0.92;
+      }
+      .badges {
+        margin-top: 14px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .badge {
+        background: rgba(255, 255, 255, 0.16);
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+      }
+      .topnav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #fff;
+        border-bottom: 1px solid var(--borde);
+        display: flex;
+        overflow-x: auto;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+      .topnav a {
+        flex: 0 0 auto;
+        padding: 13px 16px;
+        color: #555;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.92rem;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+      }
+      .topnav a:hover {
+        color: var(--azul-dark);
+        background: #f8f0f0;
+      }
+      .topnav a.current {
+        color: var(--azul);
+        border-bottom: 3px solid var(--azul);
+      }
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 26px 20px 80px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        padding: 22px 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      .card h2 {
+        color: var(--azul-dark);
+        margin-top: 0;
+        border-bottom: 2px solid var(--azul);
+        padding-bottom: 8px;
+      }
+      .progress-wrap {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 22px;
+      }
+      .progress-bar-bg {
+        background: #ede6e6;
+        border-radius: 10px;
+        height: 14px;
+        overflow: hidden;
+        margin-top: 8px;
+      }
+      .progress-bar-fill {
+        background: linear-gradient(90deg, var(--verde), #27ae60);
+        height: 100%;
+        width: 0%;
+        transition: width 0.4s ease;
+      }
+      .progress-text {
+        font-size: 0.9rem;
+        color: #555;
+        margin-top: 6px;
+      }
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .topic-link {
+        background: #fff;
+        border: 1.5px solid var(--azul);
+        color: var(--azul-dark);
+        border-radius: 10px;
+        padding: 10px 12px;
+        text-align: left;
+        cursor: pointer;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+      .topic-link:hover {
+        background: #fdeeef;
+      }
+      table.plan {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0;
+      }
+      .plan th,
+      .plan td {
+        border: 1px solid var(--borde);
+        padding: 8px 10px;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+      .plan th {
+        background: var(--azul);
+        color: #fff;
+      }
+      .plan tr:nth-child(even) {
+        background: #fcf8f8;
+      }
+      .lesson {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        margin-bottom: 16px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      .lesson-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 18px;
+        cursor: pointer;
+        flex-wrap: wrap;
+      }
+      .lesson-header:hover {
+        background: #fbefef;
+      }
+      .lesson-num {
+        background: var(--azul);
+        color: #fff;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        padding: 3px 10px;
+        white-space: nowrap;
+      }
+      .lesson-header h3 {
+        margin: 0;
+        font-size: 1.05rem;
+        color: var(--azul-dark);
+        flex: 1;
+      }
+      .lesson-time {
+        color: #777;
+        font-size: 0.85rem;
+        white-space: nowrap;
+      }
+      .lesson-done {
+        font-size: 0.85rem;
+        cursor: pointer;
+        white-space: nowrap;
+        user-select: none;
+      }
+      .lesson-body {
+        display: none;
+        padding: 4px 22px 20px;
+        border-top: 1px dashed var(--borde);
+      }
+      .lesson.open .lesson-body {
+        display: block;
+      }
+      .lesson.done .lesson-header {
+        background: #eaf6ef;
+      }
+      .lesson.done .lesson-num {
+        background: var(--verde);
+      }
+      .teacher {
+        background: #fdeeef;
+        border-left: 4px solid var(--azul);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 16px 0;
+      }
+      .teacher p {
+        margin: 8px 0;
+      }
+      .keyterms table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      .keyterms th,
+      .keyterms td {
+        border: 1px solid var(--borde);
+        padding: 7px 10px;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+      .keyterms th {
+        background: #fdeeef;
+        color: var(--azul-dark);
+      }
+      .formula-box {
+        background: #fffbea;
+        border: 1.5px solid var(--amarillo);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 14px 0;
+      }
+      .formula-box h4 {
+        margin: 0 0 6px;
+        color: var(--amarillo);
+      }
+      .formula-box pre {
+        margin: 4px 0;
+        font-family: Consolas, Menlo, monospace;
+        font-size: 0.95rem;
+        background: none;
+        white-space: pre-wrap;
+      }
+      .diagram-box {
+        background: #fbf9f9;
+        border: 1px dashed #c89aa0;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 14px 0;
+        overflow-x: auto;
+      }
+      .diagram-box h4 {
+        margin: 0 0 6px;
+        color: #7a4a52;
+      }
+      .diagram-box pre {
+        margin: 6px 0;
+        font-family: Consolas, Menlo, monospace;
+        font-size: 0.85rem;
+        line-height: 1.35;
+      }
+      .example {
+        background: #f2fbf6;
+        border-left: 4px solid var(--verde);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+      }
+      .example ol {
+        margin: 8px 0 4px 22px;
+      }
+      .pitfall {
+        background: #fdecea;
+        border-left: 4px solid var(--rojo);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 0.93rem;
+      }
+      .medlink {
+        background: #f3eefb;
+        border-left: 4px solid #7b4fb5;
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 0.93rem;
+      }
+      .mini-quiz {
+        border: 1.5px solid var(--azul);
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin: 16px 0;
+      }
+      .mini-quiz h4 {
+        margin: 0 0 10px;
+        color: var(--azul);
+      }
+      .quiz-q {
+        margin-bottom: 14px;
+        padding: 10px 12px;
+        border: 1px solid var(--borde);
+        border-radius: 8px;
+      }
+      .quiz-q p.question {
+        font-weight: 600;
+        margin: 0 0 8px;
+      }
+      .quiz-q label {
+        display: block;
+        padding: 5px 9px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-bottom: 3px;
+        font-size: 0.92rem;
+      }
+      .quiz-q label:hover {
+        background: #fbefef;
+      }
+      .quiz-q input {
+        margin-right: 8px;
+      }
+      .quiz-result {
+        font-weight: 700;
+        margin: 8px 0 0;
+      }
+      button.action-btn,
+      .action-btn {
+        display: inline-block;
+        background: var(--azul);
+        color: #fff;
+        border: none;
+        padding: 9px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      button.action-btn:hover,
+      .action-btn:hover {
+        background: var(--azul-dark);
+      }
+      footer {
+        text-align: center;
+        padding: 24px;
+        color: #888;
+        font-size: 0.85rem;
+      }
+      .clasnav {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 26px;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 700px) {
+        .lesson-header h3 {
+          font-size: 0.98rem;
+        }
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/mhchem.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+      onload="renderMathInElement(document.body,{delimiters:[{left:&#x27;$$&#x27;,right:&#x27;$$&#x27;,display:true},{left:&#x27;\\[&#x27;,right:&#x27;\\]&#x27;,display:true},{left:&#x27;\\(&#x27;,right:&#x27;\\)&#x27;,display:false}]})"
+    ></script>
+  </head>
+  <body>
+    <header class="hero">
+      <h1>🧮 Clase 2/6 · Matemática II: Funciones + PAA Matemática</h1>
+      <p>Curso Intensivo de Preparación — Ingreso a Medicina USFQ</p>
+      <p>⏱ Duración: 3 horas · Módulo: Funciones y aptitud matemática PAA</p>
+      <div class="badges">
+        <span class="badge">📐 15 lecciones</span
+        ><span class="badge">⏱ ~15 min c/u</span
+        ><span class="badge">🎯 Funciones + PAA Matematica</span>
+      </div>
+    </header>
+    <div class="topnav">
+      <a href="index.html">🏠 Inicio</a><a href="clase1.html">Clase 1</a
+      ><a href="clase2.html" class="current">Clase 2</a
+      ><a href="clase3.html">Clase 3</a><a href="clase4.html">Clase 4</a
+      ><a href="clase5.html">Clase 5</a>
+      <a href="clase6.html">Clase 6</a>
+    </div>
+    <main>
+      <div class="progress-wrap">
+        <strong>Progreso de esta clase</strong>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="classProgressBar"></div>
+        </div>
+        <div class="progress-text" id="classProgressText">
+          0 de 15 lecciones completadas (0%)
+        </div>
+      </div>
+      <div class="card">
+        <h2>📚 Menú de temas — haz clic para abrir la clase</h2>
+        <p>
+          Cada tema abre una lección completa dictada por tu profesor:
+          explicación con analogías, términos y fórmulas clave, diagramas,
+          ejemplo resuelto y mini-quiz.
+        </p>
+        <div class="topic-grid">
+          <button class="topic-link" onclick="openLesson('l01')">
+            1 · Definición de función
+          </button>
+          <button class="topic-link" onclick="openLesson('l02')">
+            2 · Gráficas de funciones
+          </button>
+          <button class="topic-link" onclick="openLesson('l03')">
+            3 · Crecientes y decrecientes
+          </button>
+          <button class="topic-link" onclick="openLesson('l04')">
+            4 · Transformaciones
+          </button>
+          <button class="topic-link" onclick="openLesson('l05')">
+            5 · Combinación de funciones
+          </button>
+          <button class="topic-link" onclick="openLesson('l06')">
+            6 · Inversas
+          </button>
+          <button class="topic-link" onclick="openLesson('l07')">
+            7 · Función cuadrática
+          </button>
+          <button class="topic-link" onclick="openLesson('l08')">
+            8 · Función exponencial
+          </button>
+          <button class="topic-link" onclick="openLesson('l09')">
+            9 · Logaritmos
+          </button>
+          <button class="topic-link" onclick="openLesson('l10')">
+            10 · Ecuaciones exp y log
+          </button>
+          <button class="topic-link" onclick="openLesson('l11')">
+            11 · PAA: aritmética
+          </button>
+          <button class="topic-link" onclick="openLesson('l12')">
+            12 · PAA: álgebra
+          </button>
+          <button class="topic-link" onclick="openLesson('l13')">
+            13 · PAA: geometría
+          </button>
+          <button class="topic-link" onclick="openLesson('l14')">
+            14 · PAA: datos
+          </button>
+          <button class="topic-link" onclick="openLesson('l15')">
+            15 · PAA: estrategia
+          </button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>🗓️ Plan de la sesión (3 horas)</h2>
+        <table class="plan">
+          <tr>
+            <th>Bloque</th>
+            <th>Tiempo</th>
+            <th>Contenido</th>
+          </tr>
+          <tr>
+            <td>A</td>
+            <td>0:00 – 0:50</td>
+            <td>
+              Lecciones 1–5: definición, gráficas, crecimiento,
+              transformaciones, combinación
+            </td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>0:50 – 1:40</td>
+            <td>
+              Lecciones 6–10: inversas, cuadrática, exponencial, logaritmos,
+              ecuaciones exp/log
+            </td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>1:40 – 2:30</td>
+            <td>
+              Lecciones 11–13: PAA aritmética, álgebra y geometría + práctica
+            </td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>2:30 – 3:00</td>
+            <td>Lecciones 14–15: datos y estrategia + quiz final</td>
+          </tr>
+        </table>
+      </div>
+
+      <article class="lesson" id="l01">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 1</span>
+          <h3>Definición de función: dominio, recorrido y recta vertical</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que una función es como una máquina expendedora confiable:
+              metes una moneda (entrada x) y siempre sale el mismo producto
+              (salida y). Si una moneda a veces diera jugo y a veces café, la
+              máquina estaría rota: eso es exactamente lo que prohíbe la
+              definición de función, que a cada valor de x le corresponde un
+              único valor de y. La notación f(x) se lee "f de x" y significa "lo
+              que la máquina produce con la entrada x".
+            </p>
+            <p>
+              Piensa en el dominio como la lista de monedas que la máquina
+              acepta y el recorrido como los productos que realmente puede
+              entregar. Para f(x) = \(\sqrt{x-2}\), el dominio es \(x \ge 2\)
+              porque no hay raíces reales de negativos; su recorrido es \(y \ge
+              0.\) La prueba de la recta vertical es el control de calidad
+              gráfico: si una línea vertical corta la gráfica más de una vez, no
+              es función (como el círculo \(x^{2}+y^{2} = 1).\) Evaluar, hallar
+              dominio y aplicar esta prueba son las tres destrezas base de toda
+              la clase.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Función</td>
+                <td>Relación donde cada x tiene exactamente un y.</td>
+              </tr>
+              <tr>
+                <td>Dominio</td>
+                <td>Conjunto de entradas x válidas.</td>
+              </tr>
+              <tr>
+                <td>Recorrido (rango)</td>
+                <td>Conjunto de salidas y alcanzadas.</td>
+              </tr>
+              <tr>
+                <td>Prueba de la recta vertical</td>
+                <td>
+                  Si una vertical corta la gráfica 2+ veces, no es función.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ y=f(x)\qquad \text{Dom}(f)=\text{valores }x\text{ permitidos}
+              \] \[ \text{Denominador}\neq 0\qquad\text{radicando par}\ge 0 \]
+              \[ \text{Prueba vertical: 1 corte = función} \;\cdot\; \text{2+
+              cortes = no función} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph LR
+X[Entrada x del dominio] --&gt; F[Maquina f]
+F --&gt; Y[Salida y del recorrido]
+X --&gt; U[Cada x un solo y]</pre
+            >
+            <pre>
+y = x²  SÍ es función (cada vertical corta 1 vez)
+x² + y² = 1 NO es función (vertical corta 2 veces)</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Halla el dominio de f(x) = \(1/(x-3)\) y evalúa f(5).</p>
+            <ol>
+              <li>
+                Denominador \(\neq \) 0 \(\to \) x − \(3 \neq 0 \to \) Dom: \(x
+                \neq 3 o (-\infty , 3) \cup \) (3, \(+\infty \)).
+              </li>
+              <li>Evalúa: f(5) = \(1/(5-3) = 1/2.\)</li>
+              <li>El recorrido es \(y \neq 0.\) ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> confundir f(x) con
+            multiplicación \(f\cdot x\); incluir valores que anulan el
+            denominador; creer que todo despeje de y es función sin aplicar la
+            prueba vertical.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> dosis-respuesta es una
+            función: cada dosis (x) produce un efecto esperado (y); el dominio
+            son las dosis seguras.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. ¿Cuál NO es función de x?</p>
+              <label
+                ><input type="radio" name="c2_l01_q1" value="a" /> y = 2x +
+                1</label
+              ><label
+                ><input type="radio" name="c2_l01_q1" value="b" /> \(x^{2}\) +
+                \(y^{2} = 4\)</label
+              ><label
+                ><input type="radio" name="c2_l01_q1" value="c" /> \(y =
+                x^{2}\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. El dominio de f(x) = \(√(x\) − 5) es…</p>
+              <label
+                ><input type="radio" name="c2_l01_q2" value="a" /> \(x \ge
+                5\)</label
+              ><label
+                ><input type="radio" name="c2_l01_q2" value="b" /> \(x \neq
+                5\)</label
+              ><label
+                ><input type="radio" name="c2_l01_q2" value="c" /> todo ℝ</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. Si f(x) = 3x − 2, f(4) =</p>
+              <label><input type="radio" name="c2_l01_q3" value="a" /> 6</label
+              ><label><input type="radio" name="c2_l01_q3" value="b" /> 9</label
+              ><label
+                ><input type="radio" name="c2_l01_q3" value="c" /> 10</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l02">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 2</span>
+          <h3>Gráficas de funciones</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que la gráfica de una función es su fotografía: de un
+              vistazo ves si sube, si baja, dónde cruza los ejes y si tiene
+              picos o valles. Cada punto (x, f(x)) es una selfie de la máquina
+              con esa entrada. Los interceptos son las "huellas" donde la curva
+              toca los ejes: con el eje y pones \(x = 0,\) con el eje x
+              resuelves f(x) = 0. Y la simetría te regala la mitad del dibujo:
+              si f(−x) = f(x) la gráfica es par y se refleja en el eje y (como
+              \(x^{2}\)); si f(−x) = −f(x) es impar y rota 180° (como
+              \(x^{3}\)).
+            </p>
+            <p>
+              Piensa en leer gráficas como leer un electrocardiograma: el eje x
+              es el tiempo y el eje y es la señal. Los ceros son donde la señal
+              cruza la base, los máximos son los picos y el comportamiento en
+              los extremos te dice a dónde tiende la función. Para graficar a
+              mano, arma una tabla corta de valores estratégicos (negativos,
+              cero, positivos y puntos de interés), marca los interceptos y une
+              con una curva suave. Memoriza las formas madre: recta, parábola,
+              valor absoluto en V, raíz cuadrada y 1/x con sus asíntotas.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Intercepto</td>
+                <td>Punto donde la gráfica cruza un eje.</td>
+              </tr>
+              <tr>
+                <td>Función par / impar</td>
+                <td>Par: simétrica al eje y. Impar: simétrica al origen.</td>
+              </tr>
+              <tr>
+                <td>Asíntota</td>
+                <td>Recta a la que la curva se acerca sin tocarla.</td>
+              </tr>
+              <tr>
+                <td>Cero de la función</td>
+                <td>x donde f(x) = 0; corte con el eje x.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ \text{Intercepto }y\text{: }(0,f(0))\qquad\text{interceptos
+              }x\text{: resuelve }f(x)=0 \] \[ \text{Par:
+              }f(-x)=f(x)\qquad\text{Impar: }f(-x)=-f(x) \] \[ \text{Formas
+              madre: }x^2\text{ parábola }\cdot|x|\text{ en V
+              }\cdot\frac{1}{x}\text{ hipérbola} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+G[Grafica] --&gt; I[Interceptos con ejes]
+G --&gt; S[Simetria par o impar]
+G --&gt; E[Extremos y maximos]
+I --&gt; T[Tabla de valores y curva suave]</pre
+            >
+            <pre>
+y = |x| (V):    \  /      y = x² (U):   (  )
+ \/ ‾‾</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Halla interceptos de f(x) = \(x^{2}\) − 4.</p>
+            <ol>
+              <li>Eje y: f(0) = −4 \(\to \) (0, −4).</li>
+              <li>
+                Eje x: \(x^{2}\) − \(4 = 0 \to x\)\(0 \to x\)\(0 \to x = \pm 2
+                \to \) (−2, 0) y (2, 0).
+              </li>
+              <li>
+                Es par: f(−x) = \(x^{2}\) − 4 = f(x), simétrica al eje y. ✔
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> unir puntos con segmentos
+            rectos en vez de curva suave; olvidar que 1/x tiene asíntotas en \(x
+            = 0 y y\)\(0 y y = 0;\) confundir intercepto (punto) con coordenada
+            suelta.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> leer un ECG o una curva
+            de fiebre es leer interceptos, picos y tendencias de una gráfica.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">1. f(x) = \(x^{2}\) es…</p>
+              <label
+                ><input type="radio" name="c2_l02_q1" value="a" /> par y
+                simétrica al eje y</label
+              ><label
+                ><input type="radio" name="c2_l02_q1" value="b" /> impar y
+                simétrica al origen</label
+              ><label
+                ><input type="radio" name="c2_l02_q1" value="c" /> no
+                simétrica</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                2. El intercepto con y de f(x) = 2x − 6 es…
+              </p>
+              <label
+                ><input type="radio" name="c2_l02_q2" value="a" /> (6, 0)</label
+              ><label
+                ><input type="radio" name="c2_l02_q2" value="b" /> (0,
+                −6)</label
+              ><label
+                ><input type="radio" name="c2_l02_q2" value="c" /> (3, 0)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. Los ceros de f(x) = \(x^{2}\) − 9 son…</p>
+              <label
+                ><input type="radio" name="c2_l02_q3" value="a" /> \(x =
+                9\)</label
+              ><label
+                ><input type="radio" name="c2_l02_q3" value="b" /> \(x =
+                0\)</label
+              ><label
+                ><input type="radio" name="c2_l02_q3" value="c" /> \(x = 3 y x\)
+                = −3</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l03">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 3</span>
+          <h3>Funciones crecientes y decrecientes</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que recorres la gráfica de izquierda a derecha como si
+              fuera un sendero de montaña: si el camino sube, la función es
+              creciente; si baja, es decreciente; si es plano, es constante.
+              Formalmente, es creciente cuando a mayor x corresponde mayor y, y
+              decreciente cuando a mayor x corresponde menor y. Una misma
+              función puede subir en un tramo y bajar en otro, como la parábola
+              \(y = x^{2}\) que baja hasta \(x = 0 y\) luego sube: decrece en
+              (\(-\infty \), 0) y crece en (0, \(+\infty \)).
+            </p>
+            <p>
+              Piensa en los puntos donde cambia la dirección como las cimas y
+              los valles del sendero: ahí viven los máximos y mínimos relativos.
+              Para analizarlos, divide el dominio en intervalos usando esos
+              puntos críticos y prueba qué hace la función en cada tramo. La
+              tasa de cambio promedio (\(f(b)-f(a))/(b-a\)) te dice qué tan
+              rápido sube o baja en un intervalo, igual que la velocidad
+              promedio de un viaje. Este lenguaje de "dónde sube y dónde baja"
+              es el que usarás para leer cualquier gráfica de examen en
+              segundos.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Creciente / decreciente</td>
+                <td>Sube (mayor x \(\to \) mayor y) o baja en un intervalo.</td>
+              </tr>
+              <tr>
+                <td>Máximo / mínimo relativo</td>
+                <td>Pico o valle local donde cambia la dirección.</td>
+              </tr>
+              <tr>
+                <td>Tasa de cambio promedio</td>
+                <td>(\(f(b)-f(a))/(b-a\)); pendiente entre dos puntos.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ \text{Creciente: }x_1\lt x_2\Rightarrow f(x_1)\lt f(x_2) \] \[
+              \text{Decreciente: }x_1\lt x_2\Rightarrow f(x_1)\gt f(x_2) \] \[
+              \text{Tasa promedio en }[a,b]=\frac{f(b)-f(a)}{b-a} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph LR
+IZ[Lee de izquierda a derecha] --&gt; SUB[Sube: creciente]
+IZ --&gt; BAJ[Baja: decreciente]
+IZ --&gt; PLA[Plano: constante]
+SUB --&gt; MAX[Pico: maximo - Valle: minimo]</pre
+            >
+            <pre>
+y = x²:  ↘ baja en (−∞,0)  |  punto (0,0) mínimo  |  ↗ sube en (0,+∞)</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Analiza f(x) = \(-x^{2}\) + 4.</p>
+            <ol>
+              <li>Es parábola que abre hacia abajo; vértice en (0, 4).</li>
+              <li>
+                Crece en (\(-\infty \), 0) y decrece en (0, \(+\infty \)).
+              </li>
+              <li>En (0, 4) hay un máximo relativo (y absoluto). ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> dar los intervalos de
+            crecimiento con valores de y en vez de x; decir que es creciente "en
+            el punto \(x = 2"\) (el crecimiento es por intervalos); confundir
+            máximo relativo con absoluto.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> la curva de fiebre que
+            sube (infección activa) y luego baja (recuperación) se describe con
+            este lenguaje.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. f(x) = −3x + 2 es…</p>
+              <label
+                ><input type="radio" name="c2_l03_q1" value="a" /> creciente en
+                todo ℝ</label
+              ><label
+                ><input type="radio" name="c2_l03_q1" value="b" /> decreciente
+                en todo ℝ</label
+              ><label
+                ><input type="radio" name="c2_l03_q1" value="c" />
+                constante</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. f(x) = \(x^{2}\) decrece en…</p>
+              <label
+                ><input type="radio" name="c2_l03_q2" value="a" /> (\(-\infty
+                \), 0)</label
+              ><label
+                ><input type="radio" name="c2_l03_q2" value="b" /> (0, \(+\infty
+                \))</label
+              ><label
+                ><input type="radio" name="c2_l03_q2" value="c" /> todo ℝ</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. La tasa promedio de f(x)=2x+1 en [\(1{,}4\)] es…
+              </p>
+              <label><input type="radio" name="c2_l03_q3" value="a" /> 3</label
+              ><label><input type="radio" name="c2_l03_q3" value="b" /> 1</label
+              ><label
+                ><input type="radio" name="c2_l03_q3" value="c" /> 2</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l04">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 4</span>
+          <h3>Transformaciones de funciones</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que la gráfica madre f(x) = \(x^{2}\) es una figura de
+              plastilina: puedes moverla, estirarla o voltearla sin cambiar su
+              esencia. Sumar fuera mueve en vertical: f(x)+3 sube todo 3
+              unidades; sumar dentro mueve en horizontal pero al revés de lo que
+              dice la intuición: f(x+2) se corre 2 a la izquierda. Multiplicar
+              fuera estira en vertical (2f(x) la alarga) y multiplicar dentro
+              comprime en horizontal; el signo menos refleja: −f(x) voltea sobre
+              el eje x y f(−x) sobre el eje y.
+            </p>
+            <p>
+              Piensa en el orden como vestirse: primero los cambios horizontales
+              (dentro del paréntesis) y luego los verticales (fuera). Para
+              graficar g(x) = \(-(x-2)^{2}\) + 3 parte de \(x^{2}\): corre 2 a
+              la derecha, refleja sobre x y sube 3. El truco de memoria es
+              "dentro-al-revés, fuera-al-derecho": lo de dentro hace lo
+              contrario (x+2 va a la izquierda) y lo de fuera hace lo literal
+              (+3 sube). Con este kit transformas cualquier función madre sin
+              tabular un solo punto.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Traslación</td>
+                <td>Desplaza la gráfica sin deformarla.</td>
+              </tr>
+              <tr>
+                <td>Estiramiento / compresión</td>
+                <td>Alarga o encoge la gráfica en vertical u horizontal.</td>
+              </tr>
+              <tr>
+                <td>Reflexión</td>
+                <td>Voltea la gráfica sobre un eje.</td>
+              </tr>
+              <tr>
+                <td>Función madre</td>
+                <td>
+                  Forma básica (\(x^{2}\), |x|, \(\sqrt{x}\)) que se transforma.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ f(x)+k\text{: sube }k\qquad f(x)-k\text{: baja }k \] \[
+              f(x+h)\text{: izquierda }h\qquad f(x-h)\text{: derecha }h \] \[
+              a\cdot f(x)\text{: estira vertical si }|a|\gt 1\qquad -f(x)\text{:
+              refleja en }x\qquad f(-x)\text{: refleja en }y \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+M["Madre f(x)"] --&gt; V[Fuera: vertical directo]
+M --&gt; H[Dentro: horizontal al reves]
+V --&gt; S1[subir bajar estirar reflejar-x]
+H --&gt; S2[izquierda derecha comprimir reflejar-y]</pre
+            >
+            <pre>g(x) = (x−2)² + 3:  x² → derecha 2 → arriba 3</pre>
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Describe g(x) = \(-√(x\) + 1) − 2 desde \(\sqrt{x}\).</p>
+            <ol>
+              <li>x+1 dentro: corre 1 a la izquierda.</li>
+              <li>Signo − fuera: refleja sobre el eje x.</li>
+              <li>−2 fuera: baja 2. Resultado completo. ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> mover f(x+2) a la derecha (es a
+            la izquierda); aplicar las transformaciones en desorden; confundir
+            estiramiento vertical con horizontal.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> calibrar un monitor
+            (desplazar la línea base, amplificar la señal) es aplicar
+            transformaciones a una función.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. f(x − 3) mueve la gráfica…</p>
+              <label
+                ><input type="radio" name="c2_l04_q1" value="a" /> 3 a la
+                izquierda</label
+              ><label
+                ><input type="radio" name="c2_l04_q1" value="b" /> 3 a la
+                derecha</label
+              ><label
+                ><input type="radio" name="c2_l04_q1" value="c" /> 3 hacia
+                arriba</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. −f(x) produce…</p>
+              <label
+                ><input type="radio" name="c2_l04_q2" value="a" /> reflexión
+                sobre el eje x</label
+              ><label
+                ><input type="radio" name="c2_l04_q2" value="b" /> reflexión
+                sobre el eje y</label
+              ><label
+                ><input type="radio" name="c2_l04_q2" value="c" /> traslación
+                hacia abajo</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. 2f(x) con f(x) = \(x^{2}\) da…</p>
+              <label
+                ><input type="radio" name="c2_l04_q3" value="a" />
+                (\(2x)^{2}\)</label
+              ><label
+                ><input type="radio" name="c2_l04_q3" value="b" /> \(x^{2}\) +
+                2</label
+              ><label
+                ><input type="radio" name="c2_l04_q3" value="c" /> \(2x^{2}\)
+                (estirada vertical)</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l05">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 5</span>
+          <h3>Combinación de funciones: suma, producto y composición</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que las funciones son ingredientes: puedes mezclarlos en
+              un mismo plato (suma, resta, producto, cociente) o cocinarlos en
+              cadena, donde el plato de uno alimenta al siguiente. Eso segundo
+              es la composición (\(f\circ g)(x\)) = f(g(x)): primero aplicas g y
+              con ese resultado alimentas f. Es como una línea de ensamblaje: g
+              pule la pieza y f la pinta; cambiar el orden cambia el producto
+              final.
+            </p>
+            <p>
+              Piensa en el dominio combinado como las reglas de ambas fábricas a
+              la vez: en (f+g) o (\(f\cdot g\)) el dominio es la intersección de
+              los dominios, y en el cociente además el denominador no puede
+              anularse. En la composición, x debe pasar primero por g y su
+              salida debe ser válida para f. Para calcular (\(f\circ g)(2\)) con
+              f(x) = \(x^{2}\) y g(x) = x+1: g(2) = 3, luego f(3) = 9. De
+              adentro hacia afuera, paso a paso, sin saltos.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Función suma / producto</td>
+                <td>
+                  (f+g)(x) = f(x)+g(x); \((f\cdot g)(x) = f(x)\cdot g(x).\)
+                </td>
+              </tr>
+              <tr>
+                <td>Función cociente</td>
+                <td>\((f/g)(x) = f(x)/g(x),\) con g(x) \(\neq \) 0.</td>
+              </tr>
+              <tr>
+                <td>Composición</td>
+                <td>
+                  (\(f\circ g)(x\)) = f(g(x)); se evalúa de adentro hacia
+                  afuera.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ (f+g)(x)=f(x)+g(x)\qquad (f\cdot g)(x)=f(x)\cdot g(x) \] \[
+              \left(\frac{f}{g}\right)(x)=\frac{f(x)}{g(x)},\ g(x)\neq 0\qquad
+              (f\circ g)(x)=f(g(x)) \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph LR
+X[x] --&gt; G[Primero g]
+G --&gt; F[Despues f]
+F --&gt; R[f de g de x]</pre
+            >
+            <pre>f(x)=x², g(x)=x+1: (f∘g)(x)=(x+1)² | (g∘f)(x)=x²+1</pre>
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Si f(x) = 2x y g(x) = x − 5, halla (\(f\circ g)(3\)) y (\(g\circ
+              f)(3\)).
+            </p>
+            <ol>
+              <li>(\(f\circ g)(3\)): g(3) = −2; f(−2) = −4.</li>
+              <li>(\(g\circ f)(3\)): f(3) = 6; g(6) = 1.</li>
+              <li>Conclusión: −4 \(\neq \) 1, el orden importa. ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> suponer que f(g(x)) = g(f(x));
+            evaluar de afuera hacia adentro; olvidar las restricciones del
+            cociente y de la función interna.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> un análisis de sangre es
+            una composición: la muestra pasa por dilución (g) y luego por
+            medición (f).
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                1. Si \(f(x)=x^{2}\) y g(x)=x+1, (\(f\circ g)(2\)) =
+              </p>
+              <label><input type="radio" name="c2_l05_q1" value="a" /> 5</label
+              ><label><input type="radio" name="c2_l05_q1" value="b" /> 9</label
+              ><label
+                ><input type="radio" name="c2_l05_q1" value="c" /> 6</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. Con las mismas, (\(g\circ f)(2\)) =</p>
+              <label><input type="radio" name="c2_l05_q2" value="a" /> 5</label
+              ><label><input type="radio" name="c2_l05_q2" value="b" /> 9</label
+              ><label
+                ><input type="radio" name="c2_l05_q2" value="c" /> 4</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. El dominio de (\(f/g)(x\)) exige…</p>
+              <label
+                ><input type="radio" name="c2_l05_q3" value="a" /> solo
+                Dom(f)</label
+              ><label
+                ><input type="radio" name="c2_l05_q3" value="b" /> solo
+                Dom(g)</label
+              ><label
+                ><input type="radio" name="c2_l05_q3" value="c" /> Dom(f) ∩
+                Dom(g) con g(x) \(\neq \) 0</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l06">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 6</span>
+          <h3>Funciones uno a uno e inversas</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que una función uno a uno es como un sistema de casilleros
+              con llave única: cada persona (x) tiene su casillero (y) y ningún
+              casillero se comparte. Solo esas funciones tienen inversa, es
+              decir, un camino de regreso que deshace exactamente lo andado: si
+              f convierte 2 en 7, su inversa \(f^{-1}\) convierte 7 en 2. La
+              prueba gráfica es la de la recta horizontal: si ninguna horizontal
+              corta la gráfica más de una vez, la función es uno a uno.
+            </p>
+            <p>
+              Piensa en hallar la inversa como intercambiar los roles: escribes
+              y = f(x), cambias x con y, y despejas la nueva y. Para f(x) = 2x +
+              3: y = 2x+3 \(\to \) x = 2y+3 \(\to y = (x-3)/2,\) así que
+              \(f^{-1}(x) = (x-3)/2.\) Geométricamente, f y \(f^{-1}\) son
+              reflejos mutuos sobre la recta y = x, y sus dominios y recorridos
+              se intercambian. La comprobación final es el apretón de manos:
+              \(f(f^{-1}(x)) = x y f^{-1}(f(x))\) = x.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Uno a uno</td>
+                <td>Valores x distintos dan valores y distintos.</td>
+              </tr>
+              <tr>
+                <td>Función inversa</td>
+                <td>Deshace a f: \(f^{-1}(f(x))\) = x.</td>
+              </tr>
+              <tr>
+                <td>Prueba horizontal</td>
+                <td>
+                  Si una horizontal corta 2+ veces, no hay inversa global.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ \text{Pasos: }y=f(x)\to\text{intercambia }x\leftrightarrow
+              y\to\text{despeja }y \] \[ f(f^{-1}(x))=x\qquad f^{-1}(f(x))=x \]
+              \[
+              \text{Dom}(f^{-1})=\text{Rec}(f)\qquad\text{Rec}(f^{-1})=\text{Dom}(f)
+              \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph LR
+X[x] --&gt; F[f ida]
+F --&gt; Y[y]
+Y --&gt; I[f inversa regreso]
+I --&gt; X2[x de vuelta]</pre
+            >
+            <pre>f y f⁻¹ son simétricas respecto a la recta y = x</pre>
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Halla la inversa de f(x) = (x + 1)/3.</p>
+            <ol>
+              <li>\(y = (x+1)/3 \to \) intercambia: \(x = (y+1)/3.\)</li>
+              <li>Despeja: 3x = y+1 \(\to \) y = 3x − 1.</li>
+              <li>
+                \(f^{-1}(x)\) = 3x − 1. Verifica: \(f(f^{-1}(2))\) = f(5) = 2 ✔.
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> escribir \(f^{-1}\) como 1/f
+            (no es el recíproco); intentar invertir funciones no uno a uno como
+            \(x^{2}\) en todo ℝ; olvidar verificar la composición.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> convertir unidades (mg/dL
+            ↔ mmol/L) y despejar variables clínicas son funciones inversas en
+            acción.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">1. La inversa de f(x) = 2x + 3 es…</p>
+              <label
+                ><input type="radio" name="c2_l06_q1" value="a" /> (x −
+                3)/2</label
+              ><label
+                ><input type="radio" name="c2_l06_q1" value="b" />
+                \(1/(2x+3)\)</label
+              ><label
+                ><input type="radio" name="c2_l06_q1" value="c" /> (x +
+                3)/2</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">2. ¿Cuál es uno a uno en todo ℝ?</p>
+              <label
+                ><input type="radio" name="c2_l06_q2" value="a" /> \(y =
+                x^{2}\)</label
+              ><label
+                ><input type="radio" name="c2_l06_q2" value="b" /> y = 3x −
+                1</label
+              ><label
+                ><input type="radio" name="c2_l06_q2" value="c" /> y =
+                |x|</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. Si f(4) = 9, entonces \(f^{-1}(9)\) =</p>
+              <label
+                ><input type="radio" name="c2_l06_q3" value="a" /> 4/9</label
+              ><label
+                ><input type="radio" name="c2_l06_q3" value="b" /> 9/4</label
+              ><label
+                ><input type="radio" name="c2_l06_q3" value="c" /> 4</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l07">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 7</span>
+          <h3>Funciones cuadráticas: vértice y parábola</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que lanzas una pelota: su altura contra el tiempo dibuja
+              una parábola, la curva en forma de U (o de U invertida) de toda
+              función cuadrática f(x) = ax² + bx + c. El vértice es el punto más
+              bajo o más alto del vuelo: si \(a \gt 0\) la parábola abre hacia
+              arriba y el vértice es un mínimo; si \(a \lt 0\) abre hacia abajo
+              y es un máximo. Su coordenada x sale directo de \(x = -b/(2a), y\)
+              el eje de simetría es la línea vertical que parte la parábola en
+              dos mitades idénticas.
+            </p>
+            <p>
+              Piensa en completar el cuadrado como reescribir la historia en
+              forma vértice f(x) = \(a(x-h)^{2}\) + k, donde (h, k) es el
+              vértice a simple vista. Los ceros (cortes con x) salen de
+              factorizar o de la fórmula general, y el intercepto con y es
+              simplemente c. Para graficar: marca el vértice, uno o dos puntos a
+              cada lado usando la simetría y une con curva suave. Optimizar
+              (hallar el valor máximo o mínimo) es entonces leer la coordenada k
+              del vértice.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Vértice</td>
+                <td>Punto (h,k) mínimo o máximo de la parábola.</td>
+              </tr>
+              <tr>
+                <td>Eje de simetría</td>
+                <td>Recta x = h que divide la parábola en dos.</td>
+              </tr>
+              <tr>
+                <td>Forma vértice</td>
+                <td>f(x) = \(a(x-h)^{2}\) + k.</td>
+              </tr>
+              <tr>
+                <td>Ceros</td>
+                <td>Soluciones de ax²+bx+c = 0; cortes con el eje x.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ \text{Vértice: }h=-\frac{b}{2a},\ k=f(h)\qquad f(x)=a(x-h)^2+k
+              \] \[ a\gt 0\text{ abre arriba (mínimo)}\qquad a\lt 0\text{ abre
+              abajo (máximo)} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+C[ax2+bx+c] --&gt; V["Halla h = -b/2a y k = f(h)"]
+V --&gt; A{a mayor que 0?}
+A --&gt;|Si| MIN[Minimo en vertice]
+A --&gt;|No| MAX[Maximo en vertice]
+V --&gt; Z[Ceros con formula o factoreo]</pre
+            >
+            <pre>a&gt;0:  ∪ mínimo abajo      a&lt;0:  ∩ máximo arriba</pre>
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Halla el vértice de f(x) = \(x^{2}\) − 6x + 5.</p>
+            <ol>
+              <li>\(h = -(-6)/2\)\(-(-6)/2 = 3.\)</li>
+              <li>\(k = 9\) − 18 + 5 = −4. Vértice (3, −4), mínimo.</li>
+              <li>Ceros: \(x^{2}-6x+5\) = (x−1)(x−5) \(\to x = 1 y 5.\) ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> olvidar el signo en
+            \(-b/(2a)\); confundir h con el valor máximo (el extremo es k);
+            graficar la parábola hacia el lado equivocado según el signo de a.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> la dosis óptima (máximo
+            beneficio, mínimos efectos) se modela como el vértice de una
+            parábola.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                1. El vértice de f(x) = \(x^{2}\) − 4x + 3 está en…
+              </p>
+              <label
+                ><input type="radio" name="c2_l07_q1" value="a" /> (4, 3)</label
+              ><label
+                ><input type="radio" name="c2_l07_q1" value="b" /> (2,
+                −1)</label
+              ><label
+                ><input type="radio" name="c2_l07_q1" value="c" /> (−2,
+                15)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. Si \(a \lt 0,\) el vértice es…</p>
+              <label
+                ><input type="radio" name="c2_l07_q2" value="a" /> un
+                máximo</label
+              ><label
+                ><input type="radio" name="c2_l07_q2" value="b" /> un
+                mínimo</label
+              ><label
+                ><input type="radio" name="c2_l07_q2" value="c" /> un
+                intercepto</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. Los ceros de \(x^{2}\) − 1 son…</p>
+              <label
+                ><input type="radio" name="c2_l07_q3" value="a" /> \(x =
+                1\)</label
+              ><label
+                ><input type="radio" name="c2_l07_q3" value="b" /> \(x =
+                0\)</label
+              ><label
+                ><input type="radio" name="c2_l07_q3" value="c" /> \(x = 1 y x\)
+                = −1</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l08">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 8</span>
+          <h3>Función exponencial</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que dejas un rumor en un grupo: cada hora cada persona se
+              lo cuenta a 2 más. El total no crece sumando, explota
+              multiplicando: 1, 2, 4, 8, 16… Esa es la firma de la función
+              exponencial f(x) = \(a^{x}\) con \(a \gt 0 y a \neq 1:\)\(0 y a
+              \neq 1:\) la variable está en el exponente. Si \(a \gt 1\) la
+              curva crece sin freno; si \(0 \lt a\)\(a \lt 1\) decrece hacia
+              cero. Nunca toca el eje x (asíntota en \(y = 0) y\) siempre pasa
+              por (0, 1).
+            </p>
+            <p>
+              Piensa en el número \(e \approx 2.718\) como la base "natural" del
+              crecimiento continuo, protagonista de f(x) = \(e^{x}\) en ciencia
+              y finanzas. Las leyes son las de exponentes que ya dominas:
+              multiplica sumando exponentes, divide restando. El crecimiento y
+              decaimiento se escriben P(t) = \(P_{0}\cdot a^{t}\) o \(P_{0}\cdot
+              e^{kt}\): con \(k \gt 0\) crecen (bacterias, interés), con \(k \lt
+              0\) decaen (fármacos en sangre, radiactividad). La vida media es
+              el tiempo en que la cantidad cae a la mitad.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Base exponencial</td>
+                <td>
+                  \(a \gt 0, a \neq 1\)\(0, a \neq 1\) en f(x) = \(a^{x}\).
+                </td>
+              </tr>
+              <tr>
+                <td>Asíntota horizontal</td>
+                <td>Recta \(y = 0 a\) la que la curva se acerca.</td>
+              </tr>
+              <tr>
+                <td>Crecimiento / decaimiento</td>
+                <td>
+                  Modelo P(t) = \(P_{0}\cdot a^{t}\) o \(P_{0}\cdot e^{kt}\).
+                </td>
+              </tr>
+              <tr>
+                <td>Vida media</td>
+                <td>Tiempo para reducirse a la mitad.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ f(x)=a^x,\ a\gt 0,\ a\neq 1\qquad\text{pasa por
+              }(0,1)\qquad\text{asíntota }y=0 \] \[ a^x\cdot a^y=a^{x+y}\qquad
+              P(t)=P_0\cdot e^{kt}\quad k\gt 0\text{ crece }\cdot\,k\lt 0\text{
+              decae} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+E[a elevado x] --&gt; B{a mayor que 1?}
+B --&gt;|Si| C[Crece rapido]
+B --&gt;|No| D[Decrece a cero]
+E --&gt; A[Asintota y=0 y punto 0,1]</pre
+            >
+            <pre>2ˣ: ↗ explosivo     (1/2)ˣ: ↘ se apaga hacia 0</pre>
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Un cultivo tiene 100 bacterias y se duplica cada hora: P(t) =
+              \(100\cdot 2^{t}\). ¿Cuántas hay a las 3 h?
+            </p>
+            <ol>
+              <li>Sustituye \(t = 3: P\)\(3: P = 100\cdot 2^{3}.\)</li>
+              <li>
+                \(2^{3} = 8 \to P\)\(8 \to P\)\(8 \to P = 800\) bacterias.
+              </li>
+              <li>A las 5 h serían \(100\cdot 32 = 3200.\) ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> confundir \(x\cdot a\) con
+            \(a^{x}\) (lineal vs. exponencial); creer que la exponencial toca el
+            eje x; mezclar las fórmulas de crecimiento con las de interés
+            simple.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> el crecimiento bacteriano
+            y la eliminación de fármacos siguen modelos exponenciales.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">1. f(x) = \(3^{x}\) pasa por…</p>
+              <label
+                ><input type="radio" name="c2_l08_q1" value="a" /> (0, 1)</label
+              ><label
+                ><input type="radio" name="c2_l08_q1" value="b" /> (0, 0)</label
+              ><label
+                ><input type="radio" name="c2_l08_q1" value="c" /> (1, 0)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">2. f(x) = (1/\(2)^{x}\) es…</p>
+              <label
+                ><input type="radio" name="c2_l08_q2" value="a" />
+                creciente</label
+              ><label
+                ><input type="radio" name="c2_l08_q2" value="b" />
+                decreciente</label
+              ><label
+                ><input type="radio" name="c2_l08_q2" value="c" />
+                constante</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. \(2^{3}\) \(\cdot \) \(2^{2}\) =</p>
+              <label
+                ><input type="radio" name="c2_l08_q3" value="a" />
+                \(4^{5}\)</label
+              ><label
+                ><input type="radio" name="c2_l08_q3" value="b" />
+                \(2^{6}\)</label
+              ><label
+                ><input type="radio" name="c2_l08_q3" value="c" /> \(2^{5} =
+                32\)</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l09">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 9</span>
+          <h3>Función logarítmica y leyes de los logaritmos</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que el logaritmo es el detective que interroga a la
+              exponencial: si \(2^{3} = 8,\) el logaritmo pregunta "¿a qué
+              exponente debo elevar 2 para obtener 8?" y responde \(log_{2}(8) =
+              3.\) El logaritmo es la función inversa de la exponencial: deshace
+              lo que ella hace. Su dominio son solo los positivos (no hay
+              logaritmo de cero ni de negativos en reales), pasa por (1, 0) y
+              tiene asíntota vertical en \(x = 0.\) El logaritmo común es base
+              10 (log) y el natural es base e (ln).
+            </p>
+            <p>
+              Piensa en las leyes de los logaritmos como las de exponentes
+              vistas en el espejo: el log de un producto es la suma de logs, el
+              de un cociente es la resta y el de una potencia baja el exponente
+              multiplicando. Convierten multiplicaciones incómodas en sumas
+              manejables, por eso la escala de Richter y el pH son logarítmicas:
+              cada unidad más multiplica por 10 la magnitud real. Para cambiar
+              de base usa \(\log_{a}(b) = \ln(b)/\ln(a),\) tu comodín con
+              calculadora.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Logaritmo</td>
+                <td>\(\log_{a}(b) = x\) significa \(a^{x} = b.\)</td>
+              </tr>
+              <tr>
+                <td>Logaritmo común / natural</td>
+                <td>Base 10 (log) y base e (ln).</td>
+              </tr>
+              <tr>
+                <td>Cambio de base</td>
+                <td>\(\log_{a}(b) = \ln(b)/\ln(a).\)</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ \log_a(xy)=\log_a(x)+\log_a(y)\qquad
+              \log_a\left(\frac{x}{y}\right)=\log_a(x)-\log_a(y) \] \[
+              \log_a(x^n)=n\cdot\log_a(x)\qquad \log_a(a)=1\qquad \log_a(1)=0 \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph LR
+E[2 elevado 3 = 8] --&gt; L[log base 2 de 8 = 3]
+L --&gt; I[Inversas: se deshacen]
+I --&gt; D[Dominio x mayor que 0]</pre
+            >
+            <pre>y = log₂(x): pasa por (1,0), asíntota x = 0, espejo de 2ˣ</pre>
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Simplifica log(20) − log(4) + log(2) (base 10).</p>
+            <ol>
+              <li>Resta = cociente: \(\log(20/4)\) = log(5).</li>
+              <li>Suma = producto: log(5) + log(2) = log(10).</li>
+              <li>log(10) = 1. ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> repartir el log sobre una suma
+            (log(a+b) no se separa); pedir logaritmo de negativos; olvidar que
+            \(\log_{a}(x)\) exige \(x \gt 0.\)
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> el pH (\(-log[H^{+}]\)) y
+            muchas escalas de laboratorio son logarítmicas.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. \(log_{2}(32)\) =</p>
+              <label><input type="radio" name="c2_l09_q1" value="a" /> 4</label
+              ><label><input type="radio" name="c2_l09_q1" value="b" /> 5</label
+              ><label
+                ><input type="radio" name="c2_l09_q1" value="c" /> 16</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. log(5) + log(2) =</p>
+              <label><input type="radio" name="c2_l09_q2" value="a" /> 1</label
+              ><label
+                ><input type="radio" name="c2_l09_q2" value="b" /> log(7)</label
+              ><label
+                ><input type="radio" name="c2_l09_q2" value="c" /> 10</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. El dominio de ln(x) es…</p>
+              <label
+                ><input type="radio" name="c2_l09_q3" value="a" /> todo ℝ</label
+              ><label
+                ><input type="radio" name="c2_l09_q3" value="b" /> \(x \ge
+                0\)</label
+              ><label
+                ><input type="radio" name="c2_l09_q3" value="c" /> \(x \gt
+                0\)</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l10">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 10</span>
+          <h3>Ecuaciones exponenciales y logarítmicas</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que la incógnita está encerrada en una caja fuerte: en
+              \(2^{x} = 16\) está encerrada en el exponente, y en \(log_{2}(x) =
+              5\) está dentro del logaritmo. Cada caja se abre con su llave: si
+              las bases son iguales, iguala exponentes \((2^{x} = 2^{4} \to
+              x\)\(2^{4} \to x\)\(2^{4} \to x = 4);\) si no, aplica logaritmo a
+              ambos lados y baja el exponente con la ley de la potencia. Para
+              las logarítmicas, convierte a forma exponencial \((log_{2}(x) = 5
+              \to x\)\(5 \to x\)\(5 \to x = 2^{5}\)\(2^{5} = 32) o\) condensa
+              todo a un solo logaritmo y luego exponencia.
+            </p>
+            <p>
+              Piensa en la verificación como el detector de billetes falsos: en
+              las logarítmicas debes descartar cualquier solución que deje un
+              argumento \(\le \) 0, porque no existe su logaritmo. En log(x) +
+              log(x−3) = 1 primero condensas a log(x(x−3)) = 1, exponencias a
+              x(x−3) = 10, resuelves la cuadrática y descartas la raíz que anule
+              los argumentos. Estrategia ganadora: aísla, convierte con la
+              función inversa y verifica el dominio.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Ecuación exponencial</td>
+                <td>Incógnita en el exponente.</td>
+              </tr>
+              <tr>
+                <td>Ecuación logarítmica</td>
+                <td>Incógnita dentro de un logaritmo.</td>
+              </tr>
+              <tr>
+                <td>Solución extraña</td>
+                <td>Anula o negativiza un argumento de log; se descarta.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ a^x=a^y\Rightarrow x=y\qquad a^x=b\Rightarrow
+              x=\frac{\log(b)}{\log(a)} \] \[ \log_a(x)=y\Rightarrow x=a^y\qquad
+              \ln(e^x)=x\qquad e^{\ln x}=x\ (x\gt 0) \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+E[Ecuacion] --&gt; T{Tipo?}
+T --&gt;|Exponente| L1[Iguala bases o aplica log]
+T --&gt;|Logaritmo| L2[Convierte a exponencial]
+L1 --&gt; V[Verifica]
+L2 --&gt; V</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Resuelve \(3^{x} = 20.\)</p>
+            <ol>
+              <li>Aplica ln a ambos lados: \(x\cdot \ln(3)\) = ln(20).</li>
+              <li>Despeja: \(x = \ln(20)/\ln(3).\)</li>
+              <li>Aproxima: \(\approx 2.996/1.099 \approx 2.73.\) ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> "bajar" el exponente sin usar
+            logaritmo; aceptar soluciones con argumento de \(log \le 0;\)
+            igualar exponentes con bases distintas.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> despejar el tiempo en la
+            eliminación de un fármaco (decaimiento exponencial) exige resolver
+            ecuaciones logarítmicas.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. Si \(5^{x} = 25, x\) =</p>
+              <label><input type="radio" name="c2_l10_q1" value="a" /> 5</label
+              ><label><input type="radio" name="c2_l10_q1" value="b" /> 2</label
+              ><label
+                ><input type="radio" name="c2_l10_q1" value="c" /> 125</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. Si \(log_{3}(x) = 2, x\) =</p>
+              <label><input type="radio" name="c2_l10_q2" value="a" /> 9</label
+              ><label><input type="radio" name="c2_l10_q2" value="b" /> 6</label
+              ><label
+                ><input type="radio" name="c2_l10_q2" value="c" /> 8</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. Al resolver log(x−5) = 1 (base 10) se obtiene…
+              </p>
+              <label
+                ><input type="radio" name="c2_l10_q3" value="a" /> \(x =
+                1\)</label
+              ><label
+                ><input type="radio" name="c2_l10_q3" value="b" /> \(x =
+                6\)</label
+              ><label
+                ><input type="radio" name="c2_l10_q3" value="c" /> \(x =
+                15\)</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l11">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 11</span>
+          <h3>PAA Mat: aritmética, porcentajes, razones y proporciones</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que la sección de aritmética de la PAA es como la caja de
+              herramientas básica del médico: fracciones, decimales, porcentajes
+              y proporciones aparecen en cada dosis y cada estadística. La PAA
+              no pide cálculos monstruosos sino decisiones rápidas: ordenar
+              fracciones (3/5 vs 2/3) convirtiendo a decimal o a común
+              denominador, encadenar porcentajes (un aumento del 20% seguido de
+              un descuento del 20% NO regresa al precio original) y plantear
+              proporciones con la receta de la lección 3 de la Clase 1.
+            </p>
+            <p>
+              Piensa en cada pregunta como un mini-caso con tres movimientos:
+              identifica qué te piden (parte, total o tasa), traduce al modelo
+              correcto (parte = tasa \(\times \) total) y estima antes de
+              calcular para eliminar distractores absurdos. Para "¿qué % de 80
+              es 20?" divide \(20/80 = 0.25\) = 25%. Para repartos
+              proporcionales divide en partes según la razón dada. Y cuidado con
+              el distractor clásico: "30% más" significa multiplicar por 1.30,
+              no sumar 30.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Porcentaje</td>
+                <td>Tasa por cada 100: p% = p/100.</td>
+              </tr>
+              <tr>
+                <td>Razón / proporción</td>
+                <td>Comparación y su igualdad al escalar.</td>
+              </tr>
+              <tr>
+                <td>Estimación</td>
+                <td>Aproximación previa para descartar opciones.</td>
+              </tr>
+              <tr>
+                <td>Distractor</td>
+                <td>Opción incorrecta diseñada para el error típico.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ \text{parte}=\text{tasa}\times\text{total}\qquad
+              \text{tasa}=\frac{\text{parte}}{\text{total}} \] \[
+              \text{“}x\%\text{
+              más”}\Rightarrow\times\left(1+\frac{x}{100}\right)\qquad\text{“}x\%\text{
+              menos”}\Rightarrow\times\left(1-\frac{x}{100}\right) \] \[
+              \frac{a}{b}=\frac{c}{d}\Rightarrow ad=bc \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+P[PAA aritmetica] --&gt; I[1 Identifica: parte total o tasa]
+I --&gt; M[2 Modelo: parte = tasa x total]
+M --&gt; E[3 Estima y elimina distractores]
+E --&gt; C[4 Calcula exacto]</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Un fármaco cuesta $40 y sube 25%. ¿Nuevo precio?</p>
+            <ol>
+              <li>Factor: 1 + \(0.25 = 1.25.\)</li>
+              <li>Precio: \(40 \times 1.25 = 50.\)</li>
+              <li>Verifica: el aumento fue $10 = 25% de 40. ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> creer que +20% y −20% se
+            cancelan; confundir "es el 30%" con "aumentó 30%"; operar fracciones
+            sin común denominador.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> concentraciones,
+            diluciones y prevalencias (%) son aritmética PAA todos los días.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. ¿Qué % de 200 es 50?</p>
+              <label
+                ><input type="radio" name="c2_l11_q1" value="a" /> 20%</label
+              ><label
+                ><input type="radio" name="c2_l11_q1" value="b" /> 25%</label
+              ><label
+                ><input type="radio" name="c2_l11_q1" value="c" /> 40%</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. $80 con 30% de descuento cuesta…</p>
+              <label
+                ><input type="radio" name="c2_l11_q2" value="a" /> $56</label
+              ><label
+                ><input type="radio" name="c2_l11_q2" value="b" /> $50</label
+              ><label
+                ><input type="radio" name="c2_l11_q2" value="c" /> $24</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. ¿Cuál fracción es mayor?</p>
+              <label
+                ><input type="radio" name="c2_l11_q3" value="a" /> 3/5</label
+              ><label
+                ><input type="radio" name="c2_l11_q3" value="b" /> 1/2</label
+              ><label
+                ><input type="radio" name="c2_l11_q3" value="c" /> 2/3</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l12">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 12</span>
+          <h3>PAA Mat: álgebra — evaluar, simplificar y valor absoluto</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que las preguntas de álgebra de la PAA son como recetas
+              que debes probar con números concretos: cuando dudes entre
+              opciones, sustituye un valor fácil (0, 1, 2) y descarta las que
+              fallen. Esa técnica de "probar casos" resuelve simplificaciones,
+              equivalencias y valor absoluto sin pelear con la teoría. Evaluar
+              f(−2), reducir 3x − (x−4) o resolver |2x−1| = 5 son los tres
+              sabores que más se repiten.
+            </p>
+            <p>
+              Piensa en el valor absoluto como la distancia: |x| = 3 significa
+              "está a 3 del cero", o sea \(x = 3 o x\) = −3. Para |2x − 1| = 5
+              abres dos casos: 2x−1 = \(5 (x = 3) y\) 2x−1 = −5 (x = −2). Y al
+              simplificar, respeta la jerarquía: paréntesis primero, distribuye
+              el signo menos a TODO el paréntesis y combina solo semejantes. Si
+              una expresión con variables te confunde, dale valores a las letras
+              y mira cuál opción sobrevive.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Evaluar</td>
+                <td>Sustituir valores y calcular.</td>
+              </tr>
+              <tr>
+                <td>Simplificar</td>
+                <td>Reducir a su forma mínima equivalente.</td>
+              </tr>
+              <tr>
+                <td>Valor absoluto</td>
+                <td>Distancia al cero; |x| = a da dos casos.</td>
+              </tr>
+              <tr>
+                <td>Probar casos</td>
+                <td>Sustituir números fáciles para descartar opciones.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ |x|=a\ (a\ge 0)\Rightarrow x=a\text{ o }x=-a \] \[
+              -(a+b)=-a-b\qquad ax+bx=(a+b)x \] \[ \text{Si dudas: sustituye
+              }x=0,1,2\text{ y compara opciones} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+A[PAA algebra] --&gt; E[Evaluar: sustituye]
+A --&gt; S[Simplificar: signos y semejantes]
+A --&gt; V[Valor absoluto: dos casos]
+V --&gt; P[Prueba casos 0 1 2]</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Resuelve |2x − 1| = 5.</p>
+            <ol>
+              <li>Caso 1: 2x − \(1 = 5 \to x\)\(5 \to x\)\(5 \to x = 3.\)</li>
+              <li>Caso 2: 2x − 1 = −5 \(\to \) x = −2.</li>
+              <li>Verifica ambas: |5| = 5 y |−5| = 5. ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> olvidar el segundo caso del
+            valor absoluto; distribuir el menos solo al primer término; elegir
+            la opción que "se parece" sin sustituir.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> los rangos de referencia
+            (|valor − objetivo| \(\le \) tolerancia) son desigualdades de valor
+            absoluto.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">1. Si 3x − (x − 4) se simplifica a…</p>
+              <label
+                ><input type="radio" name="c2_l12_q1" value="a" /> 2x + 4</label
+              ><label
+                ><input type="radio" name="c2_l12_q1" value="b" /> 2x − 4</label
+              ><label
+                ><input type="radio" name="c2_l12_q1" value="c" /> 4x + 4</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">2. Las soluciones de |x − 2| = 3 son…</p>
+              <label
+                ><input type="radio" name="c2_l12_q2" value="a" /> \(x =
+                5\)</label
+              ><label
+                ><input type="radio" name="c2_l12_q2" value="b" /> \(x = 5 y x\)
+                = −1</label
+              ><label
+                ><input type="radio" name="c2_l12_q2" value="c" /> \(x = 1 y x\)
+                = −5</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. Si P(x) = \(x^{2}\) − 3x, P(−1) =</p>
+              <label><input type="radio" name="c2_l12_q3" value="a" /> −4</label
+              ><label
+                ><input type="radio" name="c2_l12_q3" value="b" /> −2</label
+              ><label
+                ><input type="radio" name="c2_l12_q3" value="c" /> 4</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l13">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 13</span>
+          <h3>PAA Mat: geometría y medición</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que la geometría de la PAA es como el plano de un
+              arquitecto: casi todo se resuelve con media docena de fórmulas y
+              un dibujo rápido. Dibuja SIEMPRE la figura aunque el enunciado la
+              describa, marca los datos y persigue el ángulo o lado faltante con
+              la suma de 180° en triángulos, Pitágoras en rectángulos y las
+              áreas básicas. La PAA ama los tríos \(3-4-5\) y \(5-12-13\), los
+              cuadrados inscritos y las preguntas de perímetro sombreado.
+            </p>
+            <p>
+              Piensa en medir como comparar con una unidad: el perímetro bordea,
+              el área cubre y el volumen llena. Memoriza el kit: rectángulo \(A
+              = b\cdot h,\) triángulo \(A = b\cdot h/2,\) círculo \(A = \pi
+              r^{2} y P\)\(\pi r^{2} y P = 2\pi r,\) cubo \(V = l^{3} y\)
+              cilindro \(V = \pi r^{2}h.\) Convierte unidades antes de operar
+              \((1 m = 100\) cm) y desconfía de figuras "a escala engañosa":
+              mide con fórmulas, no con la vista. Un dibujo propio vale más que
+              releer el enunciado tres veces.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Perímetro / área / volumen</td>
+                <td>Contorno, superficie y capacidad.</td>
+              </tr>
+              <tr>
+                <td>Hipotenusa</td>
+                <td>Lado mayor del triángulo rectángulo.</td>
+              </tr>
+              <tr>
+                <td>Figura compuesta</td>
+                <td>Se parte en figuras simples y se suma/resta.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ \text{Triángulo: }A=\frac{b\cdot h}{2},\ \text{ángulos suman
+              }180^\circ \] \[ c^2=a^2+b^2\qquad\text{Círculo: }A=\pi r^2,\
+              P=2\pi r \] \[ \text{Cubo: }V=l^3\qquad\text{Cilindro: }V=\pi r^2h
+              \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+G[Dibuja la figura] --&gt; B{Que piden?}
+B --&gt; AN[Angulo: suma 180 y opuestos]
+B --&gt; LA[Lado: Pitagoras]
+B --&gt; AR[Area o volumen: formula]</pre
+            >
+            <pre>
+┌─────┐  Rectángulo b×h: P = 2(b+h), A = b·h
+└─────┘ Diagonal = √(b²+h²)</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Un rectángulo mide 6 \(\times \) 8. Halla su diagonal y su área.
+            </p>
+            <ol>
+              <li>
+                Diagonal: \(d = \sqrt{36+64}\)\(\sqrt{36+64} =
+                \sqrt{1}00\)\(\sqrt{1}00 = 10.\)
+              </li>
+              <li>Área: \(A = 6\cdot 8\)\(6\cdot 8 = 48.\)</li>
+              <li>Perímetro: 2(6+8) = 28. ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> usar el diámetro como radio;
+            mezclar unidades (cm con m); calcular el área cuando piden
+            perímetro.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> estimar superficies
+            corporales y volúmenes de órganos es geometría clínica directa.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                1. La diagonal de un cuadrado de lado 1 mide…
+              </p>
+              <label><input type="radio" name="c2_l13_q1" value="a" /> 1</label
+              ><label
+                ><input type="radio" name="c2_l13_q1" value="b" />
+                \(\sqrt{2}\)</label
+              ><label
+                ><input type="radio" name="c2_l13_q1" value="c" /> 2</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. El volumen de un cubo de lado 3 es…</p>
+              <label><input type="radio" name="c2_l13_q2" value="a" /> 27</label
+              ><label
+                ><input type="radio" name="c2_l13_q2" value="b" /> 18</label
+              ><label
+                ><input type="radio" name="c2_l13_q2" value="c" /> 9</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. Un ángulo de un triángulo mide 90° y otro 35°. El tercero
+                mide…
+              </p>
+              <label
+                ><input type="radio" name="c2_l13_q3" value="a" /> 45°</label
+              ><label
+                ><input type="radio" name="c2_l13_q3" value="b" /> 65°</label
+              ><label
+                ><input type="radio" name="c2_l13_q3" value="c" /> 55°</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l14">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 14</span>
+          <h3>PAA Mat: interpretación de datos — tablas y gráficas</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que una tabla o gráfica es como el tablero de un hospital:
+              condensa cientos de pacientes en unas líneas que debes leer sin
+              hacer cuentas eternas. La PAA prueba si lees ejes, leyendas y
+              unidades antes de operar: en barras comparas alturas, en líneas
+              sigues tendencias, en circulares cada sector es una fracción del
+              total y en tablas sumas filas o columnas según lo que pidan. El
+              promedio (media), la mediana (valor central) y la moda (más
+              frecuente) son el vocabulario mínimo.
+            </p>
+            <p>
+              Piensa en cada pregunta de datos como una receta de tres pasos:
+              localiza (¿qué fila, barra o sector importa?), extrae (lee el
+              número con sus unidades) y opera solo al final (diferencia, suma o
+              porcentaje). Para "¿qué % del total representa A?" divide A entre
+              el total. Desconfía de ejes truncados que exageran diferencias y
+              de gráficas sin etiquetas: si falta la unidad, la comparación es
+              trampa. La estimación visual primero, el cálculo exacto después.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Media / mediana / moda</td>
+                <td>Promedio, valor central y valor más frecuente.</td>
+              </tr>
+              <tr>
+                <td>Gráfica de barras / líneas / circular</td>
+                <td>
+                  Comparan categorías, muestran evolución o partes de un total.
+                </td>
+              </tr>
+              <tr>
+                <td>Tendencia</td>
+                <td>Dirección general de los datos en el tiempo.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ \text{Media}=\frac{\text{suma}}{n}\qquad \%\text{ de
+              }A=\frac{A}{\text{total}}\times 100 \] \[ \text{Cambio
+              }\%=\frac{\text{nuevo}-\text{viejo}}{\text{viejo}}\times
+              100\qquad\text{Mediana: ordena y toma el centro} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+D[Grafica o tabla] --&gt; L[1 Lee ejes leyenda unidades]
+L --&gt; E[2 Extrae solo el dato pedido]
+E --&gt; O[3 Opera: diferencia suma o porcentaje]</pre
+            >
+            <pre>
+Barras: ▂▄▆ → compara alturas · Circular: sector/total = %
+Tabla ejemplo (grupo sanguíneo, n = 40):
+| Grupo | O | A | B | AB |
+| n |16 |12 | 8 | 4 |
+| % |40 |30 |20 | 10 |
+Barras (n por grupo):
+O |████████████████ 16
+A |████████████ 12
+B |████████ 8
+AB |████ 4</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Notas: 7, 8, 8, 9, 13. Halla media y mediana.</p>
+            <ol>
+              <li>Media: \((7+8+8+9+13)/5 = 45/5\)\(45/5 = 9.\)</li>
+              <li>Mediana: datos ordenados, el centro es 8.</li>
+              <li>Moda: 8 (se repite). ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> calcular la mediana sin
+            ordenar; confundir el total de una circular; leer el eje equivocado
+            en gráficas dobles.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> leer tablas de
+            laboratorio y curvas epidemiológicas es interpretación de datos
+            clínica.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. La mediana de 3, 1, 4, 1, 5 es…</p>
+              <label><input type="radio" name="c2_l14_q1" value="a" /> 1</label
+              ><label><input type="radio" name="c2_l14_q1" value="b" /> 3</label
+              ><label
+                ><input type="radio" name="c2_l14_q1" value="c" /> 2.8</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                2. Si un sector circular es 1/4 del total, representa…
+              </p>
+              <label
+                ><input type="radio" name="c2_l14_q2" value="a" /> 25%</label
+              ><label
+                ><input type="radio" name="c2_l14_q2" value="b" /> 40%</label
+              ><label
+                ><input type="radio" name="c2_l14_q2" value="c" /> 75%</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. Ventas: 100 en enero, 130 en febrero. El aumento % es…
+              </p>
+              <label
+                ><input type="radio" name="c2_l14_q3" value="a" /> 13%</label
+              ><label
+                ><input type="radio" name="c2_l14_q3" value="b" /> 130%</label
+              ><label
+                ><input type="radio" name="c2_l14_q3" value="c" /> 30%</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l15">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 15</span>
+          <h3>PAA Mat: razonamiento matemático y estrategia de examen</h3>
+          <span class="lesson-time">⏱ ~12 min</span
+          ><label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que la PAA es como una guardia médica: no gana quien sabe
+              más, sino quien decide mejor bajo presión. El razonamiento
+              matemático premia traducir, estimar y descartar antes que
+              calcular: prueba casos con números fáciles, trabaja hacia atrás
+              desde las opciones (sustituye cada alternativa en la ecuación) y
+              dibuja cada problema de geometría o conteo. Las opciones suelen
+              esconder el procedimiento: si piden un valor par, elimina los
+              impares sin hacer la cuenta completa.
+            </p>
+            <p>
+              Piensa en tu estrategia como un protocolo de triaje: primera
+              pasada responde lo fácil y marca lo dudoso; segunda pasada ataca
+              lo marcado; nunca dejes preguntas en blanco si no hay penalización
+              (verifica con USFQ / College Board las reglas vigentes).
+              Administra el tiempo en bloques, desconfía de la primera intuición
+              en problemas con "trampa de lectura" (unidades mezcladas,
+              "excepto", "no") y reserva minutos finales para revisar traslados
+              de respuesta. La calma también puntúa: respira, lee dos veces y
+              ataca.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Trabajar hacia atrás</td>
+                <td>Probar las opciones en el enunciado.</td>
+              </tr>
+              <tr>
+                <td>Probar casos</td>
+                <td>Usar números simples para detectar el patrón.</td>
+              </tr>
+              <tr>
+                <td>Triaje de preguntas</td>
+                <td>Responder fácil primero, marcar y volver.</td>
+              </tr>
+              <tr>
+                <td>Trampa de lectura</td>
+                <td>Detalle (unidad, negación) que cambia la respuesta.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+            <div>
+              \[ \text{Protocolo: lee 2
+              veces}\to\text{estima}\to\text{descarta}\to\text{calcula}\to\text{verifica}
+              \] \[ \text{Hacia atrás: sustituye cada opción en la ecuación} \]
+              \[ \text{Tiempo: bloque por pregunta, marca y sigue, repasa al
+              final} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph TD
+E[Examen] --&gt; P1[Pasada 1: faciles]
+P1 --&gt; P2[Pasada 2: marcadas]
+P2 --&gt; R[Revisa traslados y trampas]
+R --&gt; F[No dejes blancos si no penaliza]</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              ¿Qué valor de x satisface 2x + \(6 = 20?\) Opciones: 5, 7, 8, 10.
+            </p>
+            <ol>
+              <li>Prueba hacia atrás: 2(7)+6 = 20. ✔</li>
+              <li>Sin despejar: la opción 7 funciona, las demás no.</li>
+              <li>Estrategia válida cuando despejar toma más tiempo.</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> quedarse atascado en una
+            pregunta difícil; trasladar mal la respuesta a la hoja; ignorar
+            unidades y negaciones del enunciado.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> el triaje de urgencias y
+            el diagnóstico diferencial usan la misma lógica: descarta, prioriza
+            y verifica.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">1. Ante una pregunta difícil, lo mejor es…</p>
+              <label
+                ><input type="radio" name="c2_l15_q1" value="a" /> marcarla,
+                seguir y volver después</label
+              ><label
+                ><input type="radio" name="c2_l15_q1" value="b" /> quedarse
+                hasta resolverla</label
+              ><label
+                ><input type="radio" name="c2_l15_q1" value="c" /> responder al
+                azar sin leer</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">2. "Trabajar hacia atrás" significa…</p>
+              <label
+                ><input type="radio" name="c2_l15_q2" value="a" /> empezar por
+                la última pregunta</label
+              ><label
+                ><input type="radio" name="c2_l15_q2" value="b" /> probar las
+                opciones en el enunciado</label
+              ><label
+                ><input type="radio" name="c2_l15_q2" value="c" /> borrar y
+                empezar de cero</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. Si x + \(5 = 12,\) ¿qué opción es correcta? (7, 8, 9, 17)
+              </p>
+              <label><input type="radio" name="c2_l15_q3" value="a" /> 8</label
+              ><label
+                ><input type="radio" name="c2_l15_q3" value="b" /> 17</label
+              ><label
+                ><input type="radio" name="c2_l15_q3" value="c" /> 7</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+      <div class="clasnav">
+        <a class="action-btn" href="clase1.html">Clase anterior</a
+        ><a class="action-btn" href="index.html">🏠 Volver al inicio</a
+        ><a class="action-btn" href="clase3.html">Clase siguiente ➡</a>
+      </div>
+    </main>
+    <footer>
+      Curso Intensivo de Preparación USFQ — Medicina · Tu progreso se guarda en
+      este navegador.
+    </footer>
+    <script>
+      const CLASE_ID = "clase2"; // ← clase1, clase2, clase3, clase4 o clase5
+      const STORE_KEY = "medcurso_v2_done";
+      function loadDone() {
+        try {
+          return JSON.parse(localStorage.getItem(STORE_KEY)) || {};
+        } catch (e) {
+          return {};
+        }
+      }
+      function saveDone(d) {
+        try {
+          localStorage.setItem(STORE_KEY, JSON.stringify(d));
+        } catch (e) {}
+      }
+
+      function openLesson(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.add("open");
+        if (typeof mmScan === "function") mmScan(el);
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      document.querySelectorAll(".lesson-header").forEach((h) => {
+        h.addEventListener("click", (e) => {
+          if (e.target.closest(".lesson-done")) return;
+          h.parentElement.classList.toggle("open");
+          if (
+            h.parentElement.classList.contains("open") &&
+            typeof mmScan === "function"
+          )
+            mmScan(h.parentElement);
+        });
+      });
+
+      document.querySelectorAll(".lesson-done input").forEach((cb) => {
+        cb.addEventListener("change", () => {
+          const lid = cb.closest(".lesson").id;
+          const d = loadDone();
+          d[CLASE_ID + ":" + lid] = cb.checked;
+          saveDone(d);
+          cb.closest(".lesson").classList.toggle("done", cb.checked);
+          refreshProgress();
+        });
+      });
+
+      function refreshProgress() {
+        const lessons = document.querySelectorAll(".lesson");
+        const done = loadDone();
+        let d = 0;
+        lessons.forEach((l) => {
+          if (done[CLASE_ID + ":" + l.id]) d++;
+        });
+        const pct = lessons.length ? Math.round((d / lessons.length) * 100) : 0;
+        const bar = document.getElementById("classProgressBar");
+        const txt = document.getElementById("classProgressText");
+        if (bar) bar.style.width = pct + "%";
+        if (txt)
+          txt.textContent =
+            d +
+            " de " +
+            lessons.length +
+            " lecciones completadas (" +
+            pct +
+            "%)";
+      }
+      (function () {
+        const done = loadDone();
+        document.querySelectorAll(".lesson").forEach((l) => {
+          if (done[CLASE_ID + ":" + l.id]) {
+            l.classList.add("done");
+            const cb = l.querySelector(".lesson-done input");
+            if (cb) cb.checked = true;
+          }
+        });
+        refreshProgress();
+      })();
+
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".quiz-check");
+        if (!btn) return;
+        const box = btn.closest(".mini-quiz");
+        let correct = 0,
+          total = 0;
+        box.querySelectorAll(".quiz-q").forEach((q) => {
+          total++;
+          const val = q.dataset.correct;
+          const sel = q.querySelector("input:checked");
+          q.querySelectorAll("label").forEach((l) => (l.style.background = ""));
+          if (sel && sel.value === val) {
+            correct++;
+            sel.parentElement.style.background = "#d4f4dd";
+          } else {
+            if (sel) sel.parentElement.style.background = "#fbd7d2";
+            const ok = q.querySelector('input[value="' + val + '"]');
+            if (ok) ok.parentElement.style.background = "#d4f4dd";
+          }
+        });
+        const res = box.querySelector(".quiz-result");
+        if (res)
+          res.textContent =
+            "Resultado: " + correct + "/" + total + " correctas";
+      });
+
+      if (window.mermaid) {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: "neutral",
+          securityLevel: "loose",
+        });
+      }
+      function mmScan(root) {
+        if (!window.mermaid) return;
+        const list =
+          root && root.querySelectorAll
+            ? root.querySelectorAll("pre.mermaid")
+            : [];
+        list.forEach((el) => {
+          if (el.getAttribute("data-processed")) return;
+          if (el.offsetParent === null) return; // oculto: esperar a que se abra la lección
+          try {
+            mermaid.run({ nodes: [el] });
+          } catch (e) {}
+        });
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        mmScan(document);
+      });
+
+      window.addEventListener("load", () => {
+        mmScan(document);
+      });
+    </script>
+  </body>
+</html>

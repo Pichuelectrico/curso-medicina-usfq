@@ -1,0 +1,3573 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 3 · Química — Curso Intensivo Medicina USFQ</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <style>
+      :root {
+        --azul: #c8102e;
+        --azul-dark: #7a0c1e;
+        --verde: #1e9e6a;
+        --rojo: #c0392b;
+        --amarillo: #b8860b;
+        --gris: #f4f6f8;
+        --texto: #223;
+        --borde: #e1e6ea;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        background: var(--gris);
+        color: var(--texto);
+        line-height: 1.6;
+      }
+      header.hero {
+        background: linear-gradient(135deg, var(--azul-dark), var(--azul));
+        color: #fff;
+        padding: 36px 20px;
+        text-align: center;
+      }
+      header.hero h1 {
+        margin: 0 0 8px;
+        font-size: 1.9rem;
+      }
+      header.hero p {
+        margin: 4px 0;
+        opacity: 0.92;
+      }
+      .badges {
+        margin-top: 14px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .badge {
+        background: rgba(255, 255, 255, 0.16);
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+      }
+      .topnav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #fff;
+        border-bottom: 1px solid var(--borde);
+        display: flex;
+        overflow-x: auto;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+      .topnav a {
+        flex: 0 0 auto;
+        padding: 13px 16px;
+        color: #555;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.92rem;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+      }
+      .topnav a:hover {
+        color: var(--azul-dark);
+        background: #f8f0f0;
+      }
+      .topnav a.current {
+        color: var(--azul);
+        border-bottom: 3px solid var(--azul);
+      }
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 26px 20px 80px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        padding: 22px 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      .card h2 {
+        color: var(--azul-dark);
+        margin-top: 0;
+        border-bottom: 2px solid var(--azul);
+        padding-bottom: 8px;
+      }
+      .progress-wrap {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 22px;
+      }
+      .progress-bar-bg {
+        background: #ede6e6;
+        border-radius: 10px;
+        height: 14px;
+        overflow: hidden;
+        margin-top: 8px;
+      }
+      .progress-bar-fill {
+        background: linear-gradient(90deg, var(--verde), #27ae60);
+        height: 100%;
+        width: 0%;
+        transition: width 0.4s ease;
+      }
+      .progress-text {
+        font-size: 0.9rem;
+        color: #555;
+        margin-top: 6px;
+      }
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .topic-link {
+        background: #fff;
+        border: 1.5px solid var(--azul);
+        color: var(--azul-dark);
+        border-radius: 10px;
+        padding: 10px 12px;
+        text-align: left;
+        cursor: pointer;
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+      .topic-link:hover {
+        background: #fdeeef;
+      }
+      table.plan {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0;
+      }
+      .plan th,
+      .plan td {
+        border: 1px solid var(--borde);
+        padding: 8px 10px;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+      .plan th {
+        background: var(--azul);
+        color: #fff;
+      }
+      .plan tr:nth-child(even) {
+        background: #fcf8f8;
+      }
+      .lesson {
+        background: #fff;
+        border: 1px solid var(--borde);
+        border-radius: 12px;
+        margin-bottom: 16px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      .lesson-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 18px;
+        cursor: pointer;
+        flex-wrap: wrap;
+      }
+      .lesson-header:hover {
+        background: #fbefef;
+      }
+      .lesson-num {
+        background: var(--azul);
+        color: #fff;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        padding: 3px 10px;
+        white-space: nowrap;
+      }
+      .lesson-header h3 {
+        margin: 0;
+        font-size: 1.05rem;
+        color: var(--azul-dark);
+        flex: 1;
+      }
+      .lesson-time {
+        color: #777;
+        font-size: 0.85rem;
+        white-space: nowrap;
+      }
+      .lesson-done {
+        font-size: 0.85rem;
+        cursor: pointer;
+        white-space: nowrap;
+        user-select: none;
+      }
+      .lesson-body {
+        display: none;
+        padding: 4px 22px 20px;
+        border-top: 1px dashed var(--borde);
+      }
+      .lesson.open .lesson-body {
+        display: block;
+      }
+      .lesson.done .lesson-header {
+        background: #eaf6ef;
+      }
+      .lesson.done .lesson-num {
+        background: var(--verde);
+      }
+      .teacher {
+        background: #fdeeef;
+        border-left: 4px solid var(--azul);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 16px 0;
+      }
+      .teacher p {
+        margin: 8px 0;
+      }
+      .keyterms table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      .keyterms th,
+      .keyterms td {
+        border: 1px solid var(--borde);
+        padding: 7px 10px;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+      .keyterms th {
+        background: #fdeeef;
+        color: var(--azul-dark);
+      }
+      .formula-box {
+        background: #fffbea;
+        border: 1.5px solid var(--amarillo);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 14px 0;
+      }
+      .formula-box h4 {
+        margin: 0 0 6px;
+        color: var(--amarillo);
+      }
+      .formula-box pre {
+        margin: 4px 0;
+        font-family: Consolas, Menlo, monospace;
+        font-size: 0.95rem;
+        background: none;
+        white-space: pre-wrap;
+      }
+      .diagram-box {
+        background: #fbf9f9;
+        border: 1px dashed #c89aa0;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 14px 0;
+        overflow-x: auto;
+      }
+      .diagram-box h4 {
+        margin: 0 0 6px;
+        color: #7a4a52;
+      }
+      .diagram-box pre {
+        margin: 6px 0;
+        font-family: Consolas, Menlo, monospace;
+        font-size: 0.85rem;
+        line-height: 1.35;
+      }
+      .example {
+        background: #f2fbf6;
+        border-left: 4px solid var(--verde);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+      }
+      .example ol {
+        margin: 8px 0 4px 22px;
+      }
+      .pitfall {
+        background: #fdecea;
+        border-left: 4px solid var(--rojo);
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 0.93rem;
+      }
+      .medlink {
+        background: #f3eefb;
+        border-left: 4px solid #7b4fb5;
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 0.93rem;
+      }
+      .mini-quiz {
+        border: 1.5px solid var(--azul);
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin: 16px 0;
+      }
+      .mini-quiz h4 {
+        margin: 0 0 10px;
+        color: var(--azul);
+      }
+      .quiz-q {
+        margin-bottom: 14px;
+        padding: 10px 12px;
+        border: 1px solid var(--borde);
+        border-radius: 8px;
+      }
+      .quiz-q p.question {
+        font-weight: 600;
+        margin: 0 0 8px;
+      }
+      .quiz-q label {
+        display: block;
+        padding: 5px 9px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-bottom: 3px;
+        font-size: 0.92rem;
+      }
+      .quiz-q label:hover {
+        background: #fbefef;
+      }
+      .quiz-q input {
+        margin-right: 8px;
+      }
+      .quiz-result {
+        font-weight: 700;
+        margin: 8px 0 0;
+      }
+      button.action-btn,
+      .action-btn {
+        display: inline-block;
+        background: var(--azul);
+        color: #fff;
+        border: none;
+        padding: 9px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      button.action-btn:hover,
+      .action-btn:hover {
+        background: var(--azul-dark);
+      }
+      footer {
+        text-align: center;
+        padding: 24px;
+        color: #888;
+        font-size: 0.85rem;
+      }
+      .clasnav {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 26px;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 700px) {
+        .lesson-header h3 {
+          font-size: 0.98rem;
+        }
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/mhchem.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+      onload="renderMathInElement(document.body,{delimiters:[{left:&#x27;$$&#x27;,right:&#x27;$$&#x27;,display:true},{left:&#x27;\\[&#x27;,right:&#x27;\\]&#x27;,display:true},{left:&#x27;\\(&#x27;,right:&#x27;\\)&#x27;,display:false}]})"
+    ></script>
+  </head>
+  <body>
+    <header class="hero">
+      <h1>⚗️ Clase 3/6 · Química</h1>
+      <p>Curso Intensivo de Preparación — Ingreso a Medicina USFQ</p>
+      <p>⏱ Duración: 3 horas · Módulo: Examen de Ciencias</p>
+      <div class="badges">
+        <span class="badge">16 lecciones</span
+        ><span class="badge">Del mol a las biomoléculas</span
+        ><span class="badge">Calculadora no programable</span>
+      </div>
+    </header>
+
+    <div class="topnav">
+      <a href="index.html">🏠 Inicio</a>
+      <a href="clase1.html">Clase 1</a>
+      <a href="clase2.html">Clase 2</a>
+      <a href="clase3.html" class="current">Clase 3</a>
+      <a href="clase4.html">Clase 4</a>
+      <a href="clase5.html">Clase 5</a>
+      <a href="clase6.html">Clase 6</a>
+    </div>
+
+    <main>
+      <div class="progress-wrap">
+        <strong>Progreso de esta clase</strong>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="classProgressBar"></div>
+        </div>
+        <div class="progress-text" id="classProgressText">
+          0 de 0 lecciones completadas (0%)
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>📚 Menú de temas — haz clic para abrir la clase</h2>
+        <p>
+          Cada tema abre una lección completa dictada por tu profesor:
+          explicación con analogías, términos y fórmulas clave, diagramas,
+          ejemplo resuelto y mini-quiz.
+        </p>
+        <div class="topic-grid">
+          <button class="topic-link" onclick="openLesson('l01')">
+            1 · Número de Avogadro y el mol
+          </button>
+          <button class="topic-link" onclick="openLesson('l02')">
+            2 · Molaridad y porcentajes
+          </button>
+          <button class="topic-link" onclick="openLesson('l03')">
+            3 · Molalidad y normalidad
+          </button>
+          <button class="topic-link" onclick="openLesson('l04')">
+            4 · El átomo y Bohr
+          </button>
+          <button class="topic-link" onclick="openLesson('l05')">
+            5 · Orbitales y configuración
+          </button>
+          <button class="topic-link" onclick="openLesson('l06')">
+            6 · Octeto y tabla periódica
+          </button>
+          <button class="topic-link" onclick="openLesson('l07')">
+            7 · Propiedades periódicas
+          </button>
+          <button class="topic-link" onclick="openLesson('l08')">
+            8 · Enlaces químicos
+          </button>
+          <button class="topic-link" onclick="openLesson('l09')">
+            9 · Estado iónico y oxidación
+          </button>
+          <button class="topic-link" onclick="openLesson('l10')">
+            10 · Exotérmicas y endotérmicas
+          </button>
+          <button class="topic-link" onclick="openLesson('l11')">
+            11 · Redox y balanceo
+          </button>
+          <button class="topic-link" onclick="openLesson('l12')">
+            12 · Ácido-base, pH y buffers
+          </button>
+          <button class="topic-link" onclick="openLesson('l13')">
+            13 · Velocidad y solubilidad
+          </button>
+          <button class="topic-link" onclick="openLesson('l14')">
+            14 · Orgánica \(\ce{I}\): hidrocarburos
+          </button>
+          <button class="topic-link" onclick="openLesson('l15')">
+            15 · Orgánica II: funcionales
+          </button>
+          <button class="topic-link" onclick="openLesson('l16')">
+            16 · Biomoléculas
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🗓️ Plan de la sesión (3 horas)</h2>
+        <table class="plan">
+          <tr>
+            <th>Bloque</th>
+            <th>Tiempo</th>
+            <th>Contenido</th>
+          </tr>
+          <tr>
+            <td>A</td>
+            <td>0:00 – 0:50</td>
+            <td>El mol y las concentraciones (l01–l03)</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>0:50 – 1:40</td>
+            <td>Átomo, tabla periódica y enlaces (l04–l09)</td>
+          </tr>
+          <tr>
+            <td>\(\ce{C}\)</td>
+            <td>1:40 – 2:30</td>
+            <td>Energía, redox y ácido-base (l10–l13)</td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>2:30 – 3:00</td>
+            <td>Química orgánica y biomoléculas (l14–l16)</td>
+          </tr>
+        </table>
+      </div>
+
+      <article class="lesson" id="l01">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 1</span>
+          <h3>Número de Avogadro y el concepto de mol</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina que trabajas vendiendo huevos: nunca los cuentas uno a
+              uno, los empaquetas en <em>docenas</em>. Los químicos hacen
+              exactamente lo mismo con los átomos, con un problema añadido: un
+              átomo es tan pequeño que ni con el mejor microscopio puedes verlo,
+              mucho menos contarlo. Así que inventaron un "paquete gigante" al
+              que llamaron <strong>mol</strong>: \(6{,}022\times 10^{23}\)
+              partículas (ese número es el <strong>número de Avogadro</strong>).
+              Un mol de átomos de carbono, un mol de moléculas de agua, un mol
+              de iones de sodio: siempre son \(6{,}022\times 10^{23}\) unidades
+              del paquete.
+            </p>
+            <p>
+              ¿Y por qué ese número tan raro y no uno redondo? Porque fue
+              elegido con una astucia genial: si tomas la masa atómica de un
+              elemento (la que ves en la tabla periódica, por ejemplo 12 para el
+              carbono) y la expresas en <strong>gramos</strong>, esa cantidad de
+              gramos contiene exactamente un mol de átomos. Es decir,
+              <strong
+                >12 g de carbono = 1 mol = \(6{,}022\times 10^{23}\)
+                átomos</strong
+              >. Ese puente —la <strong>masa molar</strong>— convierte el mundo
+              invisible de los átomos en algo que puedes pesar en una balanza de
+              laboratorio, que es la única cosa que sí sabemos medir bien.
+            </p>
+            <p>
+              Toda la estequiometría del examen se reduce a viajar por esta
+              carretera: <em>gramos \(\to \) moles \(\to \) partículas</em>.
+              Para ir de gramos a moles divides entre la masa molar; para ir de
+              moles a partículas multiplicas por el número de Avogadro. Si
+              memorizas esa carretera, la mitad de las preguntas cuantitativas
+              de Química ya están resueltas.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Mol (n)</td>
+                <td>
+                  Cantidad de sustancia que contiene \(6{,}022\times 10^{23}\)
+                  partículas.
+                </td>
+              </tr>
+              <tr>
+                <td>Número de Avogadro (\(\ce{N}\)<sub>A</sub>)</td>
+                <td>\(6{,}022\times 10^{23}\) partículas por mol.</td>
+              </tr>
+              <tr>
+                <td>Masa molar (M)</td>
+                <td>
+                  Masa de 1 mol de una sustancia, en g/mol; numéricamente igual
+                  a la masa atómica o molecular.
+                </td>
+              </tr>
+              <tr>
+                <td>Masa molecular</td>
+                <td>
+                  Suma de las masas atómicas de todos los átomos de la molécula.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+
+            <div>
+              \[ n=\frac{m}{M}\quad (n=\text{moles},\ m=\text{masa},\
+              M=\text{masa molar}) \] \[ m=n\times M\qquad N=n\times
+              6{,}022\times 10^{23}\quad (N=\text{partículas}) \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — la carretera del mol</h4>
+            <pre>
+          ÷ M (g/mol)                × 6,022×10²³
+ GRAMOS ────────────────► MOLES ────────────────► PARTÍCULAS
+        ◄────────────────        ◄────────────────
+          × M                      ÷ 6,022×10²³</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              ¿Cuántas moléculas hay en 36 g de agua? (M del \(H_{2}O = 18\)
+              g/mol)
+            </p>
+            <ol>
+              <li>
+                De gramos a moles: \(n = 36 \div 18\)\(36 \div 18 = 2\) mol.
+              </li>
+              <li>
+                De moles a moléculas: \(N = 2 \times 6{,}022\times 10^{23}\)\(2
+                \times 6{,}022\times 10^{23} = 1{,}204\times 10^{24}\)
+                moléculas.
+              </li>
+              <li>
+                Extra: cada molécula tiene 3 átomos \(\to \) hay 6 mol de átomos
+                en total.
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> multiplicar en vez de dividir
+            al pasar de gramos a moles (recuerda: gramos \(\div \) masa molar);
+            usar el número de Avogadro sobre gramos directamente (primero hay
+            que llegar a moles); confundir masa atómica (del elemento) con masa
+            molecular (de toda la molécula: el \(\ce{H2O}\) es 18, no 1 ni 16).
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> los electrolitos de la
+            sangre se reportan en mmol/L (milimoles por litro): el \(\ce{Na+}\)
+            normal es ~140 mmol/L. Cuando el residente ajusta un suero, está
+            usando la carretera del mol.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. ¿Cuántas partículas hay en 1 mol?</p>
+              <label
+                ><input type="radio" name="c3_l01_q1" value="a" />
+                \(3{,}011\times 10^{23}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l01_q1" value="b" />
+                \(6{,}022\times 10^{23}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l01_q1" value="c" /> 6022</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                2. ¿Qué masa tienen 2 mol de \(\ce{CO2}\)? \((M = 44\) g/mol)
+              </p>
+              <label
+                ><input type="radio" name="c3_l01_q2" value="a" /> 22 g</label
+              >
+              <label
+                ><input type="radio" name="c3_l01_q2" value="b" /> 44 g</label
+              >
+              <label
+                ><input type="radio" name="c3_l01_q2" value="c" /> 88 g</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                3. ¿Cuántos moles hay en 80 g de \(\ce{NaOH}\)? \((M = 40\)
+                g/mol)
+              </p>
+              <label
+                ><input type="radio" name="c3_l01_q3" value="a" /> 2 mol</label
+              >
+              <label
+                ><input type="radio" name="c3_l01_q3" value="b" /> \(0{,}5\)
+                mol</label
+              >
+              <label
+                ><input type="radio" name="c3_l01_q3" value="c" /> 3200
+                mol</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l02">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 2</span>
+          <h3>Molaridad y porcentajes % \ce{P}/V y % V/V</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Piensa en un bus: no dice "voy lleno de gente", dice "llevo 40
+              pasajeros". Lo que importa es
+              <em>cuántos por unidad de espacio</em>. La
+              <strong>molaridad</strong> hace eso con las disoluciones: cuenta
+              cuántos moles de soluto viajan en cada litro de disolución. Una
+              disolución 2 M tiene el doble de "pasajeros" por litro que una 1
+              M. Es la concentración favorita del laboratorio porque conecta
+              directo con las reacciones (que ocurren entre moles).
+            </p>
+            <p>
+              En el hospital, en cambio, verás porcentajes: el famoso
+              <strong>suero fisiológico \(0{,}9\) % \ce{P}/V</strong>. Ese
+              porcentaje significa "\(0{,}9\) g de soluto por cada 100 mL de
+              disolución". El <strong>% \ce{P}/V</strong> (peso/volumen) se usa
+              con sólidos disueltos en líquidos; el
+              <strong>% V/V</strong> (volumen/volumen) con líquidos mezclados,
+              como el alcohol 70° (70 mL de etanol por 100 mL de disolución). No
+              son escalas distintas de la realidad: son tres idiomas para decir
+              lo mismo, y un buen estudiante sabe traducir entre ellos.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Soluto</td>
+                <td>Lo que se disuelve (la sal del suero).</td>
+              </tr>
+              <tr>
+                <td>Solvente</td>
+                <td>Lo que disuelve (el agua).</td>
+              </tr>
+              <tr>
+                <td>Molaridad (M)</td>
+                <td>Moles de soluto por litro de disolución: mol/L.</td>
+              </tr>
+              <tr>
+                <td>% \ce{P}/V</td>
+                <td>Gramos de soluto por 100 mL de disolución.</td>
+              </tr>
+              <tr>
+                <td>% V/V</td>
+                <td>mL de soluto por 100 mL de disolución.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+
+            <div>
+              \[ M=\frac{n}{V}\quad (V\text{ en litros})\qquad n=M\times V \] \[
+              \%P/V=\frac{\text{g de soluto}}{100\text{ mL}}\qquad
+              \%V/V=\frac{\text{mL de soluto}}{100\text{ mL}} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — armar una disolución</h4>
+            <pre>
+   ┌─────────────┐      ┌─────────────┐      ┌──────────────────┐
+   │    SALUTO   │  +   │    AGUA     │  =   │    DISOLUCIÓN    │
+   │  (soluto)   │      │  (solvente) │      │  homogénea       │
+   └─────────────┘      └─────────────┘      └──────────────────┘
+   Molaridad: ¿cuántos moles del soluto viven en cada litro?</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              ¿Cuál es la molaridad del suero fisiológico \(0{,}9\) % \ce{P}/V?
+              (M del \(\ce{NaCl}\) = \(58{,}5\) g/mol)
+            </p>
+            <ol>
+              <li>
+                Traduce el porcentaje: \(0{,}9\) % \(P/V = 0{,}9 g\) por cada
+                100 mL \(\to \) en 1 L (1000 mL) hay 9 g de \(\ce{NaCl}\).
+              </li>
+              <li>
+                Gramos a moles: \(n = 9 \div 58{,}5\)\(9 \div 58{,}5 = 0{,}154\)
+                mol.
+              </li>
+              <li>
+                Molaridad: \(M = 0{,}154\) mol \(\div 1 L = 0{,}154 M\) (aprox.
+                \(0{,}15\) M, el famoso "suero salino \(0{,}15\) M").
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> meter mL donde la fórmula pide
+            litros (250 mL = \(0{,}25\) L); confundir \(0{,}9\) % con \(0{,}9\)
+            M (son idiomas distintos); olvidar que el % \ce{P}/V es por 100 mL,
+            no por 1 L.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> el adrenalina de
+            emergencia se diluye "1 mg en 10 mL" y los antibióticos se dosifican
+            en mg/mL: todo el día del médico es traducir entre porcentajes,
+            moles y volúmenes.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                1. ¿Cuántos gramos de \(\ce{NaCl}\) hay en 500 mL de suero
+                \(0{,}9\) % \ce{P}/V?
+              </p>
+              <label
+                ><input type="radio" name="c3_l02_q1" value="a" /> \(4{,}5\)
+                g</label
+              >
+              <label
+                ><input type="radio" name="c3_l02_q1" value="b" /> 9 g</label
+              >
+              <label
+                ><input type="radio" name="c3_l02_q1" value="c" /> 90 g</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                2. ¿Qué molaridad tiene \(0{,}5\) mol de glucosa en 250 mL?
+              </p>
+              <label
+                ><input type="radio" name="c3_l02_q2" value="a" /> \(0{,}125\)
+                M</label
+              >
+              <label
+                ><input type="radio" name="c3_l02_q2" value="b" /> 2 M</label
+              >
+              <label
+                ><input type="radio" name="c3_l02_q2" value="c" /> \(0{,}5\)
+                M</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. Un alcohol "70 % V/V" contiene…</p>
+              <label
+                ><input type="radio" name="c3_l02_q3" value="a" /> 70 g de
+                alcohol por 100 mL</label
+              >
+              <label
+                ><input type="radio" name="c3_l02_q3" value="b" /> 70 mL de agua
+                por 100 mL</label
+              >
+              <label
+                ><input type="radio" name="c3_l02_q3" value="c" /> 70 mL de
+                alcohol por 100 mL de disolución</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l03">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 3</span>
+          <h3>Molalidad y normalidad</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              La molaridad tiene un talón de Aquiles: el volumen cambia con la
+              temperatura (el calor expande líquidos). Si calientas una
+              disolución 1 M, su volumen crece y su molaridad baja… ¡sin que se
+              pierda ni un gramo de soluto! Para experimentos sensibles a la
+              temperatura se usa la <strong>molalidad</strong>: moles de soluto
+              por <strong>kilogramo de solvente</strong>. La masa no se dilata:
+              una balanza marca lo mismo en Quito o en el Sahara. Por eso la
+              molalidad es "la concentración anclada al suelo", y es la que
+              aparece en los problemas de descenso del punto de congelación y
+              elevación del punto de ebullición (por eso el anticongelante
+              funciona).
+            </p>
+            <p>
+              La <strong>normalidad</strong> (\(\ce{N}\)) es la concentración de
+              la <em>capacidad química real</em>: cuenta
+              <strong>equivalentes</strong> por litro. Un equivalente es la
+              porción que aporta o acepta 1 mol de carga \(\ce{H+}\) (en ácidos
+              y bases). El \(\ce{HCl}\) entrega \(1 H^{+}: 1 M = 1 N.\) Pero el
+              \(\ce{H2SO4}\) entrega \(2 H^{+}: 1 M = 2 N,\) porque cada
+              molécula "trabaja doble". Piénsalo como contratar mano de obra: la
+              molaridad cuenta empleados, la normalidad cuenta brazos que
+              realmente empujan.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Molalidad (m)</td>
+                <td>
+                  Moles de soluto por kilogramo de SOLVENTE (no de disolución).
+                </td>
+              </tr>
+              <tr>
+                <td>Normalidad (\(\ce{N}\))</td>
+                <td>Equivalentes-gramo de soluto por litro de disolución.</td>
+              </tr>
+              <tr>
+                <td>Equivalente-gramo</td>
+                <td>
+                  Masa que aporta o acepta 1 mol de \(\ce{H+}\) (ácidos/base) o
+                  1 mol de carga.
+                </td>
+              </tr>
+              <tr>
+                <td>Valencia</td>
+                <td>
+                  Número de \(\ce{H+}\) entregados (o de cargas) por unidad de
+                  soluto.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+
+            <div>
+              \[ m=\frac{n}{\text{kg de solvente}}\qquad
+              N=\frac{\text{equivalentes}}{L}=M\times\text{valencia} \] \[
+              \text{equivalentes}=\text{moles}\times v\quad (v=\text{n de
+              protones cedidos}) \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — comparando las tres concentraciones</h4>
+            <pre>
+  MOLARIDAD (M):  moles / LITRO de DISOLUCIÓN   (cambia con la T°)
+  MOLALIDAD (m):  moles / KILO de SOLVENTE      (no cambia con la T°)
+  NORMALIDAD (N): equivalentes / LITRO          (cuenta "brazos" reales)
+
+  1 mol H₂SO₄ ── entrega 2 H⁺ ──► 1 M = 2 N
+  1 mol HCl   ── entrega 1 H⁺ ──► 1 M = 1 N</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Disuelvo 49 g de \(\ce{H2SO4}\) \((M = 98\) g/mol) en agua hasta 1
+              L de disolución. Calcula M y \(\ce{N}\).
+            </p>
+            <ol>
+              <li>Moles: \(n = 49 \div 98\)\(49 \div 98 = 0{,}5\) mol.</li>
+              <li>
+                Molaridad: \(M = 0{,}5 \div 1\)\(0{,}5 \div 1 = 0{,}5 M.\)
+              </li>
+              <li>
+                El \(\ce{H2SO4}\) entrega 2 \(\ce{H+}\) por molécula \(\to \)
+                equivalentes = \(0{,}5 \times 2 = 1\) eq.
+              </li>
+              <li>
+                Normalidad: \(N = 1 \div 1\)\(1 \div 1 = 1 N.\) ✔ \((0{,}5 M = 1
+                N,\) tal como predice \(\ce{N}\) = M \(\times \) 2)
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> dividir entre kg de disolución
+            en vez de kg de SOLVENTE; usar la valencia del elemento en vez del
+            número de \(\ce{H+}\) entregados; olvidar que molalidad y molaridad
+            son cosas distintas aunque casi suenen igual.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> los gases sanguíneos y
+            electrolitos se reportan en mEq/L (¡miliequivalentes por litro!): el
+            \(\ce{K+}\) normal es 3,5–5 mEq/L, y una diferencia de 2 mEq puede
+            detener el corazón.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. La molalidad se expresa en…</p>
+              <label
+                ><input type="radio" name="c3_l03_q1" value="a" /> moles / litro
+                de disolución</label
+              >
+              <label
+                ><input type="radio" name="c3_l03_q1" value="b" /> moles / kg de
+                solvente</label
+              >
+              <label
+                ><input type="radio" name="c3_l03_q1" value="c" /> equivalentes
+                / litro</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                2. ¿Qué normalidad tiene una disolución \(0{,}2\) M de
+                \(\ce{H3PO4}\)? (entrega 3 \(\ce{H+}\))
+              </p>
+              <label
+                ><input type="radio" name="c3_l03_q2" value="a" /> \(0{,}6\)
+                \(\ce{N}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l03_q2" value="b" /> \(0{,}2\)
+                \(\ce{N}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l03_q2" value="c" /> \(0{,}067\)
+                \(\ce{N}\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. ¿Por qué la molalidad no cambia con la temperatura?
+              </p>
+              <label
+                ><input type="radio" name="c3_l03_q3" value="a" /> Porque usa
+                litros que se expanden igual</label
+              >
+              <label
+                ><input type="radio" name="c3_l03_q3" value="b" /> Porque los
+                moles se evaporan con el calor</label
+              >
+              <label
+                ><input type="radio" name="c3_l03_q3" value="c" /> Porque la
+                masa no se dilata, solo el volumen</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l04">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 4</span>
+          <h3>El átomo y la teoría de Bohr</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina un edificio: en el <strong>sótano</strong> está el núcleo,
+              minúsculo pero casi con todo el peso (protones y neutrones); en
+              los <strong>pisos</strong> viven los electrones, ligeros y
+              nerviosos. Bohr propuso que los electrones no viven en cualquier
+              lugar del edificio: cada uno ocupa un
+              <strong>nivel de energía</strong> fijo, como un piso numerado. Un
+              electrón puede saltar de piso, pero no puede quedarse parado entre
+              dos pisos: para subir debe "pagar" una cantidad exacta de energía
+              (por ejemplo, absorbiendo luz), y al caer de vuelta, devuelve
+              exactamente esa energía en forma de luz de color específico. Eso
+              explica los colores del fuego de los fuegos artificiales: cada
+              metal tiene su propia escalera.
+            </p>
+            <p>
+              Las partículas que importan memorizar: el
+              <strong>protón</strong> (carga +, define el elemento: cuántos
+              protones tiene un átomo, ese es su
+              <strong>número atómico Z</strong>), el
+              <strong>neutrón</strong> (sin carga, aporta masa) y el
+              <strong>electrón</strong> (carga −, se mueve en los niveles).
+              Átomos del mismo elemento con distinto número de neutrones son
+              <strong>isótopos</strong>: mismo comportamiento químico, distinta
+              masa. El carbono-14 se usa para datar fósiles precisamente por
+              eso.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Protón</td>
+                <td>
+                  Partícula con carga positiva, en el núcleo; define el elemento
+                  (Z).
+                </td>
+              </tr>
+              <tr>
+                <td>Neutrón</td>
+                <td>Partícula sin carga, en el núcleo; suma masa.</td>
+              </tr>
+              <tr>
+                <td>Electrón</td>
+                <td>Partícula con carga negativa, en niveles de energía.</td>
+              </tr>
+              <tr>
+                <td>Número atómico (Z)</td>
+                <td>Cantidad de protones; identidad del elemento.</td>
+              </tr>
+              <tr>
+                <td>Número de masa (A)</td>
+                <td>Protones + neutrones.</td>
+              </tr>
+              <tr>
+                <td>Isótopos</td>
+                <td>Átomos del mismo elemento con distinto nº de neutrones.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+
+            <div>
+              \[ A=Z+N\quad (A=\text{masa},\ Z=\text{protones},\
+              N=\text{neutrones}) \] \[ \text{N de electrones (átomo
+              neutro)}=Z\qquad\text{Máximo por nivel: }2n^2 \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — átomo de Bohr del carbono</h4>
+            <pre>
+         e⁻  e⁻
+      ╭─────────────╮   núcleo: 6 p⁺ y 6 n⁰
+     │    ⊕⊕⊕⊕      │  (Z = 6, A = 12)
+      ╰─────────────╯
+        nivel 1: 2 e⁻   nivel 2: 4 e⁻</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              El sodio tiene \(Z = 11 y A\)\(11 y A = 23.\) Describe su átomo.
+            </p>
+            <ol>
+              <li>Protones: \(Z = 11.\)</li>
+              <li>Neutrones: \(\ce{N}\) = A − \(Z = 23\) − \(11 = 12.\)</li>
+              <li>
+                Electrones (neutro): 11 \(\to \) distribución: 2, 8, 1 (nivel 3
+                casi vacío).
+              </li>
+              <li>
+                Ese 1 electrón externo explica todo su comportamiento químico
+                (lo verás en l06).
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> confundir número atómico con
+            número de masa; olvidar que un átomo neutro tiene igual número de
+            protones y electrones; pensar que los electrones "orbitan" en
+            círculos reales (son niveles de energía, no rutas fijas).
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> la medicina nuclear usa
+            isótopos: el tecnecio-99m para imágenes del corazón, el yodo-131
+            para tratar el hipertiroidismo.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                1. Un átomo tiene \(Z = 8 y A\)\(8 y A = 16.\) ¿Cuántos
+                neutrones tiene?
+              </p>
+              <label
+                ><input type="radio" name="c3_l04_q1" value="a" /> 24</label
+              >
+              <label><input type="radio" name="c3_l04_q1" value="b" /> 8</label>
+              <label
+                ><input type="radio" name="c3_l04_q1" value="c" /> 16</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. ¿Cuál es la carga del neutrón?</p>
+              <label
+                ><input type="radio" name="c3_l04_q2" value="a" /> Neutra
+                (0)</label
+              >
+              <label
+                ><input type="radio" name="c3_l04_q2" value="b" /> Positiva
+                (+1)</label
+              >
+              <label
+                ><input type="radio" name="c3_l04_q2" value="c" /> Negativa
+                (−1)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. Dos átomos con el mismo Z y distinto número de neutrones son…
+              </p>
+              <label
+                ><input type="radio" name="c3_l04_q3" value="a" /> iones
+                distintos</label
+              >
+              <label
+                ><input type="radio" name="c3_l04_q3" value="b" /> elementos
+                distintos</label
+              >
+              <label
+                ><input type="radio" name="c3_l04_q3" value="c" /> isótopos del
+                mismo elemento</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l05">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 5</span>
+          <h3>Orbitales y configuración electrónica</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Bohr dio los pisos del edificio; el modelo moderno describe
+              <strong>cómo están distribuidos los asientos en cada piso</strong
+              >. Cada nivel contiene <strong>subniveles</strong> llamados s, p,
+              d y f, con capacidades fijas: s tiene 2 asientos, p tiene 6, d
+              tiene 10 y f tiene 14. Llenar electrones es como sentar a un cine:
+              primero se llena la fila más cercana (menor energía) y así
+              sucesivamente, siguiendo el orden 1s \(\to \) 2s \(\to \) 2p \(\to
+              \) 3s \(\to \) 3p \(\to \) 4s \(\to \) 3d…
+            </p>
+            <p>
+              Escribir la <strong>configuración electrónica</strong> es solo
+              llevar la cuenta: el oxígeno tiene 8 electrones \(\to \)
+              \(1s^{2}\) \(2s^{2}\) \(2p^{4}\). Los superíndices suman 8. Este
+              detalle parece técnico, pero decide TODO el comportamiento
+              químico: los electrones de la última capa (los
+              <strong>electrones de valencia</strong>) son los que se vinculan
+              con otros átomos. El hierro de tu hemoglobina, el sodio de tus
+              neuronas: todo lo que hace tu cuerpo depende de dónde están
+              sentados sus electrones.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Orbital</td>
+                <td>
+                  Región donde es probable encontrar al electrón; capacidad
+                  definida \((s=2,\) \(p=6,\) \(d=10,\) \(f=14).\)
+                </td>
+              </tr>
+              <tr>
+                <td>Subnivel</td>
+                <td>División de cada nivel de energía: s, p, d, f.</td>
+              </tr>
+              <tr>
+                <td>Configuración electrónica</td>
+                <td>
+                  Distribución de los electrones en subniveles (ej. \(1s^{2}\)
+                  \(2s^{2}\) \(2p^{4}\)).
+                </td>
+              </tr>
+              <tr>
+                <td>Electrones de valencia</td>
+                <td>
+                  Electrones de la última capa; hacen la química del átomo.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+
+            <div>
+              \[ 1s\to 2s\to 2p\to 3s\to 3p\to 4s\to 3d\to 4p\to\cdots \] \[
+              \text{Capacidad: }s=2\quad p=6\quad d=10\quad
+              f=14\qquad\text{Nivel }n\text{: máximo }2n^2 \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — llenado como cine</h4>
+            <pre>
+ FILA (nivel)   ASIENTOS (subnivel)     CAPACIDAD
+     1              s                       2
+     2              s, p                   2+6
+     3              s, p, d               2+6+10
+     4              s, p, d, f           2+6+10+14
+
+ Ejemplo O (Z=8):  1s² 2s² 2p⁴  → 8 asientos ocupados</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Escribe la configuración electrónica del cloro \((Z = 17) y\)
+              halla sus electrones de valencia.
+            </p>
+            <ol>
+              <li>
+                17 electrones \(\to \) lleno en orden: \(1s^{2}\) (2),
+                \(2s^{2}\) (4), \(2p^{6}\) (10), \(3s^{2}\) (12), \(3p^{5}\)
+                (17).
+              </li>
+              <li>
+                Configuración: \(1s^{2}\) \(2s^{2}\) \(2p^{6}\) \(3s^{2}\)
+                \(3p^{5}\).
+              </li>
+              <li>
+                Última capa \((n=3): 2\) + 5 =
+                <strong>7 electrones de valencia</strong> \(\to \) le falta 1
+                para el octeto \(\to \) tiende a ganar 1 \(e^{-}\) \(\to \)
+                \(\ce{Cl-}\).
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> llenar 3d antes que 4s (el 4s
+            se llena primero); olvidar que los superíndices deben sumar el Z
+            total; confundir nivel con subnivel.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> el oxígeno viaja
+            "enganchado" al hierro (\(\ce{Fe^{2+}}\)) de la hemoglobina; si la
+            configuración del hierro cambia, se altera la unión del \(\ce{O2}\):
+            así funciona la intoxicación por monóxido de carbono.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                1. ¿Cuántos electrones caben en un orbital s?
+              </p>
+              <label><input type="radio" name="c3_l05_q1" value="a" /> 2</label>
+              <label><input type="radio" name="c3_l05_q1" value="b" /> 6</label>
+              <label
+                ><input type="radio" name="c3_l05_q1" value="c" /> 10</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                2. La configuración \(1s^{2}\) \(2s^{2}\) \(2p^{4}\) corresponde
+                a…
+              </p>
+              <label
+                ><input type="radio" name="c3_l05_q2" value="a" /> Nitrógeno
+                \((Z=7)\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l05_q2" value="b" /> Oxígeno
+                \((Z=8)\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l05_q2" value="c" /> Flúor
+                \((Z=9)\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. Los electrones de valencia del cloro (2,8,7) hacen que tienda
+                a…
+              </p>
+              <label
+                ><input type="radio" name="c3_l05_q3" value="a" /> perder 7
+                electrones</label
+              >
+              <label
+                ><input type="radio" name="c3_l05_q3" value="b" /> no
+                reaccionar</label
+              >
+              <label
+                ><input type="radio" name="c3_l05_q3" value="c" /> ganar 1
+                electrón</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l06">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 6</span>
+          <h3>Regla del octeto y tabla periódica</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Toda la química gira alrededor de una obsesión: los átomos quieren
+              tener <strong>8 electrones en su última capa</strong> (o 2, si son
+              tan pequeños como el hidrógeno), como invitados que quieren
+              completar una mesa de 8 sillas. A los gases nobles la mesa ya les
+              quedó completa —por eso casi no reaccionan: no necesitan nada de
+              nadie. Todos los demás átomos ganan, pierden o comparten
+              electrones para copiar esa comodidad.
+            </p>
+            <p>
+              La <strong>tabla periódica</strong> es el mapa de esa obsesión.
+              Las <strong>columnas (grupos)</strong> juntan átomos con la MISMA
+              cantidad de electrones de valencia (por eso se parecen: todos los
+              metales alcalinos del grupo 1 tienen 1 \(e^{-}\) externo y
+              explotan en agua igual). Las
+              <strong>filas (periodos)</strong> marcan cuántas capas tiene el
+              átomo. A la izquierda viven los <strong>metales</strong> (pierden
+              electrones, forman cationes), a la derecha los
+              <strong>no metales</strong> (los ganan, forman aniones). Saber
+              leer el mapa te permite predecir reacciones sin memorizarlas una a
+              una.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Regla del octeto</td>
+                <td>Tendencia a completar 8 electrones en la última capa.</td>
+              </tr>
+              <tr>
+                <td>Grupo</td>
+                <td>
+                  Columna de la tabla; átomos con igual nº de electrones de
+                  valencia.
+                </td>
+              </tr>
+              <tr>
+                <td>Periodo</td>
+                <td>Fila de la tabla; nº de niveles de energía.</td>
+              </tr>
+              <tr>
+                <td>Metales / No metales</td>
+                <td>
+                  Izquierda (ceden \(e^{-}\)) / derecha (capturan o comparten
+                  \(e^{-}\)).
+                </td>
+              </tr>
+              <tr>
+                <td>Gases nobles</td>
+                <td>Grupo 18; octeto completo, casi inertes.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+
+            <div>
+              \[ \text{Grupo 1: pierde 1 }e^-\to +1\qquad\text{Grupo 2: pierde 2
+              }e^-\to +2 \] \[ \text{Grupo 17: gana 1 }e^-\to
+              -1\qquad\text{Grupo 18: octeto completo} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama</h4>
+            <pre class="mermaid">
+graph LR
+  A[Sodio Na 2-8-1] --&gt;|pierde 1 e-| B[Na+ estable]
+  C[Cloro 2-8-7] --&gt;|gana 1 e-| D[Cl- estable]
+  B --&gt;|se atraen| E[NaCl sal de mesa]</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Predice la fórmula del compuesto entre el magnesio (grupo 2) y el
+              cloro (grupo 17).
+            </p>
+            <ol>
+              <li>
+                \(\ce{Mg}\) tiene 2 \(e^{-}\) de valencia \(\to \) los pierde
+                \(\to \) \(\ce{Mg^{2+}}\).
+              </li>
+              <li>
+                \(\ce{Cl}\) tiene 7 \(\to \) gana 1 \(\to \) \(\ce{Cl-}\).
+              </li>
+              <li>
+                Las cargas deben cuadrar: 1 \(\ce{Mg^{2+}}\) necesita 2
+                \(\ce{Cl-}\) \(\to \) <strong>\(\ce{MgCl2}\)</strong> (cloruro
+                de magnesio).
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> creer que todos los átomos
+            buscan 8 aunque tengan que perder 7 electrones (no: es más fácil
+            perder 1); confundir grupo con periodo; olvidar que en un compuesto
+            neutro las cargas siempre suman cero.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> tu vida depende de iones
+            que siguen la regla del octeto: \(\ce{Na+}\) y \(\ce{K+}\) mueven
+            los impulsos nerviosos y el corazón late gracias a esa "electricidad
+            iónica" que se mide en el ECG.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                1. En la tabla periódica, las columnas se llaman…
+              </p>
+              <label
+                ><input type="radio" name="c3_l06_q1" value="a" />
+                periodos</label
+              >
+              <label
+                ><input type="radio" name="c3_l06_q1" value="b" /> grupos</label
+              >
+              <label
+                ><input type="radio" name="c3_l06_q1" value="c" />
+                orbitales</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. El calcio (grupo 2) forma el ion…</p>
+              <label
+                ><input type="radio" name="c3_l06_q2" value="a" />
+                \(\ce{Ca^{2+}}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l06_q2" value="b" />
+                \(\ce{Ca^{2-}}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l06_q2" value="c" />
+                \(\ce{Ca+}\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. ¿Por qué los gases nobles casi no reaccionan?
+              </p>
+              <label
+                ><input type="radio" name="c3_l06_q3" value="a" /> Porque son
+                muy pesados</label
+              >
+              <label
+                ><input type="radio" name="c3_l06_q3" value="b" /> Porque tienen
+                pocos electrones</label
+              >
+              <label
+                ><input type="radio" name="c3_l06_q3" value="c" /> Porque ya
+                tienen el octeto completo</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l07">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 7</span>
+          <h3>Propiedades periódicas y electronegatividad</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              La tabla periódica no solo organiza átomos: también predice sus
+              <em>personales tendencias</em>. La más importante es la
+              <strong>electronegatividad</strong>: la fuerza con que un átomo
+              tira de los electrones cuando forma un enlace. Piensa en un
+              <em>juego de la cuerda</em>: si dos átomos comparten un electrón
+              pero uno es más electronegativo, la cuerda se corre hacia su lado
+              y el enlace queda "desbalanceado" (polar). El flúor es el campeón
+              absoluto del tirón; la tendencia general crece hacia arriba y a la
+              derecha de la tabla.
+            </p>
+            <p>
+              Otra propiedad clave es el <strong>radio atómico</strong> (el
+              "tamaño" del átomo). Baja en un grupo, el átomo suma pisos y
+              crece; avanza a la derecha en un periodo, el núcleo atrae con más
+              fuerza a la misma cantidad de pisos y el átomo se compacta. La
+              <strong>energía de ionización</strong> (cuánto cuesta arrancarle
+              un electrón) sigue la lógica opuesta: los átomos pequeños y
+              electronegativos defienden sus electrones con uñas y dientes.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Electronegatividad</td>
+                <td>
+                  Fuerza de un átomo para atraer los electrones del enlace (máx:
+                  flúor).
+                </td>
+              </tr>
+              <tr>
+                <td>Radio atómico</td>
+                <td>
+                  Tamaño del átomo; crece hacia abajo, decrece hacia la derecha.
+                </td>
+              </tr>
+              <tr>
+                <td>Energía de ionización</td>
+                <td>Energía necesaria para arrancar un electrón.</td>
+              </tr>
+              <tr>
+                <td>Enlace polar</td>
+                <td>
+                  Enlace donde los electrones se reparten de forma desigual.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Tendencias clave</h4>
+
+            <div>
+              \[ \text{Electronegatividad: sube hacia ARRIBA y DERECHA }(F\gt
+              O\gt N\approx Cl\gt H) \] \[ \text{Radio atómico: crece hacia
+              ABAJO e IZQUIERDA (Fr el más grande)} \] \[ \text{Energía de
+              ionización: como la electronegatividad (arriba-derecha)} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — el juego de la cuerda</h4>
+            <pre>
+   ENLACE O–H  (O es más electronegativa)
+
+   H              O
+   δ+ ●━━━━━━━━● δ−      la nube de electrones se corre hacia el O
+   (H casi sin carga negativa; O acapara el tirón)
+
+   Resultado: extremos con carga parcial → molécula POLAR</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Ordena de mayor a menor electronegatividad: \(\ce{O}\), F,
+              \(\ce{H}\), \(\ce{Na}\), \(\ce{Cl}\).
+            </p>
+            <ol>
+              <li>
+                Regla: sube hacia arriba-derecha \(\to \) el F está más
+                arriba-derecha que \(\ce{O}\) \(\to \) F primero.
+              </li>
+              <li>
+                Luego \(\ce{O}\), luego \(\ce{Cl}\) (más a la derecha que
+                \(\ce{H}\), aunque más abajo; \(\ce{Cl}\) gana: \(3{,}2\) vs
+                \(2{,}2\)).
+              </li>
+              <li>El \(\ce{Na}\) es metal a la izquierda \(\to \) el menor.</li>
+              <li>
+                Resultado:
+                <strong
+                  >F &gt; \(\ce{O}\) &gt; \(\ce{Cl}\) &gt; \(\ce{H}\) &gt;
+                  \(\ce{Na}\)</strong
+                >. ✔
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> creer que el radio crece hacia
+            la derecha (crece hacia abajo); confundir electronegatividad con
+            carga real (es atracción, no carga formal); memorizar valores
+            exactos en vez de la tendencia.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> la diferencia de
+            electronegatividad entre \(\ce{O}\) y \(\ce{H}\) crea los puentes de
+            hidrógeno que hacen del agua el solvente de la vida y le dan al ADN
+            su doble hélice estable.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                1. ¿Cuál es el elemento más electronegativo?
+              </p>
+              <label
+                ><input type="radio" name="c3_l07_q1" value="a" />
+                Oxígeno</label
+              >
+              <label
+                ><input type="radio" name="c3_l07_q1" value="b" /> Sodio</label
+              >
+              <label
+                ><input type="radio" name="c3_l07_q1" value="c" /> Flúor</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                2. Bajando en un grupo de la tabla, el radio atómico…
+              </p>
+              <label
+                ><input type="radio" name="c3_l07_q2" value="a" />
+                aumenta</label
+              >
+              <label
+                ><input type="radio" name="c3_l07_q2" value="b" />
+                disminuye</label
+              >
+              <label
+                ><input type="radio" name="c3_l07_q2" value="c" /> no
+                cambia</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">3. En un enlace polar, los electrones…</p>
+              <label
+                ><input type="radio" name="c3_l07_q3" value="a" /> se
+                transfieren por completo a un átomo</label
+              >
+              <label
+                ><input type="radio" name="c3_l07_q3" value="b" /> se comparten
+                de forma desigual</label
+              >
+              <label
+                ><input type="radio" name="c3_l07_q3" value="c" />
+                desaparecen</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l08">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 8</span>
+          <h3>Enlaces: iónico, covalente, Van der Waals, dipolo y London</h3>
+          <span class="lesson-time">⏱ ~12 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Los átomos se relacionan como las personas. El
+              <strong>enlace iónico</strong> es el matrimonio con entrega total:
+              un átomo (metal) le entrega electrones a otro (no metal) y ambos
+              quedan como iones de carga opuesta que se atraen para siempre —
+              así nace el \(\ce{NaCl}\). El <strong>enlace covalente</strong> es
+              la sociedad: dos no metales comparten electrones como socios que
+              aportan capital a un negocio común. Si ambos tiran parejo, el
+              enlace es <strong>no polar</strong> (\(\ce{O2}\)); si uno tira más
+              fuerte (mayor electronegatividad), es
+              <strong>polar</strong> (\(\ce{H2O}\)).
+            </p>
+            <p>
+              Y luego están las amistades de conveniencia entre moléculas ya
+              formadas, más débiles pero decisivas: las fuerzas
+              <strong>dipolo-dipolo</strong> (moléculas polares que se alinean
+              positivo-con-negativo, como imanes chiquitos) y las
+              <strong>London</strong> (fuerzas dispersas que aparecen en TODAS
+              las moléculas por fluctuaciones momentáneas de carga; son las
+              únicas que sostienen a las moléculas no polares — por eso el yodo
+              \(\ce{I2}\), no polar, puede ser sólido). Cuando el dipolo incluye
+              hidrógeno unido a \(\ce{N}\), \(\ce{O}\) o F, la atracción es tan
+              fuerte que se gana nombre propio:
+              <strong>puente de hidrógeno</strong>, la fuerza que mantiene
+              juntas las dos hebras del ADN y le da al agua su punto de
+              ebullición anormalmente alto.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Enlace iónico</td>
+                <td>
+                  Transferencia de \(e^{-}\) metal→no metal; iones que se
+                  atraen.
+                </td>
+              </tr>
+              <tr>
+                <td>Enlace covalente</td>
+                <td>Compartición de electrones entre no metales.</td>
+              </tr>
+              <tr>
+                <td>Covalente polar</td>
+                <td>
+                  Compartición desigual por diferencia de electronegatividad.
+                </td>
+              </tr>
+              <tr>
+                <td>Dipolo-dipolo</td>
+                <td>Atracción entre moléculas polares.</td>
+              </tr>
+              <tr>
+                <td>London</td>
+                <td>
+                  Fuerzas débiles instantáneas; únicas presentes en no polares.
+                </td>
+              </tr>
+              <tr>
+                <td>Puente de hidrógeno</td>
+                <td>
+                  Dipolo fuerte con \(\ce{H}\) unido a \(\ce{N}\), \(\ce{O}\) o
+                  F.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Datos clave</h4>
+
+            <div>
+              \[ \text{metal}+\text{no metal}\to\text{iónico }(\ce{NaCl},\ MgO)
+              \] \[ \text{no metal}+\text{no metal}\to\text{covalente
+              }(\ce{H2O},\ \ce{CO2},\ \ce{O2}) \] \[ \Delta EN\text{
+              grande}\to\text{iónico/polar}\qquad \Delta EN\text{
+              pequeña}\to\text{covalente no polar} \] \[ \text{Fuerzas (fuerte a
+              débil): iónico}\gg\text{puente de
+              H}\gt\text{dipolo-dipolo}\gt\text{London} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — de la entrega a la amistad</h4>
+            <pre>
+ IÓNICO (entrega)         COVALENTE (compartición)      PUENTE H (amistad)
+ Na ·  ──►  Cl            H· ── ●● ── ·H                 O─H ··· O─H
+ Na⁺  [Cl]⁻               H₂O: los e⁻ viven cerca del O   agua con agua
+ e⁻ regalado              e⁻ compartido                  atracción débil</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Clasifica el enlace de: a) MgO, b) \(\ce{HCl}\), c) \(\ce{CH4}\).
+            </p>
+            <ol>
+              <li>
+                MgO: metal + no metal, ΔEN grande \(\to \)
+                <strong>iónico</strong> (\(\ce{Mg^{2+}}\) y \(\ce{O^{2-}}\)).
+              </li>
+              <li>
+                \(\ce{HCl}\): no metales, pero \(\ce{Cl}\) (\(3{,}2\)) tira
+                mucho más que \(\ce{H}\) (\(2{,}2\)) \(\to \)
+                <strong>covalente polar</strong>.
+              </li>
+              <li>
+                \(\ce{CH4}\): \(\ce{C}\) (\(2{,}5\)) y \(\ce{H}\) (\(2{,}2\))
+                tiran casi parejo \(\to \)
+                <strong>covalente no polar</strong> (solo fuerzas London entre
+                moléculas).
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> creer que solo el \(\ce{H2O}\)
+            tiene puentes de hidrógeno (también \(\ce{NH3}\) y \(\ce{HF}\));
+            confundir enlace polar con molécula polar (el \(\ce{CO2}\) tiene
+            enlaces polares pero es simétrico \(\to \) molécula no polar);
+            olvidar que las London existen en todas las moléculas.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> el ADN se sostiene con
+            puentes de hidrógeno \((A=T\) con 2, G≡C con 3): por eso las zonas
+            ricas en G≡C se abren con más dificultad al replicarse.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                1. Un metal con un no metal forma típicamente un enlace…
+              </p>
+              <label
+                ><input type="radio" name="c3_l08_q1" value="a" /> iónico</label
+              >
+              <label
+                ><input type="radio" name="c3_l08_q1" value="b" /> covalente no
+                polar</label
+              >
+              <label
+                ><input type="radio" name="c3_l08_q1" value="c" />
+                metálico</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                2. ¿Qué fuerzas mantienen unidas a las moléculas de \(\ce{O2}\)
+                líquido?
+              </p>
+              <label
+                ><input type="radio" name="c3_l08_q2" value="a" /> Puentes de
+                hidrógeno</label
+              >
+              <label
+                ><input type="radio" name="c3_l08_q2" value="b" />
+                Dipolo-dipolo</label
+              >
+              <label
+                ><input type="radio" name="c3_l08_q2" value="c" /> Fuerzas de
+                London</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                3. El puente de hidrógeno aparece cuando el \(\ce{H}\) está
+                unido a…
+              </p>
+              <label
+                ><input type="radio" name="c3_l08_q3" value="a" /> \(\ce{C}\),
+                \(\ce{H}\) o \(\ce{Na}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l08_q3" value="b" /> \(\ce{N}\),
+                \(\ce{O}\) o F</label
+              >
+              <label
+                ><input type="radio" name="c3_l08_q3" value="c" /> \(\ce{Cl}\),
+                Br o \(\ce{I}\)</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l09">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 9</span>
+          <h3>Estado iónico y números de oxidación</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Cuando un átomo gana o pierde electrones deja de ser neutro y se
+              convierte en <strong>ion</strong>: el <strong>catión</strong> (+)
+              perdió electrones y el <strong>anión</strong> (−) los ganó. El
+              <strong>número de oxidación</strong> es la "cuenta bancaria"
+              formal de cada átomo dentro de un compuesto: anota cuántos
+              electrones perdió (+) o ganó (−) respecto a su estado neutro. Es
+              como un libro contable donde, en una fórmula neutra, las cuentas
+              de todos los átomos <em>deben sumar cero</em> — y en un ion, deben
+              sumar la carga del ion.
+            </p>
+            <p>
+              Con pocas reglas fijas puedes resolver casi todo: el oxígeno casi
+              siempre vale −2, el hidrógeno +1 (junto a no metales), y los
+              elementos del grupo 1 valen +1 y los del grupo 2 valen +2. Para el
+              resto, despejas del sumatorio. Es contabilidad química pura: te
+              enseñará a descifrar fórmulas raras como \(\ce{KMnO4}\) sin
+              haberlas visto nunca.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Catión</td>
+                <td>Ion positivo; el átomo PERDIÓ electrones.</td>
+              </tr>
+              <tr>
+                <td>Anión</td>
+                <td>Ion negativo; el átomo GANÓ electrones.</td>
+              </tr>
+              <tr>
+                <td>Número de oxidación</td>
+                <td>
+                  Carga formal que tendría el átomo si los enlaces fueran
+                  iónicos.
+                </td>
+              </tr>
+              <tr>
+                <td>Valencia</td>
+                <td>
+                  Capacidad de combinación de un elemento (los \(\ce{H+}\) que
+                  entrega o cargas que usa).
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Reglas de asignación</h4>
+
+            <div>
+              \[ \text{Átomo libre}\to 0\qquad \ce{O}\text{ (mayoría)}\to
+              -2\qquad \ce{H}\text{ (con no metales)}\to +1 \] \[ \text{Grupo
+              1}\to +1\qquad\text{Grupo 2}\to +2 \] \[ \sum\text{ n ox}=0\text{
+              (compuesto neutro) o }=\text{carga del ion} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — el libro contable</h4>
+            <pre>
+  KMnO₄  →  ¿oxidación del Mn?
+
+  K      :  +1
+  O × 4  :  −2 × 4 = −8
+  Mn     :  x = ?          Σ = 0
+
+  +1 + x − 8 = 0   →   x = +7  ✔</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Calcula el número de oxidación del azufre en el ion sulfato
+              \(\ce{SO4^{2-}}\).
+            </p>
+            <ol>
+              <li>Oxígeno: −2 \(\times \) 4 = −8.</li>
+              <li>El total debe dar la carga del ion: −2.</li>
+              <li>Plantea: \(\ce{S}\) + (−8) = −2 \(\to \) \(\ce{S}\) = +6.</li>
+              <li>El azufre va +6 en el sulfato. ✔</li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> confundir número de oxidación
+            con carga real del átomo (es una formalidad contable); olvidar
+            multiplicar por el subíndice (4 oxígenos = −8, no −2); no ajustar la
+            suma a la carga del ion poliatómico.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> el hierro de la
+            hemoglobina va \(\ce{Fe^{2+}}\); si se oxida a \(\ce{Fe^{3+}}\) deja
+            de transportar \(\ce{O2}\) (metahemoglobinemia). Los números de
+            oxidación también explican por qué el glutatión protege tus células
+            del estrés oxidativo.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                1. El número de oxidación del \(\ce{O}\) en la mayoría de
+                compuestos es…
+              </p>
+              <label
+                ><input type="radio" name="c3_l09_q1" value="a" /> +2</label
+              >
+              <label
+                ><input type="radio" name="c3_l09_q1" value="b" /> −2</label
+              >
+              <label
+                ><input type="radio" name="c3_l09_q1" value="c" /> −1</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                2. ¿Oxidación del \(\ce{Cr}\) en \(\ce{Cr2O7^{2-}}\)
+                (dicromato)?
+              </p>
+              <label
+                ><input type="radio" name="c3_l09_q2" value="a" /> +6</label
+              >
+              <label
+                ><input type="radio" name="c3_l09_q2" value="b" /> +7</label
+              >
+              <label
+                ><input type="radio" name="c3_l09_q2" value="c" /> −2</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. Un átomo que pierde electrones se convierte en…
+              </p>
+              <label
+                ><input type="radio" name="c3_l09_q3" value="a" /> anión</label
+              >
+              <label
+                ><input type="radio" name="c3_l09_q3" value="b" />
+                isótopo</label
+              >
+              <label
+                ><input type="radio" name="c3_l09_q3" value="c" /> catión</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l10">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 10</span>
+          <h3>Reacciones exotérmicas y endotérmicas</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Toda reacción es un intercambio de energía. Si libera calor al
+              ambiente, es <strong>exotérmica</strong>: piensa en una hoguera
+              que calienta la noche — combustiones, oxidaciones, la cal
+              apagándose con agua. Si absorbe calor del ambiente, es
+              <strong>endotérmica</strong>: como una hornilla que necesita gas
+              constante para cocinar — la fotosíntesis, la cocción de alimentos,
+              esa bolsa fría instantánea de primeros auxilios que enfría un
+              esguince.
+            </p>
+            <p>
+              El detector no miente: pon un termómetro en la reacción. Si la
+              temperatura <em>sube</em>, el sistema soltó calor \(\to \)
+              exotérmica (\(\Delta H\) negativo). Si <em>baja</em>, absorbió
+              \(\to \) endotérmica (\(\Delta H\) positivo). Y atención al
+              detalle que cae en examen: en una exotérmica, la energía de los
+              \(\ce{PRODUCTOS}\) es MENOR que la de los reactivos (el sobrante
+              se liberó); en una endotérmica, los productos guardan MÁS energía
+              que los reactivos (la absorbieron y la guardan en sus enlaces).
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Exotérmica</td>
+                <td>
+                  Libera calor; \(\Delta H \lt 0;\) los productos tienen menos
+                  energía.
+                </td>
+              </tr>
+              <tr>
+                <td>Endotérmica</td>
+                <td>
+                  Absorbe calor; \(\Delta H \gt 0;\) los productos tienen más
+                  energía.
+                </td>
+              </tr>
+              <tr>
+                <td>Entalpía (\(\Delta H\))</td>
+                <td>Variación de calor de la reacción a presión constante.</td>
+              </tr>
+              <tr>
+                <td>Energía de activación</td>
+                <td>
+                  "Montaña" mínima de energía para que la reacción arranque.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Datos clave</h4>
+
+            <div>
+              \[ \text{Exotérmica: }\Delta H\lt 0\quad T\text{ ambiente
+              SUBE}\quad E(\text{productos})\lt E(\text{reactivos}) \] \[
+              \text{Endotérmica: }\Delta H\gt 0\quad T\text{ ambiente BAJA}\quad
+              E(\text{productos})\gt E(\text{reactivos}) \] \[ \text{Exo:
+              combustión del metano, }\Delta H=-890\text{ kJ/mol} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — el mapa energético</h4>
+            <pre>
+  Energía
+    ▲   Reactivos                    Reactivos
+    │      ●                            ●
+    │       ╲  E. activación            │      ● Productos
+    │        ╲                          │     ╱
+    │         ● Productos              ●╱ (cuesta arriba)
+    │      (cuesta abajo)
+    └────────────────►                ────────────────►
+      EXOTÉRMICA ΔH &lt; 0                ENDOTÉRMICA ΔH &gt; 0</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              \(\ce{Al}\) mezclar bicarbonato con vinagre, el vaso se enfría.
+              ¿Qué tipo de reacción es?
+            </p>
+            <ol>
+              <li>
+                El vaso cede su calor a la mezcla \(\to \) la reacción ABSORBE
+                calor.
+              </li>
+              <li>
+                Absorbe energía \(\to \) <strong>endotérmica</strong> \(\to
+                \Delta H \gt 0.\) ✔
+              </li>
+              <li>
+                Dato curioso: esa misma reacción produce \(\ce{CO2}\), por eso
+                también burbujea.
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> confundir "libera calor" con
+            "se siente caliente en el matraz" (mide con termómetro, no con la
+            mano); pensar que las reacciones exotérmicas no necesitan energía de
+            activación (la hoguera también necesita un fósforo para arrancar);
+            cambiar el signo de \(\Delta H\) al escribirla.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> el metabolismo es un
+            sistema exotérmico controlado: la glucosa libera energía en forma de
+            ATP y calor, y ese calor (termogénesis) mantiene tus 37 °C; por eso
+            tiemblas cuando hace frío: tu cuerpo enciende reacciones para
+            calentarse.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                1. Una reacción con \(\Delta H\) = −890 kJ/mol es…
+              </p>
+              <label
+                ><input type="radio" name="c3_l10_q1" value="a" />
+                endotérmica</label
+              >
+              <label
+                ><input type="radio" name="c3_l10_q1" value="b" />
+                exotérmica</label
+              >
+              <label
+                ><input type="radio" name="c3_l10_q1" value="c" /> neutra</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                2. En una reacción endotérmica, la energía de los productos es…
+              </p>
+              <label
+                ><input type="radio" name="c3_l10_q2" value="a" /> mayor que la
+                de los reactivos</label
+              >
+              <label
+                ><input type="radio" name="c3_l10_q2" value="b" /> menor que la
+                de los reactivos</label
+              >
+              <label
+                ><input type="radio" name="c3_l10_q2" value="c" /> igual
+                siempre</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. La fotosíntesis es endotérmica porque…</p>
+              <label
+                ><input type="radio" name="c3_l10_q3" value="a" /> libera
+                \(\ce{CO2}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l10_q3" value="b" /> ocurre en las
+                plantas</label
+              >
+              <label
+                ><input type="radio" name="c3_l10_q3" value="c" /> necesita
+                absorber energía de la luz</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l11">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 11</span>
+          <h3>Oxidación-reducción y balanceo de ecuaciones</h3>
+          <span class="lesson-time">⏱ ~12 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Las reacciones redox son transferencias de electrones entre
+              átomos, como una transferencia de billetes entre cuentas: quien
+              <strong>pierde</strong> electrones se <strong>oxida</strong> (su
+              número de oxidación sube) y quien los <strong>gana</strong> se
+              <strong>reduce</strong> (su número baja). Truco para no perderse:
+              <em>"el que se oxida, pierde; el que se reduce, gana"</em> — y las
+              dos cosas ocurren SIEMPRE juntas: no existe un donante sin
+              receptor, como no existe una transferencia sin dos cuentas.
+            </p>
+            <p>
+              El <strong>balanceo</strong> es el auditor de la química: la ley
+              de Lavoisier (la materia ni se crea ni se destruye) exige que a
+              cada lado de la flecha haya exactamente los mismos átomos de cada
+              elemento. Se balancea ajustando coeficientes (los números grandes
+              delante de las fórmulas), JAMÁS los subíndices (cambiar
+              \(\ce{H2O}\) por \(\ce{H2O2}\) sería cambiar la sustancia, no la
+              cantidad). Método simple: cuenta un elemento a la vez, empieza por
+              los metales, deja el \(\ce{O}\) y el \(\ce{H}\) para el final.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Oxidación</td>
+                <td>Pérdida de electrones (sube el nº de oxidación).</td>
+              </tr>
+              <tr>
+                <td>Reducción</td>
+                <td>Ganancia de electrones (baja el nº de oxidación).</td>
+              </tr>
+              <tr>
+                <td>Agente oxidante</td>
+                <td>La especie que se reduce: acepta los \(e^{-}\).</td>
+              </tr>
+              <tr>
+                <td>Agente reductor</td>
+                <td>La especie que se oxida: entrega los \(e^{-}\).</td>
+              </tr>
+              <tr>
+                <td>Ecuación balanceada</td>
+                <td>
+                  Mismos átomos de cada elemento en reactivos y productos.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Reglas clave</h4>
+
+            <div>
+              \[ \text{Se oxida}=\text{PIERDE }e^-\qquad\text{Se
+              reduce}=\text{GANA }e^- \] \[ \text{Balanceo: solo cambian
+              COEFICIENTES, nunca subíndices} \] \[ \text{Orden:
+              metales}\to\text{no
+              metales}\to\text{O}\to\text{H}\to\text{verificación total} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — la transferencia de electrones</h4>
+            <pre>
+      2 e⁻
+  Zn ●━━━━━━━► Cu²⁺
+  │                │
+se OXIDA        se REDUCE
+(pierde e⁻)     (gana e⁻)
+agente          agente
+reductor        oxidante
+
+Zn + Cu²⁺ → Zn²⁺ + Cu   (la pila de un electrodo)</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Balancea la combustión del propano: \(\ce{C3H8}\) + \(\ce{O2}\)
+              \(\to \) \(\ce{CO2}\) + \(\ce{H2O}\).
+            </p>
+            <ol>
+              <li>
+                Carbonos: 3 a la izquierda \(\to \) pongo 3 \(\ce{CO2}\) a la
+                derecha.
+              </li>
+              <li>
+                Hidrógenos: 8 a la izquierda \(\to \) 8 \(\ce{H}\) en agua \(\to
+                \) 4 \(\ce{H2O}\).
+              </li>
+              <li>
+                Conteo de \(\ce{O}\) a la derecha: \(3\times 2\) + \(4\times 1 =
+                10 \to \) necesito \(5 O_{2} (5\times 2 = 10).\) ✔
+              </li>
+              <li>
+                Ecuación final:
+                <strong
+                  >\(\ce{C3H8}\) + \(5 O_{2} \to 3\) \(\ce{CO2}\) + 4
+                  \(\ce{H2O}\)</strong
+                >
+                (todo cuadra).
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> cambiar subíndices en vez de
+            coeficientes; olvidar multiplicar el oxígeno escondido en
+            \(\ce{H2O}\) al contar; creer que "oxidación" siempre implica
+            oxígeno (el \(\ce{Zn}\) perdió \(e^{-}\) ante el \(\ce{Cu}\) sin que
+            hubiera \(\ce{O2}\)).
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> tu respiración celular ES
+            una redox: la glucosa se oxida, el \(\ce{O2}\) se reduce, y esa
+            transferencia carga tus ATP. El estrés oxidativo (radicales libres
+            que roban \(e^{-}\)) es lo que combaten los antioxidantes de tu
+            dieta.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">1. Oxidarse significa…</p>
+              <label
+                ><input type="radio" name="c3_l11_q1" value="a" /> perder
+                electrones</label
+              >
+              <label
+                ><input type="radio" name="c3_l11_q1" value="b" /> ganar
+                electrones</label
+              >
+              <label
+                ><input type="radio" name="c3_l11_q1" value="c" /> ganar
+                protones</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                2. En \(\ce{CH4}\) + 2 \(\ce{O2}\) \(\to \) \(\ce{CO2}\) + 2
+                \(\ce{H2O}\), el coeficiente que faltaba delante del \(\ce{O2}\)
+                era…
+              </p>
+              <label><input type="radio" name="c3_l11_q2" value="a" /> 1</label>
+              <label><input type="radio" name="c3_l11_q2" value="b" /> 3</label>
+              <label><input type="radio" name="c3_l11_q2" value="c" /> 2</label>
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">3. El agente oxidante es la especie que…</p>
+              <label
+                ><input type="radio" name="c3_l11_q3" value="a" /> se oxida y
+                cede electrones</label
+              >
+              <label
+                ><input type="radio" name="c3_l11_q3" value="b" /> se reduce y
+                acepta electrones</label
+              >
+              <label
+                ><input type="radio" name="c3_l11_q3" value="c" /> no participa
+                en la transferencia</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l12">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 12</span>
+          <h3>
+            Ácido-base: Brønsted-Lowry, pH, pK, buffers, neutralización y sales
+          </h3>
+          <span class="lesson-time">⏱ ~12 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Para Brønsted y Lowry, la definición es simple y poderosa:
+              <strong
+                >ácido es quien dona \(\ce{H+}\) y base es quien lo
+                acepta</strong
+              >. El \(\ce{HCl}\) suelta su protón (ácido), el \(\ce{NH3}\) lo
+              recoge (base). Y hay un detalle elegante: cuando un ácido dona su
+              \(\ce{H+}\), lo que le queda (\(\ce{Cl-}\)) puede volver a
+              aceptarlo — es la <strong>base conjugada</strong>. Son parejas de
+              baile: ácido/base conjugada difieren en un solo \(\ce{H+}\).
+            </p>
+            <p>
+              La acidez se mide con la escala <strong>pH</strong>, que va de 0
+              (muy ácido) a 14 (muy básico), con 7 en el centro (neutro). Es una
+              escala logarítmica: pH 3 es 10 veces más ácido que pH 4 y 100
+              veces más que pH 5 — un salto de una unidad multiplica por 10. Por
+              eso tu cuerpo se obsesiona con su pH sanguíneo: debe quedarse en
+              <strong>7,35–7,45</strong>; salirse apenas de ese rango altera las
+              proteínas y puede matar. Su defensa son los
+              <strong>buffers</strong> (amortiguadores): parejas ácido/base
+              conjugada que absorben los excesos — como los amortiguadores de un
+              auto que absorben los baches para que el paseo no rebote. El
+              principal de tu sangre es \ce{H2CO3}/\ce{HCO3-}. Cuando un ácido y
+              una base reaccionan por completo ocurre la
+              <strong>neutralización</strong>: ácido + base \(\to \)
+              <strong>sal + agua</strong> (el antiácido de tu botiquín hace
+              exactamente eso con el \(\ce{HCl}\) de tu estómago).
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Ácido de Brønsted</td>
+                <td>Donador de protones (\(\ce{H+}\)).</td>
+              </tr>
+              <tr>
+                <td>Base de Brønsted</td>
+                <td>Aceptor de protones (\(\ce{H+}\)).</td>
+              </tr>
+              <tr>
+                <td>pH</td>
+                <td>
+                  \(-log[H^{+}]\); escala logarítmica de acidez (0–14, neutro
+                  7).
+                </td>
+              </tr>
+              <tr>
+                <td>pK</td>
+                <td>
+                  Constante de acidez/desprotonación; a pH = pK el buffer está
+                  en su punto óptimo.
+                </td>
+              </tr>
+              <tr>
+                <td>Buffer</td>
+                <td>
+                  Mezcla ácido débil + base conjugada que amortigua cambios de
+                  pH.
+                </td>
+              </tr>
+              <tr>
+                <td>Neutralización</td>
+                <td>Ácido + base \(\to \) sal + agua.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Fórmulas clave</h4>
+
+            <div>
+              \[ \text{pH}=-\log[\ce{H+}]\qquad \text{pOH}=-\log[\ce{OH-}]\qquad
+              \text{pH}+\text{pOH}=14 \] \[
+              \text{ácido}+\text{base}\to\text{sal}+\text{agua} \] \[ \ce{H2CO3
+              &lt;=&gt; H+ + HCO3-}\qquad (\text{buffer sangre, pH
+              }7{,}35\text{–}7{,}45) \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — la escala de pH</h4>
+            <pre>
+ 0    2    4    6  7   8    10   12   14
+ ├────┼────┼────┼──●───┼────┼────┼────┤
+ HCl  jugo café  ║agua║  sangre~7,4  jabón  NaOH
+ ácido ◄────────── neutro ──────────► básico
+ Cada unidad = ×10 de concentración de H⁺</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Calcula el pH de una disolución de \(\ce{HCl}\) \(0{,}01\) M.</p>
+            <ol>
+              <li>
+                El \(\ce{HCl}\) es ácido fuerte \(\to \) se disocia por
+                completo: \([H^{+}] = 0{,}01 M\)\(0{,}01 M = 10^{-2} M.\)
+              </li>
+              <li>Aplica: pH = \(-\log(10^{-2}) = 2.\)</li>
+              <li>
+                Comprueba: pH \(2 \lt 7 y\) \(\ce{HCl}\) es ácido ✔. Si fuera
+                \(\ce{NaOH}\) \(0{,}01\) M: pOH = 2 \(\to \) pH = 14 − \(2 =
+                12.\)
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> creer que la escala de pH es
+            lineal (es logarítmica: pH 2 es 100 veces más ácido que pH 4); usar
+            pH = pOH en bases (primero halla pOH, luego pH = 14 − pOH); olvidar
+            que los ácidos FUERTES se disocian al 100 % y los débiles no.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> la acidosis y la
+            alcalosis metabólicas son emergencias reales: un pH sanguíneo de
+            \(7{,}0\) o de \(8{,}0\) puede ser letal, y el buffer bicarbonato es
+            el héroe silencioso que te mantiene vivo cada segundo.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                1. Para Brønsted-Lowry, un ácido es una sustancia que…
+              </p>
+              <label
+                ><input type="radio" name="c3_l12_q1" value="a" /> dona
+                \(\ce{H+}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l12_q1" value="b" /> acepta
+                \(\ce{H+}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l12_q1" value="c" /> dona
+                \(\ce{OH-}\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                2. Una disolución con pH 5 frente a otra con pH 3 es…
+              </p>
+              <label
+                ><input type="radio" name="c3_l12_q2" value="a" /> 2 veces más
+                ácida</label
+              >
+              <label
+                ><input type="radio" name="c3_l12_q2" value="b" /> 100 veces más
+                ácida</label
+              >
+              <label
+                ><input type="radio" name="c3_l12_q2" value="c" /> 100 veces
+                menos ácida</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                3. En la neutralización, ácido + base produce…
+              </p>
+              <label
+                ><input type="radio" name="c3_l12_q3" value="a" /> más ácido y
+                más base</label
+              >
+              <label
+                ><input type="radio" name="c3_l12_q3" value="b" /> sal +
+                agua</label
+              >
+              <label
+                ><input type="radio" name="c3_l12_q3" value="c" /> \(\ce{H2}\) +
+                \(\ce{O2}\)</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l13">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 13</span>
+          <h3>Velocidad de reacción y solubilidad</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Prepara dos tazas de chocolate: una con agua fría y otra con agua
+              caliente, revolviendo ambas. La caliente y agitada se disuelve en
+              segundos. Acabas de manipular la <strong>velocidad</strong> de un
+              proceso físico-químico. Los factores que aceleran una reacción son
+              cuatro: <strong>temperatura</strong> (más calor = moléculas más
+              veloces = más choques efectivos),
+              <strong>concentración</strong> (más partículas en el mismo espacio
+              = más choques), <strong>superficie de contacto</strong> (el polvo
+              reacciona mucho más rápido que el terrón) y los
+              <strong>catalizadores</strong>, que son los verdaderos magos: no
+              se consumen y no cambian el resultado, solo bajan la "montaña" de
+              la energía de activación para que la reacción pase por un túnel en
+              vez de escalar el cerro.
+            </p>
+            <p>
+              La <strong>solubilidad</strong> es la capacidad de disolverse, y
+              sigue una regla de oro social:
+              <em>"lo semejante disuelve a lo semejante"</em>. Moléculas polares
+              (como el agua, con su carga parcial) disuelven solutos polares o
+              iónicos (sal, azúcar); las no polares (aceite, grasa) se agrupan
+              entre sí y le dan la espalda al agua. Por eso el aceite flota
+              formando gotas: es una exclusión social química. Y ojo con el
+              límite: una disolución <strong>saturada</strong> ya no acepta más
+              soluto — por eso el azúcar se acumula en el fondo de tu café si
+              exageras.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Velocidad de reacción</td>
+                <td>Cambio de concentración por unidad de tiempo.</td>
+              </tr>
+              <tr>
+                <td>Catalizador</td>
+                <td>
+                  Accelera la reacción bajando la energía de activación; no se
+                  consume.
+                </td>
+              </tr>
+              <tr>
+                <td>Energía de activación</td>
+                <td>Barrera mínima de energía para que ocurra la reacción.</td>
+              </tr>
+              <tr>
+                <td>Solubilidad</td>
+                <td>
+                  Cantidad máxima de soluto que se disuelve a una T° dada.
+                </td>
+              </tr>
+              <tr>
+                <td>Disolución saturada</td>
+                <td>Ya no admite más soluto disuelto.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Factores de velocidad</h4>
+
+            <div>
+              \[ \text{Factores: }T\text{, concentración,
+              superficie}\Rightarrow\text{más choques}\Rightarrow\text{MÁS
+              rápida} \] \[ \text{Catalizador: baja }E_a\Rightarrow\text{MÁS
+              rápida (sin gastarse)} \] \[ \text{«Lo semejante disuelve lo
+              semejante»: polar}\leftrightarrow\text{polar, no
+              polar}\leftrightarrow\text{no polar} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — el catalizador abre un túnel</h4>
+            <pre>
+ E
+ ▲      montaña original
+ │        ╱╲      ╱╲
+ │       ╱  ╲    ╱  ╲ ← con catalizador (túnel más bajo)
+ │      ╱    ╲__╱
+ │     ╱
+ └───────────────────► avance de la reacción
+ Misma salida, mismo destino: solo baja la barrera</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              ¿Por qué un comprimido efervescente reacciona más rápido si lo
+              trituras?
+            </p>
+            <ol>
+              <li>
+                Triturar no cambia la composición: cambia la
+                <strong>superficie de contacto</strong>.
+              </li>
+              <li>
+                El polvo expone muchísimas más moléculas al agua a la vez.
+              </li>
+              <li>
+                Más choques por segundo \(\to \) la reacción (que produce
+                \(\ce{CO2}\), las burbujas) es mucho más rápida. ✔
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> creer que el catalizador se
+            gasta o cambia los productos (solo acelera); confundir velocidad con
+            rendimiento (rápido \(\neq \) produce más); pensar que el aceite "no
+            se disuelve" por ser pesado (es por polaridad, no por masa).
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> las enzimas son
+            catalizadores biológicos; y la liposolubilidad de un fármaco decide
+            si cruza la barrera hematoencefálica: por eso algunos anestésicos
+            son gorditos y polares a la vez.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                1. Un catalizador acelera la reacción porque…
+              </p>
+              <label
+                ><input type="radio" name="c3_l13_q1" value="a" /> aumenta la
+                temperatura</label
+              >
+              <label
+                ><input type="radio" name="c3_l13_q1" value="b" /> baja la
+                energía de activación</label
+              >
+              <label
+                ><input type="radio" name="c3_l13_q1" value="c" /> agrega más
+                reactivo</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">
+                2. ¿Por qué el \(\ce{NaCl}\) se disuelve en agua?
+              </p>
+              <label
+                ><input type="radio" name="c3_l13_q2" value="a" /> Porque ambos
+                son polares/iónicos ("semejante disuelve semejante")</label
+              >
+              <label
+                ><input type="radio" name="c3_l13_q2" value="b" /> Porque el
+                \(\ce{NaCl}\) es no polar</label
+              >
+              <label
+                ><input type="radio" name="c3_l13_q2" value="c" /> Porque el
+                agua es fría</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. ¿Cuál NO acelera una reacción?</p>
+              <label
+                ><input type="radio" name="c3_l13_q3" value="a" /> Aumentar la
+                temperatura</label
+              >
+              <label
+                ><input type="radio" name="c3_l13_q3" value="b" /> Triturar el
+                reactivo</label
+              >
+              <label
+                ><input type="radio" name="c3_l13_q3" value="c" /> Enfriar la
+                mezcla</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l14">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 14</span>
+          <h3>Orgánica \(\ce{I}\): alcanos, alquenos y alquinos</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              La química orgánica es la química del carbono, y el carbono es el
+              gran constructor porque hace 4 enlaces y le gustan las cadenas.
+              Piensa en un <strong>collar de perlas</strong>: cada perla es un
+              carbono. Si todas las perlas están unidas con enlaces simples, el
+              collar es flexible y "saturado" de hidrógenos: eso es un
+              <strong>alcano</strong> (metano, etano, propano — el gas de tu
+              cocina). Si metes un enlace doble entre dos perlas, el collar se
+              acorta y se vuelve rígido y reactivo: <strong>alqueno</strong> (el
+              etileno que madura tus frutas). Con un enlace triple:
+              <strong>alquino</strong> (el acetileno que corta metales con su
+              llama).
+            </p>
+            <p>
+              La nomenclatura es un código simple: prefijo por longitud (met- 1,
+              et- 2, prop- 3, but- 4, pent- 5…) + sufijo por tipo de enlace
+              (-ano simple, -eno doble, -ino triple). Con eso puedes nombrar el
+              \(\ce{C3H8}\) sin haberlo visto: 3 carbonos (prop-) y solo simples
+              (-ano) \(\to \) <strong>propano</strong>. Y las fórmulas generales
+              te sirven de verificación: \(\ce{CnH2n+2}\) para alcanos,
+              \(\ce{CnH2n}\) para alquenos, \(\ce{CnH2n-2}\) para alquinos.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Alcano</td>
+                <td>
+                  Hidrocarburo con solo enlaces simples; saturado; fórmula
+                  \(\ce{CnH2n+2}\).
+                </td>
+              </tr>
+              <tr>
+                <td>Alqueno</td>
+                <td>
+                  Con al menos un enlace doble C=C; insaturado; \(\ce{CnH2n}\).
+                </td>
+              </tr>
+              <tr>
+                <td>Alquino</td>
+                <td>Con al menos un enlace triple C≡C; \(\ce{CnH2n-2}\).</td>
+              </tr>
+              <tr>
+                <td>Saturado / Insaturado</td>
+                <td>Solo simples / con dobles o triples.</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Nomenclatura y fórmulas</h4>
+
+            <div>
+              \[ \text{Prefijos: met-1, et-2, prop-3, but-4, pent-5, hex-6} \]
+              \[ \text{-ano (simple)}\quad\text{-eno (doble)}\quad\text{-ino
+              (triple)} \] \[ C_nH_{2n+2}\text{ (alcano)}\qquad C_nH_{2n}\text{
+              (alqueno)}\qquad C_nH_{2n-2}\text{ (alquino)} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — la familia del \(\ce{C2}\)</h4>
+            <pre>
+  etano        eteno        etino
+   H   H         H   H        H        H
+   |   |          \ /          \      /
+  H─C───C─H       C=C          C≡C
+   |   |         /   \          (alquino)
+   H   H       H     H
+ (alcano)    (alqueno)
+ simples      un doble      un triple
+ C₂H₆         C₂H₄          C₂H₂</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>Nombra el hidrocarburo \(\ce{C4H8}\) y verifica su tipo.</p>
+            <ol>
+              <li>4 carbonos \(\to \) prefijo "but-".</li>
+              <li>
+                Fórmula: \(\ce{CnH2n}\) con \(n=4 \to H\)\(\to H = 8\) ✔
+                coincide con \(\ce{C4H8}\) \(\to \) tiene un doble enlace.
+              </li>
+              <li>
+                Prefijo + sufijo: <strong>buteno</strong> (alqueno). Si fuera
+                \(\ce{C4H10}\) sería butano (alcano).
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> mezclar los sufijos (-ano no es
+            -eno); olvidar que el propano es \(\ce{C3H8}\) y no \(\ce{C3H6}\);
+            aplicar las fórmulas generales sin verificar el conteo de
+            \(\ce{H}\).
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> las cadenas
+            hidrocarbonadas de los lípidos deciden si una grasa es sólida
+            (saturada, como la mantequilla) o líquida (insaturada, como el
+            aceite de oliva) — y eso impacta directamente tu salud
+            cardiovascular.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">1. La fórmula general de los alcanos es…</p>
+              <label
+                ><input type="radio" name="c3_l14_q1" value="a" />
+                \(\ce{CnH2n+2}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l14_q1" value="b" />
+                \(\ce{CnH2n}\)</label
+              >
+              <label
+                ><input type="radio" name="c3_l14_q1" value="c" />
+                \(\ce{CnH2n-2}\)</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">2. El propano (gas de cocina) es…</p>
+              <label
+                ><input type="radio" name="c3_l14_q2" value="a" /> un alqueno de
+                3 carbonos</label
+              >
+              <label
+                ><input type="radio" name="c3_l14_q2" value="b" /> un alcano de
+                3 carbonos (\(\ce{C3H8}\))</label
+              >
+              <label
+                ><input type="radio" name="c3_l14_q2" value="c" /> un alquino de
+                3 carbonos</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">3. "Buteno" tiene 4 carbonos y…</p>
+              <label
+                ><input type="radio" name="c3_l14_q3" value="a" /> solo enlaces
+                simples</label
+              >
+              <label
+                ><input type="radio" name="c3_l14_q3" value="b" /> un enlace
+                triple</label
+              >
+              <label
+                ><input type="radio" name="c3_l14_q3" value="c" /> al menos un
+                enlace doble</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l15">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 15</span>
+          <h3>
+            Orgánica II: alcoholes, aldehídos, cetonas, ácidos, éteres y
+            aromáticos
+          </h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Si el esqueleto carbonoso es un robot, los
+              <strong>grupos funcionales</strong> son los chips que le instalas:
+              el mismo cuerpo se comporta distinto según el módulo que lleve.
+              Instálale un <strong>−OH</strong> y tendrás un
+              <em>alcohol</em> (el etanol de las bebidas y el alcohol
+              antiséptico). Instálale un <strong>−CHO</strong> en el extremo de
+              la cadena y tendrás un <em>aldehído</em> (el formaldehído que
+              conserva muestras en el laboratorio). Un <strong>C=O</strong> en
+              medio de cadena es una <em>cetona</em> (la acetona del removedor
+              de esmalte); un <strong>−COOH</strong> es un
+              <em>ácido carboxílico</em> (el vinagre es ácido acético); un
+              <strong>−O−</strong> entre dos carbonos es un <em>éter</em> (los
+              éteres fueron los primeros anestésicos quirúrgicos).
+            </p>
+            <p>
+              Y luego están los <strong>aromáticos</strong>: anillos de 6
+              carbonos (como el benceno \(\ce{C6H6}\)) cuyos electrones "giran"
+              en círculo dándoles una estabilidad especial. El anillo bencénico
+              es tan reputado que aparece en la aspirina, en el paracetamol y en
+              cientos de fármacos: aprender a reconocerlo es aprender a leer
+              etiquetas de medicamentos.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Alcohol</td>
+                <td>
+                  Grupo −OH unido a carbono saturado (etanol \(\ce{CH3CH2OH}\)).
+                </td>
+              </tr>
+              <tr>
+                <td>Aldehído</td>
+                <td>Grupo −CHO al FINAL de la cadena (formaldehído).</td>
+              </tr>
+              <tr>
+                <td>Cetona</td>
+                <td>Grupo C=O en el MEDIO de la cadena (acetona).</td>
+              </tr>
+              <tr>
+                <td>Ácido carboxílico</td>
+                <td>Grupo −COOH (ácido acético del vinagre).</td>
+              </tr>
+              <tr>
+                <td>Éter</td>
+                <td>Un \(\ce{O}\) entre dos cadenas: R−O−R′.</td>
+              </tr>
+              <tr>
+                <td>Aromático</td>
+                <td>
+                  Anillo bencénico de 6 carbonos con electrones deslocalizados.
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Grupos funcionales de un vistazo</h4>
+
+            <div>
+              \[ \text{Alcohol: }\ce{R-OH}\quad\text{Aldehído:
+              }\ce{R-CHO}\quad\text{Cetona: }\ce{R-CO-R'} \] \[ \text{Ácido:
+              }\ce{R-COOH}\quad\text{Éter: }\ce{R-O-R'}\quad\text{Aromático:
+              }\ce{C6H5-} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — el robot y sus chips</h4>
+            <pre>
+        R (esqueleto carbonoso)
+        │
+ ┌──────┼───────┬────────┬────────┐
+ −OH    −CHO    C=O      −COOH    −O−
+alcohol aldehído cetona  ácido    éter
+        + anillo bencénico = aromático</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Identifica el grupo funcional de: \(\ce{CH3CH2OH}\) y
+              \(\ce{CH3COOH}\).
+            </p>
+            <ol>
+              <li>
+                \(\ce{CH3CH2OH}\) termina en −OH unido a carbono saturado \(\to
+                \) <strong>alcohol</strong> (etanol).
+              </li>
+              <li>
+                \(\ce{CH3COOH}\) termina en −COOH \(\to \)
+                <strong>ácido carboxílico</strong> (ácido acético, el del
+                vinagre).
+              </li>
+              <li>
+                Nota la diferencia: solo el −COOH libera \(\ce{H+}\) en agua,
+                por eso uno es neutro y el otro ácido.
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> confundir aldehído con cetona
+            (el −CHO va al final; el C=O de la cetona va en medio); creer que
+            todo −OH es "alcohol de bebida" (el metanol \(\ce{CH3OH}\) es
+            veneno); olvidar que el anillo aromático otorga estabilidad, no
+            toxicidad per se.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> la farmacología es
+            química orgánica aplicada: el paracetamol lleva grupo −OH y amida
+            sobre un anillo aromático; conocer el grupo funcional te deja
+            predecir solubilidad y vía de eliminación de un fármaco.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">1. El grupo −OH define a los…</p>
+              <label
+                ><input type="radio" name="c3_l15_q1" value="a" />
+                alcoholes</label
+              >
+              <label
+                ><input type="radio" name="c3_l15_q1" value="b" />
+                cetonas</label
+              >
+              <label
+                ><input type="radio" name="c3_l15_q1" value="c" /> éteres</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">
+                2. La acetona es una cetona porque su C=O está…
+              </p>
+              <label
+                ><input type="radio" name="c3_l15_q2" value="a" /> al final de
+                la cadena</label
+              >
+              <label
+                ><input type="radio" name="c3_l15_q2" value="b" /> en el medio
+                de la cadena</label
+              >
+              <label
+                ><input type="radio" name="c3_l15_q2" value="c" /> dentro de un
+                anillo aromático</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. El benceno (\(\ce{C6H6}\)) es el ejemplo clásico de
+                compuesto…
+              </p>
+              <label
+                ><input type="radio" name="c3_l15_q3" value="a" />
+                alcohólico</label
+              >
+              <label
+                ><input type="radio" name="c3_l15_q3" value="b" />
+                saturado</label
+              >
+              <label
+                ><input type="radio" name="c3_l15_q3" value="c" />
+                aromático</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lesson" id="l16">
+        <div class="lesson-header">
+          <span class="lesson-num">Lección 16</span>
+          <h3>Biomoléculas: carbohidratos, proteínas y lípidos</h3>
+          <span class="lesson-time">⏱ ~11 min</span>
+          <label class="lesson-done"
+            ><input type="checkbox" /> ✅ Completada</label
+          >
+        </div>
+        <div class="lesson-body">
+          <div class="teacher">
+            <strong>📘 El profesor explica</strong>
+            <p>
+              Imagina tu cuerpo como un <strong>restaurante</strong> con un menú
+              de cuatro platos. Los <strong>carbohidratos</strong> son el pan:
+              energía rápida y accesible. Sus piezas pequeñas son azúcares
+              simples (glucosa \(\ce{C6H12O6}\)) que se encadenan: dos forman
+              disacáridos (la sacarosa de la mesa) y miles forman polisacáridos
+              (el almidón de tu arroz, el glucógeno que tu hígado guarda para
+              emergencias).
+            </p>
+            <p>
+              Las <strong>proteínas</strong> son los chefs: hacen casi todo el
+              trabajo (enzimas, anticuerpos, hemoglobina, músculos). Se
+              construyen encadenando <strong>aminoácidos</strong> con enlaces
+              peptídicos: la célula tiene un alfabeto de 20 aminoácidos y con él
+              escribe proteínas infinitas, igual que con 27 letras escribes toda
+              la literatura. Los <strong>lípidos</strong> son la mantequilla:
+              reservas de energía concentrada, aislamiento térmico y, sobre
+              todo, las membranas celulares (los fosfolípidos forman la doble
+              capa que define qué entra y qué sale). Y aunque hoy solo la
+              mencionamos, la cuarta pieza del menú son los
+              <strong>ácidos nucleicos</strong> (ADN y ARN): el libro de recetas
+              que la cocina lee para fabricar cada chef. Reconocer los monómeros
+              y sus enlaces es el corazón de este tema: monosacárido \(\to \)
+              polisacárido, aminoácido \(\to \) proteína, nucleótido \(\to \)
+              ADN.
+            </p>
+          </div>
+          <div class="keyterms">
+            <h4>🔍 Términos clave</h4>
+            <table>
+              <tr>
+                <th>Término</th>
+                <th>Definición</th>
+              </tr>
+              <tr>
+                <td>Monosacárido</td>
+                <td>Azúcar simple; monómero de los carbohidratos (glucosa).</td>
+              </tr>
+              <tr>
+                <td>Polisacárido</td>
+                <td>
+                  Cadena larga de azúcares (almidón, glucógeno, celulosa).
+                </td>
+              </tr>
+              <tr>
+                <td>Aminoácido</td>
+                <td>Monómero de las proteínas; hay 20 tipos distintos.</td>
+              </tr>
+              <tr>
+                <td>Enlace peptídico</td>
+                <td>Une aminoácidos entre sí (reacción de condensación).</td>
+              </tr>
+              <tr>
+                <td>Lípido</td>
+                <td>
+                  Biomolécula hidrofóbica; energía de reserva y membranas.
+                </td>
+              </tr>
+              <tr>
+                <td>Nucleótido</td>
+                <td>Monómero del ADN/ARN (azúcar + base + fosfato).</td>
+              </tr>
+            </table>
+          </div>
+          <div class="formula-box">
+            <h4>🧮 Datos clave</h4>
+
+            <div>
+              \[ \ce{C_n(H2O)_n}\qquad\text{glucosa: }\ce{C6H12O6} \] \[
+              \text{aminoácido}+\text{aminoácido}\to\text{enlace
+              peptídico}\to\text{cadena} \] \[ \text{glicerol}+\text{ácidos
+              grasos}\to\text{lípidos}\qquad 20\text{
+              aminoácidos}\to\text{millones de proteínas} \]
+            </div>
+          </div>
+          <div class="diagram-box">
+            <h4>📊 Diagrama — del monómero al polímero</h4>
+            <pre class="mermaid">
+graph LR
+  A[Monosacaridos] --&gt;|se enlazan| B[Polisacaridos]
+  C[Aminoacidos] --&gt;|enlace peptidico| D[Proteinas]
+  E[Nucleotidos] --&gt;|doble helice| F[ADN]
+  G[Glicerol y acidos grasos] --&gt; H[Lipidos]</pre
+            >
+          </div>
+          <div class="example">
+            <h4>✏️ Ejemplo resuelto</h4>
+            <p>
+              Clasifica cada biomolécula por su función: glucógeno, hemoglobina,
+              grasa subcutánea.
+            </p>
+            <ol>
+              <li>
+                Glucógeno: polisacárido de reserva \(\to \)
+                <strong>carbohidrato</strong> (reserva de energía del hígado).
+              </li>
+              <li>
+                Hemoglobina: transporta \(\ce{O2}\) \(\to \)
+                <strong>proteína</strong> (cadena de aminoácidos con grupo
+                hemo).
+              </li>
+              <li>
+                Grasa subcutánea: reserva y aislamiento \(\to \)
+                <strong>lípido</strong> (triglicérido).
+              </li>
+            </ol>
+          </div>
+          <div class="pitfall">
+            ⚠️ <strong>Errores comunes:</strong> creer que las proteínas solo
+            sirven para músculo (también son enzimas, anticuerpos y hormonas);
+            confundir glucosa con glucógeno (monómero vs polímero de reserva);
+            olvidar que los lípidos NO forman polímeros de monómeros repetidos
+            como los otros.
+          </div>
+          <div class="medlink">
+            💊 <strong>Conexión con Medicina:</strong> la fenilcetonuria (PKU)
+            es la incapacidad de degradar un aminoácido; la diabetes es un
+            problema del carbohidrato glucosa; la hipercolesterolemia, de los
+            lípidos. Toda la patología metabólica vive en este tema.
+          </div>
+          <div class="mini-quiz">
+            <h4>🎯 Ponte a prueba</h4>
+            <div class="quiz-q" data-correct="b">
+              <p class="question">1. El monómero de las proteínas es…</p>
+              <label
+                ><input type="radio" name="c3_l16_q1" value="a" /> el
+                monosacárido</label
+              >
+              <label
+                ><input type="radio" name="c3_l16_q1" value="b" /> el
+                aminoácido</label
+              >
+              <label
+                ><input type="radio" name="c3_l16_q1" value="c" /> el
+                nucleótido</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="a">
+              <p class="question">2. La glucosa (\(\ce{C6H12O6}\)) es…</p>
+              <label
+                ><input type="radio" name="c3_l16_q2" value="a" /> un
+                monosacárido</label
+              >
+              <label
+                ><input type="radio" name="c3_l16_q2" value="b" /> un
+                lípido</label
+              >
+              <label
+                ><input type="radio" name="c3_l16_q2" value="c" /> un
+                aminoácido</label
+              >
+            </div>
+            <div class="quiz-q" data-correct="c">
+              <p class="question">
+                3. Los fosfolípidos son fundamentales porque forman…
+              </p>
+              <label
+                ><input type="radio" name="c3_l16_q3" value="a" /> el ADN</label
+              >
+              <label
+                ><input type="radio" name="c3_l16_q3" value="b" /> los
+                músculos</label
+              >
+              <label
+                ><input type="radio" name="c3_l16_q3" value="c" /> las membranas
+                celulares</label
+              >
+            </div>
+            <button class="action-btn quiz-check">Corregir</button>
+            <p class="quiz-result"></p>
+          </div>
+        </div>
+      </article>
+
+      <div class="clasnav">
+        <a class="action-btn" href="clase2.html">⬅ Clase anterior</a>
+        <a class="action-btn" href="index.html">🏠 Volver al inicio</a>
+        <a class="action-btn" href="clase4.html">Clase siguiente ➡</a>
+      </div>
+    </main>
+
+    <footer>
+      Curso Intensivo de Preparación USFQ — Medicina · Tu progreso se guarda en
+      este navegador.
+    </footer>
+
+    <script>
+      const CLASE_ID = "clase3"; // ← clase1, clase2, clase3, clase4 o clase5
+      const STORE_KEY = "medcurso_v2_done";
+      function loadDone() {
+        try {
+          return JSON.parse(localStorage.getItem(STORE_KEY)) || {};
+        } catch (e) {
+          return {};
+        }
+      }
+      function saveDone(d) {
+        try {
+          localStorage.setItem(STORE_KEY, JSON.stringify(d));
+        } catch (e) {}
+      }
+
+      function openLesson(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.add("open");
+        if (typeof mmScan === "function") mmScan(el);
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      document.querySelectorAll(".lesson-header").forEach((h) => {
+        h.addEventListener("click", (e) => {
+          if (e.target.closest(".lesson-done")) return;
+          h.parentElement.classList.toggle("open");
+          if (
+            h.parentElement.classList.contains("open") &&
+            typeof mmScan === "function"
+          )
+            mmScan(h.parentElement);
+        });
+      });
+
+      document.querySelectorAll(".lesson-done input").forEach((cb) => {
+        cb.addEventListener("change", () => {
+          const lid = cb.closest(".lesson").id;
+          const d = loadDone();
+          d[CLASE_ID + ":" + lid] = cb.checked;
+          saveDone(d);
+          cb.closest(".lesson").classList.toggle("done", cb.checked);
+          refreshProgress();
+        });
+      });
+
+      function refreshProgress() {
+        const lessons = document.querySelectorAll(".lesson");
+        const done = loadDone();
+        let d = 0;
+        lessons.forEach((l) => {
+          if (done[CLASE_ID + ":" + l.id]) d++;
+        });
+        const pct = lessons.length ? Math.round((d / lessons.length) * 100) : 0;
+        const bar = document.getElementById("classProgressBar");
+        const txt = document.getElementById("classProgressText");
+        if (bar) bar.style.width = pct + "%";
+        if (txt)
+          txt.textContent =
+            d +
+            " de " +
+            lessons.length +
+            " lecciones completadas (" +
+            pct +
+            "%)";
+      }
+      (function () {
+        const done = loadDone();
+        document.querySelectorAll(".lesson").forEach((l) => {
+          if (done[CLASE_ID + ":" + l.id]) {
+            l.classList.add("done");
+            const cb = l.querySelector(".lesson-done input");
+            if (cb) cb.checked = true;
+          }
+        });
+        refreshProgress();
+      })();
+
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".quiz-check");
+        if (!btn) return;
+        const box = btn.closest(".mini-quiz");
+        let correct = 0,
+          total = 0;
+        box.querySelectorAll(".quiz-q").forEach((q) => {
+          total++;
+          const val = q.dataset.correct;
+          const sel = q.querySelector("input:checked");
+          q.querySelectorAll("label").forEach((l) => (l.style.background = ""));
+          if (sel && sel.value === val) {
+            correct++;
+            sel.parentElement.style.background = "#d4f4dd";
+          } else {
+            if (sel) sel.parentElement.style.background = "#fbd7d2";
+            const ok = q.querySelector('input[value="' + val + '"]');
+            if (ok) ok.parentElement.style.background = "#d4f4dd";
+          }
+        });
+        const res = box.querySelector(".quiz-result");
+        if (res)
+          res.textContent =
+            "Resultado: " + correct + "/" + total + " correctas";
+      });
+
+      if (window.mermaid) {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: "neutral",
+          securityLevel: "loose",
+        });
+      }
+      function mmScan(root) {
+        if (!window.mermaid) return;
+        const list =
+          root && root.querySelectorAll
+            ? root.querySelectorAll("pre.mermaid")
+            : [];
+        list.forEach((el) => {
+          if (el.getAttribute("data-processed")) return;
+          if (el.offsetParent === null) return; // oculto: esperar a que se abra la lección
+          try {
+            mermaid.run({ nodes: [el] });
+          } catch (e) {}
+        });
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        mmScan(document);
+      });
+
+      window.addEventListener("load", () => {
+        mmScan(document);
+      });
+    </script>
+  </body>
+</html>

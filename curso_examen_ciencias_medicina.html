@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso de Preparación · Examen de Ciencias - Ingreso a Medicina</title>
+<style>
+  :root{
+    --azul:#c8102e;
+    --azul-dark:#7a0c1e;
+    --verde:#1e9e6a;
+    --rojo:#c0392b;
+    --gris:#f4f6f8;
+    --texto:#223;
+    --borde:#e1e6ea;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Roboto, Arial, sans-serif;
+    background:var(--gris);
+    color:var(--texto);
+    line-height:1.55;
+  }
+  header{
+    background:linear-gradient(135deg,var(--azul-dark),var(--azul));
+    color:#fff;
+    padding:40px 20px;
+    text-align:center;
+  }
+  header h1{margin:0 0 10px;font-size:2rem;}
+  header p{margin:0;opacity:.9;font-size:1.05rem;}
+  .badges{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .badge{background:rgba(255,255,255,.15);padding:6px 14px;border-radius:20px;font-size:.85rem;}
+
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:#fff;
+    border-bottom:1px solid var(--borde);
+    display:flex;
+    overflow-x:auto;
+    box-shadow:0 2px 6px rgba(0,0,0,.05);
+  }
+  nav button{
+    flex:0 0 auto;
+    background:none;
+    border:none;
+    padding:14px 18px;
+    cursor:pointer;
+    font-size:.95rem;
+    font-weight:600;
+    color:#555;
+    border-bottom:3px solid transparent;
+    white-space:nowrap;
+  }
+  nav button.active{color:var(--azul);border-bottom:3px solid var(--azul);}
+  nav button:hover{color:var(--azul-dark);background:#f8f0f0;}
+
+  main{max-width:1000px;margin:0 auto;padding:30px 20px 80px;}
+  section{display:none;animation:fade .3s ease;}
+  section.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  .card{
+    background:#fff;
+    border:1px solid var(--borde);
+    border-radius:12px;
+    padding:22px 24px;
+    margin-bottom:20px;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  .card h2{color:var(--azul-dark);margin-top:0;border-bottom:2px solid var(--azul);padding-bottom:8px;}
+  .card h3{color:var(--azul);margin-bottom:6px;}
+  .card h4{margin:14px 0 6px;color:#333;}
+  .card ul{margin:6px 0 14px 20px;padding:0;}
+  .card li{margin-bottom:4px;}
+
+  .week-badge{
+    display:inline-block;
+    background:var(--azul);
+    color:#fff;
+    font-size:.75rem;
+    padding:3px 10px;
+    border-radius:12px;
+    margin-bottom:8px;
+  }
+
+  .progress-wrap{
+    background:#fff;border:1px solid var(--borde);border-radius:12px;
+    padding:18px 20px;margin-bottom:24px;
+  }
+  .progress-bar-bg{
+    background:#ede6e6;border-radius:10px;height:14px;overflow:hidden;margin-top:8px;
+  }
+  .progress-bar-fill{
+    background:linear-gradient(90deg,var(--verde),#27ae60);
+    height:100%;
+    width:0%;
+    transition:width .4s ease;
+  }
+  .progress-text{font-size:.9rem;color:#555;margin-top:6px;}
+
+  .topic-check{
+    display:flex;align-items:flex-start;gap:10px;
+    padding:8px 10px;border-radius:8px;
+    cursor:pointer;
+  }
+  .topic-check:hover{background:#fbefef;}
+  .topic-check input{margin-top:4px;cursor:pointer;}
+  .topic-check.done label{text-decoration:line-through;color:#999;}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;}
+  th,td{border:1px solid var(--borde);padding:8px 10px;text-align:left;font-size:.92rem;}
+  th{background:var(--azul);color:#fff;}
+  tr:nth-child(even){background:#fcf8f8;}
+
+  .tip{
+    background:#eaf6ef;border-left:4px solid var(--verde);
+    padding:12px 16px;border-radius:6px;margin:14px 0;font-size:.93rem;
+  }
+  .warn{
+    background:#fdecea;border-left:4px solid var(--rojo);
+    padding:12px 16px;border-radius:6px;margin:14px 0;font-size:.93rem;
+  }
+
+  .quiz-q{margin-bottom:18px;padding:14px;border:1px solid var(--borde);border-radius:8px;}
+  .quiz-q p.question{font-weight:600;margin:0 0 10px;}
+  .quiz-q label{display:block;padding:6px 10px;border-radius:6px;cursor:pointer;margin-bottom:4px;}
+  .quiz-q label:hover{background:#fbefef;}
+  .quiz-q input{margin-right:8px;}
+  .quiz-result{font-weight:700;margin-top:6px;}
+  .correct{color:var(--verde);}
+  .incorrect{color:var(--rojo);}
+  button.action-btn{
+    background:var(--azul);color:#fff;border:none;padding:10px 18px;
+    border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;margin-top:8px;
+  }
+  button.action-btn:hover{background:var(--azul-dark);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr;}}
+
+  footer{text-align:center;padding:24px;color:#888;font-size:.85rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🩺 Curso de Preparación — Examen de Ciencias</h1>
+  <p>Ingreso a la Carrera de Medicina · Plan de estudio basado en el temario oficial</p>
+  <div class="badges">
+    <span class="badge">📐 Matemática</span>
+    <span class="badge">⚗️ Química</span>
+    <span class="badge">🧬 Biología</span>
+    <span class="badge">📝 Opción múltiple y V/F</span>
+  </div>
+</header>
+
+<nav id="navBar">
+  <button data-target="inicio" class="active">Inicio</button>
+  <button data-target="matematica">Matemática</button>
+  <button data-target="quimica">Química</button>
+  <button data-target="biologia">Biología</button>
+  <button data-target="cronograma">Cronograma</button>
+  <button data-target="examen">Formato de examen</button>
+  <button data-target="autoevaluacion">Autoevaluación</button>
+</nav>
+
+<main>
+
+<!-- INICIO -->
+<section id="inicio" class="active">
+  <div class="progress-wrap">
+    <strong>Tu progreso general</strong>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="globalProgressBar"></div></div>
+    <div class="progress-text" id="globalProgressText">0 de 0 temas completados (0%)</div>
+  </div>
+
+  <div class="card">
+    <h2>Bienvenido/a</h2>
+    <p>Este curso organiza, en 3 módulos de contenido más un simulacro de autoevaluación, todo el temario oficial del examen de ciencias para el ingreso a Medicina: <strong>Matemática, Química y Biología</strong>. Marca cada tema como completado para llevar el control de tu avance (se guarda automáticamente en este navegador).</p>
+    <h3>¿Cómo usar este curso?</h3>
+    <ul>
+      <li>Recorre las pestañas <strong>Matemática</strong>, <strong>Química</strong> y <strong>Biología</strong> en orden; cada una está dividida en unidades con subtemas marcables.</li>
+      <li>Revisa el <strong>Cronograma</strong> sugerido de 6 semanas para distribuir tu estudio.</li>
+      <li>Lee el <strong>Formato de examen</strong> para conocer la modalidad, tipo de preguntas y materiales permitidos.</li>
+      <li>Pon a prueba lo aprendido en la <strong>Autoevaluación</strong> final con preguntas de muestra.</li>
+    </ul>
+    <div class="tip">💡 Consejo: dedica más tiempo a los temas que te resulten más difíciles. Usa una calculadora científica no programable para practicar, tal como se permite en el examen real.</div>
+  </div>
+</section>
+
+<!-- MATEMATICA -->
+<section id="matematica">
+  <div class="card">
+    <h2>📐 Módulo 1: Matemática</h2>
+    <p>Este módulo cubre conceptos fundamentales de álgebra y geometría, funciones, y funciones exponenciales/logarítmicas.</p>
+
+    <h3>Unidad 1 — Conceptos Fundamentales</h3>
+    <div class="topic-list" data-group="mat1">
+      <div class="topic-check"><input type="checkbox"><label>Números reales</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Exponentes y radicales</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Razones y proporciones</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Expresiones algebraicas</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Productos notables y factorización</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Fórmula cuadrática</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Expresiones fraccionarias</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Ecuaciones: lineales, fraccionarias y cuadráticas</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Resolución de problemas con ecuaciones</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Desigualdades</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Geometría básica</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Rectas (pendiente, ecuación de la recta)</label></div>
+    </div>
+    <div class="tip">💡 Domina factorización y ecuaciones cuadráticas: son la base para resolver funciones más adelante.</div>
+
+    <h3>Unidad 2 — Funciones</h3>
+    <div class="topic-list" data-group="mat2">
+      <div class="topic-check"><input type="checkbox"><label>Definición de función</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Gráficas de funciones</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Funciones creciente y decreciente</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Transformaciones de funciones</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Combinación de funciones</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Funciones uno a uno y sus inversas</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Funciones cuadráticas</label></div>
+    </div>
+
+    <h3>Unidad 3 — Funciones exponenciales y logarítmicas</h3>
+    <div class="topic-list" data-group="mat3">
+      <div class="topic-check"><input type="checkbox"><label>Función exponencial</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Función logarítmica</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Leyes de los logaritmos</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Ecuaciones exponenciales y logarítmicas</label></div>
+    </div>
+    <div class="warn">⚠️ No podrás usar calculadora programable: practica el manejo de logaritmos y exponentes "a mano" y con calculadora científica básica.</div>
+  </div>
+</section>
+
+<!-- QUIMICA -->
+<section id="quimica">
+  <div class="card">
+    <h2>⚗️ Módulo 2: Química</h2>
+
+    <h3>Unidad 1 — Factores de conversión en medidas de concentración</h3>
+    <div class="topic-list" data-group="qui1">
+      <div class="topic-check"><input type="checkbox"><label>Número de Avogadro y concepto de mol</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Molaridad</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Molalidad</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Normalidad</label></div>
+      <div class="topic-check"><input type="checkbox"><label>% P/V y % V/V</label></div>
+    </div>
+
+    <h3>Unidad 2 — Concepto del átomo</h3>
+    <div class="topic-list" data-group="qui2">
+      <div class="topic-check"><input type="checkbox"><label>Teoría de Bohr</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Orbitales</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Regla del octeto</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Tabla periódica</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Propiedades físicas y químicas</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Electronegatividad</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Intercambio de electrones y tipos de enlace (iónico, covalente, Van der Waals, dipolo, London)</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Estado iónico</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Momento dipolar</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Números de oxidación</label></div>
+    </div>
+
+    <h3>Unidad 3 — Reacciones químicas</h3>
+    <div class="topic-list" data-group="qui3">
+      <div class="topic-check"><input type="checkbox"><label>Reacciones exotérmicas y endotérmicas</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Oxidación y reducción</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Balance de ecuaciones químicas</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Reacciones ácido-base (Bronsted-Lowry, pH, pK, Buffer, neutralización y sales)</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Velocidad de reacción</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Solubilidad (compuestos polares y no polares)</label></div>
+    </div>
+
+    <h3>Unidad 4 — Química orgánica (nomenclatura)</h3>
+    <div class="topic-list" data-group="qui4">
+      <div class="topic-check"><input type="checkbox"><label>Alcanos, alquenos y alquinos</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Alcoholes, aldehídos, cetonas, ácidos orgánicos y éteres</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Compuestos aromáticos</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Compuestos de interés biológico: carbohidratos, proteínas y lípidos (clasificación, propiedades químicas y nomenclatura)</label></div>
+    </div>
+    <div class="tip">💡 La química orgánica conecta directamente con Biología (bioquímica celular): repásalas juntas.</div>
+  </div>
+</section>
+
+<!-- BIOLOGIA -->
+<section id="biologia">
+  <div class="card">
+    <h2>🧬 Módulo 3: Biología</h2>
+    <p>En Biología, tanto la sección teórica como la práctica se califican sobre 100 puntos.</p>
+
+    <h3>Unidad 1 — Ciencia y método científico</h3>
+    <div class="topic-list" data-group="bio1">
+      <div class="topic-check"><input type="checkbox"><label>Pasos del método científico</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Formulación de hipótesis y variables</label></div>
+    </div>
+
+    <h3>Unidad 2 — Química de la vida</h3>
+    <div class="topic-list" data-group="bio2">
+      <div class="topic-check"><input type="checkbox"><label>Tipos de enlaces químicos</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Moléculas biológicas</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Propiedades del agua</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Química del carbono</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Macromoléculas (carbohidratos, lípidos, proteínas, ácidos nucleicos)</label></div>
+    </div>
+
+    <h3>Unidad 3 — La célula</h3>
+    <div class="topic-list" data-group="bio3">
+      <div class="topic-check"><input type="checkbox"><label>Estructura celular</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Función de los organelos</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Tipos de células (procariota/eucariota)</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Membrana celular</label></div>
+    </div>
+
+    <h3>Unidad 4 — Metabolismo</h3>
+    <div class="topic-list" data-group="bio4">
+      <div class="topic-check"><input type="checkbox"><label>ATP</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Enzimas</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Respiración celular</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Fotosíntesis</label></div>
+    </div>
+
+    <h3>Unidad 5 — Biodiversidad</h3>
+    <div class="topic-list" data-group="bio5">
+      <div class="topic-check"><input type="checkbox"><label>Clasificación de los seres vivos</label></div>
+    </div>
+
+    <h3>Unidad 6 — Técnicas de laboratorio</h3>
+    <div class="topic-list" data-group="bio6">
+      <div class="topic-check"><input type="checkbox"><label>Manejo de microscopio y estereomicroscopio</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Preparación de placas</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Normas de seguridad en el laboratorio</label></div>
+      <div class="topic-check"><input type="checkbox"><label>Redacción de informes y citación en formato APA</label></div>
+    </div>
+    <div class="warn">⚠️ La sección práctica de Biología puede incluir uso real de microscopio: practica su manejo con anticipación.</div>
+  </div>
+</section>
+
+<!-- CRONOGRAMA -->
+<section id="cronograma">
+  <div class="card">
+    <h2>🗓️ Cronograma sugerido (6 semanas)</h2>
+    <table>
+      <tr><th>Semana</th><th>Enfoque</th><th>Contenido</th></tr>
+      <tr><td>1</td><td>Matemática</td><td>Conceptos fundamentales: álgebra, factorización, ecuaciones y desigualdades</td></tr>
+      <tr><td>2</td><td>Matemática</td><td>Funciones, funciones exponenciales y logarítmicas</td></tr>
+      <tr><td>3</td><td>Química</td><td>Concentraciones, estructura atómica y enlaces químicos</td></tr>
+      <tr><td>4</td><td>Química</td><td>Reacciones químicas y química orgánica (nomenclatura)</td></tr>
+      <tr><td>5</td><td>Biología</td><td>Método científico, química de la vida, célula y metabolismo</td></tr>
+      <tr><td>6</td><td>Biología + Repaso</td><td>Biodiversidad, técnicas de laboratorio y simulacro general</td></tr>
+    </table>
+    <div class="tip">💡 Reserva los últimos 2-3 días antes del examen solo para repasar temas marcados como pendientes y resolver la Autoevaluación.</div>
+  </div>
+</section>
+
+<!-- FORMATO EXAMEN -->
+<section id="examen">
+  <div class="card">
+    <h2>📝 Formato del examen</h2>
+    <div class="grid2">
+      <div>
+        <h3>Modalidad</h3>
+        <ul>
+          <li>Presencial o virtual, según la residencia del postulante</li>
+          <li>Incluye sección teórica y sección práctica</li>
+        </ul>
+        <h3>Tipo de preguntas</h3>
+        <ul>
+          <li>Opción múltiple</li>
+          <li>Verdadero / Falso</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Puntajes</h3>
+        <ul>
+          <li>En Biología, cada sección (teórica y práctica) se califica sobre 100 puntos</li>
+        </ul>
+        <h3>Materiales permitidos</h3>
+        <ul>
+          <li>Hojas de papel blanco</li>
+          <li>Lápiz y borrador</li>
+          <li>Calculadora científica <strong>no programable</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="warn">⚠️ Verifica con la institución organizadora si hay ponderaciones específicas adicionales para Matemática y Química, ya que el temario no las detalla.</div>
+  </div>
+</section>
+
+<!-- AUTOEVALUACION -->
+<section id="autoevaluacion">
+  <div class="card">
+    <h2>✅ Autoevaluación de muestra</h2>
+    <p>Responde las siguientes preguntas de práctica y pulsa "Corregir" para ver tu resultado.</p>
+
+    <div id="quizContainer">
+      <div class="quiz-q" data-correct="b">
+        <p class="question">1. ¿Cuál es la fórmula para calcular la molaridad de una solución?</p>
+        <label><input type="radio" name="q1" value="a"> masa del soluto / volumen de disolvente</label>
+        <label><input type="radio" name="q1" value="b"> moles de soluto / litros de solución</label>
+        <label><input type="radio" name="q1" value="c"> moles de soluto / kg de disolvente</label>
+        <label><input type="radio" name="q1" value="d"> equivalentes / litro</label>
+      </div>
+
+      <div class="quiz-q" data-correct="c">
+        <p class="question">2. Según la regla del octeto, ¿cuántos electrones busca completar un átomo en su capa de valencia?</p>
+        <label><input type="radio" name="q2" value="a"> 2</label>
+        <label><input type="radio" name="q2" value="b"> 6</label>
+        <label><input type="radio" name="q2" value="c"> 8</label>
+        <label><input type="radio" name="q2" value="d"> 10</label>
+      </div>
+
+      <div class="quiz-q" data-correct="b">
+        <p class="question">3. ¿Cuál es el producto principal de la fotosíntesis que almacena energía química?</p>
+        <label><input type="radio" name="q3" value="a"> Agua</label>
+        <label><input type="radio" name="q3" value="b"> Glucosa</label>
+        <label><input type="radio" name="q3" value="c"> Oxígeno molecular únicamente</label>
+        <label><input type="radio" name="q3" value="d"> Dióxido de carbono</label>
+      </div>
+
+      <div class="quiz-q" data-correct="a">
+        <p class="question">4. La función f(x) = aˣ con a > 1 es:</p>
+        <label><input type="radio" name="q4" value="a"> Creciente en todo su dominio</label>
+        <label><input type="radio" name="q4" value="b"> Decreciente en todo su dominio</label>
+        <label><input type="radio" name="q4" value="c"> Constante</label>
+        <label><input type="radio" name="q4" value="d"> Solo definida para x negativos</label>
+      </div>
+
+      <div class="quiz-q" data-correct="d">
+        <p class="question">5. ¿Cuál de las siguientes NO es un orgánulo de la célula eucariota?</p>
+        <label><input type="radio" name="q5" value="a"> Mitocondria</label>
+        <label><input type="radio" name="q5" value="b"> Aparato de Golgi</label>
+        <label><input type="radio" name="q5" value="c"> Retículo endoplasmático</label>
+        <label><input type="radio" name="q5" value="d"> Nucleoide bacteriano</label>
+      </div>
+    </div>
+
+    <button class="action-btn" id="checkQuizBtn">Corregir</button>
+    <p class="quiz-result" id="quizResult"></p>
+  </div>
+</section>
+
+</main>
+
+<footer>Curso generado a partir del temario oficial del examen de ciencias para el ingreso a Medicina. Tu progreso se guarda localmente en este navegador.</footer>
+
+<script>
+  // Navegación entre secciones
+  const navButtons = document.querySelectorAll('#navBar button');
+  const sections = document.querySelectorAll('main section');
+  navButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      navButtons.forEach(b=>b.classList.remove('active'));
+      sections.forEach(s=>s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.target).classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+
+  // Progreso con localStorage
+  const STORAGE_KEY = 'medicina_curso_progreso';
+  const checkboxes = document.querySelectorAll('.topic-check input[type="checkbox"]');
+
+  function loadProgress(){
+    let saved = {};
+    try{ saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }catch(e){ saved = {}; }
+    checkboxes.forEach((cb, idx)=>{
+      const key = cb.closest('.topic-list').dataset.group + '_' + idx;
+      if(saved[key]){
+        cb.checked = true;
+        cb.closest('.topic-check').classList.add('done');
+      }
+      cb.dataset.key = key;
+    });
+    updateProgress();
+  }
+
+  function saveProgress(){
+    const data = {};
+    checkboxes.forEach(cb=>{ data[cb.dataset.key] = cb.checked; });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function updateProgress(){
+    const total = checkboxes.length;
+    const done = Array.from(checkboxes).filter(cb=>cb.checked).length;
+    const pct = total ? Math.round((done/total)*100) : 0;
+    document.getElementById('globalProgressBar').style.width = pct + '%';
+    document.getElementById('globalProgressText').textContent = `${done} de ${total} temas completados (${pct}%)`;
+  }
+
+  checkboxes.forEach(cb=>{
+    cb.addEventListener('change', ()=>{
+      cb.closest('.topic-check').classList.toggle('done', cb.checked);
+      updateProgress();
+      saveProgress();
+    });
+  });
+
+  loadProgress();
+
+  // Quiz
+  document.getElementById('checkQuizBtn').addEventListener('click', ()=>{
+    const questions = document.querySelectorAll('.quiz-q');
+    let correct = 0;
+    questions.forEach(q=>{
+      const correctVal = q.dataset.correct;
+      const selected = q.querySelector('input[type="radio"]:checked');
+      q.querySelectorAll('label').forEach(l=>{l.style.background='';});
+      if(selected){
+        if(selected.value === correctVal){
+          correct++;
+          selected.parentElement.style.background = '#d4f4dd';
+        } else {
+          selected.parentElement.style.background = '#fbd7d2';
+          const correctLabel = q.querySelector(`input[value="${correctVal}"]`).parentElement;
+          correctLabel.style.background = '#d4f4dd';
+        }
+      } else {
+        const correctLabel = q.querySelector(`input[value="${correctVal}"]`).parentElement;
+        correctLabel.style.background = '#d4f4dd';
+      }
+    });
+    const resultEl = document.getElementById('quizResult');
+    const total = questions.length;
+    resultEl.textContent = `Resultado: ${correct} / ${total} correctas`;
+    resultEl.className = 'quiz-result ' + (correct === total ? 'correct' : (correct >= total/2 ? '' : 'incorrect'));
+  });
+</script>
+
+</body>
+</html>

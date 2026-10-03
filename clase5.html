@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 5 · PAA Verbal + Estrategia + Simulacro — Curso Intensivo Medicina USFQ</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<!-- KaTeX (LaTeX) para fórmulas matemáticas -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/mhchem.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="document.addEventListener('DOMContentLoaded',function(){renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false});});"></script>
+<style>
+  :root{
+    --azul:#c8102e; --azul-dark:#7a0c1e; --verde:#1e9e6a; --rojo:#c0392b;
+    --amarillo:#b8860b; --gris:#f4f6f8; --texto:#223; --borde:#e1e6ea;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Segoe UI',Roboto,Arial,sans-serif;background:var(--gris);color:var(--texto);line-height:1.6;}
+  header.hero{background:linear-gradient(135deg,var(--azul-dark),var(--azul));color:#fff;padding:36px 20px;text-align:center;}
+  header.hero h1{margin:0 0 8px;font-size:1.9rem;}
+  header.hero p{margin:4px 0;opacity:.92;}
+  .badges{margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .badge{background:rgba(255,255,255,.16);padding:5px 14px;border-radius:20px;font-size:.85rem;}
+  .topnav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--borde);display:flex;overflow-x:auto;box-shadow:0 2px 6px rgba(0,0,0,.05);}
+  .topnav a{flex:0 0 auto;padding:13px 16px;color:#555;text-decoration:none;font-weight:600;font-size:.92rem;white-space:nowrap;border-bottom:3px solid transparent;}
+  .topnav a:hover{color:var(--azul-dark);background:#f8f0f0;}
+  .topnav a.current{color:var(--azul);border-bottom:3px solid var(--azul);}
+  main{max-width:1000px;margin:0 auto;padding:26px 20px 80px;}
+  .card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:22px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .card h2{color:var(--azul-dark);margin-top:0;border-bottom:2px solid var(--azul);padding-bottom:8px;}
+  .progress-wrap{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+  .progress-bar-bg{background:#ede6e6;border-radius:10px;height:14px;overflow:hidden;margin-top:8px;}
+  .progress-bar-fill{background:linear-gradient(90deg,var(--verde),#27ae60);height:100%;width:0%;transition:width .4s ease;}
+  .progress-text{font-size:.9rem;color:#555;margin-top:6px;}
+  .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:12px;}
+  .topic-link{background:#fff;border:1.5px solid var(--azul);color:var(--azul-dark);border-radius:10px;padding:10px 12px;text-align:left;cursor:pointer;font-size:.92rem;font-weight:600;}
+  .topic-link:hover{background:#fdeeef;}
+  table.plan{width:100%;border-collapse:collapse;margin:12px 0;}
+  .plan th,.plan td{border:1px solid var(--borde);padding:8px 10px;font-size:.9rem;text-align:left;}
+  .plan th{background:var(--azul);color:#fff;}
+  .plan tr:nth-child(even){background:#fcf8f8;}
+  .lesson{background:#fff;border:1px solid var(--borde);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .lesson-header{display:flex;align-items:center;gap:10px;padding:14px 18px;cursor:pointer;flex-wrap:wrap;}
+  .lesson-header:hover{background:#fbefef;}
+  .lesson-num{background:var(--azul);color:#fff;border-radius:12px;font-size:.75rem;padding:3px 10px;white-space:nowrap;}
+  .lesson-header h3{margin:0;font-size:1.05rem;color:var(--azul-dark);flex:1;}
+  .lesson-time{color:#777;font-size:.85rem;white-space:nowrap;}
+  .lesson-done{font-size:.85rem;cursor:pointer;white-space:nowrap;user-select:none;}
+  .lesson-body{display:none;padding:4px 22px 20px;border-top:1px dashed var(--borde);}
+  .lesson.open .lesson-body{display:block;}
+  .lesson.done .lesson-header{background:#eaf6ef;}
+  .lesson.done .lesson-num{background:var(--verde);}
+  .teacher{background:#fdeeef;border-left:4px solid var(--azul);padding:12px 16px;border-radius:6px;margin:16px 0;}
+  .teacher p{margin:8px 0;}
+  .keyterms table{width:100%;border-collapse:collapse;margin:10px 0;}
+  .keyterms th,.keyterms td{border:1px solid var(--borde);padding:7px 10px;font-size:.9rem;text-align:left;}
+  .keyterms th{background:#fdeeef;color:var(--azul-dark);}
+  .formula-box{background:#fffbea;border:1.5px solid var(--amarillo);border-radius:8px;padding:12px 16px;margin:14px 0;}
+  .formula-box h4{margin:0 0 6px;color:var(--amarillo);}
+  .formula-box pre{margin:4px 0;font-family:Consolas,Menlo,monospace;font-size:.95rem;background:none;white-space:pre-wrap;}
+  .formula-box .katex-display{margin:8px 0;overflow-x:auto;overflow-y:hidden;padding:2px 0;}
+  .formula-box .katex{font-size:1.05rem;}
+  .diagram-box{background:#fbf9f9;border:1px dashed #c89aa0;border-radius:8px;padding:12px 16px;margin:14px 0;overflow-x:auto;}
+  .diagram-box h4{margin:0 0 6px;color:#7a4a52;}
+  .diagram-box pre{margin:6px 0;font-family:Consolas,Menlo,monospace;font-size:.85rem;line-height:1.35;}
+  .example{background:#f2fbf6;border-left:4px solid var(--verde);padding:12px 16px;border-radius:6px;margin:14px 0;}
+  .example ol{margin:8px 0 4px 22px;}
+  .pitfall{background:#fdecea;border-left:4px solid var(--rojo);padding:12px 16px;border-radius:6px;margin:14px 0;font-size:.93rem;}
+  .medlink{background:#f3eefb;border-left:4px solid #7b4fb5;padding:12px 16px;border-radius:6px;margin:14px 0;font-size:.93rem;}
+  .pasaje{background:#fefafa;border:1px solid var(--borde);border-radius:8px;padding:12px 16px;margin:12px 0;font-style:italic;}
+  .mini-quiz{border:1.5px solid var(--azul);border-radius:10px;padding:14px 18px;margin:16px 0;}
+  .mini-quiz h4{margin:0 0 10px;color:var(--azul);}
+  .quiz-q{margin-bottom:14px;padding:10px 12px;border:1px solid var(--borde);border-radius:8px;}
+  .quiz-q p.question{font-weight:600;margin:0 0 8px;}
+  .quiz-q label{display:block;padding:5px 9px;border-radius:6px;cursor:pointer;margin-bottom:3px;font-size:.92rem;}
+  .quiz-q label:hover{background:#fbefef;}
+  .quiz-q input{margin-right:8px;}
+  .quiz-result{font-weight:700;margin:8px 0 0;}
+  details.explica{margin:8px 0 0;border:1px solid var(--borde);border-radius:8px;padding:8px 14px;background:#fefafa;}
+  details.explica summary{cursor:pointer;font-weight:600;color:var(--azul-dark);}
+  button.action-btn,.action-btn{display:inline-block;background:var(--azul);color:#fff;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;text-decoration:none;}
+  button.action-btn:hover,.action-btn:hover{background:var(--azul-dark);}
+  footer{text-align:center;padding:24px;color:#888;font-size:.85rem;}
+  .clasnav{display:flex;justify-content:space-between;gap:10px;margin-top:26px;flex-wrap:wrap;}
+  @media(max-width:700px){ .lesson-header h3{font-size:.98rem;} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>🧠 Clase 5/6 · PAA Verbal + Estrategia + Simulacro</h1>
+  <p>Curso Intensivo de Preparación — Ingreso a Medicina USFQ</p>
+  <p>⏱ Duración: 3 horas · Módulo: PAA College Board (40% de tu puntaje de admisión)</p>
+  <div class="badges"><span class="badge">9 lecciones</span><span class="badge">Simulacro de 30 preguntas</span><span class="badge">Meta: 2150 para beca</span></div>
+</header>
+
+<div class="topnav">
+  <a href="index.html">🏠 Inicio</a>
+  <a href="clase1.html">Clase 1</a>
+  <a href="clase2.html">Clase 2</a>
+  <a href="clase3.html">Clase 3</a>
+  <a href="clase4.html">Clase 4</a>
+  <a href="clase5.html" class="current">Clase 5</a>
+  <a href="clase6.html">Clase 6</a>
+</div>
+
+<main>
+
+  <div class="progress-wrap">
+    <strong>Progreso de esta clase</strong>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="classProgressBar"></div></div>
+    <div class="progress-text" id="classProgressText">0 de 0 lecciones completadas (0%)</div>
+  </div>
+
+  <div class="card">
+    <h2>📚 Menú de temas — haz clic para abrir la clase</h2>
+    <p>Cada tema abre una lección completa dictada por tu profesor: explicación con analogías, términos y fórmulas clave, diagramas, ejemplo resuelto y mini-quiz.</p>
+    <div class="topic-grid">
+      <button class="topic-link" onclick="openLesson('l01')">1 · La PAA y tu admisión</button>
+      <button class="topic-link" onclick="openLesson('l02')">2 · Comprensión de lectura</button>
+      <button class="topic-link" onclick="openLesson('l03')">3 · Analogías</button>
+      <button class="topic-link" onclick="openLesson('l04')">4 · Completar oraciones</button>
+      <button class="topic-link" onclick="openLesson('l05')">5 · Sinónimos, antónimos y parónimos</button>
+      <button class="topic-link" onclick="openLesson('l06')">6 · Corrección de oraciones</button>
+      <button class="topic-link" onclick="openLesson('l07')">7 · Calcula tu puntaje</button>
+      <button class="topic-link" onclick="openLesson('l08')">8 · Última semana y día del examen</button>
+      <button class="topic-link" onclick="openLesson('l09')">9 · SIMULACRO (30 preguntas)</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🗓️ Plan de la sesión (3 horas)</h2>
+    <table class="plan">
+      <tr><th>Bloque</th><th>Tiempo</th><th>Contenido</th></tr>
+      <tr><td>A</td><td>0:00 – 0:30</td><td>La PAA, tu puntaje y tu meta (l01 y l07)</td></tr>
+      <tr><td>B</td><td>0:30 – 1:40</td><td>Aptitud Verbal completa (l02–l06)</td></tr>
+      <tr><td>C</td><td>1:40 – 2:00</td><td>Plan de última semana y día del examen (l08)</td></tr>
+      <tr><td>D</td><td>2:00 – 3:00</td><td>SIMULACRO general cronometrado + corrección (l09)</td></tr>
+    </table>
+  </div>
+
+  <article class="lesson" id="l01">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 1</span>
+      <h3>La PAA: qué es, cómo se califica y cómo cuenta para tu admisión</h3>
+      <span class="lesson-time">⏱ ~15 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✅ Completada</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <strong>📘 El profesor explica</strong>
+        <p>Piensa en tu admisión a la USFQ como una receta con dos ingredientes en proporción fija: <strong>60 % tu promedio de bachillerato</strong> y <strong>40 % tu PAA</strong>. El promedio ya está casi en la olla: es historia de 1º y 2º de bachillerato (o tu nota de grado). La PAA es el ingrediente que <em>todavía puedes cocinar</em>: es la palanca que mueves en estas semanas. Si tu promedio no es brillante, la PAA es tu redención; si lo es, la PAA es tu boleto a beca.</p>
+        <p>La PAA (Prueba de Aptitud Académica) del College Board tiene dos exámenes: el <strong>Examen de Aptitud Verbal</strong> y el <strong>Examen de Aptitud Matemática</strong>. Cada uno se puntúa hasta 1200, así que tu <strong>nota PAA máxima es 2400</strong>. Fíjate en la palabra clave: <em>aptitud</em>. No mide cuánto memorizaste; mide cuán bien razonas con palabras y números. Por eso NO se estudia como historia: se entrena como un deporte — técnicas, tiempo y miles de repeticiones en simulacros. Para medicina, recuerda además que necesitas promedio mínimo <strong>8/10</strong> y rendir el <strong>Examen de Ciencias</strong> (que entrenaste en las Clases 1–4).</p>
+        <p>¿Y cuál es tu meta? Los mínimos: <strong>1650</strong> para entrar a la USFQ, <strong>1750</strong> para Odontología y <strong>1900</strong> para Medicina Humana. Para becas apunta más alto: <strong>2150/2400</strong> en la PAA para Beca de Excelencia (en Medicina solo los 10 mejores puntajes pasan a selección) y <strong>2000/2400</strong> para Beca de Honor (2150 para Medicina, más haber sido abanderado, portaestandarte o escolta el año anterior). Traducción: si sueñas con Medicina y beca, tu blanco es la zona 2000–2150+. Es alto, pero es exactamente el tipo de meta que un entrenamiento sistemático de semanas logra.</p>
+      </div>
+      <div class="keyterms">
+        <h4>🔍 Términos clave</h4>
+        <table>
+          <tr><th>Término</th><th>Definición</th></tr>
+          <tr><td>EAV</td><td>Examen de Aptitud Verbal: comprensión de lectura, analogías, vocabulario, corrección de oraciones. Hasta 1200.</td></tr>
+          <tr><td>EAM</td><td>Examen de Aptitud Matemática: aritmética, álgebra, geometría, datos y razonamiento. Hasta 1200.</td></tr>
+          <tr><td>Nota PAA</td><td>EAV + EAM = máximo 2400.</td></tr>
+          <tr><td>Puntaje de admisión</td><td>60 % promedio de notas + 40 % PAA (escala referencial 2400).</td></tr>
+          <tr><td>Umbrales</td><td>USFQ 1650 · Odontología 1750 · Medicina 1900 · Becas 2000–2150.</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>🧮 Fórmulas y datos clave</h4>
+        \[\text{Nota PAA} = \underbrace{\text{EAV}}_{\le\,1200} + \underbrace{\text{EAM}}_{\le\,1200} \;\le\; 2400\]
+        \[\text{Puntaje de admisión} \approx 0{,}60 \times \frac{\text{promedio}}{10} \times 2400 \;+\; 0{,}40 \times \text{PAA}\]
+        <p style="margin:10px 0 0;font-size:.95rem;">Mínimos: <strong>1650</strong> USFQ · <strong>1750</strong> Odontología · <strong>1900</strong> Medicina<br>
+        Becas: <strong>Excelencia 2150</strong> · <strong>Beca de Honor 2000</strong> (Medicina: 2150 + abanderado)</p>
+      </div>
+      <div class="diagram-box">
+        <h4>📊 Diagrama — cómo se arma tu puntaje</h4>
+<pre class="mermaid">graph TD
+  A[Promedio bachillerato] -->|60 por ciento| C[Puntaje de admision]
+  B[Nota PAA - EAV + EAM] -->|40 por ciento| C
+  C --> D{Comparar con umbrales}
+  D -->|1900 o mas| E[Medicina Humana]
+  D -->|1750 o mas| F[Odontologia]
+  D -->|1650 o mas| G[USFQ general]
+  D -->|2150 o mas| H[Zona de beca]</pre>
+      </div>
+      <div class="example">
+        <h4>✏️ Ejemplo resuelto</h4>
+        <p>Ana tiene promedio 9,0 y sacó 1700 en la PAA. ¿Dónde queda?</p>
+        <ol>
+          <li>Aporte del promedio: \(0{,}60 \times \frac{9{,}0}{10} \times 2400 = 0{,}6 \times 0{,}9 \times 2400 = 1296\).</li>
+          <li>Aporte de la PAA: \(0{,}40 \times 1700 = 680\).</li>
+          <li>Puntaje estimado: \(1296 + 680 = \mathbf{1976}\).</li>
+          <li>Veredicto: supera el mínimo de Medicina (1900) ✔, pero se queda corta para Beca de Honor (2000) — le faltaron 24 puntos: cada acierto en la PAA cuenta.</li>
+        </ol>
+      </div>
+      <div class="pitfall">⚠️ <strong>Errores comunes:</strong> confundir la nota PAA (0–2400) con el puntaje de admisión (también sobre 2400, pero ponderado 60/40); creer que la PAA se "estudia" memorizando (se entrena razonando); olvidar que para Medicina el promedio mínimo es 8/10 — sin eso, la PAA por sí sola no alcanza.</div>
+      <div class="medlink">💊 <strong>Conexión con Medicina:</strong> las habilidades que evalúa la PAA — leer con precisión y razonar con datos — son las mismas con las que un médico interpreta una historia clínica o un examen de laboratorio.</div>
+      <div class="mini-quiz">
+        <h4>🎯 Ponte a prueba</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">1. ¿Cuál es la nota máxima total de la PAA?</p>
+          <label><input type="radio" name="c5_l01_q1" value="a"> 1200</label>
+          <label><input type="radio" name="c5_l01_q1" value="b"> 2400</label>
+          <label><input type="radio" name="c5_l01_q1" value="c"> 4800</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">2. En el puntaje de admisión, la PAA pesa…</p>
+          <label><input type="radio" name="c5_l01_q2" value="a"> 60%</label>
+          <label><input type="radio" name="c5_l01_q2" value="b"> 50%</label>
+          <label><input type="radio" name="c5_l01_q2" value="c"> 40%</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">3. El puntaje mínimo para Medicina Humana es…</p>
+          <label><input type="radio" name="c5_l01_q3" value="a"> 1900</label>
+          <label><input type="radio" name="c5_l01_q3" value="b"> 1750</label>
+          <label><input type="radio" name="c5_l01_q3" value="c"> 1650</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <article class="lesson" id="l02">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 2</span>
+      <h3>Verbal: comprensión de lectura</h3>
+      <span class="lesson-time">⏱ ~13 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✅ Completada</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <strong>📘 El profesor explica</strong>
+        <p>Leer un pasaje de la PAA es trabajar como <strong>forense en una escena</strong>: solo cuentan las evidencias que están EN el texto. Tu opinión, tu memoria o lo que "sabes de vida" quedan fuera de la sala. Si el pasaje dice que "el ejercicio mejora el ánimo", no puedes responder que "todos los deportistas son felices": el texto no dijo eso. El examen mide disciplina lectora, no cultura general.</p>
+        <p>Método de lectura activa, en cinco pasos: <strong>1)</strong> lee primero las preguntas (sin las opciones) para saber qué buscar; <strong>2)</strong> primera lectura rápida identificando la idea principal de cada párrafo; <strong>3)</strong> marca los <em>conectores</em> (pero, sin embargo, por lo tanto): ahí viven los giros del argumento; <strong>4)</strong> ante cada pregunta, vuelve al texto y localiza la línea exacta que la responde — la respuesta correcta casi siempre es una <em>paráfrasis</em> de una frase del pasaje; <strong>5)</strong> descarta por categorías: las opciones con absolutos ("siempre", "nunca", "todos") rara vez sobreviven.</p>
+        <p>Conoce los cinco tipos de pregunta: <strong>idea principal</strong> (¿de qué trata todo el pasaje?), <strong>detalle explícito</strong> (está dicho textualmente), <strong>vocabulario en contexto</strong> (qué significa ESA palabra AQUÍ), <strong>inferencia</strong> ("se deduce": un paso lógico más allá, no un salto) y <strong>tono/propósito</strong> (¿informar, persuadir, criticar?). Cada tipo tiene su táctica, y las verás en el ejemplo y en el simulacro.</p>
+      </div>
+      <div class="keyterms">
+        <h4>🔍 Términos clave</h4>
+        <table>
+          <tr><th>Término</th><th>Definición</th></tr>
+          <tr><td>Idea principal</td><td>Mensaje central que sostiene todo el pasaje.</td></tr>
+          <tr><td>Inferencia</td><td>Conclusión que se deduce del texto con un paso lógico (sin inventar).</td></tr>
+          <tr><td>Vocabulario en contexto</td><td>Significado de una palabra según cómo la usa ESTE pasaje.</td></tr>
+          <tr><td>Conector</td><td>Pero, sin embargo, por lo tanto: señalan giros y conclusiones.</td></tr>
+          <tr><td>Trampa absoluta</td><td>Opción con "siempre/nunca/todos" que exagera lo dicho en el texto.</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>🧮 Regla de oro</h4>
+        <pre>Respuesta correcta = PARÁFRASIS de una frase del pasaje
+Si la opción necesita conocimiento externo → descártala
+"Siempre / Nunca / Todos / Ninguno" → sospecha inmediata
+Inferencia válida = un paso lógico, no dos</pre>
+      </div>
+      <div class="diagram-box">
+        <h4>📊 Diagrama — el flujo del lector forense</h4>
+<pre>  1. Leer preguntas ─► 2. Lectura rápida ─► 3. Marcar conectores
+        │                                        │
+        ▼                                        ▼
+  5. Descartar absolutos ◄─ 4. Volver al texto y citar la línea
+        │
+        ▼
+  Elegir la opción que es PARÁFRASIS del pasaje</pre>
+      </div>
+      <div class="example">
+        <h4>✏️ Ejemplo resuelto</h4>
+        <div class="pasaje">"La anemia ferropénica es la deficiencia nutricional más común del mundo y afecta sobre todo a niños y mujeres embarazadas. Sin embargo, es fácilmente tratable con suplementos de hierro y una dieta adecuada."</div>
+        <p>¿Qué se deduce del pasaje?</p>
+        <ol>
+          <li>a) "La anemia nunca afecta a los hombres" — <strong>descartada</strong>: "sobre todo" no significa "nunca" (absoluto).</li>
+          <li>b) "La anemia ferropénica cuenta con tratamiento disponible" — ✔ correcta: es paráfrasis de "es fácilmente tratable".</li>
+          <li>c) "Todos los niños del mundo tienen anemia" — <strong>descartada</strong>: exagera "afecta sobre todo a niños".</li>
+        </ol>
+      </div>
+      <div class="pitfall">⚠️ <strong>Errores comunes:</strong> responder con lo que tú crees verdadero y no con lo que el texto dice; elegir una opción "verdadera en general" pero que el pasaje nunca menciona; leer una sola vez y responder de memoria en lugar de volver al texto.</div>
+      <div class="medlink">💊 <strong>Conexión con Medicina:</strong> interpretar una historia clínica es comprensión de lectura forense: diagnostica solo con lo documentado, marca los "pero" del paciente y no infieras dos pasos donde la evidencia da uno.</div>
+      <div class="mini-quiz">
+        <h4>🎯 Ponte a prueba</h4>
+        <div class="pasaje">"El sueño de mala calidad altera la leptina y la grelina, hormonas que regulan el apetito. Por ello, quienes duermen menos de seis horas tienden a consumir más calorías al día siguiente."</div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">1. ¿Cuál es la idea principal del pasaje?</p>
+          <label><input type="radio" name="c5_l02_q1" value="a"> Las hormonas causan todas las enfermedades</label>
+          <label><input type="radio" name="c5_l02_q1" value="b"> Hay que hacer dieta para adelgazar</label>
+          <label><input type="radio" name="c5_l02_q1" value="c"> Dormir mal altera hormonas del apetito y aumenta el consumo de calorías</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">2. Según el pasaje, la palabra "altera" significa…</p>
+          <label><input type="radio" name="c5_l02_q2" value="a"> modifica o desregula</label>
+          <label><input type="radio" name="c5_l02_q2" value="b"> elimina por completo</label>
+          <label><input type="radio" name="c5_l02_q2" value="c"> cura</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">3. ¿Cuál opción sería una trampa de absoluto?</p>
+          <label><input type="radio" name="c5_l02_q3" value="a"> Dormir poco se asocia con más apetito</label>
+          <label><input type="radio" name="c5_l02_q3" value="b"> Todos los que duermen menos de seis horas engordan</label>
+          <label><input type="radio" name="c5_l02_q3" value="c"> La leptina y la grelina regulan el apetito</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <article class="lesson" id="l03">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 3</span>
+      <h3>Verbal: analogías</h3>
+      <span class="lesson-time">⏱ ~12 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✅ Completada</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <strong>📘 El profesor explica</strong>
+        <p>Una analogía es un puente: <strong>MÉDICO : PACIENTE :: abogado : cliente</strong>. Se lee "médico es a paciente como abogado es a cliente", y la clave es la <em>relación</em>, no las palabras. Piensa en las analogías como cerraduras: la primera pareja de palabras fabrica la llave (la relación), y tu trabajo es probar esa MISMA llave en cada opción hasta que una puerta abra con suavidad. Si la llave se dobla para forzar la opción, no es la correcta: la relación debe encajar idéntica, con la misma dirección y el mismo grado.</p>
+        <p>Las relaciones más frecuentes que debes reconocer al vuelo: <strong>función</strong> (bisturí : cortar — herramienta y su uso), <strong>parte-todo</strong> (tecla : piano), <strong>causa-efecto</strong> (virus : enfermedad), <strong>contenedor-contenido</strong> (jeringa : suero), <strong>antónimos</strong> (calor : frío), <strong>sinónimos</strong>, <strong>grado</strong> (molestar : torturar — versión intensa), <strong>categoría-ejemplo</strong> (ave : colibrí) y <strong>profesional-objeto</strong> (carpintero : sierra). Antes de mirar las opciones, construye tu frase puente con palabras simples: "el bisturí SIRVE PARA cortar". Luego aplica la frase a cada opción. El error clásico es elegir una pareja de la misma categoría (profesiones) pero con otra relación.</p>
+      </div>
+      <div class="keyterms">
+        <h4>🔍 Términos clave</h4>
+        <table>
+          <tr><th>Término</th><th>Definición</th></tr>
+          <tr><td>Frase puente</td><td>Oración simple que describe la relación de la pareja dada.</td></tr>
+          <tr><td>Relación de función</td><td>Objeto → para qué sirve (termómetro : medir temperatura).</td></tr>
+          <tr><td>Parte-todo</td><td>Componente y conjunto (dedo : mano).</td></tr>
+          <tr><td>Relación de grado</td><td>Misma idea en intensidad distinta (temor : pánico).</td></tr>
+          <tr><td>Paralelismo</td><td>La relación de la respuesta debe replicar dirección y grado exactos.</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>🧮 Método en 4 pasos</h4>
+        <pre>1. Lee la pareja dada:  A : B
+2. Construye la frase puente: "A [relación] B"
+3. Prueba LA MISMA frase en cada opción: X [relación] Y
+4. Si necesitas cambiar la frase para que encaje → descarta</pre>
+      </div>
+      <div class="diagram-box">
+        <h4>📊 Diagrama — la llave de la relación</h4>
+<pre>   MÉDICO ──atiende──► PACIENTE        (la llave que fabricas)
+       ║
+       ║ misma llave
+       ▼
+   ABOGADO ──atiende/asesora──► CLIENTE  ✔ encaja
+   LIBRO ──atiende──► LECTURA        ✘ la relación no es la misma
+   (libro : leer es objeto-acción, no profesional-cliente)</pre>
+      </div>
+      <div class="example">
+        <h4>✏️ Ejemplo resuelto</h4>
+        <p><strong>MÉDICO : RECETA ::</strong></p>
+        <ol>
+          <li>Frase puente: "el médico EXPIDE una receta como producto de su trabajo".</li>
+          <li>a) panadero : harina — la harina es INSUMO, no producto → descartada.</li>
+          <li>b) arquitecto : plano — el arquitecto expide el plano como producto ✔.</li>
+          <li>c) paciente : diagnóstico — invertida (recibe, no expide) → descartada.</li>
+          <li>Respuesta: <strong>b</strong>. Misma relación emisor-producto, misma dirección.</li>
+        </ol>
+      </div>
+      <div class="pitfall">⚠️ <strong>Errores comunes:</strong> elegir por afinidad de categoría (dos profesiones, dos animales) sin verificar la relación; invertir el orden (A:B ≠ B:A); cambiar el grado de la relación (recomendar : ordenar no es igual a sugerir : exigir... ¡sí lo es! cuidado con verificar grado, no solo idea).</div>
+      <div class="medlink">💊 <strong>Conexión con Medicina:</strong> el pensamiento por analogías es el de la clínica: "este cuadro se comporta COMO un cuadro que ya conozco". Reconocer patrones por relación estructural es diagnóstico puro.</div>
+      <div class="mini-quiz">
+        <h4>🎯 Ponte a prueba</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">1. TERMÓMETRO : TEMPERATURA ::</p>
+          <label><input type="radio" name="c5_l03_q1" value="a"> balanza : kilogramo</label>
+          <label><input type="radio" name="c5_l03_q1" value="b"> esfigmomanómetro : presión arterial</label>
+          <label><input type="radio" name="c5_l03_q1" value="c"> doctor : hospital</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">2. RUEDA : AUTO ::</p>
+          <label><input type="radio" name="c5_l03_q2" value="a"> válvula : corazón</label>
+          <label><input type="radio" name="c5_l03_q2" value="b"> corazón : válvula</label>
+          <label><input type="radio" name="c5_l03_q2" value="c"> auto : carretera</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">3. ¿Qué relación es de GRADO (intensidad)?</p>
+          <label><input type="radio" name="c5_l03_q3" value="a"> agua : sed</label>
+          <label><input type="radio" name="c5_l03_q3" value="b"> pincel : pintor</label>
+          <label><input type="radio" name="c5_l03_q3" value="c"> incomodidad : agonía</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <article class="lesson" id="l04">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 4</span>
+      <h3>Verbal: completar oraciones</h3>
+      <span class="lesson-time">⏱ ~12 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✅ Completada</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <strong>📘 El profesor explica</strong>
+        <p>Completar oraciones es ser <strong>cerrajero de palabras</strong>: la oración es la cerradura y solo una llave gira sin forzar. La cerradura siempre da pistas: los <strong>conectores</strong>. Si lees "el paciente parecía reposado, ___ sus análisis mostraban deshidratación", la coma + contraste anuncia que la palabra faltante es algo como "pero": lo que viene contradice lo anterior. Si lees "por lo tanto", "en consecuencia" o "así pues", lo que falta refuerza o concluye. Primero lee la oración completa y define la POLARIDAD de la palabra faltante: ¿necesito algo positivo, negativo o de contraste? Esa decisión ya elimina la mitad de las opciones.</p>
+        <p>Segunda pista: las <strong>definiciones implícitas</strong>. Muchas oraciones definen a la palabra faltante con una frase al lado: "un comportamiento ___, es decir, que no dañaba a nadie…". El "es decir" es oro: la respuesta es sinónimo de lo que sigue. Método final: predice tu propia palabra ANTES de ver las opciones (aunque sea coloquial: "algo así como 'conflicto'"), y luego busca la opción formal que la sustituya. Si ninguna encaja con tu predicción, reléela: probablemente malinterpretaste un conector.</p>
+      </div>
+      <div class="keyterms">
+        <h4>🔍 Términos clave</h4>
+        <table>
+          <tr><th>Término</th><th>Definición</th></tr>
+          <tr><td>Conector de contraste</td><td>pero, sin embargo, aunque → la palabra faltante invierte la idea.</td></tr>
+          <tr><td>Conector de causa/consecuencia</td><td>porque, por lo tanto, debido a → la palabra mantiene el sentido.</td></tr>
+          <tr><td>Polaridad</td><td>Signo de la palabra faltante: positiva, negativa o de contraste.</td></tr>
+          <tr><td>Definición implícita</td><td>"es decir", "o sea": definen a la palabra faltante.</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>🧮 Método en 4 pasos</h4>
+        <pre>1. Lee TODA la oración y ubica los conectores
+2. Decide la polaridad: ¿contraste, refuerzo o consecuencia?
+3. Predice tu propia palabra antes de mirar opciones
+4. Elige la opción que encaja SIN forzar (prueba todas)</pre>
+      </div>
+      <div class="diagram-box">
+        <h4>📊 Diagrama — las señales de la oración</h4>
+<pre>  Oración: [idea 1] ──señal── [hueco]
+
+  señal "pero / sin embargo / aunque"   → hueco en CONTRASTE
+  señal "por lo tanto / en consecuencia"→ hueco CONSECUENTE
+  señal "es decir / o sea"              → hueco = SINÓNIMO
+  señal "además / incluso"              → hueco REFORZA
+  sin señal clara                       → hueco de CONSISTENCIA lógica</pre>
+      </div>
+      <div class="example">
+        <h4>✏️ Ejemplo resuelto</h4>
+        <p>"Aunque el tratamiento era ___ , el paciente lo abandonó por efectos secundarios intolerables."</p>
+        <ol>
+          <li>Conector "aunque" + "lo abandonó por intolerable" → el hueco debe decir algo POSITIVO del tratamiento (contraste).</li>
+          <li>Predicción: "eficaz" o "apropiado".</li>
+          <li>Opciones: a) inútil (polaridad contraria ✘) b) eficaz ✔ c) costoso (plausible en vida real, pero no contrasta con la lógica de "aunque"… y no dice nada de efectividad) → respuesta <strong>b</strong>.</li>
+        </ol>
+      </div>
+      <div class="pitfall">⚠️ <strong>Errores comunes:</strong> elegir opciones "verosímiles en el mundo real" sin encajar en la LÓGICA de la oración; ignorar los conectores y leer solo el hueco; olvidar probar TODAS las opciones (a veces dos encajan y una encaja mejor).</div>
+      <div class="medlink">💊 <strong>Conexión con Medicina:</strong> una indicación médica se redacta como oración completa y precisa: "aunque el paciente mejoró, continúe el antibiótico 5 días más". La ambigüedad en una indicación puede costar una vida.</div>
+      <div class="mini-quiz">
+        <h4>🎯 Ponte a prueba</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">1. "El tejido sanaba ___, es decir, más rápido de lo esperado."</p>
+          <label><input type="radio" name="c5_l04_q1" value="a"> lentamente</label>
+          <label><input type="radio" name="c5_l04_q1" value="b"> aceleradamente</label>
+          <label><input type="radio" name="c5_l04_q1" value="c"> dolorosamente</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">2. "___ sus méritos académicos, obtuvo la beca completa."</p>
+          <label><input type="radio" name="c5_l04_q2" value="a"> Debido a</label>
+          <label><input type="radio" name="c5_l04_q2" value="b"> A pesar de</label>
+          <label><input type="radio" name="c5_l04_q2" value="c"> En lugar de</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">3. "El medicamento era ___ , pero el paciente se sentía peor: se sospechó una reacción adversa."</p>
+          <label><input type="radio" name="c5_l04_q3" value="a"> dañino</label>
+          <label><input type="radio" name="c5_l04_q3" value="b"> desconocido</label>
+          <label><input type="radio" name="c5_l04_q3" value="c"> apropiado</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <article class="lesson" id="l05">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 5</span>
+      <h3>Verbal: sinónimos, antónimos y parónimos</h3>
+      <span class="lesson-time">⏱ ~12 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✅ Completada</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <strong>📘 El profesor explica</strong>
+        <p>Los ejercicios de vocabulario son los "glóbulos rojos" del examen: pequeños, numerosos y vitales. El método universal es el <strong>reemplazo mental</strong>: mete la opción dentro de una oración simple y mira si la oración sigue teniendo sentido. "Efímero" → "un amor efímero duró dos semanas": funciona, significa fugaz. "Parco" → "fue parco en sus explicaciones, dijo solo dos palabras": significa escaso/lacónico. Nunca elijas por intuición sonora: pruébala en contexto.</p>
+        <p>Atención con los <strong>parónimos</strong>, las palabras gemelas que no lo son: <em>haber</em> (verbo) vs <em>a ver</em> (mirar); <em>sino</em> (contraste) vs <em>si no</em> (condición); <em>consejo</em> (sugerencia o junta) vs <em>concilio</em> (asamblea religiosa); <em>hojear</em> (pasar páginas) vs <em>ojear</em> (mirar); <em>rebelar</em> vs <em>revelar</em>. El examen adora confundirlas. Y una técnica de ÚLTIMA hora para antónimos: subraya la negación interna de la palabra ("ineludible" = no evitable = inevitable). Desarma la palabra en sus piezas (prefijos in-, des-, a-) y compáralas con la pregunta: ¿te piden el SINÓNIMO o el CONTRARIO? Léelo dos veces: es el error más barato de evitar.</p>
+      </div>
+      <div class="keyterms">
+        <h4>🔍 Términos clave</h4>
+        <table>
+          <tr><th>Término</th><th>Definición</th></tr>
+          <tr><td>Sinónimo</td><td>Palabra con significado equivalente (efímero ≈ fugaz).</td></tr>
+          <tr><td>Antónimo</td><td>Palabra de significado opuesto (generoso ↔ mezquino).</td></tr>
+          <tr><td>Parónimo</td><td>Palabras parecidas en forma, distintas en sentido (haber / a ver).</td></tr>
+          <tr><td>Reemplazo mental</td><td>Técnica: sustituir la opción en una oración y verificar el sentido.</td></tr>
+          <tr><td>Prefijos negativos</td><td>in-, des-, a- invierten el sentido (inevitable = no evitable).</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>🧮 Vocabulario PAA frecuente</h4>
+        <pre>efímero = fugaz        tenaz = persistente     sagaz = astuto/perspicaz
+parco = escaso         altivo = soberbio       pródigo = generoso
+inherente = propio de  futile = inútil         auspiciar = promover
+reacio = renuente      vetusto = muy viejo     sustento = lo que apoya</pre>
+      </div>
+      <div class="diagram-box">
+        <h4>📊 Diagrama — trampas de parónimos</h4>
+<pre>  haber (existir/auxiliar) ≠ a ver (mirar)
+  sino   (contraste)       ≠ si no  (condición)
+  consejo (sugerencia)     ≠ concilio (asamblea)
+  rebelar (sublevarse)     ≠ revelar (descubrir)
+  hoeear ✘ → hojear (pasar hojas) ≠ ojear (mirar)</pre>
+      </div>
+      <div class="example">
+        <h4>✏️ Ejemplo resuelto</h4>
+        <p>¿Cuál es SINÓNIMO de "tenaz"?</p>
+        <ol>
+          <li>Prueba de reemplazo: "un negociador tenaz no cede tras 10 rondas" → persistente ✔.</li>
+          <li>a) frágil — opuesto ✘ b) persistente ✔ c) tímido — sin relación ✘.</li>
+          <li>Respuesta: <strong>b</strong>. Un negociador tenaz y uno persistente describen la misma persona.</li>
+        </ol>
+      </div>
+      <div class="pitfall">⚠️ <strong>Errores comunes:</strong> elegir por cómo SUENA la palabra; confundir antónimo con sinónimo por no leer la consigna dos veces; olvidar el prefijo negativo (responder "evitable" cuando preguntan por sinónimo de "ineludible").</div>
+      <div class="medlink">💊 <strong>Conexión con Medicina:</strong> en farmacología los parónimos son riesgos reales: "hipo-" vs "hiper-" (hipotensión/hipertensión), "cefalexina" vs "cefalotina". La precisión léxica salva vidas.</div>
+      <div class="mini-quiz">
+        <h4>🎯 Ponte a prueba</h4>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">1. Sinónimo de "efímero":</p>
+          <label><input type="radio" name="c5_l05_q1" value="a"> fugaz</label>
+          <label><input type="radio" name="c5_l05_q1" value="b"> eterno</label>
+          <label><input type="radio" name="c5_l05_q1" value="c"> sólido</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">2. Antónimo de "pródigo":</p>
+          <label><input type="radio" name="c5_l05_q2" value="a"> generoso</label>
+          <label><input type="radio" name="c5_l05_q2" value="b"> brillante</label>
+          <label><input type="radio" name="c5_l05_q2" value="c"> mezquino</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">3. "___ no estudias, no habrá ___ que te salve en el examen."</p>
+          <label><input type="radio" name="c5_l05_q3" value="a"> Sino / concilio</label>
+          <label><input type="radio" name="c5_l05_q3" value="b"> Si no / consejo</label>
+          <label><input type="radio" name="c5_l05_q3" value="c"> Si no / concilio</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <article class="lesson" id="l06">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 6</span>
+      <h3>Verbal: corrección y reescritura de oraciones</h3>
+      <span class="lesson-time">⏱ ~12 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✅ Completada</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <strong>📘 El profesor explica</strong>
+        <p>Este tipo de pregunta te entrega una oración enferma y te pide diagnosticar: error de <strong>concordancia</strong> (los numerales y verbos no cuadran: "haberían muchos estudiantes" → "había muchos estudiantes", porque "haber" es impersonal), de <strong>redundancia</strong> ("subir para arriba", "salir afuera" — el verbo ya lo dice), de <strong>ambigüedad</strong> (¿quién hace qué? "El médico le dijo al paciente que él estaba sano" — ¿quién está sano?), de <strong>gerundio mal usado</strong> ("Vi al doctor corriendo" — ¿quién corría?) o de <strong>lógica rota</strong> ("Salió de casa corriendo porque llegaba tarde al hospital que está a dos cuadras" — ¿la causa y el efecto cuadran?).</p>
+        <p>La respuesta correcta suele ser la opción <strong>más clara y más corta que conserva el sentido completo</strong>. No es la más elegante ni la más rebuscada: el español eficiente gana. Método: 1) identifica el error (nómbralo: ¿concordancia? ¿redundancia? ¿ambigüedad?); 2) reescríbelo tú mentalmente; 3) busca la opción que coincide con tu versión; 4) compara las demás para descartar: las opciones con el MISMO error (cambiado de palabras) son carnada. Y cuidado con "mejorativas" que ELIMINAN información del original: si la oración decía que el dolor era "en el pecho izquierdo", la versión correcta no puede perder el "izquierdo".</p>
+      </div>
+      <div class="keyterms">
+        <h4>🔍 Términos clave</h4>
+        <table>
+          <tr><th>Término</th><th>Definición</th></tr>
+          <tr><td>Concordancia</td><td>Acuerdo de género, número y persona entre palabras (sujeto-verbo).</td></tr>
+          <tr><td>Redundancia</td><td>Repetir lo mismo sin aporte ("subir para arriba").</td></tr>
+          <tr><td>Ambigüedad</td><td>Frase que permite dos interpretaciones distintas.</td></tr>
+          <tr><td>Gerundio incorrecto</td><td>Usar "-ando/-iendo" con sujeto confuso o valor de posterioridad.</td></tr>
+          <tr><td>Concisión</td><td>Decir lo mismo con menos palabras sin perder información.</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>🧮 Errores que el examen más repite</h4>
+        <pre>haber + plural          → "había muchos", nunca "haberían muchos"
+"subir para arriba"     → subir
+"alrededor de la esquina..." redundancias → recortar
+gerundio con sujeto confuso → cambiar por "que + verbo"
+cualquier opción que pierda un dato del original → descartada</pre>
+      </div>
+      <div class="diagram-box">
+        <h4>📊 Diagrama — el check de reescritura</h4>
+<pre>  Original ──► ¿Hay error? ──no──► (raro, revisa consigna)
+                  │sí
+                  ▼
+        Nómbralo: concordancia / redundancia / ambigüedad
+                  │
+                  ▼
+        Reescritura mental propia
+                  │
+                  ▼
+   Opción que coincide SIN perder información ✔</pre>
+      </div>
+      <div class="example">
+        <h4>✏️ Ejemplo resuelto</h4>
+        <p>¿Cuál versión es correcta? "Haberían varios pacientes en la sala de espera."</p>
+        <ol>
+          <li>Error: "haber" es impersonal → no concuerda con "varios pacientes".</li>
+          <li>Corrección mental: "Había varios pacientes en la sala de espera."</li>
+          <li>Se elige la opción que dice exactamente eso (y descartamos versiones como "Habían varios pacientes" — el mismo error con otro traje).</li>
+        </ol>
+      </div>
+      <div class="pitfall">⚠️ <strong>Errores comunes:</strong> preferir la opción "más bonita" aunque pierda un dato del original; no reconocer el mismo error disfrazado en otras opciones; caer en el uso popular "habían/haberían + plural" (incorrecto en español formal).</div>
+      <div class="medlink">💊 <strong>Conexión con Medicina:</strong> el informe clínico es un ejercicio de corrección: "paciente refiere dolor" — ¿dónde, desde cuándo, con qué intensidad? Una oración ambigua en una evolución médica induce errores en el equipo de guardia.</div>
+      <div class="mini-quiz">
+        <h4>🎯 Ponte a prueba</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">1. ¿Cuál oración es correcta?</p>
+          <label><input type="radio" name="c5_l06_q1" value="a"> Habían muchos pacientes.</label>
+          <label><input type="radio" name="c5_l06_q1" value="b"> Había muchos pacientes.</label>
+          <label><input type="radio" name="c5_l06_q1" value="c"> Haberían muchos pacientes.</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">2. ¿Cuál opción corrige la redundancia "volvió otra vez al hospital"?</p>
+          <label><input type="radio" name="c5_l06_q2" value="a"> Volvió al hospital.</label>
+          <label><input type="radio" name="c5_l06_q2" value="b"> Volvió otra vez.</label>
+          <label><input type="radio" name="c5_l06_q2" value="c"> Otra vez volvió otra vez.</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">3. "Vi al enfermero corriendo por el pasillo." La ambigüedad se resuelve mejor con…</p>
+          <label><input type="radio" name="c5_l06_q3" value="a"> Vi corriendo al enfermero.</label>
+          <label><input type="radio" name="c5_l06_q3" value="b"> Corriendo, vi al enfermero.</label>
+          <label><input type="radio" name="c5_l06_q3" value="c"> Vi que el enfermero corría por el pasillo.</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <article class="lesson" id="l07">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 7</span>
+      <h3>Cálculo de tu puntaje de admisión (con ejemplos numéricos)</h3>
+      <span class="lesson-time">⏱ ~10 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✅ Completada</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <strong>📘 El profesor explica</strong>
+        <p>Este es el cálculo que debes poder hacer en un papelito en 30 segundos, porque convierte tu meta en números concretos. La estimación referencial trabaja así: el promedio de notas (0–10) se lleva a escala 2400 y pesa el <strong>60 %</strong>; la nota PAA (0–2400) pesa el <strong>40 %</strong>. El resultado se compara con los umbrales: 1650 (USFQ), 1750 (Odontología), 1900 (Medicina), 2000 (Beca de Honor) y 2150 (Beca de Excelencia).</p>
+        <p>Lo importante es leer el cálculo como un <em>mapa de decisiones</em>: si tu simulación da 1850, no necesitas "mejorar un poco todo": necesitas saber cuántos puntos de PAA separan tu situación de 1900, y cuánto promedio adicional te daría eso. Cada punto de la PAA vale 0,4 en el puntaje final; cada centésima de promedio vale 1,44. Con ese tipo de cambio fijo dejas de estudiar a ciegas: sabes exactamente cuánto vale cada acierto.</p>
+      </div>
+      <div class="keyterms">
+        <h4>🔍 Términos clave</h4>
+        <table>
+          <tr><th>Término</th><th>Definición</th></tr>
+          <tr><td>Ponderación</td><td>Peso de cada componente: 60 % notas, 40 % PAA.</td></tr>
+          <tr><td>Umbral</td><td>Puntaje mínimo a superar: 1650/1750/1900 (y becas 2000/2150).</td></tr>
+          <tr><td>Escala referencial</td><td>Ambos componentes llevados a la base 2400 para compararlos.</td></tr>
+          <tr><td>Valor marginal</td><td>Lo que aporta cada punto extra: 0,4 por punto de PAA.</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>🧮 Fórmula referencial</h4>
+        \[\text{Puntaje} = 0{,}60 \times \frac{\text{promedio}}{10} \times 2400 + 0{,}40 \times \text{PAA}\]
+        \[+1\ \text{punto de PAA} \;\Rightarrow\; +0{,}4\ \text{de puntaje} \qquad +0{,}01\ \text{de promedio} \;\Rightarrow\; +1{,}44\ \text{de puntaje}\]
+        <p style="margin:8px 0 0;font-size:.92rem;color:#555;">(Ubicación en portal: index.html → calculadora)</p>
+      </div>
+      <div class="diagram-box">
+        <h4>📊 Diagrama — tres estudiantes, tres destinos</h4>
+<pre>           Promedio  PAA    Puntaje est.   ¿Dónde queda?
+  Ana        9,0    1700      1976       Medicina sí / beca no
+  Bruno      8,0    2000      1952       Medicina sí / beca no
+  Carla      9,0    2150      2156       Medicina sí / BECA sí
+
+   Meta sugerida: PAA ≥ 2150 si tu promedio ronda 9</pre>
+      </div>
+      <div class="example">
+        <h4>✏️ Ejemplo resuelto</h4>
+        <p>Bruno: promedio 8,0, PAA 2000. ¿Alcanza Medicina? ¿Y beca?</p>
+        <ol>
+          <li>Promedio: \(0{,}60 \times 0{,}8 \times 2400 = 1152\).</li>
+          <li>PAA: \(0{,}40 \times 2000 = 800\).</li>
+          <li>Total: \(1152 + 800 = \mathbf{1952}\) → supera Medicina (1900) ✔ pero no la Beca de Honor (2000).</li>
+          <li>¿Qué le falta para 2150? \(198\) puntos → \(198 \div 0{,}4 \approx 495\) puntos más de PAA (imposible) O subir promedio: \(198 \div 1{,}44 \approx 13{,}75\) centésimas (8,14). La PAA es su palanca realista en el corto plazo.</li>
+        </ol>
+      </div>
+      <div class="pitfall">⚠️ <strong>Errores comunes:</strong> dividir mal el porcentaje (60 % de 2400 es 1440, no 144); usar la nota PAA sin ponderar; olvidar que esto es una ESTIMACIÓN referencial (la fórmula oficial la aplica USFQ — verifica con la universidad).</div>
+      <div class="medlink">💊 <strong>Conexión con Medicina:</strong> esta conversión de metas en números operativos es pensamiento clínico básico: igual que calculas una dosis pediátrica con mg/kg, aquí calculas qué aciertos te separan de tu blanco.</div>
+      <div class="mini-quiz">
+        <h4>🎯 Ponte a prueba</h4>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">1. Con promedio 9,0 y PAA 1800, el puntaje estimado es…</p>
+          <label><input type="radio" name="c5_l07_q1" value="a"> 2016</label>
+          <label><input type="radio" name="c5_l07_q1" value="b"> 1890</label>
+          <label><input type="radio" name="c5_l07_q1" value="c"> 1800</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">2. ¿Cuánto aporta 1 punto de PAA al puntaje de admisión?</p>
+          <label><input type="radio" name="c5_l07_q2" value="a"> 1 punto</label>
+          <label><input type="radio" name="c5_l07_q2" value="b"> 0,4 puntos</label>
+          <label><input type="radio" name="c5_l07_q2" value="c"> 4 puntos</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">3. Para la Beca de Excelencia en Medicina (2150) además se requiere…</p>
+          <label><input type="radio" name="c5_l07_q3" value="a"> promedio perfecto de 10</label>
+          <label><input type="radio" name="c5_l07_q3" value="b"> solo haber rendido el Examen de Ciencias</label>
+          <label><input type="radio" name="c5_l07_q3" value="c"> estar entre los 10 mejores puntajes (proceso de selección)</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <article class="lesson" id="l08">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 8</span>
+      <h3>Plan de la última semana y día del examen</h3>
+      <span class="lesson-time">⏱ ~10 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✅ Completada</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <strong>📘 El profesor explica</strong>
+        <p>La última semana no es para aprender cosas nuevas: es para <strong>pulir lo aprendido</strong>. Piensa como un deportista antes de la final: ya no aprende nuevas técnicas, entrena ritmo, revisa videos de sus errores y duerme en profundidad. Tu plan: simulacros CRONOMETRADOS (mínimo 3 en la semana), revisión del cuaderno de errores (el tema que fallaste en el simulacro anterior se repasa ese mismo día), y dormir 8 horas — el sueño consolida la memoria: estudiar toda la noche rinde MENOS que estudiar y dormir.</p>
+        <p>El día del examen, tu única tarea es ejecutar. El <strong>Examen de Ciencias</strong> (Química, Biología y Matemáticas) es teórico y práctico, con preguntas de opción múltiple y V/F; se responde con <strong>calculadora científica NO programable</strong>, lápiz y hojas blancas — verifica tu kit la noche anterior. Llega temprano, desayuna algo real (no solo café), y usa el protocolo de tres velocidades: preguntas fáciles primero (aseguradas), medias después, difíciles al final con el tiempo sobrante. Ante una pregunta difícil: descarta opciones absurdas, marca tu mejor apuesta y avanza — no sacrifies tres preguntas fáciles por una difícil. Y respira: la ansiedad baja el razonamiento; dos respiraciones profundas cuestan 10 segundos y valen minutos de claridad.</p>
+      </div>
+      <div class="keyterms">
+        <h4>🔍 Términos clave</h4>
+        <table>
+          <tr><th>Término</th><th>Definición</th></tr>
+          <tr><td>Simulacro cronometrado</td><td>Examen de práctica con tiempo real y sin interrupciones.</td></tr>
+          <tr><td>Cuaderno de errores</td><td>Registro de cada fallo y su causa (concepto, lectura o distracción).</td></tr>
+          <tr><td>Protocolo 3 velocidades</td><td>Fáciles → medias → difíciles, en ese orden.</td></tr>
+          <tr><td>Descarte sistemático</td><td>Eliminar opciones absurdas para decidir entre 2.</td></tr>
+        </table>
+      </div>
+      <div class="formula-box">
+        <h4>🧮 Agenda de la última semana</h4>
+        <pre>Día −7 a −5: 1 simulacro/día (alterna Verbal+Mat y Ciencias) + revisar errores
+Día −4 a −3: repaso dirigido SOLO de temas débiles + 1 simulacro
+Día −2:      simulacro completo a hora real del examen + kit listo
+Día −1:      repaso liviano de fórmulas y vocabulario; NADA nuevo; dormir 8 h
+Día 0:       desayuno real, llegar 40 min antes, protocolo 3 velocidades</pre>
+      </div>
+      <div class="diagram-box">
+        <h4>📊 Diagrama — el kit del día D</h4>
+<pre>  ┌──────────────── KIT ────────────────┐
+  │ ✔ Documento de identidad            │
+  │ ✔ Calculadora científica NO programable (con pilas nuevas) │
+  │ ✔ 2–3 lápices + borrador            │
+  │ ✔ Agua y snack ligero               │
+  │ ✔ Ropa en capas (salas con aire)    │
+  │ ✘ Teléfono (apagado, según reglas)  │
+  └─────────────────────────────────────┘</pre>
+      </div>
+      <div class="example">
+        <h4>✏️ Ejemplo resuelto</h4>
+        <p>En el simulacro, Ana gastó 12 minutos en una pregunta de analogía y dejó 4 preguntas de lectura sin responder. ¿Diagnóstico?</p>
+        <ol>
+          <li>Error: no aplicó el protocolo 3 velocidades — se enganchó en una difícil.</li>
+          <li>Regla: si a los 60 segundos no ves camino, marca el mejor descarte y AVANZA.</li>
+          <li>En el próximo simulacro: cronometra por bloques (ej. 5 min por grupo de preguntas) y revisa al final. Resultado esperado: +3/4 respuestas rescatadas.</li>
+        </ol>
+      </div>
+      <div class="pitfall">⚠️ <strong>Errores comunes:</strong> estudiar temas nuevos la víspera (genera ansiedad y cansancio); llevar calculadora programable (¡la dejan fuera!); quedarse clavado en una pregunta difícil; llegar con hambre o sin documento.</div>
+      <div class="medlink">💊 <strong>Conexión con Medicina:</strong> el día del examen es tu primer "turno hospitalario": llega temprano, prioriza por gravedad, gestiona tu energía y no te paralices ante el caso difícil. El protocolo es idéntico.</div>
+      <div class="mini-quiz">
+        <h4>🎯 Ponte a prueba</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">1. ¿Qué tipo de calculadora se permite en el Examen de Ciencias?</p>
+          <label><input type="radio" name="c5_l08_q1" value="a"> Programable con memoria</label>
+          <label><input type="radio" name="c5_l08_q1" value="b"> Científica NO programable</label>
+          <label><input type="radio" name="c5_l08_q1" value="c"> La del celular</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">2. La última semana debe dedicarse sobre todo a…</p>
+          <label><input type="radio" name="c5_l08_q2" value="a"> simulacros cronometrados y repaso de errores</label>
+          <label><input type="radio" name="c5_l08_q2" value="b"> aprender temas completamente nuevos</label>
+          <label><input type="radio" name="c5_l08_q2" value="c"> descansar sin tocar un libro</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">3. Si a los 60 segundos una pregunta no te abre camino, debes…</p>
+          <label><input type="radio" name="c5_l08_q3" value="a"> quedarte hasta resolverla</label>
+          <label><input type="radio" name="c5_l08_q3" value="b"> abandonar el examen</label>
+          <label><input type="radio" name="c5_l08_q3" value="c"> descartar, marcar tu mejor apuesta y avanzar</label>
+        </div>
+        <button class="action-btn quiz-check">Corregir</button>
+        <p class="quiz-result"></p>
+      </div>
+    </div>
+  </article>
+
+  <article class="lesson" id="l09">
+    <div class="lesson-header">
+      <span class="lesson-num">Lección 9</span>
+      <h3>SIMULACRO general: 30 preguntas cronometradas</h3>
+      <span class="lesson-time">⏱ ~60 min</span>
+      <label class="lesson-done"><input type="checkbox"> ✅ Completada</label>
+    </div>
+    <div class="lesson-body">
+      <div class="teacher">
+        <strong>📘 El profesor explica</strong>
+        <p>Este es tu ensayo general del día D: <strong>30 preguntas</strong> — 10 de Aptitud Verbal, 8 de Aptitud Matemática, 6 de Química y 6 de Biología. Reglas del simulacro: cronómetro en marcha (sugerido: 55–60 minutos para todo), sin apuntes, sin interrupciones, calculadora científica no programable solo en las secciones Matemática/Química/Biología. Aplica el protocolo de 3 velocidades y el descarte sistemático que entrenamos en la lección 8.</p>
+        <p>Al terminar, activa "Corregir" en cada sección (verde = correcta, rojo = fallada) y abre la explicación de CADA pregunta fallada: el error bien analizado vale más que diez preguntas nuevas. Anota en tu cuaderno de errores: ¿fue error de concepto, de lectura o de tiempo? Si fallaste 3 preguntas del mismo tema, ese tema se repasa HOY en su clase (Clase 1–4). Meta orientadora: <strong>≥ 24/30</strong> (80 %) para estar en zona de Medicina; <strong>≥ 27/30</strong> para pensar en zona de beca.</p>
+      </div>
+      <div class="diagram-box">
+        <h4>📊 Estructura del simulacro</h4>
+<pre>  Sección            Preguntas    Tiempo sugerido
+  1. Verbal             10         20 min
+  2. Matemática          8         15 min
+  3. Química             6         12 min
+  4. Biología            6         12 min
+  ────────────────────────────────────────
+  TOTAL                 30         ~59 min</pre>
+      </div>
+
+      <div class="mini-quiz">
+        <h4>🎯 Sección 1 · Aptitud Verbal (10 preguntas)</h4>
+        <div class="pasaje">"La telemedicina creció durante la pandemia porque reduce tiempos de traslado y descongestiona salas de espera. Sin embargo, los expertos advierten que no sustituye la exploración física: ciertos signos solo se detectan con las manos del clínico."</div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">V1. Según el pasaje, la telemedicina…</p>
+          <label><input type="radio" name="c5_l09_v1" value="a"> sustituye por completo la consulta presencial</label>
+          <label><input type="radio" name="c5_l09_v1" value="b"> tiene ventajas, pero no reemplaza la exploración física</label>
+          <label><input type="radio" name="c5_l09_v1" value="c"> es inútil en medicina</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">V2. La palabra "descongestiona" significa aquí…</p>
+          <label><input type="radio" name="c5_l09_v2" value="a"> agrupa</label>
+          <label><input type="radio" name="c5_l09_v2" value="b"> financia</label>
+          <label><input type="radio" name="c5_l09_v2" value="c"> alivia la sobrecarga de</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">V3. ¿Cuál sería una trampa de absoluto sobre este pasaje?</p>
+          <label><input type="radio" name="c5_l09_v3" value="a"> La exploración física siempre es innecesaria</label>
+          <label><input type="radio" name="c5_l09_v3" value="b"> Algunos signos se detectan mejor presencialmente</label>
+          <label><input type="radio" name="c5_l09_v3" value="c"> La telemedicina reduce traslados</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">V4. ESCALPELO : INCISIÓN ::</p>
+          <label><input type="radio" name="c5_l09_v4" value="a"> paciente : diagnóstico</label>
+          <label><input type="radio" name="c5_l09_v4" value="b"> estetoscopio : auscultación</label>
+          <label><input type="radio" name="c5_l09_v4" value="c"> hospital : médico</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">V5. SÍNTOMA : FIEBRE :: (relación categoría-ejemplo)</p>
+          <label><input type="radio" name="c5_l09_v5" value="a"> fiebre : enfermedad</label>
+          <label><input type="radio" name="c5_l09_v5" value="b"> termómetro : fiebre</label>
+          <label><input type="radio" name="c5_l09_v5" value="c"> signo : ictericia</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">V6. "El resultado del cultivo fue ___, por eso suspendimos el antibiótico."</p>
+          <label><input type="radio" name="c5_l09_v6" value="a"> negativo</label>
+          <label><input type="radio" name="c5_l09_v6" value="b"> reincidente</label>
+          <label><input type="radio" name="c5_l09_v6" value="c"> pertinaz</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">V7. Sinónimo de "sagaz":</p>
+          <label><input type="radio" name="c5_l09_v7" value="a"> torpe</label>
+          <label><input type="radio" name="c5_l09_v7" value="b"> perspicaz</label>
+          <label><input type="radio" name="c5_l09_v7" value="c"> lento</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">V8. Antónimo de "transitorio":</p>
+          <label><input type="radio" name="c5_l09_v8" value="a"> fugaz</label>
+          <label><input type="radio" name="c5_l09_v8" value="b"> temporal</label>
+          <label><input type="radio" name="c5_l09_v8" value="c"> permanente</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">V9. ¿Cuál oración es correcta?</p>
+          <label><input type="radio" name="c5_l09_v9" value="a"> Había veinte pacientes en urgencias.</label>
+          <label><input type="radio" name="c5_l09_v9" value="b"> Habían veinte pacientes en urgencias.</label>
+          <label><input type="radio" name="c5_l09_v9" value="c"> Haberían veinte pacientes en urgencias.</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">V10. ¿Cuál versión corrige "El paciente fue dado de alta por el doctor y se siente mejor" evitando ambigüedad?</p>
+          <label><input type="radio" name="c5_l09_v10" value="a"> Dado de alta, el doctor se siente mejor.</label>
+          <label><input type="radio" name="c5_l09_v10" value="b"> El doctor dio de alta al paciente, que se siente mejor.</label>
+          <label><input type="radio" name="c5_l09_v10" value="c"> El paciente se siente mejor y el alta fue dada por sí mismo.</label>
+        </div>
+        <details class="explica"><summary>Claves de la sección Verbal</summary>
+          <p>V1: paráfrasis del "sin embargo". V2: vocabulario en contexto. V3: los "siempre/todos" son trampa. V4: función/herramienta-procedimiento. V5: categoría→ejemplo. V6: si suspendes el antibiótico, el cultivo no mostró bacteria → "negativo". V7: sagaz = perspicaz. V8: transitorio ↔ permanente. V9: "haber" impersonal → "había". V10: el sujeto de "se siente mejor" debe quedar claro.</p>
+        </details>
+        <button class="action-btn quiz-check">Corregir sección Verbal</button>
+        <p class="quiz-result"></p>
+      </div>
+
+      <div class="mini-quiz">
+        <h4>🎯 Sección 2 · Aptitud Matemática (8 preguntas)</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">M1. Si un suero de 500 mL lleva 25 g de glucosa, la concentración % P/V es…</p>
+          <label><input type="radio" name="c5_l09_m1" value="a"> 25 %</label>
+          <label><input type="radio" name="c5_l09_m1" value="b"> 5 %</label>
+          <label><input type="radio" name="c5_l09_m1" value="c"> 0,5 %</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">M2. El 15 % de 240 es…</p>
+          <label><input type="radio" name="c5_l09_m2" value="a"> 24</label>
+          <label><input type="radio" name="c5_l09_m2" value="b"> 30</label>
+          <label><input type="radio" name="c5_l09_m2" value="c"> 36</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">M3. Si \(3x - 7 = 20\), entonces \(x\) vale…</p>
+          <label><input type="radio" name="c5_l09_m3" value="a"> 9</label>
+          <label><input type="radio" name="c5_l09_m3" value="b"> 7</label>
+          <label><input type="radio" name="c5_l09_m3" value="c"> 13</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">M4. ¿Cuál expresión equivale a \((x + 3)(x - 3)\)?</p>
+          <label><input type="radio" name="c5_l09_m4" value="a"> \(x^2 + 9\)</label>
+          <label><input type="radio" name="c5_l09_m4" value="b"> \(x^2 - 9\)</label>
+          <label><input type="radio" name="c5_l09_m4" value="c"> \(x^2 - 6x + 9\)</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">M5. Un triángulo rectángulo tiene catetos 3 y 4. La hipotenusa es…</p>
+          <label><input type="radio" name="c5_l09_m5" value="a"> 6</label>
+          <label><input type="radio" name="c5_l09_m5" value="b"> 7</label>
+          <label><input type="radio" name="c5_l09_m5" value="c"> 5</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">M6. La pendiente de la recta que pasa por (0, 2) y (4, 10) es…</p>
+          <label><input type="radio" name="c5_l09_m6" value="a"> 2</label>
+          <label><input type="radio" name="c5_l09_m6" value="b"> 4</label>
+          <label><input type="radio" name="c5_l09_m6" value="c"> 1/2</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">M7. Una gráfica de barras muestra: niños 40 %, adultos 35 %, mayores 25 %. En 800 pacientes, ¿cuántos son niños?</p>
+          <label><input type="radio" name="c5_l09_m7" value="a"> 200</label>
+          <label><input type="radio" name="c5_l09_m7" value="b"> 320</label>
+          <label><input type="radio" name="c5_l09_m7" value="c"> 280</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">M8. Si \(\log_2(x) = 5\), entonces \(x\) es…</p>
+          <label><input type="radio" name="c5_l09_m8" value="a"> 10</label>
+          <label><input type="radio" name="c5_l09_m8" value="b"> 25</label>
+          <label><input type="radio" name="c5_l09_m8" value="c"> 32</label>
+        </div>
+        <details class="explica"><summary>Claves de la sección Matemática</summary>
+          <p>M1: 25 g/500 mL → por 100 mL: 5 g → 5 %. M2: \(240 \times 0{,}15 = 36\). M3: \(3x = 27 \Rightarrow x = 9\). M4: producto de conjugados (suma por diferencia). M5: Pitágoras: \(\sqrt{9+16} = 5\). M6: \(m = \frac{10-2}{4-0} = 2\). M7: \(800 \times 0{,}40 = 320\). M8: \(2^5 = 32\).</p>
+        </details>
+        <button class="action-btn quiz-check">Corregir sección Matemática</button>
+        <p class="quiz-result"></p>
+      </div>
+
+      <div class="mini-quiz">
+        <h4>🎯 Sección 3 · Química (6 preguntas)</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">Q1. ¿Cuántos moles hay en 90 g de glucosa? (M = 180 g/mol)</p>
+          <label><input type="radio" name="c5_l09_q1" value="a"> 0,25 mol</label>
+          <label><input type="radio" name="c5_l09_q1" value="b"> 0,5 mol</label>
+          <label><input type="radio" name="c5_l09_q1" value="c"> 2 mol</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">Q2. El número de oxidación del S en H₂SO₄ es…</p>
+          <label><input type="radio" name="c5_l09_q2" value="a"> +6</label>
+          <label><input type="radio" name="c5_l09_q2" value="b"> +4</label>
+          <label><input type="radio" name="c5_l09_q2" value="c"> −2</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">Q3. Una disolución con pH 10 es…</p>
+          <label><input type="radio" name="c5_l09_q3" value="a"> ácida</label>
+          <label><input type="radio" name="c5_l09_q3" value="b"> neutra</label>
+          <label><input type="radio" name="c5_l09_q3" value="c"> básica</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">Q4. La unión entre el Na⁺ y el Cl⁻ es un enlace…</p>
+          <label><input type="radio" name="c5_l09_q4" value="a"> covalente polar</label>
+          <label><input type="radio" name="c5_l09_q4" value="b"> iónico</label>
+          <label><input type="radio" name="c5_l09_q4" value="c"> de London</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">Q5. El grupo funcional −COOH caracteriza a…</p>
+          <label><input type="radio" name="c5_l09_q5" value="a"> los ácidos carboxílicos</label>
+          <label><input type="radio" name="c5_l09_q5" value="b"> los aldehídos</label>
+          <label><input type="radio" name="c5_l09_q5" value="c"> los éteres</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">Q6. En una reacción exotérmica, los productos tienen…</p>
+          <label><input type="radio" name="c5_l09_q6" value="a"> más energía que los reactivos</label>
+          <label><input type="radio" name="c5_l09_q6" value="b"> la misma energía que los reactivos</label>
+          <label><input type="radio" name="c5_l09_q6" value="c"> menos energía que los reactivos</label>
+        </div>
+        <details class="explica"><summary>Claves de la sección Química</summary>
+          <p>Q1: 90 ÷ 180 = 0,5 mol. Q2: 2(+1) + S + 4(−2) = 0 → S = +6. Q3: pH &gt; 7 = básico. Q4: metal + no metal con transferencia de e⁻. Q5: −COOH = ácido carboxílico. Q6: exotérmica libera energía → productos más "bajos" en energía.</p>
+        </details>
+        <button class="action-btn quiz-check">Corregir sección Química</button>
+        <p class="quiz-result"></p>
+      </div>
+
+      <div class="mini-quiz">
+        <h4>🎯 Sección 4 · Biología (6 preguntas)</h4>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">B1. El organelo que produce la mayor parte del ATP es…</p>
+          <label><input type="radio" name="c5_l09_b1" value="a"> el ribosoma</label>
+          <label><input type="radio" name="c5_l09_b1" value="b"> la mitocondria</label>
+          <label><input type="radio" name="c5_l09_b1" value="c"> el lisosoma</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">B2. En un experimento, la variable que el investigador CAMBIA deliberadamente es la…</p>
+          <label><input type="radio" name="c5_l09_b2" value="a"> independiente</label>
+          <label><input type="radio" name="c5_l09_b2" value="b"> dependiente</label>
+          <label><input type="radio" name="c5_l09_b2" value="c"> controlada</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">B3. El monómero de los ácidos nucleicos es…</p>
+          <label><input type="radio" name="c5_l09_b3" value="a"> el aminoácido</label>
+          <label><input type="radio" name="c5_l09_b3" value="b"> el monosacárido</label>
+          <label><input type="radio" name="c5_l09_b3" value="c"> el nucleótido</label>
+        </div>
+        <div class="quiz-q" data-correct="b">
+          <p class="question">B4. La respiración celular de una molécula de glucosa produce aproximadamente…</p>
+          <label><input type="radio" name="c5_l09_b4" value="a"> 2 ATP (como la fermentación)</label>
+          <label><input type="radio" name="c5_l09_b4" value="b"> ~30–32 ATP</label>
+          <label><input type="radio" name="c5_l09_b4" value="c"> 0 ATP</label>
+        </div>
+        <div class="quiz-q" data-correct="a">
+          <p class="question">B5. La fotosíntesis ocurre en…</p>
+          <label><input type="radio" name="c5_l09_b5" value="a"> el cloroplasto</label>
+          <label><input type="radio" name="c5_l09_b5" value="b"> la mitocondria</label>
+          <label><input type="radio" name="c5_l09_b5" value="c"> el núcleo</label>
+        </div>
+        <div class="quiz-q" data-correct="c">
+          <p class="question">B6. La propiedad del agua responsable de la tensión superficial es…</p>
+          <label><input type="radio" name="c5_l09_b6" value="a"> su bajo calor específico</label>
+          <label><input type="radio" name="c5_l09_b6" value="b"> su capacidad como disolvente de grasas</label>
+          <label><input type="radio" name="c5_l09_b6" value="c"> la cohesión por puentes de hidrógeno</label>
+        </div>
+        <details class="explica"><summary>Claves de la sección Biología</summary>
+          <p>B1: la mitocondria (respiración celular). B2: la independiente es la manipulada; la dependiente es la que se mide. B3: nucleótidos → ADN/ARN. B4: aerobia: ~30–32 ATP (la fermentación rinde solo 2). B5: cloroplasto. B6: la cohesión entre moléculas de agua crea la tensión superficial.</p>
+        </details>
+        <button class="action-btn quiz-check">Corregir sección Biología</button>
+        <p class="quiz-result"></p>
+      </div>
+
+      <div class="medlink">💊 <strong>Análisis final:</strong> con tus resultados por sección, define tu plan de la última semana (l08): 2 simulacros más, priorizando la sección más débil. Recuerda tu meta: ≥ 24/30 para zona Medicina, ≥ 27/30 para pensar en beca.</div>
+    </div>
+  </article>
+
+  <div class="clasnav">
+    <a class="action-btn" href="clase4.html">⬅ Clase anterior</a>
+    <a class="action-btn" href="index.html">🏠 Volver al inicio</a>
+    <a class="action-btn" href="clase6.html">Clase 6 · PAA Intensivo ➡</a>
+  </div>
+
+</main>
+
+<footer>Curso Intensivo de Preparación USFQ — Medicina · Tu progreso se guarda en este navegador.</footer>
+
+<script>
+const CLASE_ID = 'clase5';
+const STORE_KEY = 'medcurso_v2_done';
+function loadDone(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch(e){ return {}; } }
+function saveDone(d){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(d)); }catch(e){} }
+(function(){ try{ if(!localStorage.getItem('medcurso_mig_v3')){ const d=loadDone(); let ch=false; Object.keys(d).forEach(k=>{ if(k.indexOf('clase6:')===0){ d['clase5:'+k.slice(7)]=true; delete d[k]; ch=true; } }); if(ch) saveDone(d); localStorage.setItem('medcurso_mig_v3','1'); } }catch(e){} })();
+
+
+function openLesson(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.add('open');
+  if(typeof mmScan === 'function') mmScan(el);
+  el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+document.querySelectorAll('.lesson-header').forEach(h=>{
+  h.addEventListener('click', (e)=>{
+    if(e.target.closest('.lesson-done')) return;
+    h.parentElement.classList.toggle('open');
+    if(h.parentElement.classList.contains('open') && typeof mmScan === 'function') mmScan(h.parentElement);
+  });
+});
+
+document.querySelectorAll('.lesson-done input').forEach(cb=>{
+  cb.addEventListener('change', ()=>{
+    const lid = cb.closest('.lesson').id;
+    const d = loadDone();
+    d[CLASE_ID + ':' + lid] = cb.checked;
+    saveDone(d);
+    cb.closest('.lesson').classList.toggle('done', cb.checked);
+    refreshProgress();
+  });
+});
+
+function refreshProgress(){
+  const lessons = document.querySelectorAll('.lesson');
+  const done = loadDone();
+  let d = 0;
+  lessons.forEach(l=>{ if(done[CLASE_ID + ':' + l.id]) d++; });
+  const pct = lessons.length ? Math.round(d / lessons.length * 100) : 0;
+  const bar = document.getElementById('classProgressBar');
+  const txt = document.getElementById('classProgressText');
+  if(bar) bar.style.width = pct + '%';
+  if(txt) txt.textContent = d + ' de ' + lessons.length + ' lecciones completadas (' + pct + '%)';
+}
+(function(){
+  const done = loadDone();
+  document.querySelectorAll('.lesson').forEach(l=>{
+    if(done[CLASE_ID + ':' + l.id]){
+      l.classList.add('done');
+      const cb = l.querySelector('.lesson-done input');
+      if(cb) cb.checked = true;
+    }
+  });
+  refreshProgress();
+})();
+
+document.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.quiz-check');
+  if(!btn) return;
+  const box = btn.closest('.mini-quiz');
+  let correct = 0, total = 0;
+  box.querySelectorAll('.quiz-q').forEach(q=>{
+    total++;
+    const val = q.dataset.correct;
+    const sel = q.querySelector('input:checked');
+    q.querySelectorAll('label').forEach(l=> l.style.background='');
+    if(sel && sel.value === val){
+      correct++;
+      sel.parentElement.style.background = '#d4f4dd';
+    } else {
+      if(sel) sel.parentElement.style.background = '#fbd7d2';
+      const ok = q.querySelector('input[value="' + val + '"]');
+      if(ok) ok.parentElement.style.background = '#d4f4dd';
+    }
+  });
+  const res = box.querySelector('.quiz-result');
+  if(res) res.textContent = 'Resultado: ' + correct + '/' + total + ' correctas';
+});
+
+if(window.mermaid){ mermaid.initialize({ startOnLoad:false, theme:'neutral', securityLevel:'loose' }); }
+function mmScan(root){
+  if(!window.mermaid) return;
+  const list = (root && root.querySelectorAll) ? root.querySelectorAll('pre.mermaid') : [];
+  list.forEach(el=>{
+    if(el.getAttribute('data-processed')) return;
+    if(el.offsetParent === null) return; // oculto: esperar a que se abra la lección
+    try{ mermaid.run({ nodes: [el] }); }catch(e){}
+  });
+}
+document.addEventListener('DOMContentLoaded', ()=>{ mmScan(document); });
+
+window.addEventListener('load', ()=>{ mmScan(document); });
+</script>
+</body>
+</html>
