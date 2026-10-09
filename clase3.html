@@ -284,6 +284,14 @@
         font-size: 0.85rem;
         line-height: 1.35;
       }
+      .diagram-box img {
+        display: block;
+        max-width: min(100%, 520px);
+        height: auto;
+        margin: 8px auto 0;
+        background: #fff;
+        border-radius: 6px;
+      }
       .example {
         background: #f2fbf6;
         border-left: 4px solid var(--verde);
@@ -630,10 +638,10 @@
             </p>
             <ol>
               <li>
-                De gramos a moles: \(n = 36 \div 18\)\(36 \div 18 = 2\) mol.
+                De gramos a moles: \(n = 36 \div 18\) = \(36 \div 18 = 2\) mol.
               </li>
               <li>
-                De moles a moléculas: \(N = 2 \times 6{,}022\times 10^{23}\)\(2
+                De moles a moléculas: \(N = 2 \times 6{,}022\times 10^{23}\) = \(2
                 \times 6{,}022\times 10^{23} = 1{,}204\times 10^{24}\)
                 moléculas.
               </li>
@@ -803,7 +811,7 @@
                 100 mL \(\to \) en 1 L (1000 mL) hay 9 g de \(\ce{NaCl}\).
               </li>
               <li>
-                Gramos a moles: \(n = 9 \div 58{,}5\)\(9 \div 58{,}5 = 0{,}154\)
+                Gramos a moles: \(n = 9 \div 58{,}5\) = \(9 \div 58{,}5 = 0{,}154\)
                 mol.
               </li>
               <li>
@@ -977,17 +985,17 @@
               L de disolución. Calcula M y \(\ce{N}\).
             </p>
             <ol>
-              <li>Moles: \(n = 49 \div 98\) =\(49 \div 98 = 0{,}5\) mol.</li>
+              <li>Moles: \(n = 49 \div 98\) = \(49 \div 98 = 0{,}5\) mol.</li>
               <li>
-                Molaridad: \(M = 0{,}5 \div 1\)\(0{,}5 \div 1 = 0{,}5 M.\)
+                Molaridad: \(M = 0{,}5 \div 1\) = \(0{,}5 \div 1 = 0{,}5 M.\)
               </li>
               <li>
                 El \(\ce{H2SO4}\) entrega 2 \(\ce{H+}\) por molécula \(\to \)
                 equivalentes = \(0{,}5 \times 2 = 1\) eq.
               </li>
               <li>
-                Normalidad: \(N = 1 \div 1\)\(1 \div 1 = 1 N.\) ✔ \((0{,}5 M = 1
-                N,\) tal como predice \(\ce{N}\) = M \(\times \) 2)
+                Normalidad: \(N = 1 \div 1\) = \(1 \div 1 = 1 N.\) ✔ \((0{,}5 M
+                = 1 N,\) tal como predice \(\ce{N}\) = M \(\times \) 2)
               </li>
             </ol>
           </div>
@@ -1147,18 +1155,16 @@
           </div>
           <div class="diagram-box">
             <h4>📊 Diagrama — átomo de Bohr del carbono</h4>
-            <pre>
-         e⁻  e⁻
-      ╭─────────────╮   núcleo: 6 p⁺ y 6 n⁰
-     │    ⊕⊕⊕⊕      │  (Z = 6, A = 12)
-      ╰─────────────╯
-        nivel 1: 2 e⁻   nivel 2: 4 e⁻</pre
-            >
+            <img
+              src="img/bohr-carbono.jpg"
+              alt="Modelo de Bohr del carbono: núcleo con 6 protones y 6 neutrones, 2 electrones en el nivel interno y 4 electrones de valencia en el nivel externo. Número atómico 6."
+              width="520"
+            />
           </div>
           <div class="example">
             <h4>✏️ Ejemplo resuelto</h4>
             <p>
-              El sodio tiene \(Z = 11 y A\)\(11 y A = 23.\) Describe su átomo.
+              El sodio tiene \(Z = 11\) y \(A = 23.\) Describe su átomo.
             </p>
             <ol>
               <li>Protones: \(Z = 11.\)</li>
@@ -1188,7 +1194,7 @@
             <h4>🎯 Ponte a prueba</h4>
             <div class="quiz-q" data-correct="b">
               <p class="question">
-                1. Un átomo tiene \(Z = 8 y A\)\(8 y A = 16.\) ¿Cuántos
+                1. Un átomo tiene \(Z = 8\) y \(A = 16.\) ¿Cuántos
                 neutrones tiene?
               </p>
               <label
@@ -2609,11 +2615,11 @@ Zn + Cu²⁺ → Zn²⁺ + Cu   (la pila de un electrodo)</pre
             <ol>
               <li>
                 El \(\ce{HCl}\) es ácido fuerte \(\to \) se disocia por
-                completo: \([H^{+}] = 0{,}01 M\)\(0{,}01 M = 10^{-2} M.\)
+                completo: \([H^{+}] = 0{,}01 M\) = \(0{,}01 M = 10^{-2} M.\)
               </li>
               <li>Aplica: pH = \(-\log(10^{-2}) = 2.\)</li>
               <li>
-                Comprueba: pH \(2 \lt 7 y\) \(\ce{HCl}\) es ácido ✔. Si fuera
+                Comprueba: pH \(2 \lt 7\) y \(\ce{HCl}\) es ácido ✔. Si fuera
                 \(\ce{NaOH}\) \(0{,}01\) M: pOH = 2 \(\to \) pH = 14 − \(2 =
                 12.\)
               </li>
@@ -2973,7 +2979,7 @@ Zn + Cu²⁺ → Zn²⁺ + Cu   (la pila de un electrodo)</pre
             <ol>
               <li>4 carbonos \(\to \) prefijo "but-".</li>
               <li>
-                Fórmula: \(\ce{CnH2n}\) con \(n=4 \to H\)\(\to H = 8\) ✔
+                Fórmula: \(\ce{CnH2n}\) con \(n=4 \to H\) = \(\to H = 8\) ✔
                 coincide con \(\ce{C4H8}\) \(\to \) tiene un doble enlace.
               </li>
               <li>
